@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kuisoner</title>
+    <link rel="stylesheet" href="kuisoner-style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📋 Formulir Kuisoner</h1>
+            <button class="btn-logout" onclick="logout()">Keluar</button>
+        </header>
+
+        <div class="form-container">
+            <form id="questionnaireForm">
+                <!-- Informasi Responden -->
+                <section class="form-section">
+                    <h2>Informasi Responden</h2>
+                    
+                    <div class="form-group">
+                        <label for="nama">Nama Lengkap <span class="required">*</span></label>
+                        <input type="text" id="nama" name="nama" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email <span class="required">*</span></label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="usia">Usia <span class="required">*</span></label>
+                        <input type="number" id="usia" name="usia" min="1" max="120" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="jenisKelamin">Jenis Kelamin <span class="required">*</span></label>
+                        <select id="jenisKelamin" name="jenisKelamin" required>
+                            <option value="">Pilih...</option>
+                            <option value="Laki-laki">Laki-laki</option>
+                            <option value="Perempuan">Perempuan</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="pekerjaan">Pekerjaan</label>
+                        <input type="text" id="pekerjaan" name="pekerjaan" placeholder="Contoh: Mahasiswa, Karyawan, dll">
+                    </div>
+                </section>
+
+                <!-- Pertanyaan Kuisoner -->
+                <section class="form-section">
+                    <h2>Pertanyaan Kuisoner</h2>
+
+                    <div class="form-group">
+                        <label>1. Bagaimana tingkat kepuasan Anda dengan layanan ini? <span class="required">*</span></label>
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="kepuasan" value="Sangat Puas" required>
+                                <span>Sangat Puas</span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="kepuasan" value="Puas" required>
+                                <span>Puas</span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="kepuasan" value="Cukup" required>
+                                <span>Cukup</span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="kepuasan" value="Kurang Puas" required>
+                                <span>Kurang Puas</span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="kepuasan" value="Tidak Puas" required>
+                                <span>Tidak Puas</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>2. Seberapa sering Anda menggunakan layanan ini? <span class="required">*</span></label>
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="frekuensi" value="Setiap Hari" required>
+                                <span>Setiap Hari</span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="frekuensi" value="Beberapa Kali Seminggu" required>
+                                <span>Beberapa Kali Seminggu</span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="frekuensi" value="Sekali Seminggu" required>
+                                <span>Sekali Seminggu</span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="frekuensi" value="Beberapa Kali Sebulan" required>
+                                <span>Beberapa Kali Sebulan</span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="frekuensi" value="Jarang" required>
+                                <span>Jarang</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>3. Aspek mana yang paling penting bagi Anda? (Bisa pilih lebih dari satu) <span class="required">*</span></label>
+                        <div class="checkbox-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="aspek" value="Kualitas">
+                                <span>Kualitas</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="aspek" value="Harga">
+                                <span>Harga</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="aspek" value="Pelayanan">
+                                <span>Pelayanan</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="aspek" value="Kemudahan Akses">
+                                <span>Kemudahan Akses</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="aspek" value="Kecepatan">
+                                <span>Kecepatan</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="saran">4. Saran atau masukan Anda: <span class="required">*</span></label>
+                        <textarea id="saran" name="saran" rows="4" placeholder="Tuliskan saran atau masukan Anda di sini..." required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>5. Apakah Anda akan merekomendasikan layanan ini kepada orang lain? <span class="required">*</span></label>
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="rekomendasi" value="Ya, Pasti" required>
+                                <span>Ya, Pasti</span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="rekomendasi" value="Mungkin" required>
+                                <span>Mungkin</span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="rekomendasi" value="Tidak" required>
+                                <span>Tidak</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="rating">6. Berikan rating dari 1-10: <span class="required">*</span></label>
+                        <input type="range" id="rating" name="rating" min="1" max="10" value="5" required>
+                        <div class="rating-display">
+                            <span>Rating: </span>
+                            <span id="ratingValue">5</span>/10
+                        </div>
+                    </div>
+                </section>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn-submit">Kirim Kuisoner</button>
+                    <button type="button" class="btn-reset" onclick="resetForm()">Reset Form</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="kuisoner-script.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+

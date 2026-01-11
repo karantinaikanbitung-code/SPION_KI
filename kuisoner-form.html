@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Penilaian Uji</title>
+    <link rel="stylesheet" href="kuisoner-style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="google-sheets-config.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1 id="formTitle">Form Penilaian Uji</h1>
+            <div class="header-actions">
+                <button class="btn-back" style="background:#607d8b;"
+                    onclick="window.location.href='kuisoner-hasil-simpan.html'">📁 Hasil Simpan</button>
+                <button class="btn-back" onclick="goBack()">Kembali</button>
+                <button class="btn-logout" onclick="logout()">Keluar</button>
+            </div>
+        </header>
+
+        <div class="form-container">
+            <form id="penilaianForm">
+                <!-- Informasi Umum -->
+                <section class="form-section">
+                    <h2>Informasi Umum</h2>
+
+                    <div class="form-group">
+                        <label for="tanggalUji">Tanggal Uji <span class="required">*</span></label>
+                        <input type="date" id="tanggalUji" name="tanggalUji" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="namaPetugas">Pilih Nama Panelis <span class="required">*</span></label>
+                        <select id="namaPetugas" name="namaPetugas" required>
+                            <option value="">-- Pilih Nama Panelis --</option>
+                            <option>ARIE BRAMONO</option>
+                            <option>MUHAMMAD</option>
+                            <option>MIFTAHUDDIN</option>
+                            <option>NOCH MUSA JEFTA TELEW</option>
+                            <option>GRACE LANNY TANTU</option>
+                            <option>ANCE WILYAM TUWAIDAN</option>
+                            <option>ADYTIA EKO MAULANA</option>
+                            <option>YESSIE YULIANDA</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="noSampel">No. Sampel <span class="required">*</span></label>
+                        <input type="text" id="noSampel" name="noSampel" required>
+                    </div>
+                </section>
+
+                <!-- Form Penilaian berdasarkan Jenis Uji -->
+                <section class="form-section" id="penilaianSection">
+                    <h2 id="penilaianTitle">Penilaian</h2>
+                    <div id="penilaianFields"></div>
+
+                    <!-- Pilihan Penyelia di bawah tabel -->
+                    <div class="form-group" style="margin-top: 20px; border-top: 1px dashed #ccc; padding-top: 15px;">
+                        <label for="namaPenyelia">Pilih Nama Penyelia <span class="required">*</span></label>
+                        <select id="namaPenyelia" name="namaPenyelia" required>
+                            <option value="">-- Pilih Nama Penyelia --</option>
+                            <option value="Jeane Theresia Sumaraw, S.Pi, M.Si">Jeane Theresia Sumaraw, S.Pi, M.Si
+                            </option>
+                            <option value="Grace Lanny Tantu, S.Si.">Grace Lanny Tantu, S.Si.</option>
+                        </select>
+                    </div>
+                </section>
+
+                <!-- Catatan -->
+                <section class="form-section" id="catatanSection">
+                    <h2>Catatan</h2>
+                    <div class="form-group">
+                        <label for="catatan">Catatan Tambahan</label>
+                        <textarea id="catatan" name="catatan" rows="4"
+                            placeholder="Masukkan catatan tambahan jika ada..."></textarea>
+                    </div>
+                </section>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn-submit">Simpan Hasil Uji</button>
+                    <button type="button" class="btn-reset" onclick="resetForm()">Reset Form</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="kuisoner-form-script.js"></script>
+</body>
+
+</html>

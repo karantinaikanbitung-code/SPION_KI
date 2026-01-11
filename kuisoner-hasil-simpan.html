@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daftar Hasil Uji Tersimpan - SPION</title>
+    <link rel="stylesheet" href="spion-ui.css">
+    <link rel="stylesheet" href="kuisoner-style.css">
+    <style>
+        .history-container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .history-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .history-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .history-table th,
+        .history-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        .history-table th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .btn-view {
+            background-color: var(--accent-blue, #667eea);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            transition: all 0.2s;
+        }
+
+        .btn-view:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
+
+        .btn-delete {
+            background-color: #f44336;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            margin-left: 8px;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+
+        @media (max-width: 600px) {
+
+            .history-table th:nth-child(1),
+            .history-table td:nth-child(1) {
+                display: none;
+            }
+
+            .history-table th,
+            .history-table td {
+                padding: 10px 5px;
+                font-size: 12px;
+            }
+
+            .btn-delete {
+                margin-left: 0;
+                margin-top: 5px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div>
+
+    <div class="history-container">
+        <nav class="top-bar animate-fade-in" style="margin-bottom: 30px;">
+            <div class="brand-mini">
+                <div class="logo-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M6 18h8"></path>
+                        <path d="M14 22a7 7 0 1 0 0-14h-1"></path>
+                        <path d="M9 12a2 2 0 1 0-2-2v6"></path>
+                        <path d="M11 6V3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v6"></path>
+                    </svg>
+                </div>
+                <h2>SPION</h2>
+                <span style="margin: 0 10px; color: rgba(255,255,255,0.2);">|</span>
+                <h2>Daftar Hasil Uji</h2>
+            </div>
+            <div class="header-actions-modern">
+                <button class="btn-logout-modern" onclick="window.location.href='kuisoner-jenis-uji.html'">Kembali
+                    Beranda</button>
+            </div>
+        </nav>
+
+        <div class="history-card animate-fade-in" style="animation-delay: 0.1s;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h1 style="font-size: 24px; color: #333; margin: 0;">Hasil Uji Tersimpan</h1>
+                <button class="btn-logout-modern" style="background:#607d8b;" onclick="clearHistory()">Hapus
+                    Semua</button>
+            </div>
+
+            <div id="historyTableContainer">
+                <table class="history-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 50px;">#</th>
+                            <th>Nama File</th>
+                            <th>Tanggal Simpan</th>
+                            <th style="width: 200px; text-align: center;">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody id="historyBody">
+                        <!-- Content loaded via JS -->
+                    </tbody>
+                </table>
+            </div>
+            <div id="emptyState" class="empty-state" style="display: none;">
+                <div style="font-size: 48px; margin-bottom: 10px;">📂</div>
+                <p>Belum ada hasil uji yang disimpan.</p>
+                <button class="btn-view" onclick="window.location.href='kuisoner-jenis-uji.html'"
+                    style="margin-top: 15px;">Mulai Uji Baru</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hidden containers for dependencies of showLHUPreview -->
+    <div id="qrcode-container" style="display:none;"></div>
+    <div id="ikanSegarTable" style="display:none;"></div>
+    <div id="ikanBekuTable" style="display:none;"></div>
+    <div id="ikanTunaKalengTable" style="display:none;"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="google-sheets-config.js"></script>
+    <script src="kuisoner-form-script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if (sessionStorage.getItem('isAuthenticated') !== 'true') {
+                window.location.href = 'kuisoner-login.html';
+                return;
+            }
+            loadHistory();
+        });
+
+        function loadHistory() {
+            const history = JSON.parse(localStorage.getItem('spion_history') || '[]');
+            const body = document.getElementById('historyBody');
+            const container = document.getElementById('historyTableContainer');
+            const empty = document.getElementById('emptyState');
+
+            if (history.length === 0) {
+                container.style.display = 'none';
+                empty.style.display = 'block';
+                return;
+            }
+
+            container.style.display = 'block';
+            empty.style.display = 'none';
+            body.innerHTML = '';
+
+            history.forEach((item, index) => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${index + 1}</td>
+                    <td style="font-family: monospace; font-size: 13px;">${item.filename}</td>
+                    <td style="color: #666; font-size: 13px;">${new Date(item.timestamp).toLocaleString('id-ID')}</td>
+                    <td style="text-align: center;">
+                        <button class="btn-view" onclick="viewResult(${item.id})">Lihat PDF</button>
+                        <button class="btn-delete" onclick="deleteResult(${item.id})">Hapus</button>
+                    </td>
+                `;
+                body.appendChild(tr);
+            });
+        }
+
+        function viewResult(id) {
+            const history = JSON.parse(localStorage.getItem('spion_history') || '[]');
+            const item = history.find(i => i.id === id);
+            if (item) {
+                // Gunakan showLHUPreview yang sudah direfactor
+                showLHUPreview(item.data, item.hewan);
+            }
+        }
+
+        function deleteResult(id) {
+            if (confirm('Apakah Anda yakin ingin menghapus hasil uji ini?')) {
+                let history = JSON.parse(localStorage.getItem('spion_history') || '[]');
+                history = history.filter(i => i.id !== id);
+                localStorage.setItem('spion_history', JSON.stringify(history));
+                loadHistory();
+            }
+        }
+
+        function clearHistory() {
+            if (confirm('Apakah Anda yakin ingin menghapus SEMUA riwayat hasil uji?')) {
+                localStorage.removeItem('spion_history');
+                loadHistory();
+            }
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - SPION</title>
+    <link rel="stylesheet" href="spion-ui.css">
+</head>
+
+<body>
+    <div class="bg-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div>
+
+    <div class="dashboard-container">
+        <nav class="top-bar animate-fade-in">
+            <div class="brand-mini">
+                <div class="logo-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M6 18h8"></path>
+                        <path d="M14 22a7 7 0 1 0 0-14h-1"></path>
+                        <path d="M9 12a2 2 0 1 0-2-2v6"></path>
+                        <path d="M11 6V3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v6"></path>
+                    </svg>
+                </div>
+                <h2>SPION</h2>
+            </div>
+            <div class="user-profile">
+                <div class="profile-avatar"><span id="userInitial">A</span></div>
+                <span id="usernameDisplay">Admin</span>
+                <span style="color: rgba(255,255,255,0.2); margin: 0 5px;">|</span>
+                <button class="btn-logout-modern" onclick="logout()">Logout</button>
+            </div>
+        </nav>
+
+        <header class="hero-section animate-fade-in" style="animation-delay: 0.1s;">
+            <h1>Pilih Jenis Uji</h1>
+            <p>Silakan pilih kategori pengujian organoleptik yang akan dilakukan hari ini.</p>
+        </header>
+
+        <div class="card-grid">
+            <!-- Uji Organoleptik -->
+            <div class="glass glass-card test-card animate-fade-in" style="animation-delay: 0.2s;"
+                onclick="goToJenisUji('organoleptik')">
+                <div class="card-icon grad-organo">🧪</div>
+                <h3>Uji Organoleptik</h3>
+                <p>Penilaian komprehensif berdasarkan indera penglihatan, penciuman, peraba, dan rasa sesuai standar
+                    SNI.</p>
+                <div class="btn-start">Mulai Uji →</div>
+            </div>
+
+            <!-- Uji Virologi -->
+            <div class="glass glass-card test-card animate-fade-in" style="animation-delay: 0.3s;"
+                onclick="goToJenisUji('virologi')">
+                <div class="card-icon grad-vilo">🦠</div>
+                <h3>Uji Virologi</h3>
+                <p>Prosedur pengujian khusus untuk mendeteksi dan mengidentifikasi keberadaan patogen virus pada sampel.
+                </p>
+                <div class="btn-start">Mulai Uji →</div>
+            </div>
+
+            <!-- Uji Mikrobiologi -->
+            <div class="glass glass-card test-card animate-fade-in" style="animation-delay: 0.4s;"
+                onclick="goToJenisUji('mikrobiologi')">
+                <div class="card-icon grad-micro">🧫</div>
+                <h3>Uji Mikrobiologi</h3>
+                <p>Analisis laboratoris untuk mendeteksi cemaran bakteri dan mikroorganisme lainnya pada produk.</p>
+                <div class="btn-start">Mulai Uji →</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Cek autentikasi
+        if (sessionStorage.getItem('isAuthenticated') !== 'true') {
+            window.location.href = 'kuisoner-login.html';
+        }
+
+        // Tampilkan username dan inisial
+        const username = sessionStorage.getItem('username') || 'User';
+        document.getElementById('usernameDisplay').textContent = username;
+        document.getElementById('userInitial').textContent = username.charAt(0).toUpperCase();
+
+        function goToJenisUji(jenisUji) {
+            window.location.href = `kuisoner-jenis-uji.html?jenis=${jenisUji}`;
+        }
+
+        function logout() {
+            if (confirm('Apakah Anda yakin ingin keluar dari sistem SPION?')) {
+                sessionStorage.removeItem('isAuthenticated');
+                sessionStorage.removeItem('username');
+                window.location.href = 'kuisoner-login.html';
+            }
+        }
+    </script>
+</body>
+
+</html>

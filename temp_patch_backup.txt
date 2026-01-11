@@ -1,0 +1,3 @@
+Backup of sections to be replaced in kuisoner-form-script.js
+
+(kept here for safety before applying patch)

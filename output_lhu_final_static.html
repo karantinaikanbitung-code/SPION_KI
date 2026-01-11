@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Laporan Hasil Uji - Ikan Tuna Kaleng</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 10mm 15mm;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 10pt;
+            line-height: 1.3;
+            margin: 0;
+            padding: 0;
+            background-color: white;
+            color: black;
+            -webkit-print-color-adjust: exact;
+        }
+
+        .page {
+            width: 100%;
+            min-height: 297mm;
+            position: relative;
+            box-sizing: border-box;
+            page-break-after: always;
+        }
+
+        /* Semantic Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 15px;
+            page-break-inside: avoid;
+        }
+
+        th,
+        td {
+            border: 1px solid black;
+            padding: 5px;
+            vertical-align: top;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        tr {
+            page-break-inside: avoid;
+            page-break-after: auto;
+        }
+
+        .no-border,
+        .no-border td,
+        .no-border th {
+            border: none !important;
+        }
+
+        /* Typography & Utilities */
+        .text-center {
+            text-align: center;
+        }
+
+        .text-left {
+            text-align: left;
+        }
+
+        .text-right {
+            text-align: right;
+        }
+
+        .text-bold {
+            font-weight: bold;
+        }
+
+        .underline {
+            text-decoration: underline;
+        }
+
+        .valign-middle {
+            vertical-align: middle;
+        }
+
+        .mb-20 {
+            margin-bottom: 20px;
+        }
+
+        .mt-20 {
+            margin-top: 20px;
+        }
+
+        /* Header */
+        .header-table {
+            border-bottom: 2px solid black;
+            margin-bottom: 20px;
+        }
+
+        .header-table td {
+            border: none;
+            padding: 0 0 10px 0;
+        }
+
+        .logo-img {
+            width: 90px;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .org-name {
+            font-size: 14pt;
+            font-weight: bold;
+            margin-bottom: 2px;
+        }
+
+        .org-unit {
+            font-size: 11pt;
+            margin-bottom: 2px;
+        }
+
+        .org-address {
+            font-size: 10pt;
+        }
+
+        /* Scoring Table Specifics */
+        .bg-gray {
+            background-color: #f9f9f9;
+        }
+
+        .bg-total {
+            background-color: #e0e0e0;
+            font-weight: bold;
+        }
+
+        /* Footer */
+        .footer-system {
+            margin-top: 30px;
+            font-size: 8pt;
+            color: #666;
+            text-align: right;
+            border-top: 1px solid #ccc;
+            padding-top: 5px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HALAMAN 1 -->
+    <div class="page">
+        <!-- HEADER SEMANTIK DENGAN TABEL -->
+        <table class="no-border header-table">
+            <tbody>
+                <tr>
+                    <td style="width: 120px; vertical-align: middle;">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/2/26/Logo_Barantin.svg"
+                            alt="Logo Barantin" class="logo-img">
+                    </td>
+                    <td class="text-center" style="vertical-align: middle;">
+                        <div class="org-name">BADAN KARANTINA INDONESIA</div>
+                        <div class="org-unit">BALAI KARANTINA HEWAN, IKAN DAN TUMBUHAN</div>
+                        <div class="org-unit text-bold">SULAWESI UTARA</div>
+                        <div class="org-address">JL. AA MARAMIS NO. 283, KEC. MAPANGET, KOTA MANADO 95258</div>
+                        <div class="org-address">Telp. 082190899090, Email: karantinasulut@karantinaindonesia.go.id
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- JUDUL DOKUMEN -->
+        <div class="text-center text-bold underline mb-20" style="font-size: 12pt;">
+            LAMPIRAN LAPORAN HASIL UJI SEMENTARA<br>SENSORI/ORGANOLEPTIK - IKAN TUNA KALENG
+        </div>
+
+        <!-- INFORMASI UTAMA -->
+        <table class="no-border mb-20">
+            <tbody>
+                <tr>
+                    <td style="width: 200px;" class="text-bold">Kode Contoh Uji</td>
+                    <td style="width: 10px;">:</td>
+                    <td>K.123/ITK/2026</td>
+                </tr>
+                <tr>
+                    <td class="text-bold">Jenis Contoh Uji</td>
+                    <td>:</td>
+                    <td>Ikan Tuna Kaleng</td>
+                </tr>
+                <tr>
+                    <td class="text-bold">Tanggal Masuk</td>
+                    <td>:</td>
+                    <td>10 Januari 2026</td>
+                </tr>
+                <tr>
+                    <td class="text-bold">Tanggal Pengujian</td>
+                    <td>:</td>
+                    <td>11 Januari 2026</td>
+                </tr>
+                <tr>
+                    <td class="text-bold">Metode Pengujian</td>
+                    <td>:</td>
+                    <td class="text-bold">SNI 8223-2022</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- TABEL DATA UTAMA (RANGKUMAN) -->
+        <table>
+            <thead>
+                <tr>
+                    <th rowspan="2" style="width: 40px;">NO</th>
+                    <th rowspan="2" style="width: 100px;">KODE CONTOH</th>
+                    <th rowspan="2">PARAMETER UJI</th>
+                    <th rowspan="2" style="width: 120px;">Batas Standar Mutu<br><small>SNI 8223-2022</small></th>
+                    <th colspan="2">HASIL PENGUJIAN</th>
+                </tr>
+                <tr>
+                    <th>NILAI</th>
+                    <th>RATA-RATA (BULAT)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Sample 1 -->
+                <tr>
+                    <td rowspan="3" class="text-center">1.</td>
+                    <td rowspan="3" class="text-center">1</td>
+                    <td>1. Aroma</td>
+                    <td rowspan="3" class="text-center valign-middle">Min. 7 (Skor 1-9)</td>
+                    <td class="text-center">9</td>
+                    <td class="text-center">9</td>
+                </tr>
+                <tr>
+                    <td>2. Rasa</td>
+                    <td class="text-center">9</td>
+                    <td class="text-center">9</td>
+                </tr>
+                <tr>
+                    <td>3. Tekstur</td>
+                    <td class="text-center">7</td>
+                    <td class="text-center">7</td>
+                </tr>
+
+                <!-- Sample 2 -->
+                <tr class="bg-gray">
+                    <td rowspan="3" class="text-center">2.</td>
+                    <td rowspan="3" class="text-center">2</td>
+                    <td>1. Aroma</td>
+                    <td rowspan="3" class="text-center valign-middle">Min. 7 (Skor 1-9)</td>
+                    <td class="text-center">7</td>
+                    <td class="text-center">7</td>
+                </tr>
+                <tr class="bg-gray">
+                    <td>2. Rasa</td>
+                    <td class="text-center">7</td>
+                    <td class="text-center">7</td>
+                </tr>
+                <tr class="bg-gray">
+                    <td>3. Tekstur</td>
+                    <td class="text-center">7</td>
+                    <td class="text-center">7</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- KESIMPULAN -->
+        <table class="no-border mt-20">
+            <tbody>
+                <tr>
+                    <td style="width: 150px;" class="text-bold">Kesimpulan</td>
+                    <td style="width: 10px;">:</td>
+                    <td>Contoh uji MEMENUHI syarat mutu SNI 8223-2022.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- TANDA TANGAN -->
+        <div style="margin-top: 50px;">
+            <table class="no-border">
+                <tbody>
+                    <tr>
+                        <td style="width: 60%;"></td>
+                        <td class="text-center">
+                            <div>Manado, 11 Januari 2026</div>
+                            <div class="mb-20">Penyelia Penyidik Organoleptik</div>
+                            <br><br><br>
+                            <div class="text-bold underline">Dr. Ir. TESTING USER, M.Si</div>
+                            <div>NIP. 19800101 200501 1 001</div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- footer system -->
+        <div class="footer-system">
+            Dokumen ini dicetak secara otomatis oleh Sistem SPION pada 11/01/2026 13:45
+        </div>
+    </div>
+
+    <!-- HALAMAN 2: LEMBAR SKOR DETAIL -->
+    <div class="page" style="margin-top: 20px;">
+        <div class="text-right" style="font-size: 9pt;">F.7.2.03-07/LP- BBKHIT-SULSEL</div>
+        <div class="text-center text-bold underline mb-20" style="font-size: 12pt; margin-top: 10px;">
+            LEMBAR PENILAIAN UJI SKOR IKAN TUNA KALENG
+        </div>
+
+        <!-- INFO SAMPEL -->
+        <table class="mb-10">
+            <thead>
+                <tr>
+                    <th style="width: 40px;">NO</th>
+                    <th>JENIS CONTOH UJI</th>
+                    <th>JUMLAH</th>
+                    <th>UKURAN</th>
+                    <th>Ket.</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="text-center">1.</td>
+                    <td>Ikan Tuna Kaleng</td>
+                    <td class="text-center">6 Kaleng</td>
+                    <td class="text-center">185g</td>
+                    <td class="text-center">Baik</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div style="font-size: 9pt; margin-bottom: 10px;">
+            • Berilah tanda √ pada nilai yang dipilih sesuai kode contoh yang diuji.
+        </div>
+
+        <!-- TABEL SKOR LENGKAP -->
+        <table style="font-size: 9pt;">
+            <thead>
+                <tr>
+                    <th rowspan="2" class="text-left valign-middle">Spesifikasi</th>
+                    <th rowspan="2" class="valign-middle" style="width: 50px;">Nilai</th>
+                    <th colspan="6">Kode Contoh</th>
+                </tr>
+                <tr>
+                    <th style="width: 40px;">1</th>
+                    <th style="width: 40px;">2</th>
+                    <th style="width: 40px;">3</th>
+                    <th style="width: 40px;">4</th>
+                    <th style="width: 40px;">5</th>
+                    <th style="width: 40px;">6</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- 1. Aroma -->
+                <tr>
+                    <td colspan="8" class="bg-gray text-bold">1. Aroma</td>
+                </tr>
+                <tr>
+                    <td>Aroma sangat kuat sesuai spesifikasi produk</td>
+                    <td class="text-center text-bold">9</td>
+                    <td class="text-center">√</td>
+                    <td class="text-center"></td>
+                    <td class="text-center"></td>
+                    <td class="text-center"></td>
+                    <td class="text-center"></td>
+                    <td class="text-center"></td>
+                </tr>
+                <tr>
+                    <td>Aroma kuat sesuai spesifikasi produk</td>
+                    <td class="text-center text-bold">7</td>
+                    <td class="text-center"></td>
+                    <td class="text-center">√</td>
+                    <td class="text-center">√</td>
+                    <td class="text-center">√</td>
+                    <td class="text-center">√</td>
+                    <td class="text-center">√</td>
+                </tr>
+                <tr>
+                    <td>Mulai tercium aroma yang menyimpang</td>
+                    <td class="text-center text-bold">5</td>
+                    <td class="text-center"></td>
+                    <td class="text-center"></td>
+                    <td class="text-center"></td>
+                    <td class="text-center"></td>
+                    <td class="text-center"></td>
+                    <td class="text-center"></td>
+                </tr>
+
+                <!-- 2. Rasa -->
+                <tr>
+                    <td colspan="8" class="bg-gray text-bold">2. Rasa</td>
+                </tr>
+                <tr>
+                    <td>Sangat sesuai spesifikasi produk</td>
+                    <td class="text-center text-bold">9</td>
+                    <td class="text-center">√</td>
+                    <td class="text-center"></td>
+                    <td class="text-center"></td>
+                    <td class="text-center"></td>
+                    <td class="text-center"></td>
+                    <td class="text-center"></td>
+                </tr>
+                <tr>
+                    <td>Sesuai spesifikasi produk</td>
+                    <td class="text-center text-bold">7</td>
+                    <td class="text-center"></td>
+                    <td class="text-center">√</td>
+                    <td class="text-center">√</td>
+                    <td class="text-center">√</td>
+                    <td class="text-center">√</td>
+                    <td class="text-center">√</td>
+                </tr>
+                <tr>
+                    <td>Terdapat rasa yang tidak sesuai spesifikasi produk</td>
+                    <td class="text-center text-bold">5</td>
+                    <td class="text-center"></td>
+                    <td class="text-center"></td>
+                    <td class="text-center"></td>
+                    <td class="text-center"></td>
+                    <td class="text-center"></td>
+                    <td class="text-center"></td>
+                </tr>
+
+                <!-- 3. Tekstur -->
+                <tr>
+                    <td colspan="8" class="bg-gray text-bold">3. Tekstur</td>
+                </tr>
+                <tr>
+                    <td>Sangat kompak sesuai spesifikasi produk</td>
+                    <td class="text-center text-bold">9</td>
+                    <td class="text-center"></td>
+                    <td class="text-center"></td>
+                    <td class="text-center"></td>
+                    <td class="text-center"></td>
+                    <td class="text-center"></td>
+                    <td class="text-center"></td>
+                </tr>
+                <tr>
+                    <td>Kompak sesuai spesifikasi produk</td>
+                    <td class="text-center text-bold">7</td>
+                    <td class="text-center">√</td>
+                    <td class="text-center">√</td>
+                    <td class="text-center">√</td>
+                    <td class="text-center">√</td>
+                    <td class="text-center">√</td>
+                    <td class="text-center">√</td>
+                </tr>
+                <tr>
+                    <td>Kurang kompak</td>
+                    <td class="text-center text-bold">5</td>
+                    <td class="text-center"></td>
+                    <td class="text-center"></td>
+                    <td class="text-center"></td>
+                    <td class="text-center"></td>
+                    <td class="text-center"></td>
+                    <td class="text-center"></td>
+                </tr>
+
+                <!-- TOTALS -->
+                <tr class="bg-total">
+                    <td colspan="2" class="text-center">Total</td>
+                    <td class="text-center">25</td>
+                    <td class="text-center">21</td>
+                    <td class="text-center">21</td>
+                    <td class="text-center">21</td>
+                    <td class="text-center">21</td>
+                    <td class="text-center">21</td>
+                </tr>
+                <tr class="bg-total" style="background-color: #d1d1d1;">
+                    <td colspan="2" class="text-center">Rata-rata</td>
+                    <td class="text-center">8.3</td>
+                    <td class="text-center">7.0</td>
+                    <td class="text-center">7.0</td>
+                    <td class="text-center">7.0</td>
+                    <td class="text-center">7.0</td>
+                    <td class="text-center">7.0</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- PANELIS & QR CODE -->
+        <table class="no-border mt-20">
+            <tbody>
+                <tr>
+                    <td style="width: 70%; vertical-align: bottom;">
+                        <div>Tanggal: 11 Januari 2026</div>
+                    </td>
+                    <td class="text-center">
+                        <div class="mb-10">Panelis</div>
+                        <div
+                            style="width: 80px; height: 80px; border: 1px dashed black; margin: 0 auto; display: flex; align-items: center; justify-content: center;">
+                            <small>QR</small>
+                        </div>
+                        <div class="text-bold mt-20">YANCE WILYAM TUWAIDAN</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="footer-system">
+            Dokumen ini dicetak secara otomatis oleh Sistem SPION pada 11/01/2026 13:45
+        </div>
+    </div>
+
+</body>
+
+</html>

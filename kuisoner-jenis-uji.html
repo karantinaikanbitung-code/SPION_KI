@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pilih Spesies - SPION</title>
+    <link rel="stylesheet" href="spion-ui.css">
+</head>
+
+<body>
+    <div class="bg-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div>
+
+    <div class="dashboard-container">
+        <nav class="top-bar animate-fade-in">
+            <div class="brand-mini">
+                <div class="logo-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M6 18h8"></path>
+                        <path d="M14 22a7 7 0 1 0 0-14h-1"></path>
+                        <path d="M9 12a2 2 0 1 0-2-2v6"></path>
+                        <path d="M11 6V3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v6"></path>
+                    </svg>
+                </div>
+                <h2>SPION</h2>
+                <span style="margin: 0 10px; color: rgba(255,255,255,0.2);">|</span>
+                <div style="margin-left: 0;">
+                    <h2 id="jenisUjiTitle">Jenis Uji</h2>
+                </div>
+            </div>
+            <div class="header-actions-modern">
+                <div class="user-profile">
+                    <button class="btn-logout-modern" style="background:#607d8b; margin-right:10px;"
+                        onclick="window.location.href='kuisoner-hasil-simpan.html'">📁 Hasil Simpan</button>
+                    <span id="usernameDisplay">Admin</span>
+                    <button class="btn-logout-modern" onclick="logout()">Logout</button>
+                </div>
+            </div>
+        </nav>
+
+        <header class="hero-section animate-fade-in" style="animation-delay: 0.1s;">
+            <h1>Pilih Spesies</h1>
+            <p>Silakan pilih jenis komoditas yang akan diuji untuk <span id="jenisUjiText"
+                    style="color: var(--accent-blue); font-weight: 600;">...</span>.</p>
+        </header>
+
+        <div class="card-grid">
+            <!-- Ikan Segar -->
+            <div class="glass glass-card test-card animate-fade-in" style="animation-delay: 0.2s;"
+                onclick="goToForm('ikan-segar')">
+                <div class="card-icon" style="background: linear-gradient(135deg, #667eea, #764ba2);">🐟</div>
+                <h3>Ikan Segar</h3>
+                <p>Pengujian organoleptik untuk produk perikanan dalam kondisi segar/basah.</p>
+                <div class="btn-start">Pilih →</div>
+            </div>
+
+            <!-- Ikan Beku -->
+            <div class="glass glass-card test-card animate-fade-in" style="animation-delay: 0.3s;"
+                onclick="goToForm('ikan-beku')">
+                <div class="card-icon" style="background: linear-gradient(135deg, #a8edea, #fed6e3);">❄️</div>
+                <h3>Ikan Beku</h3>
+                <p>Pengujian organoleptik untuk produk perikanan yang telah dibekukan.</p>
+                <div class="btn-start">Pilih →</div>
+            </div>
+
+            <!-- Ikan Tuna Kaleng -->
+            <div class="glass glass-card test-card animate-fade-in" style="animation-delay: 0.4s;"
+                onclick="goToForm('ikan-tuna-kaleng')">
+                <div class="card-icon" style="background: linear-gradient(135deg, #ffecd2, #fcb69f);">🥫</div>
+                <h3>Ikan Tuna Kaleng</h3>
+                <p>Pengujian organoleptik khusus untuk produk tuna dalam kemasan kaleng (SNI 8223-2022).</p>
+                <div class="btn-start">Pilih →</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Cek autentikasi
+        if (sessionStorage.getItem('isAuthenticated') !== 'true') {
+            window.location.href = 'kuisoner-login.html';
+        }
+
+        // Ambil jenis uji dari URL
+        const urlParams = new URLSearchParams(window.location.search);
+        let jenisUji = urlParams.get('jenis');
+
+        // Default ke 'organoleptik' jika tidak ada atau tidak valid
+        if (!jenisUji || !['organoleptik', 'virologi', 'mikrobiologi'].includes(jenisUji)) {
+            // alert('Jenis uji tidak valid! Defaulting to Organoleptik.'); // Optional debug
+            jenisUji = 'organoleptik';
+            // Update URL params without reload (optional aesthetic)
+            const newUrl = new URL(window.location);
+            newUrl.searchParams.set('jenis', 'organoleptik');
+            window.history.replaceState({}, '', newUrl);
+        }
+
+        // Set judul berdasarkan jenis uji
+        const jenisUjiNames = {
+            'organoleptik': 'Uji Organoleptik',
+            'virologi': 'Uji Virologi',
+            'mikrobiologi': 'Uji Mikrobiologi'
+        };
+
+        document.getElementById('usernameDisplay').textContent = sessionStorage.getItem('username') || 'User';
+        document.getElementById('jenisUjiTitle').textContent = jenisUjiNames[jenisUji];
+        document.getElementById('jenisUjiText').textContent = jenisUjiNames[jenisUji];
+
+        function goToForm(hewan) {
+            window.location.href = `kuisoner-form.html?jenis=${jenisUji}&hewan=${hewan}`;
+        }
+
+        function goBack() {
+            window.location.href = 'kuisoner-home.html';
+        }
+
+        function logout() {
+            if (confirm('Apakah Anda yakin ingin keluar?')) {
+                sessionStorage.removeItem('isAuthenticated');
+                sessionStorage.removeItem('username');
+                window.location.href = 'kuisoner-login.html';
+            }
+        }
+    </script>
+</body>
+
+</html>
