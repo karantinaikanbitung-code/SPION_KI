@@ -92,6 +92,43 @@
                 margin-top: 5px;
             }
         }
+
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(0, 0, 0, .1);
+            border-radius: 50%;
+            border-top-color: var(--accent-blue, #667eea);
+            animation: spin 1s ease-in-out infinite;
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .btn-sync {
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s;
+        }
+
+        .btn-sync:hover {
+            background-color: #43a047;
+            transform: scale(1.02);
+        }
     </style>
 </head>
 
@@ -107,27 +144,35 @@
                 <div class="logo-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                         stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M6 18h8"></path>
-                        <path d="M14 22a7 7 0 1 0 0-14h-1"></path>
-                        <path d="M9 12a2 2 0 1 0-2-2v6"></path>
-                        <path d="M11 6V3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v6"></path>
+                        <!-- Eye (sight) -->
+                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                        <circle cx="12" cy="12" r="3"></circle>
                     </svg>
                 </div>
-                <h2>SPION</h2>
+                <div style="display: flex; flex-direction: column;">
+                    <h2>SPION</h2>
+                    <p style="font-size: 0.65rem; color: rgba(255,255,255,0.7); margin: 0; line-height: 1.2;">Sistem
+                        Pemeriksaan sensorI Organoleptik lapangaN</p>
+                </div>
                 <span style="margin: 0 10px; color: rgba(255,255,255,0.2);">|</span>
                 <h2>Daftar Hasil Uji</h2>
             </div>
             <div class="header-actions-modern">
-                <button class="btn-logout-modern" onclick="window.location.href='kuisoner-jenis-uji.html'">Kembali
-                    Beranda</button>
+                <a href="kuisoner-jenis-uji.html" class="btn-logout-modern"
+                    style="text-decoration:none; display:inline-flex; align-items:center;">Kembali Beranda</a>
             </div>
         </nav>
 
         <div class="history-card animate-fade-in" style="animation-delay: 0.1s;">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
                 <h1 style="font-size: 24px; color: #333; margin: 0;">Hasil Uji Tersimpan</h1>
-                <button class="btn-logout-modern" style="background:#607d8b;" onclick="clearHistory()">Hapus
-                    Semua</button>
+                <div style="display: flex; gap: 10px;">
+                    <button class="btn-sync" onclick="loadHistory()">
+                        <span>🔄</span> Segarkan (Cloud Sync)
+                    </button>
+                    <button class="btn-logout-modern" style="background:#607d8b;" onclick="clearHistory()">Hapus
+                        Lokal</button>
+                </div>
             </div>
 
             <div id="historyTableContainer">
@@ -136,6 +181,7 @@
                         <tr>
                             <th style="width: 50px;">#</th>
                             <th>Nama File</th>
+                            <th>Lokasi Pelayanan</th>
                             <th>Tanggal Simpan</th>
                             <th style="width: 200px; text-align: center;">Aksi</th>
                         </tr>
@@ -172,11 +218,33 @@
             loadHistory();
         });
 
-        function loadHistory() {
-            const history = JSON.parse(localStorage.getItem('spion_history') || '[]');
+        async function loadHistory() {
             const body = document.getElementById('historyBody');
             const container = document.getElementById('historyTableContainer');
             const empty = document.getElementById('emptyState');
+
+            // Tampilkan loading state
+            body.innerHTML = '<tr><td colspan="4" style="text-align: center; padding: 40px;">Memuat data dari cloud... <div class="loading-spinner"></div></td></tr>';
+            container.style.display = 'block';
+            empty.style.display = 'none';
+
+            let history = [];
+
+            try {
+                // Ambil dari Cloud (Google Sheets)
+                const cloudRes = await getHistoryFromSheets();
+                if (cloudRes && cloudRes.success && cloudRes.history) {
+                    history = cloudRes.history;
+                    // Update Local Storage sebagai cache
+                    localStorage.setItem('spion_history', JSON.stringify(history));
+                } else {
+                    console.warn('Gagal ambil history dari cloud, menggunakan local storage.');
+                    history = JSON.parse(localStorage.getItem('spion_history') || '[]');
+                }
+            } catch (err) {
+                console.error('Error fetching cloud history:', err);
+                history = JSON.parse(localStorage.getItem('spion_history') || '[]');
+            }
 
             if (history.length === 0) {
                 container.style.display = 'none';
@@ -193,36 +261,44 @@
                 tr.innerHTML = `
                     <td>${index + 1}</td>
                     <td style="font-family: monospace; font-size: 13px;">${item.filename}</td>
-                    <td style="color: #666; font-size: 13px;">${new Date(item.timestamp).toLocaleString('id-ID')}</td>
+                    <td style="font-size: 13px;">${item['lokasi pelayanan'] || item.lokasiPelayanan || item.lokasipelayanan || (item.data ? item.data.noSampel : '-')}</td>
+                    <td style="color: #666; font-size: 13px;">${item.timestamp ? new Date(item.timestamp).toLocaleString('id-ID') : '-'}</td>
                     <td style="text-align: center;">
-                        <button class="btn-view" onclick="viewResult(${item.id})">Lihat PDF</button>
-                        <button class="btn-delete" onclick="deleteResult(${item.id})">Hapus</button>
+                        <button class="btn-view" onclick="viewResult('${item.id || index}')">Lihat PDF</button>
+                        <button class="btn-delete" style="opacity: 0.5; cursor: not-allowed;" title="Hapus hanya tersedia di Google Sheets" onclick="alert('Penghapusan data terpusat harus dilakukan langsung di Google Sheets Master History.')">Hapus</button>
                     </td>
                 `;
+                // Simpan data di element untuk viewResult
+                tr.dataset.item = JSON.stringify(item);
                 body.appendChild(tr);
             });
         }
 
         function viewResult(id) {
-            const history = JSON.parse(localStorage.getItem('spion_history') || '[]');
-            const item = history.find(i => i.id === id);
-            if (item) {
-                // Gunakan showLHUPreview yang sudah direfactor
-                showLHUPreview(item.data, item.hewan);
+            // Temukan item dari history yang sedang ditampilkan
+            const rows = document.querySelectorAll('#historyBody tr');
+            let itemData = null;
+            rows.forEach(row => {
+                const item = JSON.parse(row.dataset.item || '{}');
+                if (item.id == id || (item.id === undefined && rows.indexOf(row) == id)) {
+                    itemData = item;
+                }
+            });
+
+            if (itemData && itemData.data) {
+                // Gunakan showLHUPreview yang sudah ada di kuisoner-form-script.js
+                showLHUPreview(itemData.data, itemData.hewan, itemData.filename);
+            } else {
+                alert('Data tidak ditemukan atau format tidak valid.');
             }
         }
 
         function deleteResult(id) {
-            if (confirm('Apakah Anda yakin ingin menghapus hasil uji ini?')) {
-                let history = JSON.parse(localStorage.getItem('spion_history') || '[]');
-                history = history.filter(i => i.id !== id);
-                localStorage.setItem('spion_history', JSON.stringify(history));
-                loadHistory();
-            }
+            alert('Fitur hapus dinonaktifkan untuk sinkronisasi cloud. Silakan hapus baris di Google Sheets jika ingin menghapus permanen.');
         }
 
         function clearHistory() {
-            if (confirm('Apakah Anda yakin ingin menghapus SEMUA riwayat hasil uji?')) {
+            if (confirm('Apakah Anda yakin ingin menghapus SEMUA riwayat lokal? Ini tidak akan menghapus data di cloud.')) {
                 localStorage.removeItem('spion_history');
                 loadHistory();
             }

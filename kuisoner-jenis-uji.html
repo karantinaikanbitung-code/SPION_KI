@@ -20,13 +20,16 @@
                 <div class="logo-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                         stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M6 18h8"></path>
-                        <path d="M14 22a7 7 0 1 0 0-14h-1"></path>
-                        <path d="M9 12a2 2 0 1 0-2-2v6"></path>
-                        <path d="M11 6V3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v6"></path>
+                        <!-- Eye (sight) -->
+                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                        <circle cx="12" cy="12" r="3"></circle>
                     </svg>
                 </div>
-                <h2>SPION</h2>
+                <div style="display: flex; flex-direction: column;">
+                    <h2>SPION</h2>
+                    <p style="font-size: 0.65rem; color: rgba(255,255,255,0.7); margin: 0; line-height: 1.2;">Sistem
+                        Pemeriksaan sensorI Organoleptik lapangaN</p>
+                </div>
                 <span style="margin: 0 10px; color: rgba(255,255,255,0.2);">|</span>
                 <div style="margin-left: 0;">
                     <h2 id="jenisUjiTitle">Jenis Uji</h2>
@@ -34,8 +37,9 @@
             </div>
             <div class="header-actions-modern">
                 <div class="user-profile">
-                    <button class="btn-logout-modern" style="background:#607d8b; margin-right:10px;"
-                        onclick="window.location.href='kuisoner-hasil-simpan.html'">📁 Hasil Simpan</button>
+                    <a href="kuisoner-hasil-simpan.html" class="btn-logout-modern"
+                        style="background:#607d8b; color:white; padding:8px 16px; border-radius:8px; text-decoration:none; margin-right:10px; display:inline-flex; align-items:center; justify-content:center;">📁
+                        Hasil Simpan</a>
                     <span id="usernameDisplay">Admin</span>
                     <button class="btn-logout-modern" onclick="logout()">Logout</button>
                 </div>
@@ -73,6 +77,60 @@
                 <div class="card-icon" style="background: linear-gradient(135deg, #ffecd2, #fcb69f);">🥫</div>
                 <h3>Ikan Tuna Kaleng</h3>
                 <p>Pengujian organoleptik khusus untuk produk tuna dalam kemasan kaleng (SNI 8223-2022).</p>
+                <div class="btn-start">Pilih →</div>
+            </div>
+
+            <!-- Sarden/Makarel Kaleng -->
+            <div class="glass glass-card test-card animate-fade-in" style="animation-delay: 0.5s;"
+                onclick="goToForm('sarden-makarel-kaleng')">
+                <div class="card-icon" style="background: linear-gradient(135deg, #fceabb, #f8b500);">🥫</div>
+                <h3>Sarden/Makarel Kaleng</h3>
+                <p>Pengujian organoleptik untuk produk sarden atau makarel dalam kemasan kaleng.</p>
+                <div class="btn-start">Pilih →</div>
+            </div>
+
+            <!-- Dried Smoking Fish -->
+            <div class="glass glass-card test-card animate-fade-in" style="animation-delay: 0.6s;"
+                onclick="goToForm('ikan-asap')">
+                <div class="card-icon" style="background: linear-gradient(135deg, #8e9eab, #eef2f3);">🐟</div>
+                <h3>Dried Smoking Fish (Ikan Asap)</h3>
+                <p>Pengujian organoleptik untuk produk ikan asap.</p>
+                <div class="btn-start">Pilih →</div>
+            </div>
+
+            <!-- Ikan Asin Kering -->
+            <div class="glass glass-card test-card animate-fade-in" style="animation-delay: 0.7s;"
+                onclick="goToForm('ikan-asin-kering')">
+                <div class="card-icon" style="background: linear-gradient(135deg, #48c6ef, #6f86d6);">🐟</div>
+                <h3>Ikan Asin Kering</h3>
+                <p>Pengujian organoleptik untuk produk ikan asin kering.</p>
+                <div class="btn-start">Pilih →</div>
+            </div>
+
+            <!-- Rumput Laut Kering -->
+            <div class="glass glass-card test-card animate-fade-in" style="animation-delay: 0.8s;"
+                onclick="goToForm('rumput-laut-kering')">
+                <div class="card-icon" style="background: linear-gradient(135deg, #11998e, #38ef7d);">🌿</div>
+                <h3>Rumput Laut Kering</h3>
+                <p>Pengujian organoleptik untuk produk rumput laut kering.</p>
+                <div class="btn-start">Pilih →</div>
+            </div>
+
+            <!-- Lobster, Udang Kipas Hidup -->
+            <div class="glass glass-card test-card animate-fade-in" style="animation-delay: 0.9s;"
+                onclick="goToForm('lobster-udang-kipas')">
+                <div class="card-icon" style="background: linear-gradient(135deg, #ff416c, #ff4b2b);">🦞</div>
+                <h3>LOBSTER, UDANG KIPAS HIDUP</h3>
+                <p>Pengujian organoleptik untuk lobster dan udang kipas hidup.</p>
+                <div class="btn-start">Pilih →</div>
+            </div>
+
+            <!-- Kepiting Bakau Hidup -->
+            <div class="glass glass-card test-card animate-fade-in" style="animation-delay: 1.0s;"
+                onclick="goToForm('kepiting-bakau')">
+                <div class="card-icon" style="background: linear-gradient(135deg, #FF512F, #DD2476);">🦀</div>
+                <h3>KEPITING BAKAU HIDUP</h3>
+                <p>Pengujian organoleptik untuk kepiting bakau hidup.</p>
                 <div class="btn-start">Pilih →</div>
             </div>
         </div>

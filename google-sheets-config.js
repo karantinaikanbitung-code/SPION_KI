@@ -1,6 +1,6 @@
 // Konfigurasi Google Sheets
 // Ganti URL ini dengan URL Google Apps Script Web App Anda
-const GOOGLE_APPS_SCRIPT_URL = 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE';
+const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwMquEGFezdJZqG9ci814UsF01BVc4oYn5DS1mCWHTL6YBX1kVjA2hCNCJBr2UYyrC4yg/exec';
 
 // Mapping jenis hewan ke nama sheet
 const SHEET_NAMES = {
@@ -39,10 +39,10 @@ async function saveToGoogleSheets(data, jenisUji, jenisHewan) {
     try {
         // Siapkan data untuk dikirim
         const sheetName = SHEET_NAMES[jenisHewan] || jenisHewan.replace(/\s+/g, '_');
-        
+
         // Format data menjadi array untuk Google Sheets
         const rowData = formatDataForSheets(data, jenisUji, jenisHewan);
-        
+
         // Kirim data ke Google Apps Script sebagai JSON
         const response = await fetch(GOOGLE_APPS_SCRIPT_URL, {
             method: 'POST',
@@ -78,20 +78,20 @@ function tryAlternativeMethod(data, jenisUji, jenisHewan) {
     try {
         const sheetName = SHEET_NAMES[jenisHewan] || jenisHewan.replace(/\s+/g, '_');
         const rowData = formatDataForSheets(data, jenisUji, jenisHewan);
-        
+
         // Buat URL dengan parameter
         const params = new URLSearchParams({
             action: 'appendRow',
             sheetName: sheetName,
             data: JSON.stringify(rowData)
         });
-        
+
         // Gunakan image tag untuk mengirim request (fire and forget)
         const img = document.createElement('img');
         img.src = GOOGLE_APPS_SCRIPT_URL + '?' + params.toString();
         img.style.display = 'none';
         document.body.appendChild(img);
-        
+
         // Hapus setelah beberapa detik
         setTimeout(() => {
             if (img.parentNode) {
@@ -108,7 +108,7 @@ function tryAlternativeMethod(data, jenisUji, jenisHewan) {
  */
 function formatDataForSheets(data, jenisUji, jenisHewan) {
     const row = [];
-    
+
     // Header dasar
     row.push(data.timestamp || '');
     row.push(jenisUji || '');
@@ -116,13 +116,13 @@ function formatDataForSheets(data, jenisUji, jenisHewan) {
     row.push(data.tanggalUji || '');
     row.push(data.namaPetugas || '');
     row.push(data.noSampel || '');
-    
+
     // Data khusus ikan segar
     if (jenisHewan === 'Ikan Segar') {
         // Kode contoh uji dan tanggal diterima sudah ada di data object
         row.push(data.kodeContohUji || '');
         row.push(data.tglDiterima || '');
-        
+
         // Data untuk setiap kode contoh (1-6)
         if (data.penilaianIkanSegar) {
             for (let kode = 1; kode <= 6; kode++) {
@@ -131,7 +131,7 @@ function formatDataForSheets(data, jenisUji, jenisHewan) {
                     row.push(kodeData.total || 0);
                     row.push(kodeData.rataRata || 0);
                     // Tambahkan detail nilai jika ada
-                    const nilaiStr = kodeData.nilai && kodeData.nilai.length > 0 
+                    const nilaiStr = kodeData.nilai && kodeData.nilai.length > 0
                         ? kodeData.nilai.map(n => `Row${n.rowIndex}:${n.nilai}`).join('; ')
                         : '';
                     row.push(nilaiStr);
@@ -149,7 +149,7 @@ function formatDataForSheets(data, jenisUji, jenisHewan) {
         // Nama panelis dan tanggal panelis
         row.push(data.namaPanelis || '');
         row.push(data.tanggalPanelis || '');
-        
+
         // Data untuk setiap kode contoh (1-5)
         if (data.penilaianIkanBeku) {
             for (let kode = 1; kode <= 5; kode++) {
@@ -158,7 +158,7 @@ function formatDataForSheets(data, jenisUji, jenisHewan) {
                     row.push(kodeData.total || 0);
                     row.push(kodeData.rataRata || 0);
                     // Tambahkan detail nilai jika ada
-                    const nilaiStr = kodeData.nilai && kodeData.nilai.length > 0 
+                    const nilaiStr = kodeData.nilai && kodeData.nilai.length > 0
                         ? kodeData.nilai.map(n => `Row${n.rowIndex}:${n.nilai}`).join('; ')
                         : '';
                     row.push(nilaiStr);
@@ -176,7 +176,7 @@ function formatDataForSheets(data, jenisUji, jenisHewan) {
         // Nama panelis dan tanggal panelis
         row.push(data.namaPanelisTuna || '');
         row.push(data.tanggalPanelisTuna || '');
-        
+
         // Data untuk setiap kode contoh (1-5)
         if (data.penilaianIkanTunaKaleng) {
             for (let kode = 1; kode <= 5; kode++) {
@@ -185,7 +185,7 @@ function formatDataForSheets(data, jenisUji, jenisHewan) {
                     row.push(kodeData.total || 0);
                     row.push(kodeData.rataRata || 0);
                     // Tambahkan detail nilai jika ada
-                    const nilaiStr = kodeData.nilai && kodeData.nilai.length > 0 
+                    const nilaiStr = kodeData.nilai && kodeData.nilai.length > 0
                         ? kodeData.nilai.map(n => `Row${n.rowIndex}:${n.nilai}`).join('; ')
                         : '';
                     row.push(nilaiStr);
@@ -202,12 +202,12 @@ function formatDataForSheets(data, jenisUji, jenisHewan) {
     } else {
         // Data untuk jenis hewan lain (kepiting, gurita, kerang)
         // Tambahkan field sesuai dengan form
-        const excludedKeys = ['jenisUji', 'jenisHewan', 'timestamp', 'tanggalUji', 
-                             'namaPetugas', 'noSampel', 'penilaianIkanSegar', 
-                             'kodeContohUji', 'tglDiterima', 'penilaianIkanBeku',
-                             'namaPanelis', 'tanggalPanelis', 'penilaianIkanTunaKaleng',
-                             'namaPanelisTuna', 'tanggalPanelisTuna', 'catatan'];
-        
+        const excludedKeys = ['jenisUji', 'jenisHewan', 'timestamp', 'tanggalUji',
+            'namaPetugas', 'noSampel', 'penilaianIkanSegar',
+            'kodeContohUji', 'tglDiterima', 'penilaianIkanBeku',
+            'namaPanelis', 'tanggalPanelis', 'penilaianIkanTunaKaleng',
+            'namaPanelisTuna', 'tanggalPanelisTuna', 'catatan'];
+
         for (let key in data) {
             if (!excludedKeys.includes(key)) {
                 // Jika object, stringify
@@ -219,10 +219,10 @@ function formatDataForSheets(data, jenisUji, jenisHewan) {
             }
         }
     }
-    
+
     // Catatan
     row.push(data.catatan || '');
-    
+
     return row;
 }
 
@@ -236,9 +236,9 @@ function getSheetHeaders(jenisHewan) {
         'Jenis Hewan',
         'Tanggal Uji',
         'Nama Panelis',
-        'No. Sampel'
+        'Lokasi Pelayanan'
     ];
-    
+
     if (jenisHewan === 'Ikan Segar') {
         const ikanSegarHeaders = [
             ...baseHeaders,
@@ -277,3 +277,56 @@ function getSheetHeaders(jenisHewan) {
     }
 }
 
+/**
+ * Menyimpan item history ke Google Sheets
+ */
+async function saveHistoryToSheets(item) {
+    if (!GOOGLE_APPS_SCRIPT_URL || GOOGLE_APPS_SCRIPT_URL === 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE') {
+        return { success: false, message: 'Apps Script URL belum dikonfigurasi' };
+    }
+
+    try {
+        const response = await fetch(GOOGLE_APPS_SCRIPT_URL, {
+            method: 'POST',
+            mode: 'cors',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                action: 'saveHistory',
+                historyItem: item
+            })
+        });
+
+        if (response.ok) {
+            return await response.json();
+        }
+        throw new Error('HTTP Error: ' + response.status);
+    } catch (error) {
+        console.error('Error saving history to Sheets:', error);
+        return { success: false, message: error.message };
+    }
+}
+
+/**
+ * Mengambil history dari Google Sheets
+ */
+async function getHistoryFromSheets() {
+    if (!GOOGLE_APPS_SCRIPT_URL || GOOGLE_APPS_SCRIPT_URL === 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE') {
+        return { success: false, message: 'Apps Script URL belum dikonfigurasi' };
+    }
+
+    try {
+        // Gunakan GET untuk mengambil data agar lebih simpel
+        const response = await fetch(`${GOOGLE_APPS_SCRIPT_URL}?action=getHistory`, {
+            method: 'GET',
+            mode: 'cors'
+        });
+
+        if (response.ok) {
+            return await response.json();
+        }
+        throw new Error('HTTP Error: ' + response.status);
+    } catch (error) {
+        console.error('Error fetching history from Sheets:', error);
+        return { success: false, message: error.message };
+    }
+}

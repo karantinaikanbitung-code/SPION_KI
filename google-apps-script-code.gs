@@ -50,6 +50,11 @@ function doPost(e) {
       return appendRowToSheet(sheetName, rowData);
     } else if (action === 'saveFileToDrive') {
       return saveFileToDrive(data.filename, data.htmlContent);
+    } else if (action === 'saveHistory') {
+       // data.historyItem = { id, filename, timestamp, hewan, data_json }
+       return saveHistoryToSheet(data.historyItem);
+    } else if (action === 'getHistory') {
+       return getHistoryFromSheet();
     } else {
       return createJSONResponse({
         success: false,
@@ -113,6 +118,8 @@ function doGet(e) {
     if (action === 'appendRow') {
       const result = appendRowToSheetInternal(sheetName, rowData);
       return createJSONResponse(result);
+    } else if (action === 'getHistory') {
+      return getHistoryFromSheet();
     } else {
       return createJSONResponse({
         success: false,
@@ -221,7 +228,7 @@ function getHeadersForSheet(sheetName) {
       'Jenis Hewan',
       'Tanggal Uji',
       'Nama Panelis',
-      'No. Sampel',
+      'Lokasi Pelayanan',
       'Kode Contoh Uji',
       'Tanggal Diterima',
       'Kode Contoh 1 - Total',
@@ -251,7 +258,7 @@ function getHeadersForSheet(sheetName) {
       'Jenis Hewan',
       'Tanggal Uji',
       'Nama Panelis',
-      'No. Sampel',
+      'Lokasi Pelayanan',
       'Nama Panelis',
       'Tanggal Panelis',
       'Kode Contoh 1 - Total',
@@ -278,7 +285,7 @@ function getHeadersForSheet(sheetName) {
       'Jenis Hewan',
       'Tanggal Uji',
       'Nama Panelis',
-      'No. Sampel',
+      'Lokasi Pelayanan',
       'Nama Panelis',
       'Tanggal Panelis',
       'Kode Contoh 1 - Total',
@@ -306,9 +313,83 @@ function getHeadersForSheet(sheetName) {
       'Jenis Hewan',
       'Tanggal Uji',
       'Nama Panelis',
-      'No. Sampel',
+      'Lokasi Pelayanan',
       'Catatan'
     ];
+  }
+}
+
+/**
+ * Menyimpan item history ke sheet 'History'
+ */
+function saveHistoryToSheet(item) {
+  try {
+    const spreadsheet = SpreadsheetApp.openById(SPREADSHEET_ID);
+    let sheet = spreadsheet.getSheetByName('History');
+    
+    if (!sheet) {
+      sheet = spreadsheet.insertSheet('History');
+      sheet.appendRow(['ID', 'Filename', 'Lokasi Pelayanan', 'Timestamp', 'Hewan', 'Data JSON']);
+      sheet.getRange(1, 1, 1, 6).setFontWeight('bold').setBackground('#4285f4').setFontColor('#ffffff');
+    }
+    
+    // Simpan data
+    sheet.appendRow([
+      item.id,
+      item.filename,
+      item.lokasiPelayanan || '-',
+      item.timestamp,
+      item.hewan,
+      typeof item.data === 'string' ? item.data : JSON.stringify(item.data)
+    ]);
+    
+    return createJSONResponse({ success: true, message: 'History berhasil disimpan' });
+  } catch (error) {
+    return createJSONResponse({ success: false, message: 'Gagal simpan history: ' + error.toString() });
+  }
+}
+
+/**
+ * Mengambil semua data dari sheet 'History'
+ */
+function getHistoryFromSheet() {
+  try {
+    const spreadsheet = SpreadsheetApp.openById(SPREADSHEET_ID);
+    const sheet = spreadsheet.getSheetByName('History');
+    
+    if (!sheet) {
+      return createJSONResponse({ success: true, history: [] });
+    }
+    
+    const rows = sheet.getDataRange().getValues();
+    const headers = rows[0];
+    const history = [];
+    
+    for (let i = 1; i < rows.length; i++) {
+      const row = rows[i];
+      const item = {};
+      for (let j = 0; j < headers.length; j++) {
+        item[headers[j].toLowerCase()] = row[j];
+      }
+      
+      // Parse data_json jika ada
+      if (item['data json']) {
+        try {
+          item.data = JSON.parse(item['data json']);
+        } catch (e) {
+          item.data = null;
+        }
+      }
+      
+      history.push(item);
+    }
+    
+    // Sort by timestamp descending (assuming ISO format or similar)
+    history.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+    
+    return createJSONResponse({ success: true, history: history });
+  } catch (error) {
+    return createJSONResponse({ success: false, message: 'Gagal ambil history: ' + error.toString() });
   }
 }
 

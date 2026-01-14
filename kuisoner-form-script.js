@@ -38,7 +38,12 @@ document.addEventListener('DOMContentLoaded', function () {
     const hewanNames = {
         'ikan-segar': 'Ikan Segar',
         'ikan-beku': 'Ikan Beku',
-        'ikan-tuna-kaleng': 'Ikan Tuna Kaleng'
+        'ikan-tuna-kaleng': 'Ikan Tuna Kaleng',
+        'sarden-makarel-kaleng': 'Sarden/Makarel Kaleng',
+        'ikan-asap': 'Dried Smoking Fish (Ikan Asap)',
+        'ikan-asin-kering': 'Ikan Asin Kering',
+        'rumput-laut-kering': 'Rumput Laut Kering',
+        'lobster-udang-kipas': 'LOBSTER, UDANG KIPAS HIDUP'
     };
 
     if (penilaianForm) {
@@ -101,7 +106,7 @@ function generateFormFields(jenisUji, hewan) {
     const catatanSectionEl = document.getElementById('catatanSection');
     if (catatanSectionEl) catatanSectionEl.style.display = 'block';
 
-    if (hewan === 'ikan-segar' || hewan === 'ikan-beku' || hewan === 'ikan-tuna-kaleng') {
+    if (hewan === 'ikan-segar' || hewan === 'ikan-beku' || hewan === 'ikan-tuna-kaleng' || hewan === 'sarden-makarel-kaleng' || hewan === 'ikan-asap' || hewan === 'ikan-asin-kering' || hewan === 'rumput-laut-kering' || hewan === 'lobster-udang-kipas' || hewan === 'kepiting-bakau') {
         if (catatanSectionEl) catatanSectionEl.style.display = 'none';
     }
 
@@ -131,6 +136,42 @@ function generateOrganoleptikFields(container, hewan) {
     // Jika ikan tuna kaleng, buat tabel khusus
     if (hewan === 'ikan-tuna-kaleng') {
         generateIkanTunaKalengTable(container);
+        return;
+    }
+
+    // Jika sarden/makarel kaleng, buat tabel khusus
+    if (hewan === 'sarden-makarel-kaleng') {
+        generateSardenMakarelKalengTable(container);
+        return;
+    }
+
+    // Jika ikan asap, buat tabel khusus
+    if (hewan === 'ikan-asap') {
+        generateDriedSmokingFishTable(container);
+        return;
+    }
+
+    // Jika ikan asin kering, buat tabel khusus
+    if (hewan === 'ikan-asin-kering') {
+        generateIkanAsinKeringTable(container);
+        return;
+    }
+
+    // Jika rumput laut kering, buat tabel khusus
+    if (hewan === 'rumput-laut-kering') {
+        generateRumputLautKeringTable(container);
+        return;
+    }
+
+    // Jika lobster/udang kipas, buat tabel khusus
+    if (hewan === 'lobster-udang-kipas') {
+        generateLobsterUdangKipasTable(container);
+        return;
+    }
+
+    // Jika kepiting bakau, buat tabel khusus
+    if (hewan === 'kepiting-bakau') {
+        generateKepitingBakauTable(container);
         return;
     }
 
@@ -1415,54 +1456,1050 @@ function generateIkanTunaKalengTable(container) {
     setTimeout(updatePanelistQRCode, 300);
 }
 
-function calculateTotalsTunaKaleng() {
-    const table = document.getElementById('ikanTunaKalengTable');
-    if (!table) {
-        return;
-    }
 
-    // Hitung total dan rata-rata untuk setiap kode contoh (1-6)
+function generateSardenMakarelKalengTable(container) {
+    // Header informasi
+    const headerDiv = document.createElement('div');
+    headerDiv.className = 'sarden-makarel-header';
+    headerDiv.innerHTML = `
+        <h3 style="text-align: center; margin-bottom: 20px; font-size: 18px; font-weight: 600;">LEMBAR PENILAIAN UJI SKOR SARDEN/MAKAREL KALENG</h3>
+        <div style="margin-bottom: 15px;">
+            <label style="display: inline-block; width: 200px;">1. Kode Contoh Uji /No. Aju PTK :</label>
+            <input type="text" id="kodeContohUji" name="kodeContohUji" style="width: 300px; padding: 8px; border: 1px solid #ddd; border-radius: 5px;">
+        </div>
+        <div style="margin-bottom: 15px;">
+            <label style="display: inline-block; width: 200px;">2. Tgl. Diterima Contoh Uji :</label>
+            <input type="date" id="tglDiterima" name="tglDiterima" style="width: 300px; padding: 8px; border: 1px solid #ddd; border-radius: 5px;">
+        </div>
+        <table style="width: 100%; margin-bottom: 20px; border-collapse: collapse; border: 1px solid #ddd;">
+            <thead>
+                <tr style="background-color: #f5f5f5;">
+                    <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">NO</th>
+                    <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">JENIS CONTOH UJI</th>
+                    <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">JUMLAH</th>
+                    <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">UKURAN</th>
+                    <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">Ket.</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">1.</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;"><input type="text" id="jenisContoh" name="jenisContoh" placeholder="Sarden/Makarel Kaleng" style="width: 100%; border: none; padding: 5px;"></td>
+                    <td style="border: 1px solid #ddd; padding: 8px;"><input type="text" name="jumlah" style="width: 100%; border: none; padding: 5px;"></td>
+                    <td style="border: 1px solid #ddd; padding: 8px;"><input type="text" name="ukuran" style="width: 100%; border: none; padding: 5px;"></td>
+                    <td style="border: 1px solid #ddd; padding: 8px;"><input type="text" name="keterangan" style="width: 100%; border: none; padding: 5px;"></td>
+                </tr>
+            </tbody>
+        </table>
+        <p style="margin-bottom: 15px; font-style: italic;">Berilah tanda √ pada nilai yang dipilih sesuai kode contoh yang diuji.</p>
+    `;
+    container.appendChild(headerDiv);
+
+    // Data untuk tabel penilaian sesuai gambar
+    const penilaianData = [
+        {
+            kategori: '1. Kenampakan',
+            items: [
+                { desc: 'Utuh, cerah', nilai: 9 },
+                { desc: 'Utuh, kurang cerah', nilai: 7 },
+                { desc: 'Tidak utuh, kusam', nilai: 5 }
+            ]
+        },
+        {
+            kategori: '2. Bau',
+            items: [
+                { desc: 'Aroma sangat kuat sesuai spesifikasi', nilai: 9 },
+                { desc: 'Aroma kuat sesuai spesifikasi', nilai: 7 },
+                { desc: 'Mulai tercium bau asam', nilai: 5 }
+            ]
+        },
+        {
+            kategori: '3. Rasa',
+            items: [
+                { desc: 'Sangat sesuai spesifikasi.', nilai: 9 },
+                { desc: 'Sesuai spesifikasi', nilai: 7 },
+                { desc: 'Tidak sesuai spesifikasi, hambar', nilai: 5 }
+            ]
+        },
+        {
+            kategori: '4. Tekstur',
+            items: [
+                { desc: 'Sangat kompak sesuai spesifikasi', nilai: 9 },
+                { desc: 'Kompak sesuai spesifikasi', nilai: 7 },
+                { desc: 'Kurang kompak', nilai: 5 }
+            ]
+        }
+    ];
+
+    // Buat tabel utama
+    const table = document.createElement('table');
+    table.className = 'sarden-makarel-table';
+    table.id = 'sardenMakarelTable';
+
+    // Header tabel
+    const thead = document.createElement('thead');
+    thead.innerHTML = `
+        <tr>
+            <th rowspan="2" style="border: 1px solid #ddd; padding: 10px; text-align: center; background-color: #f5f5f5; min-width: 200px;">Spesifikasi</th>
+            <th rowspan="2" style="border: 1px solid #ddd; padding: 10px; text-align: center; background-color: #f5f5f5; min-width: 80px;">Nilai</th>
+            <th colspan="6" style="border: 1px solid #ddd; padding: 10px; text-align: center; background-color: #f5f5f5;">Kode Contoh</th>
+        </tr>
+        <tr>
+            <th style="border: 1px solid #ddd; padding: 10px; text-align: center; background-color: #f5f5f5; min-width: 60px;">1</th>
+            <th style="border: 1px solid #ddd; padding: 10px; text-align: center; background-color: #f5f5f5; min-width: 60px;">2</th>
+            <th style="border: 1px solid #ddd; padding: 10px; text-align: center; background-color: #f5f5f5; min-width: 60px;">3</th>
+            <th style="border: 1px solid #ddd; padding: 10px; text-align: center; background-color: #f5f5f5; min-width: 60px;">4</th>
+            <th style="border: 1px solid #ddd; padding: 10px; text-align: center; background-color: #f5f5f5; min-width: 60px;">5</th>
+            <th style="border: 1px solid #ddd; padding: 10px; text-align: center; background-color: #f5f5f5; min-width: 60px;">6</th>
+        </tr>
+    `;
+    table.appendChild(thead);
+
+    // Body tabel
+    const tbody = document.createElement('tbody');
+    let rowIndex = 0;
+
+    penilaianData.forEach((section, sectionIndex) => {
+        section.items.forEach((item, itemIndex) => {
+            const row = document.createElement('tr');
+            row.dataset.nilai = item.nilai;
+            row.dataset.rowIndex = rowIndex;
+
+            // Kolom Spesifikasi
+            const specCell = document.createElement('td');
+            specCell.style.border = '1px solid #ddd';
+            specCell.style.padding = '10px';
+            specCell.style.verticalAlign = 'top';
+
+            let specText = '';
+            if (itemIndex === 0) {
+                specText = '<strong>' + section.kategori + '</strong><br>';
+            }
+            specText += item.desc;
+            specCell.innerHTML = specText;
+            row.appendChild(specCell);
+
+            // Kolom Nilai
+            const nilaiCell = document.createElement('td');
+            nilaiCell.style.border = '1px solid #ddd';
+            nilaiCell.style.padding = '10px';
+            nilaiCell.style.textAlign = 'center';
+            nilaiCell.style.fontWeight = '600';
+            nilaiCell.textContent = item.nilai;
+            row.appendChild(nilaiCell);
+
+            // Kolom Kode Contoh (1-6)
+            for (let kode = 1; kode <= 6; kode++) {
+                const kodeCell = document.createElement('td');
+                kodeCell.className = 'kode-contoh-cell';
+                kodeCell.dataset.kode = kode;
+                kodeCell.dataset.rowIndex = rowIndex;
+                kodeCell.dataset.nilai = item.nilai;
+                kodeCell.style.border = '1px solid #ddd';
+                kodeCell.style.padding = '10px';
+                kodeCell.style.textAlign = 'center';
+                kodeCell.style.cursor = 'pointer';
+
+                // Checkbox tersembunyi
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.className = 'nilai-checkbox';
+                checkbox.dataset.kode = kode;
+                checkbox.dataset.rowIndex = rowIndex;
+                checkbox.dataset.nilai = item.nilai;
+                checkbox.dataset.sectionIndex = sectionIndex;
+                checkbox.style.display = 'none';
+
+                kodeCell.appendChild(checkbox);
+
+                // Event listener untuk klik pada cell
+                kodeCell.addEventListener('click', function (e) {
+                    if (e.target === checkbox || e.target.type === 'checkbox') return;
+                    e.preventDefault();
+                    e.stopPropagation();
+
+                    const newCheckedState = !checkbox.checked;
+                    if (newCheckedState) {
+                        const siblings = tbody.querySelectorAll(`.nilai-checkbox[data-kode="${kode}"][data-section-index="${sectionIndex}"]`);
+                        siblings.forEach(sib => {
+                            if (sib !== checkbox && sib.checked) {
+                                sib.checked = false;
+                                updateCheckmark(sib.parentElement, false);
+                            }
+                        });
+                    }
+                    checkbox.checked = newCheckedState;
+                    updateCheckmark(kodeCell, newCheckedState);
+                    setTimeout(() => calculateTotalsSardenMakarel(), 10);
+                });
+
+                row.appendChild(kodeCell);
+            }
+            tbody.appendChild(row);
+            rowIndex++;
+        });
+    });
+
+    // Baris Total
+    const totalRow = document.createElement('tr');
+    totalRow.className = 'total-row';
+    totalRow.innerHTML = `<td colspan="2" style="border: 1px solid #ddd; padding: 10px; font-weight: 600; text-align: center; background-color: #f9f9f9;">Total</td>`;
     for (let kode = 1; kode <= 6; kode++) {
-        let total = 0;
-        let count = 0;
+        totalRow.innerHTML += `<td class="total-cell" data-kode="${kode}" style="border: 1px solid #ddd; padding: 10px; text-align: center; font-weight: 600; background: #f9f9f9;">0</td>`;
+    }
+    tbody.appendChild(totalRow);
 
-        // Cari semua checkbox untuk kode contoh ini (baik yang checked maupun tidak)
-        const allCheckboxes = table.querySelectorAll(`input.nilai-checkbox[data-kode="${kode}"]`);
+    // Baris Rata-rata
+    const avgRow = document.createElement('tr');
+    avgRow.className = 'avg-row';
+    avgRow.innerHTML = `<td colspan="2" style="border: 1px solid #ddd; padding: 10px; font-weight: 600; text-align: center; background-color: #f0f0f0;">Rata-rata</td>`;
+    for (let kode = 1; kode <= 6; kode++) {
+        avgRow.innerHTML += `<td class="avg-cell" data-kode="${kode}" style="border: 1px solid #ddd; padding: 10px; text-align: center; font-weight: 600; background: #f0f0f0;">0.00</td>`;
+    }
+    tbody.appendChild(avgRow);
 
-        // Hitung total dan jumlah dari checkbox yang dicentang
-        allCheckboxes.forEach(checkbox => {
-            if (checkbox.checked) {
-                const nilaiStr = checkbox.getAttribute('data-nilai');
-                const nilai = parseInt(nilaiStr);
-                if (!isNaN(nilai) && nilai > 0) {
-                    total += nilai;
-                    count++;
-                }
+    table.appendChild(tbody);
+    const tableWrapper = document.createElement('div');
+    tableWrapper.className = 'table-wrapper';
+    tableWrapper.style.overflowX = 'auto';
+    tableWrapper.style.marginBottom = '20px';
+    tableWrapper.appendChild(table);
+    container.appendChild(tableWrapper);
+
+    // LHU Button
+    const formActions = document.querySelector('.form-actions');
+    if (formActions) {
+        const oldBtn = formActions.querySelector('.btn-lhu');
+        if (oldBtn) oldBtn.remove();
+        const lhuButton = document.createElement('button');
+        lhuButton.type = 'button';
+        lhuButton.className = 'btn-lhu';
+        lhuButton.textContent = 'Lihat LHU (Laporan Hasil Uji)';
+        lhuButton.style.padding = '12px 24px';
+        lhuButton.style.background = 'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)';
+        lhuButton.style.color = 'white';
+        lhuButton.style.border = 'none';
+        lhuButton.style.borderRadius = '10px';
+        lhuButton.style.fontSize = '16px';
+        lhuButton.style.fontWeight = '600';
+        lhuButton.style.cursor = 'pointer';
+        lhuButton.style.transition = 'all 0.3s';
+        lhuButton.style.marginRight = '10px';
+        lhuButton.addEventListener('click', async () => {
+            try {
+                lhuButton.disabled = true;
+                await showLHUPreview();
+            } finally {
+                lhuButton.disabled = false;
             }
         });
+        formActions.insertBefore(lhuButton, formActions.firstChild);
+    }
 
-        // Update total - cari dengan berbagai cara untuk memastikan ditemukan
-        let totalCell = table.querySelector(`td.total-cell[data-kode="${kode}"]`);
-        if (!totalCell) {
-            totalCell = table.querySelector(`.total-cell[data-kode="${kode}"]`);
-        }
-        if (totalCell) {
-            totalCell.textContent = total.toString();
-            totalCell.style.color = '#667eea';
-            totalCell.style.fontWeight = '600';
-        }
+    const qrWrapper = document.createElement('div');
+    qrWrapper.style.marginTop = '20px';
+    qrWrapper.style.display = 'flex';
+    qrWrapper.style.justifyContent = 'flex-end';
+    qrWrapper.innerHTML = `<div id="qrcode-container" style="padding: 10px; background: #fff; border-radius: 8px;"></div>`;
+    container.appendChild(qrWrapper);
+    setTimeout(updatePanelistQRCode, 300);
+}
 
-        // Update rata-rata
-        let avgCell = table.querySelector(`td.avg-cell[data-kode="${kode}"]`);
-        if (!avgCell) {
-            avgCell = table.querySelector(`.avg-cell[data-kode="${kode}"]`);
+
+function generateDriedSmokingFishTable(container) {
+    // Header informasi
+    const headerDiv = document.createElement('div');
+    headerDiv.className = 'ikan-asap-header';
+    headerDiv.innerHTML = `
+        <h3 style="text-align: center; margin-bottom: 20px; font-size: 18px; font-weight: 600;">LEMBAR PENILAIAN UJI SKOR DRIED SMOKING FISH (IKAN ASAP)</h3>
+        <div style="margin-bottom: 15px;">
+            <label style="display: inline-block; width: 200px;">1. Kode Contoh Uji /No. Aju PTK :</label>
+            <input type="text" id="kodeContohUji" name="kodeContohUji" style="width: 300px; padding: 8px; border: 1px solid #ddd; border-radius: 5px;">
+        </div>
+        <div style="margin-bottom: 15px;">
+            <label style="display: inline-block; width: 200px;">2. Tgl. Diterima Contoh Uji :</label>
+            <input type="date" id="tglDiterima" name="tglDiterima" style="width: 300px; padding: 8px; border: 1px solid #ddd; border-radius: 5px;">
+        </div>
+        <table style="width: 100%; margin-bottom: 20px; border-collapse: collapse; border: 1px solid #ddd;">
+            <thead>
+                <tr style="background-color: #f5f5f5;">
+                    <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">NO</th>
+                    <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">JENIS CONTOH UJI</th>
+                    <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">JUMLAH</th>
+                    <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">UKURAN</th>
+                    <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">Ket.</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">1.</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;"><input type="text" id="jenisContoh" name="jenisContoh" placeholder="Dried Smoking Fish" style="width: 100%; border: none; padding: 5px;"></td>
+                    <td style="border: 1px solid #ddd; padding: 8px;"><input type="text" name="jumlah" style="width: 100%; border: none; padding: 5px;"></td>
+                    <td style="border: 1px solid #ddd; padding: 8px;"><input type="text" name="ukuran" style="width: 100%; border: none; padding: 5px;"></td>
+                    <td style="border: 1px solid #ddd; padding: 8px;"><input type="text" name="keterangan" style="width: 100%; border: none; padding: 5px;"></td>
+                </tr>
+            </tbody>
+        </table>
+        <p style="margin-bottom: 15px; font-style: italic;">Berilah tanda √ pada nilai yang dipilih sesuai kode contoh yang diuji.</p>
+    `;
+    container.appendChild(headerDiv);
+
+    // Data untuk tabel penilaian sesuai gambar (5 level: 1, 3, 5, 7, 9)
+    const penilaianData = [
+        {
+            kategori: '1. Kenampakan',
+            items: [
+                { desc: 'Bersih, warna seragam dan merata tanpa retakan.', nilai: 9 },
+                { desc: 'Cukup bersih, warna seragam dan merata tanpa retakan.', nilai: 7 },
+                { desc: 'Kurang bersih, warna seragam dan merata sedikit retakan.', nilai: 5 },
+                { desc: 'Kotor, warna kurang seragam dan kurang merata, retak-retak.', nilai: 3 },
+                { desc: 'Kotor sekali, warna tidak seragam dan tidak rata, retak-retak.', nilai: 1 }
+            ]
+        },
+        {
+            kategori: '2. Bau',
+            items: [
+                { desc: 'Spesifik ikan kayu, tanpa bau tambahan.', nilai: 9 },
+                { desc: 'Spesifik bau ikan kayu berkurang, tanpa bau tambahan.', nilai: 7 },
+                { desc: 'Spesifik bau ikan kayu tidak ada dengan sedikit bau tambahan.', nilai: 5 },
+                { desc: 'Spesifik bau ikan kayu tidak ada dengan tambahan agak kuat.', nilai: 3 },
+                { desc: 'Tengik, apek dengan bau tambahan kuat.', nilai: 1 }
+            ]
+        },
+        {
+            kategori: '3. Rasa',
+            items: [
+                { desc: 'Sangat suka.', nilai: 9 },
+                { desc: 'Suka.', nilai: 7 },
+                { desc: 'Biasa.', nilai: 5 },
+                { desc: 'Tidak suka.', nilai: 3 },
+                { desc: 'Sangat tidak suka.', nilai: 1 }
+            ]
+        },
+        {
+            kategori: '4. Tekstur',
+            items: [
+                { desc: 'Keras, tidak mudah patah.', nilai: 9 },
+                { desc: 'Kurang keras, agak mudah patah.', nilai: 7 },
+                { desc: 'Agak rapuh.', nilai: 5 },
+                { desc: 'Rapuh.', nilai: 3 },
+                { desc: 'Hancur.', nilai: 1 }
+            ]
         }
-        if (avgCell) {
-            const avg = count > 0 ? (total / count).toFixed(2) : '0.00';
-            avgCell.textContent = avg;
-            avgCell.style.color = '#667eea';
-            avgCell.style.fontWeight = '600';
+    ];
+
+    // Buat tabel utama
+    const table = document.createElement('table');
+    table.className = 'ikan-asap-table';
+    table.id = 'ikanAsapTable';
+
+    // Header tabel
+    const thead = document.createElement('thead');
+    thead.innerHTML = `
+        <tr>
+            <th rowspan="2" style="border: 1px solid #ddd; padding: 10px; text-align: center; background-color: #f5f5f5; min-width: 250px;">Spesifikasi</th>
+            <th rowspan="2" style="border: 1px solid #ddd; padding: 10px; text-align: center; background-color: #f5f5f5; min-width: 80px;">Nilai</th>
+            <th colspan="6" style="border: 1px solid #ddd; padding: 10px; text-align: center; background-color: #f5f5f5;">Kode Contoh</th>
+        </tr>
+        <tr>
+            <th style="border: 1px solid #ddd; padding: 10px; text-align: center; background-color: #f5f5f5; min-width: 60px;">1</th>
+            <th style="border: 1px solid #ddd; padding: 10px; text-align: center; background-color: #f5f5f5; min-width: 60px;">2</th>
+            <th style="border: 1px solid #ddd; padding: 10px; text-align: center; background-color: #f5f5f5; min-width: 60px;">3</th>
+            <th style="border: 1px solid #ddd; padding: 10px; text-align: center; background-color: #f5f5f5; min-width: 60px;">4</th>
+            <th style="border: 1px solid #ddd; padding: 10px; text-align: center; background-color: #f5f5f5; min-width: 60px;">5</th>
+            <th style="border: 1px solid #ddd; padding: 10px; text-align: center; background-color: #f5f5f5; min-width: 60px;">6</th>
+        </tr>
+    `;
+    table.appendChild(thead);
+
+    // Body tabel
+    const tbody = document.createElement('tbody');
+    let rowIndex = 0;
+
+    penilaianData.forEach((section, sectionIndex) => {
+        section.items.forEach((item, itemIndex) => {
+            const row = document.createElement('tr');
+            row.dataset.nilai = item.nilai;
+            row.dataset.rowIndex = rowIndex;
+
+            // Kolom Spesifikasi
+            const specCell = document.createElement('td');
+            specCell.style.border = '1px solid #ddd';
+            specCell.style.padding = '10px';
+            specCell.style.verticalAlign = 'top';
+
+            let specText = '';
+            if (itemIndex === 0) {
+                specText = '<strong>' + section.kategori + '</strong><br>';
+            }
+            specText += '- ' + item.desc;
+            specCell.innerHTML = specText;
+            row.appendChild(specCell);
+
+            // Kolom Nilai
+            const nilaiCell = document.createElement('td');
+            nilaiCell.style.border = '1px solid #ddd';
+            nilaiCell.style.padding = '10px';
+            nilaiCell.style.textAlign = 'center';
+            nilaiCell.style.fontWeight = '600';
+            nilaiCell.textContent = item.nilai;
+            row.appendChild(nilaiCell);
+
+            // Kolom Kode Contoh (1-6)
+            for (let kode = 1; kode <= 6; kode++) {
+                const kodeCell = document.createElement('td');
+                kodeCell.className = 'kode-contoh-cell';
+                kodeCell.dataset.kode = kode;
+                kodeCell.dataset.rowIndex = rowIndex;
+                kodeCell.dataset.nilai = item.nilai;
+                kodeCell.style.border = '1px solid #ddd';
+                kodeCell.style.padding = '10px';
+                kodeCell.style.textAlign = 'center';
+                kodeCell.style.cursor = 'pointer';
+
+                // Checkbox tersembunyi
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.className = 'nilai-checkbox';
+                checkbox.dataset.kode = kode;
+                checkbox.dataset.rowIndex = rowIndex;
+                checkbox.dataset.nilai = item.nilai;
+                checkbox.dataset.sectionIndex = sectionIndex;
+                checkbox.style.display = 'none';
+
+                kodeCell.appendChild(checkbox);
+
+                // Event listener untuk klik pada cell
+                kodeCell.addEventListener('click', function (e) {
+                    if (e.target === checkbox || e.target.type === 'checkbox') return;
+                    e.preventDefault();
+                    e.stopPropagation();
+
+                    const newCheckedState = !checkbox.checked;
+                    if (newCheckedState) {
+                        const siblings = tbody.querySelectorAll(`.nilai-checkbox[data-kode="${kode}"][data-section-index="${sectionIndex}"]`);
+                        siblings.forEach(sib => {
+                            if (sib !== checkbox && sib.checked) {
+                                sib.checked = false;
+                                updateCheckmark(sib.parentElement, false);
+                            }
+                        });
+                    }
+                    checkbox.checked = newCheckedState;
+                    updateCheckmark(kodeCell, newCheckedState);
+                    setTimeout(() => calculateTotalsIkanAsap(), 10);
+                });
+
+                row.appendChild(kodeCell);
+            }
+            tbody.appendChild(row);
+            rowIndex++;
+        });
+    });
+
+    // Baris Total
+    const totalRow = document.createElement('tr');
+    totalRow.className = 'total-row';
+    totalRow.innerHTML = `<td colspan="2" style="border: 1px solid #ddd; padding: 10px; font-weight: 600; text-align: center; background-color: #f9f9f9;">Total</td>`;
+    for (let kode = 1; kode <= 6; kode++) {
+        totalRow.innerHTML += `<td class="total-cell" data-kode="${kode}" style="border: 1px solid #ddd; padding: 10px; text-align: center; font-weight: 600; background: #f9f9f9;">0</td>`;
+    }
+    tbody.appendChild(totalRow);
+
+    // Baris Rata-rata
+    const avgRow = document.createElement('tr');
+    avgRow.className = 'avg-row';
+    avgRow.innerHTML = `<td colspan="2" style="border: 1px solid #ddd; padding: 10px; font-weight: 600; text-align: center; background-color: #f0f0f0;">Rata-rata</td>`;
+    for (let kode = 1; kode <= 6; kode++) {
+        avgRow.innerHTML += `<td class="avg-cell" data-kode="${kode}" style="border: 1px solid #ddd; padding: 10px; text-align: center; font-weight: 600; background: #f0f0f0;">0.00</td>`;
+    }
+    tbody.appendChild(avgRow);
+
+    table.appendChild(tbody);
+    const tableWrapper = document.createElement('div');
+    tableWrapper.className = 'table-wrapper';
+    tableWrapper.style.overflowX = 'auto';
+    tableWrapper.style.marginBottom = '20px';
+    tableWrapper.appendChild(table);
+    container.appendChild(tableWrapper);
+
+    // LHU Button
+    const formActions = document.querySelector('.form-actions');
+    if (formActions) {
+        const oldBtn = formActions.querySelector('.btn-lhu');
+        if (oldBtn) oldBtn.remove();
+        const lhuButton = document.createElement('button');
+        lhuButton.type = 'button';
+        lhuButton.className = 'btn-lhu';
+        lhuButton.textContent = 'Lihat LHU (Laporan Hasil Uji)';
+        lhuButton.style.padding = '12px 24px';
+        lhuButton.style.background = 'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)';
+        lhuButton.style.color = 'white';
+        lhuButton.style.border = 'none';
+        lhuButton.style.borderRadius = '10px';
+        lhuButton.style.fontSize = '16px';
+        lhuButton.style.fontWeight = '600';
+        lhuButton.style.cursor = 'pointer';
+        lhuButton.style.transition = 'all 0.3s';
+        lhuButton.style.marginRight = '10px';
+        lhuButton.addEventListener('click', async () => {
+            try {
+                lhuButton.disabled = true;
+                await showLHUPreview();
+            } finally {
+                lhuButton.disabled = false;
+            }
+        });
+        formActions.insertBefore(lhuButton, formActions.firstChild);
+    }
+
+    const qrWrapper = document.createElement('div');
+    qrWrapper.style.marginTop = '20px';
+    qrWrapper.style.display = 'flex';
+    qrWrapper.style.justifyContent = 'flex-end';
+    qrWrapper.innerHTML = `<div id="qrcode-container" style="padding: 10px; background: #fff; border-radius: 8px;"></div>`;
+    container.appendChild(qrWrapper);
+    setTimeout(updatePanelistQRCode, 300);
+}
+
+function calculateTotalsIkanAsap() {
+    const table = document.getElementById('ikanAsapTable');
+    if (!table) return;
+    for (let kode = 1; kode <= 6; kode++) {
+        let total = 0, count = 0;
+        table.querySelectorAll(`input.nilai-checkbox[data-kode="${kode}"]:checked`).forEach(cb => {
+            total += parseInt(cb.dataset.nilai);
+            count++;
+        });
+        const totalCell = table.querySelector(`.total-cell[data-kode="${kode}"]`);
+        if (totalCell) totalCell.textContent = total;
+        const avgCell = table.querySelector(`.avg-cell[data-kode="${kode}"]`);
+        if (avgCell) avgCell.textContent = count > 0 ? (total / count).toFixed(2) : '0.00';
+    }
+}
+
+function generateIkanAsinKeringTable(container) {
+    // Header informasi
+    const headerDiv = document.createElement('div');
+    headerDiv.className = 'ikan-asin-kering-header';
+    headerDiv.innerHTML = `
+        <h3 style="text-align: center; margin-bottom: 20px; font-size: 18px; font-weight: 600;">LEMBAR PENILAIAN UJI SKOR IKAN ASIN KERING</h3>
+        <div style="margin-bottom: 15px;">
+            <label style="display: inline-block; width: 200px;">1. Kode Contoh Uji /No. Aju PTK :</label>
+            <input type="text" id="kodeContohUji" name="kodeContohUji" style="width: 300px; padding: 8px; border: 1px solid #ddd; border-radius: 5px;">
+        </div>
+        <div style="margin-bottom: 15px;">
+            <label style="display: inline-block; width: 200px;">2. Tgl. Diterima Contoh Uji :</label>
+            <input type="date" id="tglDiterima" name="tglDiterima" style="width: 300px; padding: 8px; border: 1px solid #ddd; border-radius: 5px;">
+        </div>
+        <table style="width: 100%; margin-bottom: 20px; border-collapse: collapse; border: 1px solid #ddd;">
+            <thead>
+                <tr style="background-color: #f5f5f5;">
+                    <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">NO</th>
+                    <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">JENIS CONTOH UJI</th>
+                    <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">JUMLAH</th>
+                    <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">UKURAN</th>
+                    <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">Ket.</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">1.</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;"><input type="text" id="jenisContoh" name="jenisContoh" placeholder="Ikan Asin Kering" style="width: 100%; border: none; padding: 5px;"></td>
+                    <td style="border: 1px solid #ddd; padding: 8px;"><input type="text" name="jumlah" style="width: 100%; border: none; padding: 5px;"></td>
+                    <td style="border: 1px solid #ddd; padding: 8px;"><input type="text" name="ukuran" style="width: 100%; border: none; padding: 5px;"></td>
+                    <td style="border: 1px solid #ddd; padding: 8px;"><input type="text" name="keterangan" style="width: 100%; border: none; padding: 5px;"></td>
+                </tr>
+            </tbody>
+        </table>
+        <p style="margin-bottom: 15px; font-style: italic;">Berilah tanda √ pada nilai yang dipilih sesuai kode contoh yang diuji.</p>
+    `;
+    container.appendChild(headerDiv);
+
+    // Data untuk tabel penilaian sesuai gambar
+    const penilaianData = [
+        {
+            kategori: '1. Kenampakan',
+            items: [
+                { desc: 'Bersih, sangat cerah spesifik jenis.', nilai: 9 },
+                { desc: 'Bersih, cerah spesifik jenis.', nilai: 7 },
+                { desc: 'Kusam', nilai: 5 }
+            ]
+        },
+        {
+            kategori: '2. Bau',
+            items: [
+                { desc: 'Spesifik jenis kuat', nilai: 9 },
+                { desc: 'Spesifik jenis kurang kuat.', nilai: 7 },
+                { desc: 'Tengik, apak.', nilai: 5 }
+            ]
+        },
+        {
+            kategori: '3. Rasa',
+            items: [
+                { desc: 'Asin, spesifik jenis', nilai: 9 },
+                { desc: 'Asin, spesifik jenis kurang', nilai: 7 },
+                { desc: 'Asin, ada rasa tambahan.', nilai: 5 }
+            ]
+        },
+        {
+            kategori: '4. Tekstur',
+            items: [
+                { desc: 'Padat, kering', nilai: 9 },
+                { desc: 'Padat, kurang kering', nilai: 7 },
+                { desc: 'Padat, ada rasa tambahan.', nilai: 5 }
+            ]
+        },
+        {
+            kategori: '5. Jamur',
+            items: [
+                { desc: 'Tidak ada.', nilai: 9 },
+                { desc: 'Ada.', nilai: 1 }
+            ]
         }
+    ];
+
+    // Buat tabel utama
+    const table = document.createElement('table');
+    table.className = 'ikan-asin-kering-table';
+    table.id = 'ikanAsinKeringTable';
+
+    // Header tabel
+    const thead = document.createElement('thead');
+    thead.innerHTML = `
+        <tr>
+            <th rowspan="2" style="border: 1px solid #ddd; padding: 10px; text-align: center; background-color: #f5f5f5; min-width: 250px;">Spesifikasi</th>
+            <th rowspan="2" style="border: 1px solid #ddd; padding: 10px; text-align: center; background-color: #f5f5f5; min-width: 80px;">Nilai</th>
+            <th colspan="6" style="border: 1px solid #ddd; padding: 10px; text-align: center; background-color: #f5f5f5;">Kode Contoh</th>
+        </tr>
+        <tr>
+            <th style="border: 1px solid #ddd; padding: 10px; text-align: center; background-color: #f5f5f5; min-width: 60px;">1</th>
+            <th style="border: 1px solid #ddd; padding: 10px; text-align: center; background-color: #f5f5f5; min-width: 60px;">2</th>
+            <th style="border: 1px solid #ddd; padding: 10px; text-align: center; background-color: #f5f5f5; min-width: 60px;">3</th>
+            <th style="border: 1px solid #ddd; padding: 10px; text-align: center; background-color: #f5f5f5; min-width: 60px;">4</th>
+            <th style="border: 1px solid #ddd; padding: 10px; text-align: center; background-color: #f5f5f5; min-width: 60px;">5</th>
+            <th style="border: 1px solid #ddd; padding: 10px; text-align: center; background-color: #f5f5f5; min-width: 60px;">6</th>
+        </tr>
+    `;
+    table.appendChild(thead);
+
+    // Body tabel
+    const tbody = document.createElement('tbody');
+    let rowIndex = 0;
+
+    penilaianData.forEach((section, sectionIndex) => {
+        section.items.forEach((item, itemIndex) => {
+            const row = document.createElement('tr');
+            row.dataset.nilai = item.nilai;
+            row.dataset.rowIndex = rowIndex;
+
+            // Kolom Spesifikasi
+            const specCell = document.createElement('td');
+            specCell.style.border = '1px solid #ddd';
+            specCell.style.padding = '10px';
+            specCell.style.verticalAlign = 'top';
+
+            let specText = '';
+            if (itemIndex === 0) {
+                specText = '<strong>' + section.kategori + '</strong><br>';
+            }
+            specText += '- ' + item.desc;
+            specCell.innerHTML = specText;
+            row.appendChild(specCell);
+
+            // Kolom Nilai
+            const nilaiCell = document.createElement('td');
+            nilaiCell.style.border = '1px solid #ddd';
+            nilaiCell.style.padding = '10px';
+            nilaiCell.style.textAlign = 'center';
+            nilaiCell.style.fontWeight = '600';
+            nilaiCell.textContent = item.nilai;
+            row.appendChild(nilaiCell);
+
+            // Kolom Kode Contoh (1-6)
+            for (let kode = 1; kode <= 6; kode++) {
+                const kodeCell = document.createElement('td');
+                kodeCell.className = 'kode-contoh-cell';
+                kodeCell.dataset.kode = kode;
+                kodeCell.dataset.rowIndex = rowIndex;
+                kodeCell.dataset.nilai = item.nilai;
+                kodeCell.style.border = '1px solid #ddd';
+                kodeCell.style.padding = '10px';
+                kodeCell.style.textAlign = 'center';
+                kodeCell.style.cursor = 'pointer';
+
+                // Checkbox tersembunyi
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.className = 'nilai-checkbox';
+                checkbox.dataset.kode = kode;
+                checkbox.dataset.rowIndex = rowIndex;
+                checkbox.dataset.nilai = item.nilai;
+                checkbox.dataset.sectionIndex = sectionIndex;
+                checkbox.style.display = 'none';
+
+                kodeCell.appendChild(checkbox);
+
+                // Event listener untuk klik pada cell
+                kodeCell.addEventListener('click', function (e) {
+                    if (e.target === checkbox || e.target.type === 'checkbox') return;
+                    e.preventDefault();
+                    e.stopPropagation();
+
+                    const newCheckedState = !checkbox.checked;
+                    if (newCheckedState) {
+                        const siblings = tbody.querySelectorAll(`.nilai-checkbox[data-kode="${kode}"][data-section-index="${sectionIndex}"]`);
+                        siblings.forEach(sib => {
+                            if (sib !== checkbox && sib.checked) {
+                                sib.checked = false;
+                                updateCheckmark(sib.parentElement, false);
+                            }
+                        });
+                    }
+                    checkbox.checked = newCheckedState;
+                    updateCheckmark(kodeCell, newCheckedState);
+                    setTimeout(() => calculateTotalsIkanAsinKering(), 10);
+                });
+
+                row.appendChild(kodeCell);
+            }
+            tbody.appendChild(row);
+            rowIndex++;
+        });
+    });
+
+    // Baris Total
+    const totalRow = document.createElement('tr');
+    totalRow.className = 'total-row';
+    totalRow.innerHTML = `<td colspan="2" style="border: 1px solid #ddd; padding: 10px; font-weight: 600; text-align: center; background-color: #f9f9f9;">Total</td>`;
+    for (let kode = 1; kode <= 6; kode++) {
+        totalRow.innerHTML += `<td class="total-cell" data-kode="${kode}" style="border: 1px solid #ddd; padding: 10px; text-align: center; font-weight: 600; background: #f9f9f9;">0</td>`;
+    }
+    tbody.appendChild(totalRow);
+
+    // Baris Rata-rata
+    const avgRow = document.createElement('tr');
+    avgRow.className = 'avg-row';
+    avgRow.innerHTML = `<td colspan="2" style="border: 1px solid #ddd; padding: 10px; font-weight: 600; text-align: center; background-color: #f0f0f0;">Rata-rata</td>`;
+    for (let kode = 1; kode <= 6; kode++) {
+        avgRow.innerHTML += `<td class="avg-cell" data-kode="${kode}" style="border: 1px solid #ddd; padding: 10px; text-align: center; font-weight: 600; background: #f0f0f0;">0.00</td>`;
+    }
+    tbody.appendChild(avgRow);
+
+    table.appendChild(tbody);
+    const tableWrapper = document.createElement('div');
+    tableWrapper.className = 'table-wrapper';
+    tableWrapper.style.overflowX = 'auto';
+    tableWrapper.style.marginBottom = '20px';
+    tableWrapper.appendChild(table);
+    container.appendChild(tableWrapper);
+
+    // LHU Button
+    const formActions = document.querySelector('.form-actions');
+    if (formActions) {
+        const oldBtn = formActions.querySelector('.btn-lhu');
+        if (oldBtn) oldBtn.remove();
+        const lhuButton = document.createElement('button');
+        lhuButton.type = 'button';
+        lhuButton.className = 'btn-lhu';
+        lhuButton.textContent = 'Lihat LHU (Laporan Hasil Uji)';
+        lhuButton.style.padding = '12px 24px';
+        lhuButton.style.background = 'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)';
+        lhuButton.style.color = 'white';
+        lhuButton.style.border = 'none';
+        lhuButton.style.borderRadius = '10px';
+        lhuButton.style.fontSize = '16px';
+        lhuButton.style.fontWeight = '600';
+        lhuButton.style.cursor = 'pointer';
+        lhuButton.style.transition = 'all 0.3s';
+        lhuButton.style.marginRight = '10px';
+        lhuButton.addEventListener('click', async () => {
+            try {
+                lhuButton.disabled = true;
+                await showLHUPreview();
+            } finally {
+                lhuButton.disabled = false;
+            }
+        });
+        formActions.insertBefore(lhuButton, formActions.firstChild);
+    }
+
+    const qrWrapper = document.createElement('div');
+    qrWrapper.style.marginTop = '20px';
+    qrWrapper.style.display = 'flex';
+    qrWrapper.style.justifyContent = 'flex-end';
+    qrWrapper.innerHTML = `<div id="qrcode-container" style="padding: 10px; background: #fff; border-radius: 8px;"></div>`;
+    container.appendChild(qrWrapper);
+    setTimeout(updatePanelistQRCode, 300);
+}
+
+function calculateTotalsIkanAsinKering() {
+    const table = document.getElementById('ikanAsinKeringTable');
+    if (!table) return;
+    for (let kode = 1; kode <= 6; kode++) {
+        let total = 0, count = 0;
+        table.querySelectorAll(`input.nilai-checkbox[data-kode="${kode}"]:checked`).forEach(cb => {
+            total += parseInt(cb.dataset.nilai);
+            count++;
+        });
+        const totalCell = table.querySelector(`.total-cell[data-kode="${kode}"]`);
+        if (totalCell) totalCell.textContent = total;
+        const avgCell = table.querySelector(`.avg-cell[data-kode="${kode}"]`);
+        if (avgCell) avgCell.textContent = count > 0 ? (total / count).toFixed(2) : '0.00';
+    }
+}
+
+function generateRumputLautKeringTable(container) {
+    // Header informasi
+    const headerDiv = document.createElement('div');
+    headerDiv.className = 'rumput-laut-kering-header';
+    headerDiv.innerHTML = `
+        <h3 style="text-align: center; margin-bottom: 20px; font-size: 18px; font-weight: 600;">LEMBAR PENILAIAN UJI SKOR RUMPUT LAUT KERING</h3>
+        <div style="margin-bottom: 15px;">
+            <label style="display: inline-block; width: 200px;">1. Kode Contoh Uji /No. Aju PTK :</label>
+            <input type="text" id="kodeContohUji" name="kodeContohUji" style="width: 300px; padding: 8px; border: 1px solid #ddd; border-radius: 5px;">
+        </div>
+        <div style="margin-bottom: 15px;">
+            <label style="display: inline-block; width: 200px;">2. Tgl. Diterima Contoh Uji :</label>
+            <input type="date" id="tglDiterima" name="tglDiterima" style="width: 300px; padding: 8px; border: 1px solid #ddd; border-radius: 5px;">
+        </div>
+        <table style="width: 100%; margin-bottom: 20px; border-collapse: collapse; border: 1px solid #ddd;">
+            <thead>
+                <tr style="background-color: #f5f5f5;">
+                    <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">NO</th>
+                    <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">JENIS CONTOH UJI</th>
+                    <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">JUMLAH</th>
+                    <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">UKURAN</th>
+                    <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">Ket.</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">1.</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;"><input type="text" id="jenisContoh" name="jenisContoh" placeholder="Rumput Laut Kering" style="width: 100%; border: none; padding: 5px;"></td>
+                    <td style="border: 1px solid #ddd; padding: 8px;"><input type="text" name="jumlah" style="width: 100%; border: none; padding: 5px;"></td>
+                    <td style="border: 1px solid #ddd; padding: 8px;"><input type="text" name="ukuran" style="width: 100%; border: none; padding: 5px;"></td>
+                    <td style="border: 1px solid #ddd; padding: 8px;"><input type="text" name="keterangan" style="width: 100%; border: none; padding: 5px;"></td>
+                </tr>
+            </tbody>
+        </table>
+        <p style="margin-bottom: 15px; font-style: italic;">Berilah tanda √ pada nilai yang dipilih sesuai kode contoh yang diuji.</p>
+    `;
+    container.appendChild(headerDiv);
+
+    // Data untuk tabel penilaian sesuai gambar
+    const penilaianData = [
+        {
+            kategori: '1. Kenampakan',
+            items: [
+                { desc: 'Bersih, warna cerah spesifik jenis', nilai: 9 },
+                { desc: 'Sedikit kurang bersih, warna kurang cerah spesifik jenis.', nilai: 7 },
+                { desc: 'Kurang bersih, warna agak kusam spesifik jenis', nilai: 5 },
+                { desc: 'Kotor, warna spesifik jenis, kusam', nilai: 3 },
+                { desc: 'Kotor, warna spesifik jenis, sangat kusam', nilai: 1 }
+            ]
+        },
+        {
+            kategori: '2. Tekstur',
+            items: [
+                { desc: 'Kering merata, liat tidak mudah dipatahkan.', nilai: 9 },
+                { desc: 'Kering kurang merata, liat tidak mudah dipatahkan.', nilai: 7 },
+                { desc: 'Lembab, liat agak mudah dipatahkan.', nilai: 5 },
+                { desc: 'Mudah dipatahkan.', nilai: 3 },
+                { desc: 'Mudah sekali dipatahkan.', nilai: 1 }
+            ]
+        }
+    ];
+
+    // Buat tabel utama
+    const table = document.createElement('table');
+    table.className = 'rumput-laut-kering-table';
+    table.id = 'rumputLautKeringTable';
+
+    // Header tabel
+    const thead = document.createElement('thead');
+    thead.innerHTML = `
+        <tr>
+            <th rowspan="2" style="border: 1px solid #ddd; padding: 10px; text-align: center; background-color: #f5f5f5; min-width: 250px;">Spesifikasi</th>
+            <th rowspan="2" style="border: 1px solid #ddd; padding: 10px; text-align: center; background-color: #f5f5f5; min-width: 80px;">Nilai</th>
+            <th colspan="8" style="border: 1px solid #ddd; padding: 10px; text-align: center; background-color: #f5f5f5;">Kode Contoh</th>
+        </tr>
+        <tr>
+            <th style="border: 1px solid #ddd; padding: 10px; text-align: center; background-color: #f5f5f5; min-width: 50px;">1</th>
+            <th style="border: 1px solid #ddd; padding: 10px; text-align: center; background-color: #f5f5f5; min-width: 50px;">2</th>
+            <th style="border: 1px solid #ddd; padding: 10px; text-align: center; background-color: #f5f5f5; min-width: 50px;">3</th>
+            <th style="border: 1px solid #ddd; padding: 10px; text-align: center; background-color: #f5f5f5; min-width: 50px;">4</th>
+            <th style="border: 1px solid #ddd; padding: 10px; text-align: center; background-color: #f5f5f5; min-width: 50px;">5</th>
+            <th style="border: 1px solid #ddd; padding: 10px; text-align: center; background-color: #f5f5f5; min-width: 50px;">6</th>
+            <th style="border: 1px solid #ddd; padding: 10px; text-align: center; background-color: #f5f5f5; min-width: 50px;">7</th>
+            <th style="border: 1px solid #ddd; padding: 10px; text-align: center; background-color: #f5f5f5; min-width: 50px;">8</th>
+        </tr>
+    `;
+    table.appendChild(thead);
+
+    // Body tabel
+    const tbody = document.createElement('tbody');
+    let rowIndex = 0;
+
+    penilaianData.forEach((section, sectionIndex) => {
+        section.items.forEach((item, itemIndex) => {
+            const row = document.createElement('tr');
+            row.dataset.nilai = item.nilai;
+            row.dataset.rowIndex = rowIndex;
+
+            // Kolom Spesifikasi
+            const specCell = document.createElement('td');
+            specCell.style.border = '1px solid #ddd';
+            specCell.style.padding = '10px';
+            specCell.style.verticalAlign = 'top';
+
+            let specText = '';
+            if (itemIndex === 0) {
+                specText = '<strong>' + section.kategori + '</strong><br>';
+            }
+            specText += '- ' + item.desc;
+            specCell.innerHTML = specText;
+            row.appendChild(specCell);
+
+            // Kolom Nilai
+            const nilaiCell = document.createElement('td');
+            nilaiCell.style.border = '1px solid #ddd';
+            nilaiCell.style.padding = '10px';
+            nilaiCell.style.textAlign = 'center';
+            nilaiCell.style.fontWeight = '600';
+            nilaiCell.textContent = item.nilai;
+            row.appendChild(nilaiCell);
+
+            // Kolom Kode Contoh (1-8)
+            for (let kode = 1; kode <= 8; kode++) {
+                const kodeCell = document.createElement('td');
+                kodeCell.className = 'kode-contoh-cell';
+                kodeCell.dataset.kode = kode;
+                kodeCell.dataset.rowIndex = rowIndex;
+                kodeCell.dataset.nilai = item.nilai;
+                kodeCell.style.border = '1px solid #ddd';
+                kodeCell.style.padding = '10px';
+                kodeCell.style.textAlign = 'center';
+                kodeCell.style.cursor = 'pointer';
+
+                // Checkbox tersembunyi
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.className = 'nilai-checkbox';
+                checkbox.dataset.kode = kode;
+                checkbox.dataset.rowIndex = rowIndex;
+                checkbox.dataset.nilai = item.nilai;
+                checkbox.dataset.sectionIndex = sectionIndex;
+                checkbox.style.display = 'none';
+
+                kodeCell.appendChild(checkbox);
+
+                // Event listener untuk klik pada cell
+                kodeCell.addEventListener('click', function (e) {
+                    if (e.target === checkbox || e.target.type === 'checkbox') return;
+                    e.preventDefault();
+                    e.stopPropagation();
+
+                    const newCheckedState = !checkbox.checked;
+                    if (newCheckedState) {
+                        const siblings = tbody.querySelectorAll(`.nilai-checkbox[data-kode="${kode}"][data-section-index="${sectionIndex}"]`);
+                        siblings.forEach(sib => {
+                            if (sib !== checkbox && sib.checked) {
+                                sib.checked = false;
+                                updateCheckmark(sib.parentElement, false);
+                            }
+                        });
+                    }
+                    checkbox.checked = newCheckedState;
+                    updateCheckmark(kodeCell, newCheckedState);
+                    setTimeout(() => calculateTotalsRumputLautKering(), 10);
+                });
+
+                row.appendChild(kodeCell);
+            }
+            tbody.appendChild(row);
+            rowIndex++;
+        });
+    });
+
+    // Baris Total
+    const totalRow = document.createElement('tr');
+    totalRow.className = 'total-row';
+    totalRow.innerHTML = `<td colspan="2" style="border: 1px solid #ddd; padding: 10px; font-weight: 600; text-align: center; background-color: #f9f9f9;">Total</td>`;
+    for (let kode = 1; kode <= 8; kode++) {
+        totalRow.innerHTML += `<td class="total-cell" data-kode="${kode}" style="border: 1px solid #ddd; padding: 10px; text-align: center; font-weight: 600; background: #f9f9f9;">0</td>`;
+    }
+    tbody.appendChild(totalRow);
+
+    // Baris Rata-rata
+    const avgRow = document.createElement('tr');
+    avgRow.className = 'avg-row';
+    avgRow.innerHTML = `<td colspan="2" style="border: 1px solid #ddd; padding: 10px; font-weight: 600; text-align: center; background-color: #f0f0f0;">Rata-rata</td>`;
+    for (let kode = 1; kode <= 8; kode++) {
+        avgRow.innerHTML += `<td class="avg-cell" data-kode="${kode}" style="border: 1px solid #ddd; padding: 10px; text-align: center; font-weight: 600; background: #f0f0f0;">0.00</td>`;
+    }
+    tbody.appendChild(avgRow);
+
+    table.appendChild(tbody);
+    const tableWrapper = document.createElement('div');
+    tableWrapper.className = 'table-wrapper';
+    tableWrapper.style.overflowX = 'auto';
+    tableWrapper.style.marginBottom = '20px';
+    tableWrapper.appendChild(table);
+    container.appendChild(tableWrapper);
+
+    // LHU Button
+    const formActions = document.querySelector('.form-actions');
+    if (formActions) {
+        const oldBtn = formActions.querySelector('.btn-lhu');
+        if (oldBtn) oldBtn.remove();
+        const lhuButton = document.createElement('button');
+        lhuButton.type = 'button';
+        lhuButton.className = 'btn-lhu';
+        lhuButton.textContent = 'Lihat LHU (Laporan Hasil Uji)';
+        lhuButton.style.padding = '12px 24px';
+        lhuButton.style.background = 'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)';
+        lhuButton.style.color = 'white';
+        lhuButton.style.border = 'none';
+        lhuButton.style.borderRadius = '10px';
+        lhuButton.style.fontSize = '16px';
+        lhuButton.style.fontWeight = '600';
+        lhuButton.style.cursor = 'pointer';
+        lhuButton.style.transition = 'all 0.3s';
+        lhuButton.style.marginRight = '10px';
+        lhuButton.addEventListener('click', async () => {
+            try {
+                lhuButton.disabled = true;
+                await showLHUPreview();
+            } finally {
+                lhuButton.disabled = false;
+            }
+        });
+        formActions.insertBefore(lhuButton, formActions.firstChild);
+    }
+
+    const qrWrapper = document.createElement('div');
+    qrWrapper.style.marginTop = '20px';
+    qrWrapper.style.display = 'flex';
+    qrWrapper.style.justifyContent = 'flex-end';
+    qrWrapper.innerHTML = `<div id="qrcode-container" style="padding: 10px; background: #fff; border-radius: 8px;"></div>`;
+    container.appendChild(qrWrapper);
+    setTimeout(updatePanelistQRCode, 300);
+}
+
+function calculateTotalsRumputLautKering() {
+    const table = document.getElementById('rumputLautKeringTable');
+    if (!table) return;
+    for (let kode = 1; kode <= 8; kode++) {
+        let total = 0, count = 0;
+        table.querySelectorAll(`input.nilai-checkbox[data-kode="${kode}"]:checked`).forEach(cb => {
+            total += parseInt(cb.dataset.nilai);
+            count++;
+        });
+        const totalCell = table.querySelector(`.total-cell[data-kode="${kode}"]`);
+        if (totalCell) totalCell.textContent = total;
+        const avgCell = table.querySelector(`.avg-cell[data-kode="${kode}"]`);
+        if (avgCell) avgCell.textContent = count > 0 ? (total / count).toFixed(2) : '0.00';
     }
 }
 
@@ -1473,16 +2510,21 @@ function getFormattedFilename(data, hewan) {
     const hewanNames = {
         'ikan-segar': 'Ikan Segar',
         'ikan-beku': 'Ikan Beku',
-        'ikan-tuna-kaleng': 'Ikan Tuna Kaleng'
+        'ikan-tuna-kaleng': 'Ikan Tuna Kaleng',
+        'sarden-makarel-kaleng': 'Sarden/Makarel Kaleng',
+        'ikan-asap': 'Dried Smoking Fish (Ikan Asap)',
+        'ikan-asin-kering': 'Ikan Asin Kering',
+        'rumput-laut-kering': 'Rumput Laut Kering',
+        'lobster-udang-kipas': 'LOBSTER, UDANG KIPAS HIDUP'
     };
 
     const jenis = hewanNames[hewan] || 'Uji';
-    const noUji = data.noSampel || data.kodeContohUji || 'TanpaNo';
+    const noPTK = data.kodeContohUji || 'TanpaPTK';
     const panelis = data.namaPetugas || data.namaPanelis || data.namaPanelisTuna || 'Panelis';
     // Tanggal diuji format angka semua
     const tanggal = (data.tanggalUji || '').replace(/-/g, '');
 
-    return `${jenis}_${noUji}_${panelis}-${tanggal}`;
+    return `${jenis}_PTK-${noPTK}_${panelis}-${tanggal}`;
 }
 
 /**
@@ -1617,6 +2659,108 @@ function collectFormDataForPreview(hewan) {
                 };
             }
         }
+    } else if (hewan === 'sarden-makarel-kaleng') {
+        const table = document.getElementById('sardenMakarelTable');
+        if (table) {
+            data.penilaianSardenMakarel = {};
+            for (let kode = 1; kode <= 6; kode++) {
+                const totalCell = table.querySelector(`.total-cell[data-kode="${kode}"]`);
+                const avgCell = table.querySelector(`.avg-cell[data-kode="${kode}"]`);
+                data.penilaianSardenMakarel[`kodeContoh${kode}`] = {
+                    total: totalCell?.textContent || '0',
+                    rataRata: avgCell?.textContent || '0.00',
+                    nilai: Array.from(table.querySelectorAll(`.nilai-checkbox[data-kode="${kode}"]:checked`)).map(cb => ({
+                        rowIndex: parseInt(cb.dataset.rowIndex),
+                        nilai: parseInt(cb.dataset.nilai)
+                    }))
+                };
+            }
+        }
+    } else if (hewan === 'ikan-asap') {
+        const table = document.getElementById('ikanAsapTable');
+        if (table) {
+            data.penilaianIkanAsap = {};
+            for (let kode = 1; kode <= 6; kode++) {
+                const totalCell = table.querySelector(`.total-cell[data-kode="${kode}"]`);
+                const avgCell = table.querySelector(`.avg-cell[data-kode="${kode}"]`);
+                data.penilaianIkanAsap[`kodeContoh${kode}`] = {
+                    total: totalCell?.textContent || '0',
+                    rataRata: avgCell?.textContent || '0.00',
+                    nilai: Array.from(table.querySelectorAll(`.nilai-checkbox[data-kode="${kode}"]:checked`)).map(cb => ({
+                        rowIndex: parseInt(cb.dataset.rowIndex),
+                        nilai: parseInt(cb.dataset.nilai)
+                    }))
+                };
+            }
+        }
+    } else if (hewan === 'ikan-asin-kering') {
+        const table = document.getElementById('ikanAsinKeringTable');
+        if (table) {
+            data.penilaianIkanAsinKering = {};
+            for (let kode = 1; kode <= 6; kode++) {
+                const totalCell = table.querySelector(`.total-cell[data-kode="${kode}"]`);
+                const avgCell = table.querySelector(`.avg-cell[data-kode="${kode}"]`);
+                data.penilaianIkanAsinKering[`kodeContoh${kode}`] = {
+                    total: totalCell?.textContent || '0',
+                    rataRata: avgCell?.textContent || '0.00',
+                    nilai: Array.from(table.querySelectorAll(`.nilai-checkbox[data-kode="${kode}"]:checked`)).map(cb => ({
+                        rowIndex: parseInt(cb.dataset.rowIndex),
+                        nilai: parseInt(cb.dataset.nilai)
+                    }))
+                };
+            }
+        }
+    } else if (hewan === 'rumput-laut-kering') {
+        const table = document.getElementById('rumputLautKeringTable');
+        if (table) {
+            data.penilaianRumputLautKering = {};
+            for (let kode = 1; kode <= 8; kode++) {
+                const totalCell = table.querySelector(`.total-cell[data-kode="${kode}"]`);
+                const avgCell = table.querySelector(`.avg-cell[data-kode="${kode}"]`);
+                data.penilaianRumputLautKering[`kodeContoh${kode}`] = {
+                    total: totalCell?.textContent || '0',
+                    rataRata: avgCell?.textContent || '0.00',
+                    nilai: Array.from(table.querySelectorAll(`.nilai-checkbox[data-kode="${kode}"]:checked`)).map(cb => ({
+                        rowIndex: parseInt(cb.dataset.rowIndex),
+                        nilai: parseInt(cb.dataset.nilai)
+                    }))
+                };
+            }
+        }
+    } else if (hewan === 'lobster-udang-kipas') {
+        const table = document.getElementById('lobsterUdangKipasTable');
+        if (table) {
+            data.penilaianLobsterUdangKipas = {};
+            for (let kode = 1; kode <= 6; kode++) {
+                const totalCell = table.querySelector(`.total-cell[data-kode="${kode}"]`);
+                const avgCell = table.querySelector(`.avg-cell[data-kode="${kode}"]`);
+                data.penilaianLobsterUdangKipas[`kodeContoh${kode}`] = {
+                    total: totalCell?.textContent || '0',
+                    rataRata: avgCell?.textContent || '0.00',
+                    nilai: Array.from(table.querySelectorAll(`.nilai-checkbox[data-kode="${kode}"]:checked`)).map(cb => ({
+                        rowIndex: parseInt(cb.dataset.rowIndex),
+                        nilai: parseInt(cb.dataset.nilai)
+                    }))
+                };
+            }
+        }
+    } else if (hewan === 'kepiting-bakau') {
+        const table = document.getElementById('kepitingBakauTable');
+        if (table) {
+            data.penilaianKepitingBakau = {};
+            for (let kode = 1; kode <= 6; kode++) {
+                const totalCell = table.querySelector(`.total-cell[data-kode="${kode}"]`);
+                const avgCell = table.querySelector(`.avg-cell[data-kode="${kode}"]`);
+                data.penilaianKepitingBakau[`kodeContoh${kode}`] = {
+                    total: totalCell?.textContent || '0',
+                    rataRata: avgCell?.textContent || '0.00',
+                    nilai: Array.from(table.querySelectorAll(`.nilai-checkbox[data-kode="${kode}"]:checked`)).map(cb => ({
+                        rowIndex: parseInt(cb.dataset.rowIndex),
+                        nilai: parseInt(cb.dataset.nilai)
+                    }))
+                };
+            }
+        }
     }
     return data;
 }
@@ -1640,15 +2784,28 @@ function generateLHUHtml(data, hewan) {
     let jenisContoh = 'Ikan Segar';
     if (hewan === 'ikan-beku') jenisContoh = 'Ikan Beku';
     if (hewan === 'ikan-tuna-kaleng') jenisContoh = 'Ikan Tuna Kaleng';
+    if (hewan === 'sarden-makarel-kaleng') jenisContoh = 'Sarden/Makarel Kaleng';
+    if (hewan === 'ikan-asap') jenisContoh = 'Dried Smoking Fish (Ikan Asap)';
+    if (hewan === 'ikan-asin-kering') jenisContoh = 'Ikan Asin Kering';
+    if (hewan === 'rumput-laut-kering') jenisContoh = 'Rumput Laut Kering';
+    if (hewan === 'lobster-udang-kipas') jenisContoh = 'LOBSTER, UDANG KIPAS HIDUP';
+    if (hewan === 'kepiting-bakau') jenisContoh = 'KEPITING BAKAU HIDUP';
 
     const isIkanBeku = (hewan === 'ikan-beku');
     const isIkanTuna = (hewan === 'ikan-tuna-kaleng');
+    const isSardenMakarel = (hewan === 'sarden-makarel-kaleng');
+    const isIkanAsap = (hewan === 'ikan-asap');
+    const isIkanAsinKering = (hewan === 'ikan-asin-kering');
+    const isRumputLautKering = (hewan === 'rumput-laut-kering');
+    const isLobsterUdangKipas = (hewan === 'lobster-udang-kipas');
+    const isKepitingBakau = (hewan === 'kepiting-bakau');
 
     const kodeContohData = [];
-    const penilaian = isIkanBeku ? data.penilaianIkanBeku : (isIkanTuna ? data.penilaianIkanTunaKaleng : data.penilaianIkanSegar);
+    const penilaian = isIkanBeku ? data.penilaianIkanBeku : (isIkanTuna ? data.penilaianIkanTunaKaleng : (isSardenMakarel ? data.penilaianSardenMakarel : (isIkanAsap ? data.penilaianIkanAsap : (isIkanAsinKering ? data.penilaianIkanAsinKering : (isRumputLautKering ? data.penilaianRumputLautKering : (isLobsterUdangKipas ? data.penilaianLobsterUdangKipas : (isKepitingBakau ? data.penilaianKepitingBakau : data.penilaianIkanSegar)))))));
 
     if (penilaian) {
-        for (let i = 1; i <= 6; i++) {
+        const maxSamples = isRumputLautKering ? 8 : 6;
+        for (let i = 1; i <= maxSamples; i++) {
             const item = penilaian[`kodeContoh${i}`];
             if (item && item.nilai && item.nilai.length > 0) {
                 kodeContohData.push({ kode: i, nilai: item.nilai });
@@ -1658,17 +2815,17 @@ function generateLHUHtml(data, hewan) {
 
     // Header logic
     const headerHTML = `
-    <div style="display: flex; align-items: center; margin-bottom: 20px; border-bottom: 2px solid #333; padding-bottom: 10px;">
-        <div style="flex: 0 0 100px; margin-right: 6px; display:flex; align-items:center; justify-content:center;"><img src="https://id.wikipedia.org/wiki/Special:FilePath/Logo_Barantin.svg" alt="Logo Barantin" style="width: 100px; height: 100px; object-fit: contain; display: block; border: none; border-radius: 0;"/></div>
-        <div style="flex: 1; text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center;"><div style="font-weight: bold; font-size: 16px; margin-bottom: 6px;">BADAN KARANTINA INDONESIA</div><div style="font-size: 14px; margin-bottom: 4px;">BALAI KARANTINA HEWAN, IKAN DAN TUMBUHAN</div><div style="font-size: 14px; margin-bottom: 4px; font-weight: bold;">SULAWESI UTARA</div><div style="font-size: 13px; margin-bottom: 3px;">JL. AA MARAMIS NO. 283, KEC. MAPANGET, KOTA MANADO, SULAWESI UTARA 95258</div><div style="font-size: 13px; margin-bottom: 3px;">Telp. 082190899090, Email: karantinasulut@karantinaindonesia.go.id</div><div style="font-size: 13px;">www.karantinaindonesia.go.id</div></div>
+    <div style="display: flex; align-items: center; margin-bottom: 5px; border-bottom: 2px solid #333; padding-bottom: 5px;">
+        <div style="flex: 0 0 80px; margin-right: 6px; display:flex; align-items:center; justify-content:center;"><img src="https://id.wikipedia.org/wiki/Special:FilePath/Logo_Barantin.svg" alt="Logo Barantin" style="width: 80px; height: 80px; object-fit: contain; display: block; border: none; border-radius: 0;"/></div>
+        <div style="flex: 1; text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center;"><div style="font-weight: bold; font-size: 14px; margin-bottom: 2px;">BADAN KARANTINA INDONESIA</div><div style="font-size: 12px; margin-bottom: 2px;">BALAI KARANTINA HEWAN, IKAN DAN TUMBUHAN</div><div style="font-size: 12px; margin-bottom: 2px; font-weight: bold;">SULAWESI UTARA</div><div style="font-size: 11px; margin-bottom: 2px;">JL. AA MARAMIS NO. 283, KEC. MAPANGET, KOTA MANADO, SULAWESI UTARA 95258</div><div style="font-size: 11px; margin-bottom: 2px;">Telp. 082190899090, Email: karantinasulut@karantinaindonesia.go.id</div><div style="font-size: 11px;">www.karantinaindonesia.go.id</div></div>
     </div>
-    <h2 style="text-align: center; font-size: 16px; font-weight: bold; margin: 15px 0;">LAMPIRAN LAPORAN HASIL UJI SEMENTARA<br>SENSORI/ORGANOLEPTIK - ${isIkanBeku ? 'IKAN BEKU' : (isIkanTuna ? 'IKAN TUNA KALENG' : 'IKAN SEGAR')}</h2>
-    <table style="width:100%; margin-bottom: 8px; font-size:9pt; border-collapse: collapse; table-layout: fixed;">
-        <tr><td style="width: 220px; text-align: left; vertical-align: middle; padding: 4px 8px;"><strong>Kode Contoh Uji</strong></td><td style="width: 12px; text-align: center; vertical-align: middle;">:</td><td style="text-align: left; padding: 4px 8px; vertical-align: middle;">${kodeContohUji || '-'}</td></tr>
-        <tr><td style="width: 220px; text-align: left; vertical-align: middle; padding: 4px 8px;"><strong>Jenis Contoh Uji</strong></td><td style="width: 12px; text-align: center; vertical-align: middle;">:</td><td style="text-align: left; padding: 4px 8px; vertical-align: middle;">${jenisContoh || '-'}</td></tr>
-        <tr><td style="width: 220px; text-align: left; vertical-align: middle; padding: 4px 8px;"><strong>Tanggal Masuk</strong></td><td style="width: 12px; text-align: center; vertical-align: middle;">:</td><td style="text-align: left; padding: 4px 8px; vertical-align: middle;">${tglDiterima ? formatIndoDate(tglDiterima) : '-'}</td></tr>
-        <tr><td style="width: 220px; text-align: left; vertical-align: middle; padding: 4px 8px;"><strong>Tanggal Pengujian</strong></td><td style="width: 12px; text-align: center; vertical-align: middle;">:</td><td style="text-align: left; padding: 4px 8px; vertical-align: middle;">${tanggalUji ? formatIndoDate(tanggalUji) : '-'}</td></tr>
-        <tr><td style="width: 220px; text-align: left; vertical-align: middle; padding: 4px 8px;"><strong>Metode Pengujian</strong></td><td style="width: 12px; text-align: center; vertical-align: middle;">:</td><td style="text-align: left; padding: 4px 8px; vertical-align: middle;"><strong>${isIkanBeku ? 'SNI 4110-2020' : (isIkanTuna ? 'SNI 8223-2022' : 'SNI 2729-2021')}</strong></td></tr>
+    <h2 style="text-align: center; font-size: 13px; font-weight: bold; margin: 5px 0;">LAMPIRAN LAPORAN HASIL UJI SEMENTARA<br/>SENSORI/ORGANOLEPTIK - ${isIkanBeku ? 'IKAN BEKU' : (isIkanTuna ? 'IKAN TUNA KALENG' : (isSardenMakarel ? 'SARDEN/MAKAREL KALENG' : (isIkanAsap ? 'DRIED SMOKING FISH' : (isIkanAsinKering ? 'IKAN ASIN KERING' : (isRumputLautKering ? 'RUMPUT LAUT KERING' : (isLobsterUdangKipas ? 'LOBSTER, UDANG KIPAS HIDUP' : 'IKAN SEGAR'))))))}</h2>
+    <table class="header-info-table" style="width:100%; margin-bottom: 5px; font-size:8pt; border-collapse: collapse; table-layout: fixed;">
+        <tr><td style="width: 180px; text-align: left; vertical-align: middle; padding: 2px 8px;"><strong>Kode Contoh Uji</strong></td><td style="width: 12px; text-align: center; vertical-align: middle;">:</td><td style="text-align: left; padding: 2px 8px; vertical-align: middle;">${kodeContohUji || '-'}</td></tr>
+        <tr><td style="width: 180px; text-align: left; vertical-align: middle; padding: 2px 8px;"><strong>Jenis Contoh Uji</strong></td><td style="width: 12px; text-align: center; vertical-align: middle;">:</td><td style="text-align: left; padding: 2px 8px; vertical-align: middle;">${jenisContoh || '-'}</td></tr>
+        <tr><td style="width: 180px; text-align: left; vertical-align: middle; padding: 2px 8px;"><strong>Tanggal Masuk</strong></td><td style="width: 12px; text-align: center; vertical-align: middle;">:</td><td style="text-align: left; padding: 2px 8px; vertical-align: middle;">${tglDiterima ? formatIndoDate(tglDiterima) : '-'}</td></tr>
+        <tr><td style="width: 180px; text-align: left; vertical-align: middle; padding: 2px 8px;"><strong>Tanggal Pengujian</strong></td><td style="width: 12px; text-align: center; vertical-align: middle;">:</td><td style="text-align: left; padding: 2px 8px; vertical-align: middle;">${tanggalUji ? formatIndoDate(tanggalUji) : '-'}</td></tr>
+        <tr><td style="width: 180px; text-align: left; vertical-align: middle; padding: 2px 8px;"><strong>Metode Pengujian</strong></td><td style="width: 12px; text-align: center; vertical-align: middle;">:</td><td style="text-align: left; padding: 2px 8px; vertical-align: middle;"><strong>${isIkanBeku ? 'SNI 4110-2020' : (isIkanTuna ? 'SNI 8223-2022' : (isSardenMakarel ? 'SNI 2712:2013' : (isIkanAsap ? 'SNI 2725:2013' : (isIkanAsinKering ? 'SNI 2721.1:2009' : (isRumputLautKering ? 'SNI 2690:2015' : (isLobsterUdangKipas ? 'SNI 8036:2014 / SNI 8037:2014' : 'SNI 2729-2021'))))))}</strong></td></tr>
     </table>`;
 
     // Parameter mapping logic for summary table
@@ -1704,6 +2861,47 @@ function generateLHUHtml(data, hewan) {
             { name: '3. Tekstur', rowIndices: [6, 7, 8] }
         ];
         renderGroups = [parameterList[0], parameterList[1], parameterList[2]];
+    } else if (isSardenMakarel) {
+        parameterList = [
+            { name: '1. Kenampakan', rowIndices: [0, 1, 2] },
+            { name: '2. Bau', rowIndices: [3, 4, 5] },
+            { name: '3. Rasa', rowIndices: [6, 7, 8] },
+            { name: '4. Tekstur', rowIndices: [9, 10, 11] }
+        ];
+        renderGroups = [parameterList[0], parameterList[1], parameterList[2], parameterList[3]];
+    } else if (isIkanAsap) {
+        parameterList = [
+            { name: '1. Kenampakan', rowIndices: [0, 1, 2, 3, 4] },
+            { name: '2. Bau', rowIndices: [5, 6, 7, 8, 9] },
+            { name: '3. Rasa', rowIndices: [10, 11, 12, 13, 14] },
+            { name: '4. Tekstur', rowIndices: [15, 16, 17, 18, 19] }
+        ];
+        renderGroups = [parameterList[0], parameterList[1], parameterList[2], parameterList[3]];
+    } else if (isIkanAsinKering) {
+        parameterList = [
+            { name: '1. Kenampakan', rowIndices: [0, 1, 2] },
+            { name: '2. Bau', rowIndices: [3, 4, 5] },
+            { name: '3. Rasa', rowIndices: [6, 7, 8] },
+            { name: '4. Tekstur', rowIndices: [9, 10, 11] },
+            { name: '5. Jamur', rowIndices: [12, 13] }
+        ];
+        renderGroups = [parameterList[0], parameterList[1], parameterList[2], parameterList[3], parameterList[4]];
+    } else if (isRumputLautKering) {
+        parameterList = [
+            { name: '1. Kenampakan', rowIndices: [0, 1, 2, 3, 4] },
+            { name: '2. Tekstur', rowIndices: [5, 6, 7, 8, 9] }
+        ];
+        renderGroups = [parameterList[0], parameterList[1]];
+    } else if (isLobsterUdangKipas) {
+        parameterList = [
+            { name: '1. Mutu Sensori', rowIndices: [0, 1, 2] }
+        ];
+        renderGroups = [parameterList[0]];
+    } else if (isKepitingBakau) {
+        parameterList = [
+            { name: '1. Mutu Sensori', rowIndices: [0, 1, 2, 3, 4] }
+        ];
+        renderGroups = [parameterList[0]];
     } else {
         parameterList = [
             { name: '1. Penampakan\n   a. Mata', rowIndices: [0, 1, 2] },
@@ -1767,18 +2965,18 @@ function generateLHUHtml(data, hewan) {
     });
 
     const tableHTML = `
-    <table style="width: 100%; border-collapse: collapse; margin-bottom: 10px; font-size: 7pt;">
+    <table style="width: 100%; border-collapse: collapse; margin-bottom: 5px; font-size: 7.5pt;">
         <thead>
             <tr style="background-color: #4CAF50; color: white;">
-                <th style="border: 1px solid #333; padding: 4px; text-align: center;" rowspan="2">NO</th>
-                <th style="border: 1px solid #333; padding: 4px; text-align: center;" rowspan="2">Kode Pengujian</th>
-                <th style="border: 1px solid #333; padding: 4px; text-align: center;" rowspan="2">Parameter Uji</th>
-                <th style="border: 1px solid #333; padding: 4px; text-align: center;" rowspan="2">Batas Standar Mutu<br><span style="font-size: 10px;">${isIkanBeku ? '<strong>SNI 4110-2020</strong>' : (isIkanTuna ? '<strong>SNI 8223-2022</strong>' : 'SNI 2729-2021')}</span></th>
-                <th style="border: 1px solid #333; padding: 4px; text-align: center;" colspan="2">Hasil Analisa</th>
+                <th style="border: 1px solid #333; padding: 2px; text-align: center;" rowspan="2">NO</th>
+                <th style="border: 1px solid #333; padding: 2px; text-align: center;" rowspan="2">Kode Pengujian</th>
+                <th style="border: 1px solid #333; padding: 2px; text-align: center;" rowspan="2">Parameter Uji</th>
+                <th style="border: 1px solid #333; padding: 2px; text-align: center;" rowspan="2">Batas Standar Mutu<br/><span style="font-size: 8px;">${isIkanBeku ? '<strong>SNI 4110-2020</strong>' : (isIkanTuna ? '<strong>SNI 8223-2022</strong>' : (isSardenMakarel ? '<strong>SNI 2712:2013</strong>' : (isIkanAsap ? '<strong>SNI 2725:2013</strong>' : (isIkanAsinKering ? '<strong>SNI 2721.1:2009</strong>' : (isRumputLautKering ? '<strong>SNI 2690:2015</strong>' : (isLobsterUdangKipas ? '<strong>SNI 8036:2014 / SNI 8037:2014' : (isKepitingBakau ? '<strong>SNI 4110:2014' : 'SNI 2729-2021')))))))}</span></th>
+                <th style="border: 1px solid #333; padding: 2px; text-align: center;" colspan="2">Hasil Analisa</th>
             </tr>
             <tr style="background-color: #4CAF50; color: white;">
-                <th style="border: 1px solid #333; padding: 4px; text-align: center;">Nilai sebelum dibulatkan</th>
-                <th style="border: 1px solid #333; padding: 4px; text-align: center;">Nilai setelah dibulatkan</th>
+                <th style="border: 1px solid #333; padding: 2px; text-align: center;">Nilai sebelum dibulatkan</th>
+                <th style="border: 1px solid #333; padding: 2px; text-align: center;">Nilai setelah dibulatkan</th>
             </tr>
         </thead>
         <tbody>
@@ -1789,18 +2987,18 @@ function generateLHUHtml(data, hewan) {
     const namaPenyelia = data.namaPenyelia || 'Grace Lanny Tantu, S.Pi';
 
     const conclusionHTML = `
-    <div style="margin-top: 10px; margin-bottom: 10px;">
-        <table style="width:100%; font-size:9pt; border-collapse: collapse; table-layout: fixed;">
-            <tr><td style="width:220px; text-align: left; vertical-align: middle; padding:4px 8px;"><strong>Tujuan Pemeriksaan</strong></td><td style="width:12px; text-align:center; vertical-align: middle;">:</td><td style="text-align: left; padding:4px 8px; vertical-align: middle;">Sensori/Organoleptik</td></tr>
-            <tr><td style="width:220px; text-align: left; vertical-align: middle; padding:4px 8px;"><strong>Metode pemeriksaan laboratoris</strong></td><td style="width:12px; text-align:center; vertical-align: middle;">:</td><td style="text-align: left; padding:4px 8px; vertical-align: middle;"><strong>${isIkanBeku ? 'SNI 4110-2020' : (isIkanTuna ? 'SNI 8223-2022' : 'SNI 2729-2021')}</strong></td></tr>
-            <tr><td style="width:220px; text-align: left; vertical-align: middle; padding:4px 8px;"><strong>Kesimpulan</strong></td><td style="width:12px; text-align:center; vertical-align: middle;">:</td><td style="text-align: left; padding:4px 8px; vertical-align: middle;">Memenuhi Standar Interval Mutu Kesegaran</td></tr>
+    <div style="margin-top: 5px; margin-bottom: 5px;">
+        <table style="width:100%; font-size:8pt; border-collapse: collapse; table-layout: fixed;">
+            <tr><td style="width:180px; text-align: left; vertical-align: middle; padding:2px 8px;"><strong>Tujuan Pemeriksaan</strong></td><td style="width:12px; text-align:center; vertical-align: middle;">:</td><td style="text-align: left; padding:2px 8px; vertical-align: middle;">Sensori/Organoleptik</td></tr>
+            <tr><td style="width:180px; text-align: left; vertical-align: middle; padding:2px 8px;"><strong>Metode pemeriksaan laboratoris</strong></td><td style="width:12px; text-align:center; vertical-align: middle;">:</td><td style="text-align: left; padding:2px 8px; vertical-align: middle;"><strong>${isIkanBeku ? 'SNI 4110-2020' : (isIkanTuna ? 'SNI 8223-2022' : (isSardenMakarel ? 'SNI 2712:2013' : (isIkanAsap ? 'SNI 2725:2013' : (isIkanAsinKering ? 'SNI 2721.1:2009' : (isRumputLautKering ? 'SNI 2690:2015' : (isLobsterUdangKipas ? 'SNI 8036:2014 / SNI 8037:2014' : 'SNI 2729-2021'))))))}</strong></td></tr>
+            <tr><td style="width:180px; text-align: left; vertical-align: middle; padding:2px 8px;"><strong>Kesimpulan</strong></td><td style="width:12px; text-align:center; vertical-align: middle;">:</td><td style="text-align: left; padding:2px 8px; vertical-align: middle;">Memenuhi Standar Interval Mutu Kesegaran</td></tr>
         </table>
     </div>
-    <div style="width:100%; display:flex; justify-content:flex-end; margin-top: 10px; font-size:10pt;">
-        <div style="text-align: right; max-width:300px; line-height:1.4;">
-            <div style="margin-bottom: 18px;">Bitung, ${tglDiterima ? formatIndoDate(tglDiterima) : ''}</div>
-            <div style="margin-bottom: 6px;"><strong>Penyelia,</strong></div>
-            <div style="margin-top: 48px;">${namaPenyelia}</div>
+    <div style="width:100%; display:flex; justify-content:flex-end; margin-top: 5px; font-size:9pt;">
+        <div style="text-align: right; max-width:250px; line-height:1.2;">
+            <div style="margin-bottom: 10px;">Bitung, ${tglDiterima ? formatIndoDate(tglDiterima) : ''}</div>
+            <div style="margin-bottom: 4px;"><strong>Penyelia,</strong></div>
+            <div style="margin-top: 30px;">${namaPenyelia}</div>
         </div>
     </div>`;
 
@@ -1824,6 +3022,71 @@ function generateLHUHtml(data, hewan) {
             { kategori: '1. Aroma', subKategori: '', items: [{ desc: 'Aroma sangat kuat sesuai spesifikasi produk', nilai: 9 }, { desc: 'Aroma kuat sesuai spesifikasi produk', nilai: 7 }, { desc: 'Mulai tercium aroma yang menyimpang (tengik/sulfida/amoniak)', nilai: 5 }] },
             { kategori: '2. Rasa', subKategori: '', items: [{ desc: 'Sangat sesuai spesifikasi produk', nilai: 9 }, { desc: 'Sesuai spesifikasi produk', nilai: 7 }, { desc: 'Terdapat rasa yang tidak sesuai spesifikasi produk (pahit/masam)', nilai: 5 }] },
             { kategori: '3. Tekstur', subKategori: '', items: [{ desc: 'Sangat kompak sesuai spesifikasi produk', nilai: 9 }, { desc: 'Kompak sesuai spesifikasi produk', nilai: 7 }, { desc: 'Kurang kompak', nilai: 5 }] }
+        ];
+    } else if (isSardenMakarel) {
+        scoreSheetItems = [
+            { kategori: '1. Kenampakan', subKategori: '', items: [{ desc: 'Utuh, cerah', nilai: 9 }, { desc: 'Utuh, kurang cerah', nilai: 7 }, { desc: 'Tidak utuh, kusam', nilai: 5 }] },
+            { kategori: '2. Bau', subKategori: '', items: [{ desc: 'Aroma sangat kuat sesuai spesifikasi', nilai: 9 }, { desc: 'Aroma kuat sesuai spesifikasi', nilai: 7 }, { desc: 'Mulai tercium bau asam', nilai: 5 }] },
+            { kategori: '3. Rasa', subKategori: '', items: [{ desc: 'Sangat sesuai spesifikasi.', nilai: 9 }, { desc: 'Sesuai spesifikasi', nilai: 7 }, { desc: 'Tidak sesuai spesifikasi, hambar', nilai: 5 }] },
+            { kategori: '4. Tekstur', subKategori: '', items: [{ desc: 'Sangat kompak sesuai spesifikasi', nilai: 9 }, { desc: 'Kompak sesuai spesifikasi', nilai: 7 }, { desc: 'Kurang kompak', nilai: 5 }] }
+        ];
+    } else if (isIkanAsap) {
+        scoreSheetItems = [
+            { kategori: '1. Kenampakan', subKategori: '', items: [{ desc: 'Bersih, warna seragam dan merata tanpa retakan.', nilai: 9 }, { desc: 'Cukup bersih, warna seragam dan merata tanpa retakan.', nilai: 7 }, { desc: 'Kurang bersih, warna seragam dan merata sedikit retakan.', nilai: 5 }, { desc: 'Kotor, warna kurang seragam dan kurang merata, retak-retak.', nilai: 3 }, { desc: 'Kotor sekali, warna tidak seragam dan tidak rata, retak-retak.', nilai: 1 }] },
+            { kategori: '2. Bau', subKategori: '', items: [{ desc: 'Spesifik ikan kayu, tanpa bau tambahan.', nilai: 9 }, { desc: 'Spesifik bau ikan kayu berkurang, tanpa bau tambahan.', nilai: 7 }, { desc: 'Spesifik bau ikan kayu tidak ada dengan sedikit bau tambahan.', nilai: 5 }, { desc: 'Spesifik bau ikan kayu tidak ada dengan tambahan agak kuat.', nilai: 3 }, { desc: 'Tengik, apek dengan bau tambahan kuat.', nilai: 1 }] },
+            { kategori: '3. Rasa', subKategori: '', items: [{ desc: 'Sangat suka.', nilai: 9 }, { desc: 'Suka.', nilai: 7 }, { desc: 'Biasa.', nilai: 5 }, { desc: 'Tidak suka.', nilai: 3 }, { desc: 'Sangat tidak suka.', nilai: 1 }] },
+            { kategori: '4. Tekstur', subKategori: '', items: [{ desc: 'Keras, tidak mudah patah.', nilai: 9 }, { desc: 'Kurang keras, agak mudah patah.', nilai: 7 }, { desc: 'Agak rapuh.', nilai: 5 }, { desc: 'Rapuh.', nilai: 3 }, { desc: 'Hancur.', nilai: 1 }] }
+        ];
+    } else if (isIkanAsinKering) {
+        scoreSheetItems = [
+            { kategori: '1. Kenampakan', subKategori: '', items: [{ desc: 'Bersih, sangat cerah spesifik jenis.', nilai: 9 }, { desc: 'Bersih, cerah spesifik jenis.', nilai: 7 }, { desc: 'Kusam', nilai: 5 }] },
+            { kategori: '2. Bau', subKategori: '', items: [{ desc: 'Spesifik jenis kuat', nilai: 9 }, { desc: 'Spesifik jenis kurang kuat.', nilai: 7 }, { desc: 'Tengik, apak.', nilai: 5 }] },
+            { kategori: '3. Rasa', subKategori: '', items: [{ desc: 'Asin, spesifik jenis', nilai: 9 }, { desc: 'Asin, spesifik jenis kurang', nilai: 7 }, { desc: 'Asin, ada rasa tambahan.', nilai: 5 }] },
+            { kategori: '4. Tekstur', subKategori: '', items: [{ desc: 'Padat, kering', nilai: 9 }, { desc: 'Padat, kurang kering', nilai: 7 }, { desc: 'Padat, ada rasa tambahan.', nilai: 5 }] },
+            { kategori: '5. Jamur', subKategori: '', items: [{ desc: 'Tidak ada.', nilai: 9 }, { desc: 'Ada.', nilai: 1 }] }
+        ];
+    } else if (isRumputLautKering) {
+        scoreSheetItems = [
+            {
+                kategori: '1. Kenampakan', items: [
+                    { desc: 'Bersih, warna cerah spesifik jenis', nilai: 9 },
+                    { desc: 'Sedikit kurang bersih, warna kurang cerah spesifik jenis.', nilai: 7 },
+                    { desc: 'Kurang bersih, warna agak kusam spesifik jenis', nilai: 5 },
+                    { desc: 'Kotor, warna spesifik jenis, kusam', nilai: 3 },
+                    { desc: 'Kotor, warna spesifik jenis, sangat kusam', nilai: 1 }
+                ]
+            },
+            {
+                kategori: '2. Tekstur', items: [
+                    { desc: 'Kering merata, liat tidak mudah dipatahkan.', nilai: 9 },
+                    { desc: 'Kering kurang merata, liat tidak mudah dipatahkan.', nilai: 7 },
+                    { desc: 'Lembab, liat agak mudah dipatahkan.', nilai: 5 },
+                    { desc: 'Mudah dipatahkan.', nilai: 3 },
+                    { desc: 'Mudah sekali dipatahkan.', nilai: 1 }
+                ]
+            }
+        ];
+    } else if (isLobsterUdangKipas) {
+        scoreSheetItems = [
+            {
+                kategori: '1. Spesifikasi', items: [
+                    { desc: 'Hidup dan reaktif terhadap sentuhan, Mata utuh, antenna utuh, kaki utuh tanpa cacat sedikit pun, bagian perut cemerlang', nilai: 9 },
+                    { desc: 'Hidup dan reaktif terhadap sentuhanm mata utuh, antena tidak utuh, kaki utuh tanpa cacat sedikitpun bagian perut cemerlang.', nilai: 7 },
+                    { desc: 'Hidup dan reaktif terhadap sentuhan, mata tidak utuh, antena tidak utuh, kaki utuh bagian perut cemerlang.', nilai: 5 }
+                ]
+            }
+        ];
+    } else if (isKepitingBakau) {
+        scoreSheetItems = [
+            {
+                kategori: '1. Spesifikasi', items: [
+                    { desc: 'Hidup dan reaktif terhadap sentuhan, Mata utuh, capit dan kaki utuh tanpa cacat', nilai: 9 },
+                    { desc: 'Hidup dan reaktif terhadap sentuhan, mata utuh, capit utuh, kaki patah satu sampai tidak sebaris', nilai: 7 },
+                    { desc: 'Hidup dan reaktif terhadap sentuhan, mata utuh, capit patah tidak sampai pangkal, kaki patah satu sampai tiga tidak sebaris', nilai: 5 },
+                    { desc: 'Hidup dan tidak reaktif terhadap sentuhan, mata tidak utuh, capit patah dari pangkal dan posisi horizon, kaki patah lebih dari tiga mulut sedikit berbusa', nilai: 3 },
+                    { desc: 'Mati', nilai: 1 }
+                ]
+            }
         ];
     } else {
         scoreSheetItems = [
@@ -1864,7 +3127,8 @@ function generateLHUHtml(data, hewan) {
             }
             specText = firstColContent + `<div style="padding-left:${firstColContent ? '10px' : '0'}">` + (item.desc.startsWith('•') ? item.desc : '• ' + item.desc) + `</div>`;
             let checkboxesHtml = '';
-            for (let k = 1; k <= 6; k++) {
+            const samplesCount = isRumputLautKering ? 8 : 6;
+            for (let k = 1; k <= samplesCount; k++) {
                 const isChecked = selectionMap[globalRowIndex] && selectionMap[globalRowIndex][k];
                 checkboxesHtml += `<td style="border: 1px solid #000; text-align: center; vertical-align: middle;">${isChecked ? '√' : ''}</td>`;
             }
@@ -1875,7 +3139,8 @@ function generateLHUHtml(data, hewan) {
 
     let totalRowHtml = `<tr><td colspan="2" style="border: 1px solid #000; padding: 4px; text-align: center; font-weight: bold; background-color: #f9f9f9;">Total</td>`;
     let avgRowHtml = `<tr><td colspan="2" style="border: 1px solid #000; padding: 4px; text-align: center; font-weight: bold; background-color: #f0f0f0;">Rata-rata</td>`;
-    for (let k = 1; k <= 6; k++) {
+    const colLimit = isRumputLautKering ? 8 : 6;
+    for (let k = 1; k <= colLimit; k++) {
         const item = penilaian ? penilaian[`kodeContoh${k}`] : null;
         totalRowHtml += `<td style="border: 1px solid #000; padding: 2px; text-align: center; font-weight: bold; background-color: #f9f9f9; font-size: 9pt;">${item ? item.total : '0'}</td>`;
         avgRowHtml += `<td style="border: 1px solid #000; padding: 2px; text-align: center; font-weight: bold; background-color: #f0f0f0; font-size: 9pt;">${item ? (typeof item.rataRata === 'number' ? item.rataRata.toFixed(2) : item.rataRata) : '0.00'}</td>`;
@@ -1887,24 +3152,32 @@ function generateLHUHtml(data, hewan) {
 
     const scoreSheetPageHTML = `
     <div class="sheet" style="position: relative;">
-        <div style="position: absolute; top: 10mm; right: 20mm; font-size: 10pt;">F.7.2.03-07/LP- BBKHIT-SULSEL</div>
-        <div style="text-align: center; margin-top: 5mm; margin-bottom: 20px;"><h3 style="margin: 0; font-size: 11pt; font-weight: bold; text-decoration: underline;">LEMBAR PENILAIAN UJI SKOR ${isIkanBeku ? 'IKAN BEKU' : (isIkanTuna ? 'IKAN TUNA KALENG' : 'IKAN SEGAR')}</h3></div>
-        <div style="margin-bottom: 10px; font-size: 9pt;"><table style="width: 100%; border: none;"><tr><td style="width: 250px;">1. Kode Contoh Uji /No. Aju PTK</td><td style="width: 10px;">:</td><td>${kodeContohUji}</td></tr><tr><td>2. Tgl. Diterima Contoh Uji</td><td>:</td><td>${tglDiterima ? formatIndoDate(tglDiterima) : ''}</td></tr></table></div>
-        <table style="width: 100%; border-collapse: collapse; margin-bottom: 10px; font-size: 9pt;">
-            <thead><tr><th style="border: 1px solid #000; padding: 5px; text-align: center; width: 50px;">NO</th><th style="border: 1px solid #000; padding: 5px; text-align: center;">JENIS CONTOH UJI</th><th style="border: 1px solid #000; padding: 5px; text-align: center;">JUMLAH</th><th style="border: 1px solid #000; padding: 5px; text-align: center;">UKURAN</th><th style="border: 1px solid #000; padding: 5px; text-align: center;">Ket.</th></tr></thead>
-            <tbody><tr><td style="border: 1px solid #000; padding: 5px; text-align: center;">1.</td><td style="border: 1px solid #000; padding: 5px;">${jenisContoh}</td><td style="border: 1px solid #000; padding: 5px; text-align: center;">${jumlah}</td><td style="border: 1px solid #000; padding: 5px; text-align: center;">${ukuran}</td><td style="border: 1px solid #000; padding: 5px; text-align: center;">${keterangan}</td></tr></tbody>
+        <div style="position: absolute; top: 5mm; right: 10mm; font-size: 8pt;">F.7.2.03-07/LP- BBKHIT-SULSEL</div>
+        <div style="text-align: center; margin-top: 2mm; margin-bottom: 10px;"><h3 style="margin: 0; font-size: 10pt; font-weight: bold; text-decoration: underline;">LEMBAR PENILAIAN UJI SKOR ${isIkanBeku ? 'IKAN BEKU' : (isIkanTuna ? 'IKAN TUNA KALENG' : (isSardenMakarel ? 'SARDEN/MAKAREL KALENG' : (isIkanAsap ? 'DRIED SMOKING FISH' : (isIkanAsinKering ? 'IKAN ASIN KERING' : (isRumputLautKering ? 'RUMPUT LAUT KERING' : (isLobsterUdangKipas ? 'LOBSTER, UDANG KIPAS HIDUP' : (isKepitingBakau ? 'KEPITING BAKAU HIDUP' : 'IKAN SEGAR')))))))}</h3></div>
+        <div style="margin-bottom: 5px; font-size: 8pt;"><table style="width: 100%; border: none;"><tr><td style="width: 200px;">1. Kode Contoh Uji /No. Aju PTK</td><td style="width: 10px;">:</td><td>${kodeContohUji}</td></tr><tr><td>2. Tgl. Diterima Contoh Uji</td><td>:</td><td>${tglDiterima ? formatIndoDate(tglDiterima) : ''}</td></tr></table></div>
+        <table style="width: 100%; border-collapse: collapse; margin-bottom: 5px; font-size: 8pt;">
+            <thead><tr><th style="border: 1px solid #000; padding: 3px; text-align: center; width: 40px;">NO</th><th style="border: 1px solid #000; padding: 3px; text-align: center;">JENIS CONTOH UJI</th><th style="border: 1px solid #000; padding: 3px; text-align: center;">JUMLAH</th><th style="border: 1px solid #000; padding: 3px; text-align: center;">UKURAN</th><th style="border: 1px solid #000; padding: 3px; text-align: center;">Ket.</th></tr></thead>
+            <tbody><tr><td style="border: 1px solid #000; padding: 3px; text-align: center;">1.</td><td style="border: 1px solid #000; padding: 3px;">${jenisContoh}</td><td style="border: 1px solid #000; padding: 3px; text-align: center;">${jumlah}</td><td style="border: 1px solid #000; padding: 3px; text-align: center;">${ukuran}</td><td style="border: 1px solid #000; padding: 3px; text-align: center;">${keterangan}</td></tr></tbody>
         </table>
-        <div style="margin-bottom: 5px; font-size: 9pt;">• Berilah tanda √ pada nilai yang dipilih sesuai kode contoh yang diuji.</div>
-        <table style="width: 100%; border-collapse: collapse; font-size: 9pt;">
+        <div style="margin-bottom: 2px; font-size: 8pt;">• Berilah tanda √ pada nilai yang dipilih sesuai kode contoh yang diuji.</div>
+        <table style="width: 100%; border-collapse: collapse; font-size: 8pt;">
             <thead>
-                <tr><th style="border: 1px solid #000; padding: 5px; text-align: left; vertical-align: middle;" rowspan="2">Spesifikasi</th><th style="border: 1px solid #000; padding: 5px; text-align: center; vertical-align: middle;" rowspan="2">Nilai</th><th style="border: 1px solid #000; padding: 5px; text-align: center;" colspan="6">Kode Contoh</th></tr>
-                <tr><th style="border: 1px solid #000; padding: 5px; text-align: center; width: 30px;">1</th><th style="border: 1px solid #000; padding: 5px; text-align: center; width: 30px;">2</th><th style="border: 1px solid #000; padding: 5px; text-align: center; width: 30px;">3</th><th style="border: 1px solid #000; padding: 5px; text-align: center; width: 30px;">4</th><th style="border: 1px solid #000; padding: 5px; text-align: center; width: 30px;">5</th><th style="border: 1px solid #000; padding: 5px; text-align: center; width: 30px;">6</th></tr>
+                <tr><th style="border: 1px solid #000; padding: 3px; text-align: left; vertical-align: middle;" rowspan="2">Spesifikasi</th><th style="border: 1px solid #000; padding: 3px; text-align: center; vertical-align: middle;" rowspan="2">Nilai</th><th style="border: 1px solid #000; padding: 3px; text-align: center;" colspan="${isRumputLautKering ? 8 : 6}">Kode Contoh</th></tr>
+                <tr>
+                    <th style="border: 1px solid #000; padding: 3px; text-align: center; width: 25px;">1</th>
+                    <th style="border: 1px solid #000; padding: 3px; text-align: center; width: 25px;">2</th>
+                    <th style="border: 1px solid #000; padding: 3px; text-align: center; width: 25px;">3</th>
+                    <th style="border: 1px solid #000; padding: 3px; text-align: center; width: 25px;">4</th>
+                    <th style="border: 1px solid #000; padding: 3px; text-align: center; width: 25px;">5</th>
+                    <th style="border: 1px solid #000; padding: 3px; text-align: center; width: 25px;">6</th>
+                    ${isRumputLautKering ? '<th style="border: 1px solid #000; padding: 3px; text-align: center; width: 25px;">7</th><th style="border: 1px solid #000; padding: 3px; text-align: center; width: 25px;">8</th>' : ''}
+                </tr>
             </thead>
             <tbody>${scoreRowsHtml}${totalRowHtml}${avgRowHtml}</tbody>
         </table>
-        <table style="width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 9pt;">
-            <thead><tr><th style="border: 1px solid #000; padding: 5px; text-align: center; width: 50px;">No</th><th style="border: 1px solid #000; padding: 5px; text-align: center;">Panelis</th><th style="border: 1px solid #000; padding: 5px; text-align: center;">Tanda Tangan</th></tr></thead>
-            <tbody><tr><td style="border: 1px solid #000; padding: 5px; text-align: center; vertical-align: middle; height: 60px;">1.</td><td style="border: 1px solid #000; padding: 5px; text-align: center; vertical-align: middle;">${namaPanelis}</td><td style="border: 1px solid #000; padding: 5px; text-align: center; vertical-align: middle;">${qrSrc ? `<img src="${qrSrc}" style="width: 60px; height: 60px; object-fit: contain;">` : ''}</td></tr></tbody>
+        <table style="width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 8pt;">
+            <thead><tr><th style="border: 1px solid #000; padding: 3px; text-align: center; width: 40px;">No</th><th style="border: 1px solid #000; padding: 3px; text-align: center;">Panelis</th><th style="border: 1px solid #000; padding: 3px; text-align: center;">Tanda Tangan</th></tr></thead>
+            <tbody><tr><td style="border: 1px solid #000; padding: 3px; text-align: center; vertical-align: middle; height: 50px;">1.</td><td style="border: 1px solid #000; padding: 3px; text-align: center; vertical-align: middle;">${namaPanelis}</td><td style="border: 1px solid #000; padding: 3px; text-align: center; vertical-align: middle;">${qrSrc ? `<img src="${qrSrc}" style="width: 50px; height: 50px; object-fit: contain;">` : ''}</td></tr></tbody>
         </table>
     </div>`;
 
@@ -1915,10 +3188,25 @@ function generateLHUHtml(data, hewan) {
     <title>LHU Final</title>
     <style>
         @media print { 
-            @page { size: A4 portrait; margin: 0; } 
+            @page { size: A4 portrait; margin: 10mm; } 
             body { margin: 0; padding: 0; background: none; } 
-            .sheet { margin: 0; box-shadow: none; width: 100%; height: auto; page-break-after: always; padding: 20mm; overflow: visible; } 
-            .sheet:last-child { page-break-after: auto; } 
+            .sheet { 
+                margin: 0 !important; 
+                box-shadow: none !important; 
+                width: 100% !important; 
+                height: 277mm !important; /* A4 height - margins */
+                page-break-after: always !important; 
+                padding: 5mm !important; 
+                overflow: hidden !important;
+                display: block !important;
+            } 
+            .sheet:last-child { page-break-after: auto !important; } 
+            
+            /* Tighten up for print */
+            h2 { margin: 10px 0 !important; font-size: 14px !important; }
+            table { font-size: 8pt !important; }
+            th, td { padding: 2px 4px !important; }
+            .header-info-table td { padding: 1px 4px !important; }
         }
         body { background: #525659; margin: 0; padding: 25px 0; font-family: Arial, sans-serif; display: flex; flex-direction: column; align-items: center; min-height: 100vh; -webkit-print-color-adjust: exact; }
         .sheet { width: 100%; max-width: 210mm; height: auto; min-height: 297mm; background: #fff; box-shadow: 0 0 10px rgba(0,0,0,0.5); padding: 20mm; box-sizing: border-box; margin-bottom: 25px; overflow: hidden; position: relative; }
@@ -2020,7 +3308,7 @@ async function generatePdfBlob() {
 }
 
 // LHU preview (implements requested mappings and preview layout)
-async function showLHUPreview(savedData = null, savedHewan = null) {
+async function showLHUPreview(savedData = null, savedHewan = null, savedFilename = null) {
     try {
         const urlParams = new URLSearchParams(window.location.search);
         const hewan = savedHewan || urlParams.get('hewan') || 'ikan-segar';
@@ -2189,7 +3477,12 @@ async function showLHUPreview(savedData = null, savedHewan = null) {
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = 'LHU_Preview_' + (kodeContohUji ? kodeContohUji.replace(/[^a-z0-9]/gi, '_') : 'Output') + '.html';
+
+            // Menggunakan format nama file yang sama dengan Daftar Hasil Uji
+            // Jika ada nama file tersimpan (dari history), gunakan itu. Jika tidak, generate baru.
+            const filename = savedFilename || getFormattedFilename(data, hewan);
+            a.download = filename + (filename.toLowerCase().endsWith('.html') ? '' : '.html');
+
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
@@ -2508,6 +3801,11 @@ function handleFormSubmit(jenisUji, hewan) {
         'ikan-segar': 'Ikan Segar',
         'ikan-beku': 'Ikan Beku',
         'ikan-tuna-kaleng': 'Ikan Tuna Kaleng',
+        'sarden-makarel-kaleng': 'Sarden/Makarel Kaleng',
+        'ikan-asap': 'Dried Smoking Fish (Ikan Asap)',
+        'ikan-asin-kering': 'Ikan Asin Kering',
+        'rumput-laut-kering': 'Rumput Laut Kering',
+        'lobster-udang-kipas': 'LOBSTER, UDANG KIPAS HIDUP',
         'kepiting': 'Kepiting',
         'gurita': 'Gurita',
         'kerang': 'Kerang'
@@ -2699,6 +3997,156 @@ function handleFormSubmit(jenisUji, hewan) {
         }
     }
 
+    // Khusus untuk ikan asap, kumpulkan data dari tabel
+    if (hewan === 'ikan-asap') {
+        const kodeContohUjiInput = document.getElementById('kodeContohUji');
+        const tglDiterimaInput = document.getElementById('tglDiterima');
+        if (kodeContohUjiInput) data.kodeContohUji = kodeContohUjiInput.value || '';
+        if (tglDiterimaInput) data.tglDiterima = tglDiterimaInput.value || '';
+
+        const table = document.getElementById('ikanAsapTable');
+        if (table) {
+            data.penilaianIkanAsap = {};
+            for (let kode = 1; kode <= 6; kode++) {
+                const kodeData = { nilai: [], total: 0, rataRata: 0 };
+                const checkboxes = table.querySelectorAll(`.nilai-checkbox[data-kode="${kode}"]:checked`);
+                checkboxes.forEach(checkbox => {
+                    kodeData.nilai.push({ rowIndex: checkbox.dataset.rowIndex, nilai: parseInt(checkbox.dataset.nilai) });
+                });
+                const totalCell = table.querySelector(`.total-cell[data-kode="${kode}"]`);
+                const avgCell = table.querySelector(`.avg-cell[data-kode="${kode}"]`);
+                if (totalCell) kodeData.total = parseInt(totalCell.textContent) || 0;
+                if (avgCell) kodeData.rataRata = parseFloat(avgCell.textContent) || 0;
+                data.penilaianIkanAsap[`kodeContoh${kode}`] = kodeData;
+            }
+        }
+    }
+
+    // Khusus untuk sarden/makarel kaleng, kumpulkan data dari tabel
+    if (hewan === 'sarden-makarel-kaleng') {
+        const kodeContohUjiInput = document.getElementById('kodeContohUji');
+        const tglDiterimaInput = document.getElementById('tglDiterima');
+        if (kodeContohUjiInput) data.kodeContohUji = kodeContohUjiInput.value || '';
+        if (tglDiterimaInput) data.tglDiterima = tglDiterimaInput.value || '';
+
+        const table = document.getElementById('sardenMakarelTable');
+        if (table) {
+            data.penilaianSardenMakarel = {};
+            for (let kode = 1; kode <= 6; kode++) {
+                const kodeData = { nilai: [], total: 0, rataRata: 0 };
+                const checkboxes = table.querySelectorAll(`.nilai-checkbox[data-kode="${kode}"]:checked`);
+                checkboxes.forEach(checkbox => {
+                    kodeData.nilai.push({ rowIndex: checkbox.dataset.rowIndex, nilai: parseInt(checkbox.dataset.nilai) });
+                });
+                const totalCell = table.querySelector(`.total-cell[data-kode="${kode}"]`);
+                const avgCell = table.querySelector(`.avg-cell[data-kode="${kode}"]`);
+                if (totalCell) kodeData.total = parseInt(totalCell.textContent) || 0;
+                if (avgCell) kodeData.rataRata = parseFloat(avgCell.textContent) || 0;
+                data.penilaianSardenMakarel[`kodeContoh${kode}`] = kodeData;
+            }
+        }
+    }
+
+    // Khusus untuk ikan asin kering, kumpulkan data dari tabel
+    if (hewan === 'ikan-asin-kering') {
+        const kodeContohUjiInput = document.getElementById('kodeContohUji');
+        const tglDiterimaInput = document.getElementById('tglDiterima');
+        if (kodeContohUjiInput) data.kodeContohUji = kodeContohUjiInput.value || '';
+        if (tglDiterimaInput) data.tglDiterima = tglDiterimaInput.value || '';
+
+        const table = document.getElementById('ikanAsinKeringTable');
+        if (table) {
+            data.penilaianIkanAsinKering = {};
+            for (let kode = 1; kode <= 6; kode++) {
+                const kodeData = { nilai: [], total: 0, rataRata: 0 };
+                const checkboxes = table.querySelectorAll(`.nilai-checkbox[data-kode="${kode}"]:checked`);
+                checkboxes.forEach(checkbox => {
+                    kodeData.nilai.push({ rowIndex: checkbox.dataset.rowIndex, nilai: parseInt(checkbox.dataset.nilai) });
+                });
+                const totalCell = table.querySelector(`.total-cell[data-kode="${kode}"]`);
+                const avgCell = table.querySelector(`.avg-cell[data-kode="${kode}"]`);
+                if (totalCell) kodeData.total = parseInt(totalCell.textContent) || 0;
+                if (avgCell) kodeData.rataRata = parseFloat(avgCell.textContent) || 0;
+                data.penilaianIkanAsinKering[`kodeContoh${kode}`] = kodeData;
+            }
+        }
+    }
+
+    // Khusus untuk rumput laut kering, kumpulkan data dari tabel
+    if (hewan === 'rumput-laut-kering') {
+        const kodeContohUjiInput = document.getElementById('kodeContohUji');
+        const tglDiterimaInput = document.getElementById('tglDiterima');
+        if (kodeContohUjiInput) data.kodeContohUji = kodeContohUjiInput.value || '';
+        if (tglDiterimaInput) data.tglDiterima = tglDiterimaInput.value || '';
+
+        const table = document.getElementById('rumputLautKeringTable');
+        if (table) {
+            data.penilaianRumputLautKering = {};
+            for (let kode = 1; kode <= 8; kode++) {
+                const kodeData = { nilai: [], total: 0, rataRata: 0 };
+                const checkboxes = table.querySelectorAll(`.nilai-checkbox[data-kode="${kode}"]:checked`);
+                checkboxes.forEach(checkbox => {
+                    kodeData.nilai.push({ rowIndex: checkbox.dataset.rowIndex, nilai: parseInt(checkbox.dataset.nilai) });
+                });
+                const totalCell = table.querySelector(`.total-cell[data-kode="${kode}"]`);
+                const avgCell = table.querySelector(`.avg-cell[data-kode="${kode}"]`);
+                if (totalCell) kodeData.total = parseInt(totalCell.textContent) || 0;
+                if (avgCell) kodeData.rataRata = parseFloat(avgCell.textContent) || 0;
+                data.penilaianRumputLautKering[`kodeContoh${kode}`] = kodeData;
+            }
+        }
+    }
+
+    // Khusus untuk lobster/udang kipas, kumpulkan data dari tabel
+    if (hewan === 'lobster-udang-kipas') {
+        const kodeContohUjiInput = document.getElementById('kodeContohUji');
+        const tglDiterimaInput = document.getElementById('tglDiterima');
+        if (kodeContohUjiInput) data.kodeContohUji = kodeContohUjiInput.value || '';
+        if (tglDiterimaInput) data.tglDiterima = tglDiterimaInput.value || '';
+
+        const table = document.getElementById('lobsterUdangKipasTable');
+        if (table) {
+            data.penilaianLobsterUdangKipas = {};
+            for (let kode = 1; kode <= 6; kode++) {
+                const kodeData = { nilai: [], total: 0, rataRata: 0 };
+                const checkboxes = table.querySelectorAll(`.nilai-checkbox[data-kode="${kode}"]:checked`);
+                checkboxes.forEach(checkbox => {
+                    kodeData.nilai.push({ rowIndex: checkbox.dataset.rowIndex, nilai: parseInt(checkbox.dataset.nilai) });
+                });
+                const totalCell = table.querySelector(`.total-cell[data-kode="${kode}"]`);
+                const avgCell = table.querySelector(`.avg-cell[data-kode="${kode}"]`);
+                if (totalCell) kodeData.total = parseInt(totalCell.textContent) || 0;
+                if (avgCell) kodeData.rataRata = parseFloat(avgCell.textContent) || 0;
+                data.penilaianLobsterUdangKipas[`kodeContoh${kode}`] = kodeData;
+            }
+        }
+    }
+
+    // Khusus untuk kepiting bakau, kumpulkan data dari tabel
+    if (hewan === 'kepiting-bakau') {
+        const kodeContohUjiInput = document.getElementById('kodeContohUji');
+        const tglDiterimaInput = document.getElementById('tglDiterima');
+        if (kodeContohUjiInput) data.kodeContohUji = kodeContohUjiInput.value || '';
+        if (tglDiterimaInput) data.tglDiterima = tglDiterimaInput.value || '';
+
+        const table = document.getElementById('kepitingBakauTable');
+        if (table) {
+            data.penilaianKepitingBakau = {};
+            for (let kode = 1; kode <= 6; kode++) {
+                const kodeData = { nilai: [], total: 0, rataRata: 0 };
+                const checkboxes = table.querySelectorAll(`.nilai-checkbox[data-kode="${kode}"]:checked`);
+                checkboxes.forEach(checkbox => {
+                    kodeData.nilai.push({ rowIndex: checkbox.dataset.rowIndex, nilai: parseInt(checkbox.dataset.nilai) });
+                });
+                const totalCell = table.querySelector(`.total-cell[data-kode="${kode}"]`);
+                const avgCell = table.querySelector(`.avg-cell[data-kode="${kode}"]`);
+                if (totalCell) kodeData.total = parseInt(totalCell.textContent) || 0;
+                if (avgCell) kodeData.rataRata = parseFloat(avgCell.textContent) || 0;
+                data.penilaianKepitingBakau[`kodeContoh${kode}`] = kodeData;
+            }
+        }
+    }
+
     // Capture QR Code Source explicitly for saving
     let qrSrc = '';
     const qrImg = document.querySelector('#qrcode-container img');
@@ -2717,13 +4165,29 @@ function handleFormSubmit(jenisUji, hewan) {
     const lhuHtml = generateLHUHtml(data, hewan);
     window.htmlDownload = lhuHtml;
 
+    // Persiapkan item history
+    const historyItem = {
+        id: Date.now(),
+        filename: filename,
+        lokasiPelayanan: data.noSampel || '-',
+        hewan: hewan,
+        data: data,
+        // html: lhuHtml, // HTML tidak dikirim ke history sheet (terlalu besar), sudah dibackup ke Drive
+        timestamp: new Date().toISOString()
+    };
+
     // Simpan ke Local Storage
     saveResultLocally(data, filename, lhuHtml, hewan);
 
-    // Backup ke GDrive
+    // Backup ke GDrive (File HTML)
     backupToGDrive(data, filename, lhuHtml);
 
-    // Simpan ke Google Sheets (async, tidak blocking)
+    // Simpan ke Google Sheets History (Agar bisa dilihat semua orang/perangkat)
+    saveHistoryToSheets(historyItem)
+        .then(res => console.log('History synced to cloud:', res))
+        .catch(err => console.error('History sync failed:', err));
+
+    // Simpan ke Google Sheets (Data Terformat)
     saveToGoogleSheets(data, jenisUjiNames[jenisUji], hewanNames[hewan])
         .then(result => {
             if (result.success) {
@@ -2737,7 +4201,7 @@ function handleFormSubmit(jenisUji, hewan) {
         });
 
     // Tampilkan pesan sukses
-    alert('Terima kasih! Data penilaian uji telah berhasil disimpan di history dan cadangan cloud.');
+    alert('Terima kasih! Data penilaian uji telah berhasil disimpan dan disinkronkan ke semua perangkat.');
 }
 
 function exportToExcel(data, jenisUji, hewan) {
@@ -2786,9 +4250,9 @@ function exportToExcel(data, jenisUji, hewan) {
 }
 
 function goBack() {
-    const urlParams = new URLSearchParams(window.location.search);
+    const urlParams = new URLSearchParams(location.search);
     const jenisUji = urlParams.get('jenis');
-    window.location.href = `kuisoner-jenis-uji.html?jenis=${jenisUji}`;
+    location.href = `kuisoner-jenis-uji.html?jenis=${jenisUji}`;
 }
 
 function logout() {
@@ -2810,4 +4274,479 @@ function resetForm() {
     }
 }
 
+/**
+ * Menghasilkan tabel penilaian untuk Lobster/Udang Kipas Hidup
+ */
+function generateLobsterUdangKipasTable(container) {
+    // Header info (Format as Ikan Segar)
+    const headerDiv = document.createElement('div');
+    headerDiv.className = 'lobster-udang-kipas-header';
+    headerDiv.innerHTML = `
+        <h3 style="text-align: center; margin-bottom: 20px; font-size: 18px; font-weight: 600;">LEMBAR PENILAIAN UJI SKOR LOBSTER, UDANG KIPAS HIDUP</h3>
+        <div style="margin-bottom: 15px;">
+            <label style="display: inline-block; width: 200px;">1. Kode Contoh Uji /No. Aju PTK :</label>
+            <input type="text" id="kodeContohUji" name="kodeContohUji" style="width: 300px; padding: 8px; border: 1px solid #ddd; border-radius: 5px;">
+        </div>
+        <div style="margin-bottom: 15px;">
+            <label style="display: inline-block; width: 200px;">2. Tgl. Diterima Contoh Uji :</label>
+            <input type="date" id="tglDiterima" name="tglDiterima" style="width: 300px; padding: 8px; border: 1px solid #ddd; border-radius: 5px;">
+        </div>
+        <table style="width: 100%; margin-bottom: 20px; border-collapse: collapse; border: 1px solid #ddd;">
+            <thead>
+                <tr style="background-color: #f5f5f5;">
+                    <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">NO</th>
+                    <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">JENIS CONTOH UJI</th>
+                    <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">JUMLAH</th>
+                    <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">UKURAN</th>
+                    <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">Ket.</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">1.</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;"><input type="text" id="jenisContoh" name="jenisContoh" placeholder="Lobster/Udang Kipas" style="width: 100%; border: none; padding: 5px;"></td>
+                    <td style="border: 1px solid #ddd; padding: 8px;"><input type="text" name="jumlah" style="width: 100%; border: none; padding: 5px;"></td>
+                    <td style="border: 1px solid #ddd; padding: 8px;"><input type="text" name="ukuran" style="width: 100%; border: none; padding: 5px;"></td>
+                    <td style="border: 1px solid #ddd; padding: 8px;"><input type="text" name="keterangan" style="width: 100%; border: none; padding: 5px;"></td>
+                </tr>
+            </tbody>
+        </table>
+        <p style="margin-bottom: 15px; font-style: italic;">Berilah tanda √ pada nilai yang dipilih sesuai kode contoh yang diuji.</p>
+    `;
+    container.appendChild(headerDiv);
+    // Hide catatan section for Lobster/Udang Kipas
+    const catatanSection = document.getElementById('catatanSection');
+    if (catatanSection) catatanSection.style.display = 'none';
+
+    // Scoring descriptions from the image
+    const criteria = [
+        { desc: 'Hidup dan reaktif terhadap sentuhan, Mata utuh, antenna utuh, kaki utuh tanpa cacat sedikit pun, bagian perut cemerlang', nilai: 9 },
+        { desc: 'Hidup dan reaktif terhadap sentuhanm mata utuh, antena tidak utuh, kaki utuh tanpa cacat sedikitpun bagian perut cemerlang.', nilai: 7 },
+        { desc: 'Hidup dan reaktif terhadap sentuhan, mata tidak utuh, antena tidak utuh, kaki utuh bagian perut cemerlang.', nilai: 5 }
+    ];
+
+    const table = document.createElement('table');
+    table.className = 'lobster-udang-kipas-table';
+    table.id = 'lobsterUdangKipasTable';
+    table.style.width = '100%';
+    table.style.borderCollapse = 'collapse';
+    table.style.marginBottom = '20px';
+
+    // Header tabel
+    const thead = document.createElement('thead');
+    thead.innerHTML = `
+        <tr style="background-color: #f5f5f5;">
+            <th style="border: 1px solid #ddd; padding: 10px; text-align: center; width: 50%;">Spesifikasi</th>
+            <th style="border: 1px solid #ddd; padding: 10px; text-align: center; width: 60px;">Nilai</th>
+            <th colspan="6" style="border: 1px solid #ddd; padding: 10px; text-align: center;">Kode Contoh</th>
+        </tr>
+        <tr style="background-color: #f5f5f5;">
+            <th colspan="2"></th>
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">1</th>
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">2</th>
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">3</th>
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">4</th>
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">5</th>
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">6</th>
+        </tr>
+    `;
+    table.appendChild(thead);
+
+    const tbody = document.createElement('tbody');
+    criteria.forEach((item, rowIndex) => {
+        const tr = document.createElement('tr');
+        tr.dataset.nilai = item.nilai;
+        tr.dataset.rowIndex = rowIndex;
+
+        // Spesifikasi cell
+        const specCell = document.createElement('td');
+        specCell.style.border = '1px solid #ddd';
+        specCell.style.padding = '10px';
+        specCell.textContent = '- ' + item.desc;
+        tr.appendChild(specCell);
+
+        // Nilai cell
+        const valorCell = document.createElement('td');
+        valorCell.style.border = '1px solid #ddd';
+        valorCell.style.padding = '10px';
+        valorCell.style.textAlign = 'center';
+        valorCell.style.fontWeight = 'bold';
+        valorCell.textContent = item.nilai;
+        tr.appendChild(valorCell);
+
+        // Kode contoh cells (1-6)
+        for (let kode = 1; kode <= 6; kode++) {
+            const td = document.createElement('td');
+            td.className = 'kode-contoh-cell';
+            td.dataset.kode = kode;
+            td.dataset.rowIndex = rowIndex;
+            td.dataset.nilai = item.nilai;
+            td.style.border = '1px solid #ddd';
+            td.style.padding = '10px';
+            td.style.textAlign = 'center';
+            td.style.cursor = 'pointer';
+
+            const checkbox = document.createElement('input');
+            checkbox.type = 'checkbox';
+            checkbox.className = 'nilai-checkbox';
+            checkbox.dataset.kode = kode;
+            checkbox.dataset.rowIndex = rowIndex;
+            checkbox.dataset.nilai = item.nilai;
+            checkbox.style.display = 'none';
+            td.appendChild(checkbox);
+
+            td.addEventListener('click', function (e) {
+                if (e.target.type === 'checkbox') return;
+                const newChecked = !checkbox.checked;
+
+                // Uncheck others in the same column
+                if (newChecked) {
+                    tbody.querySelectorAll(`input.nilai-checkbox[data-kode="${kode}"]`).forEach(cb => {
+                        cb.checked = false;
+                        updateCheckmark(cb.parentElement, false);
+                    });
+                }
+
+                checkbox.checked = newChecked;
+                updateCheckmark(td, newChecked);
+                setTimeout(() => calculateTotalsLobsterUdangKipas(), 10);
+            });
+
+            tr.appendChild(td);
+        }
+        tbody.appendChild(tr);
+    });
+
+    // Baris Total
+    const totalTr = document.createElement('tr');
+    totalTr.style.backgroundColor = '#f9f9f9';
+    totalTr.innerHTML = `<td colspan="2" style="border: 1px solid #ddd; padding: 10px; font-weight: bold; text-align: center;">Total</td>`;
+    for (let i = 1; i <= 6; i++) {
+        totalTr.innerHTML += `<td class="total-cell" data-kode="${i}" style="border: 1px solid #ddd; padding: 10px; text-align: center; font-weight: bold;">0</td>`;
+    }
+    tbody.appendChild(totalTr);
+
+    // Baris Rata-rata
+    const avgTr = document.createElement('tr');
+    avgTr.style.backgroundColor = '#f1f1f1';
+    avgTr.innerHTML = `<td colspan="2" style="border: 1px solid #ddd; padding: 10px; font-weight: bold; text-align: center;">Rata-rata</td>`;
+    for (let i = 1; i <= 6; i++) {
+        avgTr.innerHTML += `<td class="avg-cell" data-kode="${i}" style="border: 1px solid #ddd; padding: 10px; text-align: center; font-weight: bold;">0.00</td>`;
+    }
+    tbody.appendChild(avgTr);
+
+    table.appendChild(tbody);
+    container.appendChild(table);
+
+    // LHU Button (re-implement specific for this species)
+    const formActions = document.querySelector('.form-actions');
+    if (formActions) {
+        // Hapus tombol preview lama jika ada
+        const oldBtn = formActions.querySelector('.btn-lhu');
+        if (oldBtn) oldBtn.remove();
+
+        const lhuButton = document.createElement('button');
+        lhuButton.type = 'button';
+        lhuButton.className = 'btn-lhu';
+        lhuButton.textContent = 'Lihat LHU (Laporan Hasil Uji)';
+        lhuButton.style.padding = '12px 24px';
+        lhuButton.style.background = 'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)';
+        lhuButton.style.color = 'white';
+        lhuButton.style.border = 'none';
+        lhuButton.style.borderRadius = '10px';
+        lhuButton.style.fontSize = '16px';
+        lhuButton.style.fontWeight = '600';
+        lhuButton.style.cursor = 'pointer';
+        lhuButton.style.transition = 'all 0.3s';
+        lhuButton.style.marginRight = '10px';
+
+        lhuButton.onmouseover = function () {
+            this.style.transform = 'translateY(-2px)';
+            this.style.boxShadow = '0 10px 20px rgba(67, 233, 123, 0.3)';
+        };
+        lhuButton.onmouseout = function () {
+            this.style.transform = 'translateY(0)';
+            this.style.boxShadow = 'none';
+        };
+
+        lhuButton.addEventListener('click', async function (e) {
+            try {
+                this.disabled = true;
+                await showLHUPreview();
+            } catch (err) {
+                console.error('showLHUPreview error', err);
+                alert('Gagal membuka preview: ' + (err && err.message ? err.message : err));
+            } finally {
+                this.disabled = false;
+            }
+        });
+
+        // Insert as first child
+        formActions.insertBefore(lhuButton, formActions.firstChild);
+    }
+
+    // QR Code and Panelist info
+    const qrWrapper = document.createElement('div');
+    qrWrapper.style.marginTop = '20px';
+    qrWrapper.style.display = 'flex';
+    qrWrapper.style.justifyContent = 'flex-end';
+    qrWrapper.innerHTML = `<div id="qrcode-container" style="padding: 10px; background: #fff; border-radius: 8px;"></div>`;
+    container.appendChild(qrWrapper);
+    setTimeout(updatePanelistQRCode, 300);
+}
+
+function calculateTotalsLobsterUdangKipas() {
+    const table = document.getElementById('lobsterUdangKipasTable');
+    if (!table) return;
+    for (let kode = 1; kode <= 6; kode++) {
+        let total = 0, count = 0;
+        table.querySelectorAll(`input.nilai-checkbox[data-kode="${kode}"]:checked`).forEach(cb => {
+            total += parseInt(cb.dataset.nilai);
+            count++;
+        });
+        const totalCell = table.querySelector(`.total-cell[data-kode="${kode}"]`);
+        if (totalCell) totalCell.textContent = total;
+        const avgCell = table.querySelector(`.avg-cell[data-kode="${kode}"]`);
+        if (avgCell) avgCell.textContent = count > 0 ? (total / count).toFixed(2) : '0.00';
+    }
+}
+
+/**
+ * Menghasilkan tabel penilaian untuk Kepiting Bakau Hidup
+ */
+function generateKepitingBakauTable(container) {
+    // Header info (Format as Ikan Segar)
+    const headerDiv = document.createElement('div');
+    headerDiv.className = 'kepiting-bakau-header';
+    headerDiv.innerHTML = `
+        <h3 style="text-align: center; margin-bottom: 20px; font-size: 18px; font-weight: 600;">LEMBAR PENILAIAN UJI SKOR KEPITING BAKAU HIDUP</h3>
+        <div style="margin-bottom: 15px;">
+            <label style="display: inline-block; width: 200px;">1. Kode Contoh Uji /No. Aju PTK :</label>
+            <input type="text" id="kodeContohUji" name="kodeContohUji" style="width: 300px; padding: 8px; border: 1px solid #ddd; border-radius: 5px;">
+        </div>
+        <div style="margin-bottom: 15px;">
+            <label style="display: inline-block; width: 200px;">2. Tgl. Diterima Contoh Uji :</label>
+            <input type="date" id="tglDiterima" name="tglDiterima" style="width: 300px; padding: 8px; border: 1px solid #ddd; border-radius: 5px;">
+        </div>
+        <table style="width: 100%; margin-bottom: 20px; border-collapse: collapse; border: 1px solid #ddd;">
+            <thead>
+                <tr style="background-color: #f5f5f5;">
+                    <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">NO</th>
+                    <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">JENIS CONTOH UJI</th>
+                    <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">JUMLAH</th>
+                    <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">UKURAN</th>
+                    <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">Ket.</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">1.</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;"><input type="text" id="jenisContoh" name="jenisContoh" placeholder="Kepiting Bakau Hidup" style="width: 100%; border: none; padding: 5px;"></td>
+                    <td style="border: 1px solid #ddd; padding: 8px;"><input type="text" name="jumlah" style="width: 100%; border: none; padding: 5px;"></td>
+                    <td style="border: 1px solid #ddd; padding: 8px;"><input type="text" name="ukuran" style="width: 100%; border: none; padding: 5px;"></td>
+                    <td style="border: 1px solid #ddd; padding: 8px;"><input type="text" name="keterangan" style="width: 100%; border: none; padding: 5px;"></td>
+                </tr>
+            </tbody>
+        </table>
+        <p style="margin-bottom: 15px; font-style: italic;">Berilah tanda √ pada nilai yang dipilih sesuai kode contoh yang diuji.</p>
+    `;
+    container.appendChild(headerDiv);
+    // Hide catatan section for Kepiting Bakau
+    const catatanSection = document.getElementById('catatanSection');
+    if (catatanSection) catatanSection.style.display = 'none';
+
+    // Scoring descriptions from the image
+    const criteria = [
+        { desc: 'Hidup dan reaktif terhadap sentuhan, Mata utuh, capit dan kaki utuh tanpa cacat', nilai: 9 },
+        { desc: 'Hidup dan reaktif terhadap sentuhan, mata utuh, capit utuh, kaki patah satu sampai tidak sebaris', nilai: 7 },
+        { desc: 'Hidup dan reaktif terhadap sentuhan, mata utuh, capit patah tidak sampai pangkal, kaki patah satu sampai tiga tidak sebaris', nilai: 5 },
+        { desc: 'Hidup dan tidak reaktif terhadap sentuhan, mata tidak utuh, capit patah dari pangkal dan posisi horizon, kaki patah lebih dari tiga mulut sedikit berbusa', nilai: 3 },
+        { desc: 'Mati', nilai: 1 }
+    ];
+
+    const table = document.createElement('table');
+    table.className = 'kepiting-bakau-table';
+    table.id = 'kepitingBakauTable';
+    table.style.width = '100%';
+    table.style.borderCollapse = 'collapse';
+    table.style.marginBottom = '20px';
+
+    // Header tabel
+    const thead = document.createElement('thead');
+    thead.innerHTML = `
+        <tr style="background-color: #f5f5f5;">
+            <th style="border: 1px solid #ddd; padding: 10px; text-align: center; width: 50%;">Spesifikasi</th>
+            <th style="border: 1px solid #ddd; padding: 10px; text-align: center; width: 60px;">Nilai</th>
+            <th colspan="6" style="border: 1px solid #ddd; padding: 10px; text-align: center;">Kode Contoh</th>
+        </tr>
+        <tr style="background-color: #f5f5f5;">
+            <th colspan="2"></th>
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">1</th>
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">2</th>
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">3</th>
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">4</th>
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">5</th>
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">6</th>
+        </tr>
+    `;
+    table.appendChild(thead);
+
+    const tbody = document.createElement('tbody');
+    criteria.forEach((item, rowIndex) => {
+        const tr = document.createElement('tr');
+        tr.dataset.nilai = item.nilai;
+        tr.dataset.rowIndex = rowIndex;
+
+        // Spesifikasi cell
+        const specCell = document.createElement('td');
+        specCell.style.border = '1px solid #ddd';
+        specCell.style.padding = '10px';
+        specCell.textContent = '- ' + item.desc;
+        tr.appendChild(specCell);
+
+        // Nilai cell
+        const valorCell = document.createElement('td');
+        valorCell.style.border = '1px solid #ddd';
+        valorCell.style.padding = '10px';
+        valorCell.style.textAlign = 'center';
+        valorCell.style.fontWeight = 'bold';
+        valorCell.textContent = item.nilai;
+        tr.appendChild(valorCell);
+
+        // Kode contoh cells (1-6)
+        for (let kode = 1; kode <= 6; kode++) {
+            const td = document.createElement('td');
+            td.className = 'kode-contoh-cell';
+            td.dataset.kode = kode;
+            td.dataset.rowIndex = rowIndex;
+            td.dataset.nilai = item.nilai;
+            td.style.border = '1px solid #ddd';
+            td.style.padding = '10px';
+            td.style.textAlign = 'center';
+            td.style.cursor = 'pointer';
+
+            const checkbox = document.createElement('input');
+            checkbox.type = 'checkbox';
+            checkbox.className = 'nilai-checkbox';
+            checkbox.dataset.kode = kode;
+            checkbox.dataset.rowIndex = rowIndex;
+            checkbox.dataset.nilai = item.nilai;
+            checkbox.style.display = 'none';
+            td.appendChild(checkbox);
+
+            td.addEventListener('click', function (e) {
+                if (e.target.type === 'checkbox') return;
+                const newChecked = !checkbox.checked;
+
+                // Uncheck others in the same column
+                if (newChecked) {
+                    tbody.querySelectorAll(`input.nilai-checkbox[data-kode="${kode}"]`).forEach(cb => {
+                        cb.checked = false;
+                        updateCheckmark(cb.parentElement, false);
+                    });
+                }
+
+                checkbox.checked = newChecked;
+                updateCheckmark(td, newChecked);
+                setTimeout(() => calculateTotalsKepitingBakau(), 10);
+            });
+
+            tr.appendChild(td);
+        }
+        tbody.appendChild(tr);
+    });
+
+    // Baris Total
+    const totalTr = document.createElement('tr');
+    totalTr.style.backgroundColor = '#f9f9f9';
+    totalTr.innerHTML = `<td colspan="2" style="border: 1px solid #ddd; padding: 10px; font-weight: bold; text-align: center;">Total</td>`;
+    for (let i = 1; i <= 6; i++) {
+        totalTr.innerHTML += `<td class="total-cell" data-kode="${i}" style="border: 1px solid #ddd; padding: 10px; text-align: center; font-weight: bold;">0</td>`;
+    }
+    tbody.appendChild(totalTr);
+
+    // Baris Rata-rata
+    const avgTr = document.createElement('tr');
+    avgTr.style.backgroundColor = '#f1f1f1';
+    avgTr.innerHTML = `<td colspan="2" style="border: 1px solid #ddd; padding: 10px; font-weight: bold; text-align: center;">Rata-rata</td>`;
+    for (let i = 1; i <= 6; i++) {
+        avgTr.innerHTML += `<td class="avg-cell" data-kode="${i}" style="border: 1px solid #ddd; padding: 10px; text-align: center; font-weight: bold;">0.00</td>`;
+    }
+    tbody.appendChild(avgTr);
+
+    table.appendChild(tbody);
+    container.appendChild(table);
+
+    // LHU Button (re-implement specific for this species)
+    const formActions = document.querySelector('.form-actions');
+    if (formActions) {
+        // Hapus tombol preview lama jika ada
+        const oldBtn = formActions.querySelector('.btn-lhu');
+        if (oldBtn) oldBtn.remove();
+
+        const lhuButton = document.createElement('button');
+        lhuButton.type = 'button';
+        lhuButton.className = 'btn-lhu';
+        lhuButton.textContent = 'Lihat LHU (Laporan Hasil Uji)';
+        lhuButton.style.padding = '12px 24px';
+        lhuButton.style.background = 'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)';
+        lhuButton.style.color = 'white';
+        lhuButton.style.border = 'none';
+        lhuButton.style.borderRadius = '10px';
+        lhuButton.style.fontSize = '16px';
+        lhuButton.style.fontWeight = '600';
+        lhuButton.style.cursor = 'pointer';
+        lhuButton.style.transition = 'all 0.3s';
+        lhuButton.style.marginRight = '10px';
+
+        lhuButton.onmouseover = function () {
+            this.style.transform = 'translateY(-2px)';
+            this.style.boxShadow = '0 10px 20px rgba(67, 233, 123, 0.3)';
+        };
+        lhuButton.onmouseout = function () {
+            this.style.transform = 'translateY(0)';
+            this.style.boxShadow = 'none';
+        };
+
+        lhuButton.addEventListener('click', async function (e) {
+            try {
+                this.disabled = true;
+                await showLHUPreview();
+            } catch (err) {
+                console.error('showLHUPreview error', err);
+                alert('Gagal membuka preview: ' + (err && err.message ? err.message : err));
+            } finally {
+                this.disabled = false;
+            }
+        });
+
+        // Insert as first child
+        formActions.insertBefore(lhuButton, formActions.firstChild);
+    }
+
+    // QR Code and Panelist info
+    const qrWrapper = document.createElement('div');
+    qrWrapper.style.marginTop = '20px';
+    qrWrapper.style.display = 'flex';
+    qrWrapper.style.justifyContent = 'flex-end';
+    qrWrapper.innerHTML = `<div id="qrcode-container" style="padding: 10px; background: #fff; border-radius: 8px;"></div>`;
+    container.appendChild(qrWrapper);
+    setTimeout(updatePanelistQRCode, 300);
+}
+
+function calculateTotalsKepitingBakau() {
+    const table = document.getElementById('kepitingBakauTable');
+    if (!table) return;
+    for (let kode = 1; kode <= 6; kode++) {
+        let total = 0, count = 0;
+        table.querySelectorAll(`input.nilai-checkbox[data-kode="${kode}"]:checked`).forEach(cb => {
+            total += parseInt(cb.dataset.nilai);
+            count++;
+        });
+        const totalCell = table.querySelector(`.total-cell[data-kode="${kode}"]`);
+        if (totalCell) totalCell.textContent = total;
+        const avgCell = table.querySelector(`.avg-cell[data-kode="${kode}"]`);
+        if (avgCell) avgCell.textContent = count > 0 ? (total / count).toFixed(2) : '0.00';
+    }
+}
 

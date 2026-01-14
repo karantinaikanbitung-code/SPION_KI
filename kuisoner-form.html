@@ -15,8 +15,9 @@
         <header>
             <h1 id="formTitle">Form Penilaian Uji</h1>
             <div class="header-actions">
-                <button class="btn-back" style="background:#607d8b;"
-                    onclick="window.location.href='kuisoner-hasil-simpan.html'">📁 Hasil Simpan</button>
+                <a href="kuisoner-hasil-simpan.html" class="btn-back"
+                    style="background:#607d8b; text-decoration:none; display:inline-flex; align-items:center; justify-content:center;">📁
+                    Hasil Simpan</a>
                 <button class="btn-back" onclick="goBack()">Kembali</button>
                 <button class="btn-logout" onclick="logout()">Keluar</button>
             </div>
@@ -49,8 +50,16 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="noSampel">No. Sampel <span class="required">*</span></label>
-                        <input type="text" id="noSampel" name="noSampel" required>
+                        <label for="noSampel">Lokasi Pelayanan <span class="required">*</span></label>
+                        <select id="noSampel" name="noSampel" required>
+                            <option value="">-- Pilih Lokasi Pelayanan --</option>
+                            <option value="Bandara Samratulangi">Bandara Samratulangi</option>
+                            <option value="Pelabuhan Laut Manado">Pelabuhan Laut Manado</option>
+                            <option value="Pelabuhan Laut Bitung">Pelabuhan Laut Bitung</option>
+                            <option value="Pelabuhan Laut Tahuna">Pelabuhan Laut Tahuna</option>
+                            <option value="Pelabuhan Laut Siau">Pelabuhan Laut Siau</option>
+                            <option value="Pelabuhan Laut Melonguane">Pelabuhan Laut Melonguane</option>
+                        </select>
                     </div>
                 </section>
 
