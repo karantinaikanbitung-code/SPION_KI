@@ -1,31 +1,49 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - SPION</title>
-    <link rel="stylesheet" href="assets/css/styles.css">
-    <link rel="icon" href="assets/logo/favicon.png" type="image/png">
+    <link rel="stylesheet" href="spion-ui.css">
+    <script src="theme-manager.js"></script>
 </head>
+
 <body>
+    <div class="bg-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div>
+
+    <button id="themeToggle" class="btn-back-modern"
+        style="position: fixed; top: 20px; right: 20px; z-index: 1000; border-radius: 100px; padding: 10px 15px;">🌓
+        Mode</button>
+
     <div class="login-wrapper">
         <div class="glass login-card animate-fade-in">
-            <div style="text-align:center; margin-bottom:16px;">
-                <img src="assets/logo/spion-logo.png" alt="Logo SPION" style="width:96px;max-width:20vw; border-radius:16px; box-shadow:0 2px 12px #00aaff33;">
+            <div class="spion-logo">
+                <div class="logo-icon">
+                    <div class="logo-icon">
+                        <img src="assets/spion-logo-new.png" alt="SPION Logo">
+                    </div>
+                </div>
                 <h1 class="spion-title">SPION</h1>
                 <p class="spion-subtitle">Sistem Pemeriksaan sensorI Organoleptik lapangaN</p>
             </div>
+
             <form id="loginForm">
                 <div class="form-group-modern">
                     <label for="username">Username</label>
                     <div class="input-wrapper-modern">
-                        <input type="text" id="username" name="username" placeholder="Masukkan username" required autocomplete="username">
+                        <input type="text" id="username" name="username" placeholder="Masukkan username" required
+                            autocomplete="username">
                     </div>
                 </div>
                 <div class="form-group-modern">
                     <label for="password">Password</label>
                     <div class="input-wrapper-modern">
-                        <input type="password" id="password" name="password" placeholder="Masukkan password" required autocomplete="current-password">
+                        <input type="password" id="password" name="password" placeholder="Masukkan password" required
+                            autocomplete="current-password">
                     </div>
                     <div class="error-message-modern" id="errorMessage"></div>
                 </div>
@@ -33,6 +51,7 @@
             </form>
         </div>
     </div>
-    <script src="assets/js/scripts.js"></script>
+    <script src="kuisoner-login.js"></script>
 </body>
+
 </html>
