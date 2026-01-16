@@ -11,6 +11,21 @@
     --text-primary: #f8fafc;
     --text-secondary: #94a3b8;
     --card-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    --blob-opacity: 0.15;
+}
+
+[data-theme="light"] {
+    --primary-bg: #f5f7fa;
+    --accent-blue: #0284c7;
+    --accent-purple: #4f46e5;
+    --accent-pink: #db2777;
+    --accent-green: #059669;
+    --glass-bg: rgba(255, 255, 255, 0.8);
+    --glass-border: rgba(0, 0, 0, 0.1);
+    --text-primary: #1e293b;
+    --text-secondary: #64748b;
+    --card-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    --blob-opacity: 0.08;
 }
 
 * {
@@ -25,6 +40,7 @@ body {
     color: var(--text-primary);
     min-height: 100vh;
     overflow-x: hidden;
+    transition: background-color 0.3s, color 0.3s;
 }
 
 /* Background Animation */
@@ -36,8 +52,8 @@ body {
     height: 100%;
     z-index: -1;
     overflow: hidden;
-    background: radial-gradient(circle at 20% 30%, rgba(56, 189, 248, 0.15), transparent 40%),
-        radial-gradient(circle at 80% 70%, rgba(129, 140, 248, 0.15), transparent 40%);
+    background: radial-gradient(circle at 20% 30%, rgba(56, 189, 248, var(--blob-opacity)), transparent 40%),
+        radial-gradient(circle at 80% 70%, rgba(129, 140, 248, var(--blob-opacity)), transparent 40%);
 }
 
 .blob {
@@ -110,7 +126,7 @@ body {
 .logo-icon {
     width: 80px;
     height: 80px;
-    background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+    /* Background removed for image logo */
     border-radius: 20px;
     display: flex;
     align-items: center;
@@ -118,12 +134,20 @@ body {
     box-shadow: 0 10px 25px rgba(56, 189, 248, 0.3);
 }
 
+.logo-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: inherit;
+}
+
 .spion-title {
     font-size: 2.5rem;
     font-weight: 800;
     letter-spacing: -0.025em;
-    background: linear-gradient(to right, #fff, #94a3b8);
+    background: linear-gradient(to right, var(--text-primary), var(--text-secondary));
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
@@ -190,11 +214,11 @@ body {
 
 .input-wrapper-modern input {
     width: 100%;
-    background: rgba(255, 255, 255, 0.05);
+    background: var(--glass-bg);
     border: 1px solid var(--glass-border);
     border-radius: 12px;
     padding: 12px 16px;
-    color: white;
+    color: var(--text-primary);
     font-size: 1rem;
     transition: all 0.3s;
 }
@@ -362,7 +386,7 @@ body {
 }
 
 .test-card:hover .btn-start {
-    background: white;
+    background: var(--text-primary);
     color: var(--primary-bg);
 }
 
@@ -411,17 +435,17 @@ body {
     align-items: center;
     gap: 8px;
     padding: 10px 18px;
-    background: rgba(255, 255, 255, 0.05);
+    background: var(--glass-bg);
     border: 1px solid var(--glass-border);
     border-radius: 12px;
-    color: white;
+    color: var(--text-primary);
     font-weight: 500;
     cursor: pointer;
     transition: all 0.3s;
 }
 
 .btn-back-modern:hover {
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--glass-border);
     transform: translateX(-4px);
 }
 
@@ -485,5 +509,68 @@ body {
 
     .btn-back-modern span {
         display: none;
+    }
+}
+
+/* Compact Grid for Species Selection (5 columns) */
+.card-grid-5 {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1.5rem;
+}
+
+.test-card-compact {
+    padding: 1.5rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.test-card-compact:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.test-card-compact h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 0;
+    line-height: 1.3;
+}
+
+.test-card-compact .card-icon {
+    width: 60px;
+    height: 60px;
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+}
+
+/* Responsive adjustments for 5-column grid */
+@media (max-width: 1200px) {
+    .card-grid-5 {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media (max-width: 992px) {
+    .card-grid-5 {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .card-grid-5 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .card-grid-5 {
+        grid-template-columns: 1fr;
     }
 }

@@ -7,6 +7,7 @@
     <title>Daftar Hasil Uji Tersimpan - SPION</title>
     <link rel="stylesheet" href="spion-ui.css">
     <link rel="stylesheet" href="kuisoner-style.css">
+    <script src="theme-manager.js"></script>
     <style>
         .history-container {
             max-width: 1000px;
@@ -15,11 +16,12 @@
         }
 
         .history-card {
-            background: rgba(255, 255, 255, 0.9);
+            background: var(--card-bg);
             backdrop-filter: blur(10px);
-            border-radius: 16px;
+            border-radius: 20px;
             padding: 30px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 30px var(--shadow-color);
+            border: 1px solid var(--glass-border);
         }
 
         .history-table {
@@ -71,7 +73,7 @@
         .empty-state {
             text-align: center;
             padding: 40px;
-            color: #666;
+            color: var(--text-secondary);
         }
 
         @media (max-width: 600px) {
@@ -142,22 +144,18 @@
         <nav class="top-bar animate-fade-in" style="margin-bottom: 30px;">
             <div class="brand-mini">
                 <div class="logo-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                        stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <!-- Eye (sight) -->
-                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                        <circle cx="12" cy="12" r="3"></circle>
-                    </svg>
+                    <img src="assets/spion-logo.png" alt="SPION Logo">
                 </div>
                 <div style="display: flex; flex-direction: column;">
                     <h2>SPION</h2>
                     <p style="font-size: 0.65rem; color: rgba(255,255,255,0.7); margin: 0; line-height: 1.2;">Sistem
-                        Pemeriksaan sensorI Organoleptik lapangaN</p>
+                        Pemeriksaan sensorI Organoleptik lapagaN</p>
                 </div>
                 <span style="margin: 0 10px; color: rgba(255,255,255,0.2);">|</span>
                 <h2>Daftar Hasil Uji</h2>
             </div>
-            <div class="header-actions-modern">
+            <div class="user-profile">
+                <button id="themeToggle" class="btn-logout-modern" style="margin-right: 15px;">🌓 Mode</button>
                 <a href="kuisoner-jenis-uji.html" class="btn-logout-modern"
                     style="text-decoration:none; display:inline-flex; align-items:center;">Kembali Beranda</a>
             </div>

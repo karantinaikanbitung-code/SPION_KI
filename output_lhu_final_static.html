@@ -10,6 +10,42 @@
             margin: 10mm 15mm;
         }
 
+        @media print {
+            @page {
+                size: A4 portrait;
+                margin: 0;
+            }
+
+            html,
+            body {
+                margin: 0 !important;
+                padding: 0 !important;
+                display: block !important;
+                width: 100% !important;
+                height: auto !important;
+                overflow: visible !important;
+                background: none !important;
+            }
+
+            .page {
+                width: 210mm !important;
+                height: 280mm !important;
+                padding: 15mm 20mm !important;
+                margin: 0 !important;
+                background: white !important;
+                box-sizing: border-box !important;
+                page-break-after: always !important;
+                page-break-inside: avoid !important;
+                overflow: hidden !important;
+                display: block !important;
+                position: relative !important;
+            }
+
+            .page:last-child {
+                page-break-after: avoid !important;
+            }
+        }
+
         body {
             font-family: Arial, sans-serif;
             font-size: 10pt;
@@ -27,6 +63,10 @@
             position: relative;
             box-sizing: border-box;
             page-break-after: always;
+        }
+
+        .page:last-child {
+            page-break-after: avoid !important;
         }
 
         /* Semantic Tables */
@@ -302,206 +342,6 @@
         </div>
     </div>
 
-    <!-- HALAMAN 2: LEMBAR SKOR DETAIL -->
-    <div class="page" style="margin-top: 20px;">
-        <div class="text-right" style="font-size: 9pt;">F.7.2.03-07/LP- BBKHIT-SULSEL</div>
-        <div class="text-center text-bold underline mb-20" style="font-size: 12pt; margin-top: 10px;">
-            LEMBAR PENILAIAN UJI SKOR IKAN TUNA KALENG
-        </div>
-
-        <!-- INFO SAMPEL -->
-        <table class="mb-10">
-            <thead>
-                <tr>
-                    <th style="width: 40px;">NO</th>
-                    <th>JENIS CONTOH UJI</th>
-                    <th>JUMLAH</th>
-                    <th>UKURAN</th>
-                    <th>Ket.</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td class="text-center">1.</td>
-                    <td>Ikan Tuna Kaleng</td>
-                    <td class="text-center">6 Kaleng</td>
-                    <td class="text-center">185g</td>
-                    <td class="text-center">Baik</td>
-                </tr>
-            </tbody>
-        </table>
-
-        <div style="font-size: 9pt; margin-bottom: 10px;">
-            • Berilah tanda √ pada nilai yang dipilih sesuai kode contoh yang diuji.
-        </div>
-
-        <!-- TABEL SKOR LENGKAP -->
-        <table style="font-size: 9pt;">
-            <thead>
-                <tr>
-                    <th rowspan="2" class="text-left valign-middle">Spesifikasi</th>
-                    <th rowspan="2" class="valign-middle" style="width: 50px;">Nilai</th>
-                    <th colspan="6">Kode Contoh</th>
-                </tr>
-                <tr>
-                    <th style="width: 40px;">1</th>
-                    <th style="width: 40px;">2</th>
-                    <th style="width: 40px;">3</th>
-                    <th style="width: 40px;">4</th>
-                    <th style="width: 40px;">5</th>
-                    <th style="width: 40px;">6</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- 1. Aroma -->
-                <tr>
-                    <td colspan="8" class="bg-gray text-bold">1. Aroma</td>
-                </tr>
-                <tr>
-                    <td>Aroma sangat kuat sesuai spesifikasi produk</td>
-                    <td class="text-center text-bold">9</td>
-                    <td class="text-center">√</td>
-                    <td class="text-center"></td>
-                    <td class="text-center"></td>
-                    <td class="text-center"></td>
-                    <td class="text-center"></td>
-                    <td class="text-center"></td>
-                </tr>
-                <tr>
-                    <td>Aroma kuat sesuai spesifikasi produk</td>
-                    <td class="text-center text-bold">7</td>
-                    <td class="text-center"></td>
-                    <td class="text-center">√</td>
-                    <td class="text-center">√</td>
-                    <td class="text-center">√</td>
-                    <td class="text-center">√</td>
-                    <td class="text-center">√</td>
-                </tr>
-                <tr>
-                    <td>Mulai tercium aroma yang menyimpang</td>
-                    <td class="text-center text-bold">5</td>
-                    <td class="text-center"></td>
-                    <td class="text-center"></td>
-                    <td class="text-center"></td>
-                    <td class="text-center"></td>
-                    <td class="text-center"></td>
-                    <td class="text-center"></td>
-                </tr>
-
-                <!-- 2. Rasa -->
-                <tr>
-                    <td colspan="8" class="bg-gray text-bold">2. Rasa</td>
-                </tr>
-                <tr>
-                    <td>Sangat sesuai spesifikasi produk</td>
-                    <td class="text-center text-bold">9</td>
-                    <td class="text-center">√</td>
-                    <td class="text-center"></td>
-                    <td class="text-center"></td>
-                    <td class="text-center"></td>
-                    <td class="text-center"></td>
-                    <td class="text-center"></td>
-                </tr>
-                <tr>
-                    <td>Sesuai spesifikasi produk</td>
-                    <td class="text-center text-bold">7</td>
-                    <td class="text-center"></td>
-                    <td class="text-center">√</td>
-                    <td class="text-center">√</td>
-                    <td class="text-center">√</td>
-                    <td class="text-center">√</td>
-                    <td class="text-center">√</td>
-                </tr>
-                <tr>
-                    <td>Terdapat rasa yang tidak sesuai spesifikasi produk</td>
-                    <td class="text-center text-bold">5</td>
-                    <td class="text-center"></td>
-                    <td class="text-center"></td>
-                    <td class="text-center"></td>
-                    <td class="text-center"></td>
-                    <td class="text-center"></td>
-                    <td class="text-center"></td>
-                </tr>
-
-                <!-- 3. Tekstur -->
-                <tr>
-                    <td colspan="8" class="bg-gray text-bold">3. Tekstur</td>
-                </tr>
-                <tr>
-                    <td>Sangat kompak sesuai spesifikasi produk</td>
-                    <td class="text-center text-bold">9</td>
-                    <td class="text-center"></td>
-                    <td class="text-center"></td>
-                    <td class="text-center"></td>
-                    <td class="text-center"></td>
-                    <td class="text-center"></td>
-                    <td class="text-center"></td>
-                </tr>
-                <tr>
-                    <td>Kompak sesuai spesifikasi produk</td>
-                    <td class="text-center text-bold">7</td>
-                    <td class="text-center">√</td>
-                    <td class="text-center">√</td>
-                    <td class="text-center">√</td>
-                    <td class="text-center">√</td>
-                    <td class="text-center">√</td>
-                    <td class="text-center">√</td>
-                </tr>
-                <tr>
-                    <td>Kurang kompak</td>
-                    <td class="text-center text-bold">5</td>
-                    <td class="text-center"></td>
-                    <td class="text-center"></td>
-                    <td class="text-center"></td>
-                    <td class="text-center"></td>
-                    <td class="text-center"></td>
-                    <td class="text-center"></td>
-                </tr>
-
-                <!-- TOTALS -->
-                <tr class="bg-total">
-                    <td colspan="2" class="text-center">Total</td>
-                    <td class="text-center">25</td>
-                    <td class="text-center">21</td>
-                    <td class="text-center">21</td>
-                    <td class="text-center">21</td>
-                    <td class="text-center">21</td>
-                    <td class="text-center">21</td>
-                </tr>
-                <tr class="bg-total" style="background-color: #d1d1d1;">
-                    <td colspan="2" class="text-center">Rata-rata</td>
-                    <td class="text-center">8.3</td>
-                    <td class="text-center">7.0</td>
-                    <td class="text-center">7.0</td>
-                    <td class="text-center">7.0</td>
-                    <td class="text-center">7.0</td>
-                    <td class="text-center">7.0</td>
-                </tr>
-            </tbody>
-        </table>
-
-        <!-- PANELIS & QR CODE -->
-        <table class="no-border mt-20">
-            <tbody>
-                <tr>
-                    <td style="width: 70%; vertical-align: bottom;">
-                        <div>Tanggal: 11 Januari 2026</div>
-                    </td>
-                    <td class="text-center">
-                        <div class="mb-10">Panelis</div>
-                        <div
-                            style="width: 80px; height: 80px; border: 1px dashed black; margin: 0 auto; display: flex; align-items: center; justify-content: center;">
-                            <small>QR</small>
-                        </div>
-                        <div class="text-bold mt-20">YANCE WILYAM TUWAIDAN</div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-
-        <div class="footer-system">
-            Dokumen ini dicetak secara otomatis oleh Sistem SPION pada 11/01/2026 13:45
-        </div>
     </div>
 
 </body>
