@@ -3147,7 +3147,7 @@ function generateLHUHtml(data, hewan) {
     // Header logic
     const headerHTML = `
     <div style="display: flex; align-items: center; margin-bottom: 5px; border-bottom: 2px solid #333; padding-bottom: 5px;">
-        <div style="flex: 0 0 80px; margin-right: 6px; display:flex; align-items:center; justify-content:center;"><img src="https://id.wikipedia.org/wiki/Special:FilePath/Logo_Barantin.svg" alt="Logo Barantin" style="width: 80px; height: 80px; object-fit: contain; display: block; border: none; border-radius: 0;"/></div>
+        <div style="flex: 0 0 80px; margin-right: 6px; display:flex; align-items:center; justify-content:center;"><img src="assets/spion-logo.png" alt="Logo Barantin" style="width: 80px; height: 80px; object-fit: contain; display: block; border: none; border-radius: 0;"/></div>
         <div style="flex: 1; text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center;"><div style="font-weight: bold; font-size: 14px; margin-bottom: 2px;">BADAN KARANTINA INDONESIA</div><div style="font-size: 12px; margin-bottom: 2px;">BALAI KARANTINA HEWAN, IKAN DAN TUMBUHAN</div><div style="font-size: 12px; margin-bottom: 2px; font-weight: bold;">SULAWESI UTARA</div><div style="font-size: 11px; margin-bottom: 2px;">JL. AA MARAMIS NO. 283, KEC. MAPANGET, KOTA MANADO, SULAWESI UTARA 95258</div><div style="font-size: 11px; margin-bottom: 2px;">Telp. 082190899090, Email: karantinasulut@karantinaindonesia.go.id</div><div style="font-size: 11px;">www.karantinaindonesia.go.id</div></div>
     </div>
     <h2 style="text-align: center; font-size: 13px; font-weight: bold; margin: 5px 0;">LAMPIRAN LAPORAN HASIL UJI SEMENTARA<br/>SENSORI/ORGANOLEPTIK - ${titleText}</h2>
