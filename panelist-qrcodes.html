@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kartu QR Code Panelis - SPION</title>
+    <link rel="stylesheet" href="kuisoner-style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <style>
+        .qr-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .qr-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: transform 0.3s;
+        }
+
+        .qr-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .qr-code {
+            margin-bottom: 15px;
+            padding: 10px;
+            background: white;
+            border: 1px solid #eee;
+            border-radius: 8px;
+        }
+
+        .panelist-name {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #333;
+            word-break: break-word;
+            margin: 0;
+            min-height: 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @media print {
+            .no-print {
+                display: none;
+            }
+
+            .qr-gallery {
+                display: block;
+            }
+
+            .qr-card {
+                page-break-inside: avoid;
+                break-inside: avoid;
+                display: inline-flex;
+                width: 180px;
+                margin: 10px;
+                box-shadow: none;
+                border: 1px solid #ddd;
+            }
+        }
+
+        .header-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body class="light-mode"> <!-- Default to light for printing -->
+    <div class="container">
+        <header class="no-print">
+            <h1>Kartu QR Code Panelis</h1>
+            <div class="header-actions">
+                <button class="btn-back" onclick="window.print()">🖨️ Cetak Semua</button>
+                <a href="kuisoner-form.html" class="btn-back" style="text-decoration:none;">Kembali ke Form</a>
+            </div>
+        </header>
+
+        <div class="qr-gallery" id="qrGallery">
+            <!-- QR Cards will be generated here -->
+        </div>
+    </div>
+
+    <script>
+        const panelists = [
+            "Adytia Eko Maulana, S.Pi",
+            "Angga Afrianto",
+            "Ansar Ahmad",
+            "Arie Bramono, S.Pi",
+            "Asternia S, A.Md",
+            "Fabio Rembet",
+            "Fernando Wenur",
+            "Grace L. Tantu, S.Pi",
+            "Hendro Saputro, A.Md",
+            "Herdiawan Asnur",
+            "Ikhsan Alpar, A.Md.Pi",
+            "Jeane T. S, S.Pi, M.Si",
+            "Kamaruddin, S.Pi",
+            "Lidiawati, S.Pi",
+            "M. Arwin, S.Pi, M.Si",
+            "Marwono Sutias, S.Pi",
+            "Meidyawati Y L L, S.Pi",
+            "Miftahuddin, A.Md",
+            "Muhammad, A.Md",
+            "Noch M. J. Telew, S.Pi",
+            "Nur H Mokobombang, S.KH",
+            "Nursanti Ishak, A.Md",
+            "Raymond W C, S.Tr.Pi",
+            "Renold Rahajaan, S.Pi",
+            "Rindiyani Y K, A.Md.T",
+            "Santi Nika A, S.Tr. Pi",
+            "Yance W. T, A.Md",
+            "Yessie Yulianda, S.KH"
+        ];
+
+        const gallery = document.getElementById('qrGallery');
+
+        panelists.forEach(name => {
+            const card = document.createElement('div');
+            card.className = 'qr-card glass';
+
+            const qrDiv = document.createElement('div');
+            qrDiv.className = 'qr-code';
+
+            const nameP = document.createElement('p');
+            nameP.className = 'panelist-name';
+            nameP.textContent = name;
+
+            card.appendChild(qrDiv);
+            card.appendChild(nameP);
+            gallery.appendChild(card);
+
+            new QRCode(qrDiv, {
+                text: name,
+                width: 128,
+                height: 128,
+                colorDark: "#000000",
+                colorLight: "#ffffff",
+                correctLevel: QRCode.CorrectLevel.H
+            });
+        });
+    </script>
+</body>
+
+</html>

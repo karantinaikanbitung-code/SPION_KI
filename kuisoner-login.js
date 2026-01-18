@@ -1,6 +1,9 @@
-// Kredensial untuk akses kuisoner (contoh: ganti dengan mekanisme autentikasi yang lebih aman)
-const CORRECT_USERNAME = "admin123";
-const CORRECT_PASSWORD = "12345678";
+// Kredensial untuk akses kuisoner
+const USERS = [
+    { username: "admin123", password: "12345678", role: "admin" },
+    { username: "Samrat01", password: "kisamrat", role: "user" },
+    { username: "PelManado01", password: "kimanado", role: "user" }
+];
 
 document.addEventListener('DOMContentLoaded', function () {
     const loginForm = document.getElementById('loginForm');
@@ -56,10 +59,13 @@ document.addEventListener('DOMContentLoaded', function () {
         const username = usernameInput.value.trim();
         const password = passwordInput.value.trim();
 
-        // Validasi sederhana (contoh; ganti dengan pengecekan server untuk produksi)
-        if (username === CORRECT_USERNAME && password === CORRECT_PASSWORD) {
+        // Cari user yang sesuai
+        const user = USERS.find(u => u.username === username && u.password === password);
+
+        if (user) {
             sessionStorage.setItem('isAuthenticated', 'true');
-            sessionStorage.setItem('username', username);
+            sessionStorage.setItem('username', user.username);
+            sessionStorage.setItem('userRole', user.role); // Simpan role untuk otorisasi
             window.location.href = 'kuisoner-jenis-uji.html?jenis=organoleptik';
         } else {
             showError('Username atau password salah! Silakan coba lagi.');

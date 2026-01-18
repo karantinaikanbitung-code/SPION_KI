@@ -56,7 +56,8 @@ document.addEventListener('DOMContentLoaded', function () {
         'bakso-ikan': 'Bakso Ikan',
         'udang-masak-beku': 'Udang Masak Beku',
         'tuna-loin-beku': 'Tuna Loin Beku',
-        'tuna-steak-beku': 'Tuna Steak Beku'
+        'tuna-steak-beku': 'Tuna Steak Beku',
+        'tuna-loin-segar': 'Tuna Loin Segar'
     };
 
     if (penilaianForm) {
@@ -128,7 +129,7 @@ function generateFormFields(jenisUji, hewan) {
         hewan === 'gurita-mentah-beku' || hewan === 'lobster-beku' || hewan === 'cakalang-beku' ||
         hewan === 'hiu-utuh-beku' || hewan === 'fillet-kakap-beku' || hewan === 'kepiting-rebus-beku' ||
         hewan === 'udang-kupas-mentah-beku' || hewan === 'bakso-ikan' || hewan === 'udang-masak-beku' ||
-        hewan === 'tuna-loin-beku') {
+        hewan === 'tuna-loin-beku' || hewan === 'tuna-loin-segar') {
         if (catatanSectionEl) catatanSectionEl.style.display = 'none';
     }
 
@@ -294,6 +295,10 @@ function generateOrganoleptikFields(container, hewan) {
     }
     if (hewan === 'tuna-steak-beku') {
         generateTunaSteakBekuTable(container);
+        return;
+    }
+    if (hewan === 'tuna-loin-segar') {
+        generateTunaLoinSegarTable(container);
         return;
     }
 
@@ -2649,25 +2654,44 @@ function getFormattedFilename(data, hewan) {
 }
 
 /**
- * Menyimpan hasil uji ke localStorage
+ * Menyimpan hasil uji ke localStorage dan Google Sheets
  */
-function saveResultLocally(data, filename, rawHtml, hewan) {
+async function saveResultLocally(data, filename, rawHtml, hewan) {
     try {
-        const history = JSON.parse(localStorage.getItem('spion_history') || '[]');
         const newItem = {
             id: Date.now(),
             filename: filename,
             hewan: hewan,
             data: data,
             html: rawHtml,
-            timestamp: new Date().toISOString()
+            timestamp: new Date().toISOString(),
+            lokasiPelayanan: data.noSampel || '-'
         };
-        history.unshift(newItem); // Tambah di awal (terbaru)
+
+        // 1. Simpan Lokal (sebagai backup instan)
+        const history = JSON.parse(localStorage.getItem('spion_history') || '[]');
+        history.unshift(newItem);
         localStorage.setItem('spion_history', JSON.stringify(history));
         console.log('Data saved locally:', filename);
+
+        // 2. Simpan ke Cloud (Google Sheets History)
+        if (typeof saveHistoryToSheets === 'function') {
+            try {
+                const cloudRes = await saveHistoryToSheets(newItem);
+                if (cloudRes && cloudRes.success) {
+                    console.log('Data synced to cloud successfully');
+                } else {
+                    console.warn('Local save success, but cloud sync failed:', cloudRes ? cloudRes.message : 'Unknown error');
+                    // Kita tidak perlu menghentikan proses jika cloud gagal, record lokal tetap ada
+                }
+            } catch (cloudErr) {
+                console.error('Error during cloud sync:', cloudErr);
+            }
+        }
+
         return true;
     } catch (e) {
-        console.error('Error saving locally:', e);
+        console.error('Error saving result:', e);
         return false;
     }
 }
@@ -3236,6 +3260,24 @@ function collectFormDataForPreview(hewan) {
             }
         }
     }
+    if (hewan === 'tuna-loin-segar') {
+        const table = document.getElementById('tunaLoinSegarTable');
+        if (table) {
+            data.penilaianTunaLoinSegar = {};
+            for (let kode = 1; kode <= 6; kode++) {
+                const totalCell = table.querySelector(`.total-cell[data-kode="${kode}"]`);
+                const avgCell = table.querySelector(`.avg-cell[data-kode="${kode}"]`);
+                data.penilaianTunaLoinSegar[`kodeContoh${kode}`] = {
+                    total: totalCell?.textContent || '0',
+                    rataRata: avgCell?.textContent || '0.00',
+                    nilai: Array.from(table.querySelectorAll(`.nilai-checkbox[data-kode="${kode}"]:checked`)).map(cb => ({
+                        rowIndex: parseInt(cb.dataset.rowIndex),
+                        nilai: parseInt(cb.dataset.nilai)
+                    }))
+                };
+            }
+        }
+    }
     return data;
 }
 
@@ -3271,20 +3313,8 @@ function generateLHUHtml(data, hewan) {
     if (hewan === 'sambal-ikan') jenisContoh = 'Sambal Ikan';
     if (hewan === 'tuna-loin-beku') jenisContoh = 'Tuna Loin Beku';
     if (hewan === 'tuna-steak-beku') jenisContoh = 'Tuna Steak Beku';
+    if (hewan === 'tuna-loin-segar') jenisContoh = 'Tuna Loin Segar';
     if (hewan === 'udang-segar') jenisContoh = 'Udang Segar';
-    if (hewan === 'udang-beku') jenisContoh = 'Udang Beku';
-    if (hewan === 'cumi-cumi-beku') jenisContoh = 'Cumi-cumi Beku';
-    if (hewan === 'gurita-mentah-beku') jenisContoh = 'Gurita Mentah Beku';
-    if (hewan === 'lobster-beku') jenisContoh = 'Lobster Beku';
-    if (hewan === 'cakalang-beku') jenisContoh = 'Cakalang Beku';
-    if (hewan === 'hiu-utuh-beku') jenisContoh = 'Hiu Utuh Beku';
-    if (hewan === 'fillet-kakap-beku') jenisContoh = 'Fillet Kakap Beku';
-    if (hewan === 'kepiting-rebus-beku') jenisContoh = 'Daging Kepiting Rebus Beku';
-    if (hewan === 'udang-kupas-mentah-beku') jenisContoh = 'Udang Kupas Mentah Beku';
-    if (hewan === 'bakso-ikan') jenisContoh = 'Bakso Ikan';
-    if (hewan === 'udang-masak-beku') jenisContoh = 'Udang Masak Beku';
-    if (hewan === 'tuna-loin-beku') jenisContoh = 'Tuna Loin Beku';
-    if (hewan === 'tuna-steak-beku') jenisContoh = 'Tuna Steak Beku';
 
     const isIkanBeku = (hewan === 'ikan-beku');
     const isIkanTuna = (hewan === 'ikan-tuna-kaleng');
@@ -3313,6 +3343,7 @@ function generateLHUHtml(data, hewan) {
     const isUdangKupasMentahBeku = (hewan === 'udang-kupas-mentah-beku');
     const isBaksoIkan = (hewan === 'bakso-ikan');
     const isUdangMasakBeku = (hewan === 'udang-masak-beku');
+    const isTunaLoinSegar = (hewan === 'tuna-loin-segar');
 
     const titles = {
         'ikan-beku': 'IKAN BEKU',
@@ -3342,6 +3373,7 @@ function generateLHUHtml(data, hewan) {
         'udang-kupas-mentah-beku': 'UDANG KUPAS MENTAH BEKU',
         'bakso-ikan': 'BAKSO IKAN',
         'udang-masak-beku': 'UDANG MASAK BEKU',
+        'tuna-loin-segar': 'TUNA LOIN SEGAR',
         'tuna-loin-beku': 'TUNA LOIN BEKU',
         'tuna-steak-beku': 'TUNA STEAK BEKU'
     };
@@ -3373,6 +3405,7 @@ function generateLHUHtml(data, hewan) {
         'udang-kupas-mentah-beku': 'SNI 3457-2014',
         'bakso-ikan': 'SNI 7266-2017',
         'udang-masak-beku': 'SNI 3458-2016',
+        'tuna-loin-segar': 'SNI 7530-2018',
         'tuna-loin-beku': 'SNI 4104-2015',
         'tuna-steak-beku': 'SNI 01-4485.1-2006'
     };
@@ -3407,7 +3440,7 @@ function generateLHUHtml(data, hewan) {
     else if (isUdangKupasMentahBeku) penilaian = data.penilaianUdangKupasMentahBeku;
     else if (isBaksoIkan) penilaian = data.penilaianBaksoIkan;
     else if (isUdangMasakBeku) penilaian = data.penilaianUdangMasakBeku;
-    else if (isTunaLoinBeku) penilaian = data.penilaianTunaLoinBeku;
+    else if (isTunaLoinSegar) penilaian = data.penilaianTunaLoinSegar;
 
     if (penilaian) {
         let maxSamples = 6;
@@ -3579,11 +3612,18 @@ function generateLHUHtml(data, hewan) {
                 subGroups: [parameterList[0], parameterList[1], parameterList[2]]
             },
             {
-                name: `B. Sesudah pelelehan\n   1. Kenampakan\n   3. Bau\n   4. Tekstur`,
+                name: `B. Sesudah pelelehan\n   1. Kenampakan\n   2. Bau\n   3. Tekstur`,
                 rowIndices: [].concat(parameterList[3].rowIndices, parameterList[4].rowIndices, parameterList[5].rowIndices),
                 subGroups: [parameterList[3], parameterList[4], parameterList[5]]
             }
         ];
+    } else if (isTunaLoinSegar) {
+        parameterList = [
+            { name: '1. Kenampakan', rowIndices: [0, 1, 2] },
+            { name: '2. Bau', rowIndices: [3, 4, 5] },
+            { name: '3. Tekstur', rowIndices: [6, 7, 8] }
+        ];
+        renderGroups = [parameterList[0], parameterList[1], parameterList[2]];
     } else if (isUdangBeku) {
         parameterList = [
             { name: 'A. Dalam keadaan beku\n   1. Lapisan es', rowIndices: [0, 1, 2, 3, 4, 5, 6] },
@@ -4553,11 +4593,35 @@ function generateLHUHtml(data, hewan) {
                 ]
             }
         ];
+    } else if (isTunaLoinSegar) {
+        scoreSheetItems = [
+            {
+                kategori: '1. Kenampakan', items: [
+                    { desc: 'Daging berwarna merah cerah, serat daging merekat kuat sesamanya, mengkilap, tanpa pelangi. Bentuk potongan daging rapi, tidak terikut tulang, tidak ada daging merah.', nilai: 9 },
+                    { desc: 'Daging berwarna merah kurang cerah, serat daging merekat sesamanya, kurang mengkilap, sedikit tampak pelangi. Bentuk potongan daging rapi, tidak terikut tulang, tidak ada daging merah.', nilai: 7 },
+                    { desc: 'Daging berwarna merah kusam, serat daging mulai memisah, kering, tampak pelangi. Bentuk potongan daging tidak rapi, sedikit terikut tulang, ada daging merah.', nilai: 5 }
+                ]
+            },
+            {
+                kategori: '2. Bau', items: [
+                    { desc: 'Sangat segar, spesifik jenis.', nilai: 9 },
+                    { desc: 'Segar, spesifik jenis.', nilai: 7 },
+                    { desc: 'Kurang segar, ada sedikit bau tambahan.', nilai: 5 }
+                ]
+            },
+            {
+                kategori: '3. Tekstur', items: [
+                    { desc: 'Padat dan kompak.', nilai: 9 },
+                    { desc: 'Padat, kurang kompak.', nilai: 7 },
+                    { desc: 'Agak lembek, tidak kompak.', nilai: 5 }
+                ]
+            }
+        ];
     } else if (isUdangSegar) {
         scoreSheetItems = [
             { kategori: '1. Kenampakan', items: [{ desc: 'Utuh, bening bercahaya asli menurut jenis, antar ruas kokoh', nilai: 9 }, { desc: 'Utuh, kurang bening, cahaya mulai pudar, berwarna asli, antar ruas kokoh', nilai: 8 }, { desc: 'Utuh, kebeningan agak hilang, sedikit kusam, antar ruas kurang kokoh', nilai: 7 }, { desc: 'Utuh, kebeningan hilang, kusam, warna agak merah muda, sedikit noda hitam, antar ruas kurang kokoh', nilai: 5 }, { desc: 'Warna merah, noda hitam banyak, kulit mudah lepas dari daging', nilai: 3 }, { desc: 'Warna merah sangat kusam, banyak sekali noda hitam', nilai: 1 }] },
-            { kategori: '2. Bau', items: [{ desc: 'Bau sangat segar spesifik jenis', nilai: 9 }, { desc: 'Bau segar spesifik jenis', nilai: 8 }, { desc: 'Bau spesifik jenis netral', nilai: 7 }, { desc: 'Mulai timbul bau amoniak', nilai: 5 }, { desc: 'Bau asam sulfit (Hâ‚‚S)', nilai: 3 }, { desc: 'Bau amoniak kuat dan bau busuk', nilai: 1 }] },
-            { kategori: '3. Tekstur', items: [{ desc: 'Sangat elastis, kompak dan padat', nilai: 9 }, { desc: 'Elastis, kompak dan padat', nilai: 8 }, { desc: 'Kurang elastis, kompak dan padat', nilai: 7 }, { desc: 'Tidak elastis, tidak kompak dan tidak padat', nilai: 5 }, { desc: 'Agak lunak', nilai: 3 }, { desc: 'Lunak', nilai: 1 }] }
+            { kategori: '2. Bau', items: [{ desc: 'Bau sangat segar spesifik jenis', nilai: 9 }, { desc: 'Bau segar spesifik jenis', nilai: 8 }, { desc: 'Bau spesifik jenis netral', nilai: 7 }, { desc: 'Mulai timbul bau amoniak', nilai: 5 }, { desc: 'Bau asam sulfit (H&#8322;S)', nilai: 3 }, { desc: 'Bau amoniak kuat dan bau busuk', nilai: 1 }] },
+            { kategori: '3. Tekstur', items: [{ desc: 'Sangat elastis, kompak dan padat', nilai: 9 }, { desc: 'Elastis, kompak and padat', nilai: 8 }, { desc: 'Kurang elastis, kompak and padat', nilai: 7 }, { desc: 'Tidak elastis, tidak kompak and tidak padat', nilai: 5 }, { desc: 'Agak lunak', nilai: 3 }, { desc: 'Lunak', nilai: 1 }] }
         ];
     } else {
         scoreSheetItems = [
@@ -5263,7 +5327,7 @@ function generateMikrobiologiFields(container, hewan) {
     });
 }
 
-function handleFormSubmit(jenisUji, hewan) {
+async function handleFormSubmit(jenisUji, hewan) {
     const form = document.getElementById('penilaianForm');
 
     // Validasi form HTML5
@@ -5804,29 +5868,30 @@ function handleFormSubmit(jenisUji, hewan) {
         timestamp: new Date().toISOString()
     };
 
-    // Simpan ke Local Storage
-    saveResultLocally(data, filename, lhuHtml, hewan);
+    // Simpan history & sync cloud
+    await saveResultLocally(data, filename, lhuHtml, hewan);
 
     // Backup ke GDrive (File HTML)
-    backupToGDrive(data, filename, lhuHtml);
+    if (typeof backupToGDrive === 'function') {
+        backupToGDrive(data, filename, lhuHtml);
+    }
 
-    // Simpan ke Google Sheets History (Agar bisa dilihat semua orang/perangkat)
-    saveHistoryToSheets(historyItem)
-        .then(res => console.log('History synced to cloud:', res))
-        .catch(err => console.error('History sync failed:', err));
-
-    // Simpan ke Google Sheets (Data Terformat)
-    saveToGoogleSheets(data, jenisUjiNames[jenisUji], hewanNames[hewan])
-        .then(result => {
-            if (result.success) {
-                console.log('Data berhasil disimpan ke Google Sheets');
-            } else {
-                console.warn('Peringatan: ' + result.message);
-            }
-        })
-        .catch(error => {
-            console.error('Error saving to Google Sheets:', error);
-        });
+    // Simpan ke Google Sheets (Data Terformat Detail)
+    if (typeof saveToGoogleSheets === 'function') {
+        const jenisUjiSheet = jenisUjiNames[jenisUji] || jenisUji;
+        const hewanSheet = hewanNames[hewan] || hewan;
+        saveToGoogleSheets(data, jenisUjiSheet, hewanSheet)
+            .then(result => {
+                if (result.success) {
+                    console.log('Data detail berhasil disimpan ke Google Sheets');
+                } else {
+                    console.warn('Peringatan Simpan Detail: ' + result.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error saving detail to Google Sheets:', error);
+            });
+    }
 
     // Tampilkan pesan sukses
     alert('Terima kasih! Data penilaian uji telah berhasil disimpan dan disinkronkan ke semua perangkat.');
@@ -11709,7 +11774,7 @@ function generateTunaSteakBekuTable(container) {
                 </tr>
             </tbody>
         </table>
-        <p style="margin-bottom: 15px; font-style: italic;">Berilah tanda ✓ pada nilai yang dipilih sesuai kode contoh yang diuji.</p>
+        <p style="margin-bottom: 15px; font-style: italic;">Berilah tanda &#10003; pada nilai yang dipilih sesuai kode contoh yang diuji.</p>
     `;
     container.appendChild(headerDiv);
 
@@ -11895,6 +11960,174 @@ function generateTunaSteakBekuTable(container) {
     tbody.appendChild(avgTr);
 
     table.appendChild(tbody);
+    container.appendChild(table);
+
+    const formActions = document.querySelector('.form-actions');
+    if (formActions) {
+        const oldBtn = formActions.querySelector('.btn-lhu');
+        if (oldBtn) oldBtn.remove();
+
+        const lhuButton = document.createElement('button');
+        lhuButton.type = 'button';
+        lhuButton.className = 'btn-lhu';
+        lhuButton.textContent = 'Lihat LHU (Laporan Hasil Uji)';
+        lhuButton.style.padding = '12px 24px';
+        lhuButton.style.background = 'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)';
+        lhuButton.style.color = 'white';
+        lhuButton.style.border = 'none';
+        lhuButton.style.borderRadius = '10px';
+        lhuButton.style.fontSize = '16px';
+        lhuButton.style.fontWeight = '600';
+        lhuButton.style.cursor = 'pointer';
+        lhuButton.style.transition = 'all 0.3s';
+        lhuButton.style.marginRight = '10px';
+
+        lhuButton.addEventListener('click', async function (e) {
+            try {
+                this.disabled = true;
+                await showLHUPreview();
+            } catch (err) {
+                console.error('showLHUPreview error', err);
+                alert('Gagal membuka preview: ' + (err && err.message ? err.message : err));
+            } finally {
+                this.disabled = false;
+            }
+        });
+
+        formActions.insertBefore(lhuButton, formActions.firstChild);
+    }
+
+    const qrWrapper = document.createElement('div');
+    qrWrapper.style.marginTop = '20px';
+    qrWrapper.style.display = 'flex';
+    qrWrapper.style.justifyContent = 'flex-end';
+    qrWrapper.innerHTML = `<div id="qrcode-container" style="padding: 10px; background: #fff; border-radius: 8px;"></div>`;
+    container.appendChild(qrWrapper);
+    setTimeout(updatePanelistQRCode, 300);
+}
+
+function calculateTotalsTunaLoinSegar() {
+    const table = document.getElementById('tunaLoinSegarTable');
+    if (!table) return;
+
+    for (let kode = 1; kode <= 6; kode++) {
+        const checked = table.querySelectorAll(`.nilai-checkbox[data-kode="${kode}"]:checked`);
+        let total = 0;
+        checked.forEach(cb => {
+            total += parseInt(cb.dataset.nilai);
+        });
+
+        const totalCell = table.querySelector(`.total-cell[data-kode="${kode}"]`);
+        const avgCell = table.querySelector(`.avg-cell[data-kode="${kode}"]`);
+
+        if (totalCell) totalCell.textContent = total;
+        if (avgCell) {
+            const paramCount = 3;
+            avgCell.textContent = (total / paramCount).toFixed(2);
+        }
+    }
+}
+
+function generateTunaLoinSegarTable(container) {
+    const headerDiv = document.createElement('div');
+    headerDiv.className = 'tuna-loin-segar-header';
+    headerDiv.innerHTML = `
+        <h3 style="text-align: center; margin-bottom: 20px; font-size: 18px; font-weight: 600;">LEMBAR PENILAIAN UJI SKOR TUNA LOIN SEGAR</h3>
+        <h4 style="text-align: center; margin-bottom: 20px; font-size: 14px; font-weight: normal;">SNI 7530-2018</h4>
+        <div style="margin-bottom: 15px;">
+            <p style="font-size: 14px; color: #666; font-style: italic;">&bull; Berilah tanda &#10003; pada nilai yang dipilih sesuai kode contoh yang diuji.</p>
+        </div>
+    `;
+    container.appendChild(headerDiv);
+
+    const table = document.createElement('table');
+    table.id = 'tunaLoinSegarTable';
+    table.style.width = '100%';
+    table.style.borderCollapse = 'collapse';
+    table.style.marginBottom = '20px';
+
+    const criteria = [
+        {
+            name: 'Kenampakan',
+            options: [
+                { desc: 'Daging berwarna merah cerah, serat daging merekat kuat sesamanya, mengkilap, tanpa pelangi. Bentuk potongan daging rapi, tidak terikut tulang, tidak ada daging merah.', nilai: 9 },
+                { desc: 'Daging berwarna merah kurang cerah, serat daging merekat sesamanya, kurang mengkilap, sedikit tampak pelangi. Bentuk potongan daging rapi, tidak terikut tulang, tidak ada daging merah.', nilai: 7 },
+                { desc: 'Daging berwarna merah kusam, serat daging mulai memisah, kering, tampak pelangi. Bentuk potongan daging tidak rapi, sedikit terikut tulang, ada daging merah.', nilai: 5 }
+            ]
+        },
+        {
+            name: 'Bau',
+            options: [
+                { desc: 'Sangat segar, spesifik jenis.', nilai: 9 },
+                { desc: 'Segar, spesifik jenis.', nilai: 7 },
+                { desc: 'Kurang segar, ada sedikit bau tambahan.', nilai: 5 }
+            ]
+        },
+        {
+            name: 'Tekstur',
+            options: [
+                { desc: 'Padat dan kompak.', nilai: 9 },
+                { desc: 'Padat, kurang kompak.', nilai: 7 },
+                { desc: 'Agak lembek, tidak kompak.', nilai: 5 }
+            ]
+        }
+    ];
+
+    let tableHtml = `
+        <thead>
+            <tr>
+                <th style="border: 1px solid #ddd; padding: 12px; background-color: #f8f9fa; text-align: left;" rowspan="2">Spesifikasi</th>
+                <th style="border: 1px solid #ddd; padding: 12px; background-color: #f8f9fa; text-align: center;" rowspan="2">Nilai</th>
+                <th style="border: 1px solid #ddd; padding: 12px; background-color: #f8f9fa; text-align: center;" colspan="6">Kode Contoh</th>
+            </tr>
+            <tr>
+                <th style="border: 1px solid #ddd; padding: 8px; background-color: #f8f9fa; text-align: center; width: 50px;">1</th>
+                <th style="border: 1px solid #ddd; padding: 8px; background-color: #f8f9fa; text-align: center; width: 50px;">2</th>
+                <th style="border: 1px solid #ddd; padding: 8px; background-color: #f8f9fa; text-align: center; width: 50px;">3</th>
+                <th style="border: 1px solid #ddd; padding: 8px; background-color: #f8f9fa; text-align: center; width: 50px;">4</th>
+                <th style="border: 1px solid #ddd; padding: 8px; background-color: #f8f9fa; text-align: center; width: 50px;">5</th>
+                <th style="border: 1px solid #ddd; padding: 8px; background-color: #f8f9fa; text-align: center; width: 50px;">6</th>
+            </tr>
+        </thead>
+        <tbody>`;
+
+    criteria.forEach((criterion, cIdx) => {
+        tableHtml += `<tr><td colspan="8" style="border: 1px solid #ddd; padding: 10px; background-color: #f1f3f5; font-weight: bold;">${cIdx + 1}. ${criterion.name}</td></tr>`;
+        criterion.options.forEach((opt, oIdx) => {
+            tableHtml += `<tr>
+                <td style="border: 1px solid #ddd; padding: 10px; font-size: 14px;">&bull; ${opt.desc}</td>
+                <td style="border: 1px solid #ddd; padding: 10px; text-align: center; font-weight: bold;">${opt.nilai}</td>`;
+            for (let k = 1; k <= 6; k++) {
+                tableHtml += `<td style="border: 1px solid #ddd; padding: 0; text-align: center; cursor: pointer;" onclick="this.querySelector('.nilai-checkbox').click()">
+                    <input type="checkbox" class="nilai-checkbox" data-kode="${k}" data-row-index="${cIdx}" data-nilai="${opt.nilai}" style="display:none;" onchange="if(this.checked){ const cbs = this.closest('tbody').querySelectorAll('.nilai-checkbox[data-kode=\&quot;' + this.dataset.kode + '\&quot;][data-row-index=\&quot;' + this.dataset.rowIndex + '\&quot;]'); cbs.forEach(cb => { if(cb!==this){cb.checked=false; cb.closest('td').style.backgroundColor=''; if(cb.nextSibling)cb.nextSibling.remove();} }); this.closest('td').style.backgroundColor='#e8f0fe'; const mark = document.createElement('span'); mark.className='checkmark-visual'; mark.style.fontSize='20px'; mark.style.color='#667eea'; mark.style.display='block'; mark.style.pointerEvents='none'; mark.innerHTML='&#10003;'; this.after(mark); } else { this.closest('td').style.backgroundColor=''; if(this.nextSibling)this.nextSibling.remove(); } calculateTotalsTunaLoinSegar(); event.stopPropagation();">
+                </td>`;
+            }
+            tableHtml += `</tr>`;
+        });
+    });
+
+    tableHtml += `
+        <tr style="background-color: #f8f9fa; font-weight: bold;">
+            <td colspan="2" style="border: 1px solid #ddd; padding: 12px; text-align: right;">Total</td>
+            <td class="total-cell" data-kode="1" style="border: 1px solid #ddd; padding: 12px; text-align: center;">0</td>
+            <td class="total-cell" data-kode="2" style="border: 1px solid #ddd; padding: 12px; text-align: center;">0</td>
+            <td class="total-cell" data-kode="3" style="border: 1px solid #ddd; padding: 12px; text-align: center;">0</td>
+            <td class="total-cell" data-kode="4" style="border: 1px solid #ddd; padding: 12px; text-align: center;">0</td>
+            <td class="total-cell" data-kode="5" style="border: 1px solid #ddd; padding: 12px; text-align: center;">0</td>
+            <td class="total-cell" data-kode="6" style="border: 1px solid #ddd; padding: 12px; text-align: center;">0</td>
+        </tr>
+        <tr style="background-color: #e9ecef; font-weight: bold;">
+            <td colspan="2" style="border: 1px solid #ddd; padding: 12px; text-align: right;">Rata-rata</td>
+            <td class="avg-cell" data-kode="1" style="border: 1px solid #ddd; padding: 12px; text-align: center;">0.00</td>
+            <td class="avg-cell" data-kode="2" style="border: 1px solid #ddd; padding: 12px; text-align: center;">0.00</td>
+            <td class="avg-cell" data-kode="3" style="border: 1px solid #ddd; padding: 12px; text-align: center;">0.00</td>
+            <td class="avg-cell" data-kode="4" style="border: 1px solid #ddd; padding: 12px; text-align: center;">0.00</td>
+            <td class="avg-cell" data-kode="5" style="border: 1px solid #ddd; padding: 12px; text-align: center;">0.00</td>
+            <td class="avg-cell" data-kode="6" style="border: 1px solid #ddd; padding: 12px; text-align: center;">0.00</td>
+        </tr>
+        </tbody>`;
+
+    table.innerHTML = tableHtml;
     container.appendChild(table);
 
     const formActions = document.querySelector('.form-actions');
