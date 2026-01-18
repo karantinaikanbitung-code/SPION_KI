@@ -46,7 +46,17 @@ document.addEventListener('DOMContentLoaded', function () {
         'lobster-udang-kipas': 'LOBSTER, UDANG KIPAS HIDUP',
         'udang-beku': 'Udang Beku',
         'cumi-cumi-beku': 'Cumi-cumi Beku',
-        'gurita-mentah-beku': 'Gurita Mentah Beku'
+        'gurita-mentah-beku': 'Gurita Mentah Beku',
+        'lobster-beku': 'Lobster Beku',
+        'cakalang-beku': 'Cakalang Beku',
+        'hiu-utuh-beku': 'Hiu Utuh Beku',
+        'fillet-kakap-beku': 'Fillet Kakap Beku',
+        'kepiting-rebus-beku': 'Daging Kepiting Rebus Beku',
+        'udang-kupas-mentah-beku': 'Udang Kupas Mentah Beku',
+        'bakso-ikan': 'Bakso Ikan',
+        'udang-masak-beku': 'Udang Masak Beku',
+        'tuna-loin-beku': 'Tuna Loin Beku',
+        'tuna-steak-beku': 'Tuna Steak Beku'
     };
 
     if (penilaianForm) {
@@ -109,7 +119,16 @@ function generateFormFields(jenisUji, hewan) {
     const catatanSectionEl = document.getElementById('catatanSection');
     if (catatanSectionEl) catatanSectionEl.style.display = 'block';
 
-    if (hewan === 'ikan-segar' || hewan === 'ikan-beku' || hewan === 'ikan-tuna-kaleng' || hewan === 'sarden-makarel-kaleng' || hewan === 'ikan-asap' || hewan === 'ikan-asin-kering' || hewan === 'rumput-laut-kering' || hewan === 'lobster-udang-kipas' || hewan === 'kepiting-bakau' || hewan === 'ikan-asap-murni' || hewan === 'sirip-hiu-kering' || hewan === 'udang-kering-utuh' || hewan === 'abon-ikan' || hewan === 'sambal-ikan' || hewan === 'tuna-loin-beku' || hewan === 'tuna-steak-beku' || hewan === 'udang-segar' || hewan === 'udang-beku' || hewan === 'cumi-cumi-beku' || hewan === 'gurita-mentah-beku') {
+    if (hewan === 'ikan-segar' || hewan === 'ikan-beku' || hewan === 'ikan-tuna-kaleng' || hewan === 'sarden-makarel-kaleng' ||
+        hewan === 'ikan-asap' || hewan === 'ikan-asin-kering' || hewan === 'rumput-laut-kering' ||
+        hewan === 'lobster-udang-kipas' || hewan === 'kepiting-bakau' || hewan === 'ikan-asap-murni' ||
+        hewan === 'sirip-hiu-kering' || hewan === 'udang-kering-utuh' || hewan === 'abon-ikan' ||
+        hewan === 'sambal-ikan' || hewan === 'tuna-loin-beku' || hewan === 'tuna-steak-beku' ||
+        hewan === 'udang-segar' || hewan === 'udang-beku' || hewan === 'cumi-cumi-beku' ||
+        hewan === 'gurita-mentah-beku' || hewan === 'lobster-beku' || hewan === 'cakalang-beku' ||
+        hewan === 'hiu-utuh-beku' || hewan === 'fillet-kakap-beku' || hewan === 'kepiting-rebus-beku' ||
+        hewan === 'udang-kupas-mentah-beku' || hewan === 'bakso-ikan' || hewan === 'udang-masak-beku' ||
+        hewan === 'tuna-loin-beku') {
         if (catatanSectionEl) catatanSectionEl.style.display = 'none';
     }
 
@@ -237,6 +256,46 @@ function generateOrganoleptikFields(container, hewan) {
         generateGuritaMentahBekuTable(container);
         return;
     }
+    if (hewan === 'lobster-beku') {
+        generateLobsterBekuTable(container);
+        return;
+    }
+    if (hewan === 'cakalang-beku') {
+        generateCakalangBekuTable(container);
+        return;
+    }
+    if (hewan === 'hiu-utuh-beku') {
+        generateHiuUtuhBekuTable(container);
+        return;
+    }
+    if (hewan === 'fillet-kakap-beku') {
+        generateFilletKakapBekuTable(container);
+        return;
+    }
+    if (hewan === 'kepiting-rebus-beku') {
+        generateKepitingRebusBekuTable(container);
+        return;
+    }
+    if (hewan === 'udang-kupas-mentah-beku') {
+        generateUdangKupasMentahBekuTable(container);
+        return;
+    }
+    if (hewan === 'bakso-ikan') {
+        generateBaksoIkanTable(container);
+        return;
+    }
+    if (hewan === 'udang-masak-beku') {
+        generateUdangMasakBekuTable(container);
+        return;
+    }
+    if (hewan === 'tuna-loin-beku') {
+        generateTunaLoinBekuTable(container);
+        return;
+    }
+    if (hewan === 'tuna-steak-beku') {
+        generateTunaSteakBekuTable(container);
+        return;
+    }
 
     const fields = [
         {
@@ -352,7 +411,7 @@ function generateIkanSegarTable(container) {
                 </tr>
             </tbody>
         </table>
-        <p style="margin-bottom: 15px; font-style: italic;">Berilah tanda ✓ pada nilai yang dipilih sesuai kode contoh yang diuji.</p>
+        <p style="margin-bottom: 15px; font-style: italic;">Berilah tanda âœ“ pada nilai yang dipilih sesuai kode contoh yang diuji.</p>
     `;
     container.appendChild(headerDiv);
     // Hide catatan section for Ikan Segar and setup QR/barcode syncing with nama panelis
@@ -727,7 +786,7 @@ function generateIkanBekuTable(container) {
             </tbody>
         </table>
         <div style="margin-bottom: 15px; padding: 10px; background-color: #f0f0f0; border-radius: 5px;">
-            <p style="margin: 5px 0;">• Berilah tanda ✓ pada nilai yang dipilih sesuai kode contoh yang diuji.</p>
+            <p style="margin: 5px 0;">â€¢ Berilah tanda âœ“ pada nilai yang dipilih sesuai kode contoh yang diuji.</p>
         </div>
     `;
     container.appendChild(headerDiv);
@@ -1201,7 +1260,7 @@ function generateIkanTunaKalengTable(container) {
                 </tr>
             </tbody>
         </table>
-        <p style="margin-bottom: 15px; font-style: italic;">Berilah tanda ✓ pada nilai yang dipilih sesuai kode contoh yang diuji.</p>
+        <p style="margin-bottom: 15px; font-style: italic;">Berilah tanda âœ“ pada nilai yang dipilih sesuai kode contoh yang diuji.</p>
     `;
     container.appendChild(headerDiv);
 
@@ -1553,7 +1612,7 @@ function generateSardenMakarelKalengTable(container) {
                 </tr>
             </tbody>
         </table>
-        <p style="margin-bottom: 15px; font-style: italic;">Berilah tanda âˆš pada nilai yang dipilih sesuai kode contoh yang diuji.</p>
+        <p style="margin-bottom: 15px; font-style: italic;">Berilah tanda Ã¢Ë†Å¡ pada nilai yang dipilih sesuai kode contoh yang diuji.</p>
     `;
     container.appendChild(headerDiv);
 
@@ -1802,7 +1861,7 @@ function generateDriedSmokingFishTable(container) {
                 </tr>
             </tbody>
         </table>
-        <p style="margin-bottom: 15px; font-style: italic;">Berilah tanda âˆš pada nilai yang dipilih sesuai kode contoh yang diuji.</p>
+        <p style="margin-bottom: 15px; font-style: italic;">Berilah tanda Ã¢Ë†Å¡ pada nilai yang dipilih sesuai kode contoh yang diuji.</p>
     `;
     container.appendChild(headerDiv);
 
@@ -2074,7 +2133,7 @@ function generateIkanAsinKeringTable(container) {
                 </tr>
             </tbody>
         </table>
-        <p style="margin-bottom: 15px; font-style: italic;">Berilah tanda âˆš pada nilai yang dipilih sesuai kode contoh yang diuji.</p>
+        <p style="margin-bottom: 15px; font-style: italic;">Berilah tanda Ã¢Ë†Å¡ pada nilai yang dipilih sesuai kode contoh yang diuji.</p>
     `;
     container.appendChild(headerDiv);
 
@@ -2345,7 +2404,7 @@ function generateRumputLautKeringTable(container) {
                 </tr>
             </tbody>
         </table>
-        <p style="margin-bottom: 15px; font-style: italic;">Berilah tanda âˆš pada nilai yang dipilih sesuai kode contoh yang diuji.</p>
+        <p style="margin-bottom: 15px; font-style: italic;">Berilah tanda Ã¢Ë†Å¡ pada nilai yang dipilih sesuai kode contoh yang diuji.</p>
     `;
     container.appendChild(headerDiv);
 
@@ -3004,6 +3063,178 @@ function collectFormDataForPreview(hewan) {
                 };
             }
         }
+    } else if (hewan === 'lobster-beku') {
+        const table = document.getElementById('lobsterBekuTable');
+        if (table) {
+            data.penilaianLobsterBeku = {};
+            for (let kode = 1; kode <= 6; kode++) {
+                const totalCell = table.querySelector(`.total-cell[data-kode="${kode}"]`);
+                const avgCell = table.querySelector(`.avg-cell[data-kode="${kode}"]`);
+                data.penilaianLobsterBeku[`kodeContoh${kode}`] = {
+                    total: totalCell?.textContent || '0',
+                    rataRata: avgCell?.textContent || '0.00',
+                    nilai: Array.from(table.querySelectorAll(`.nilai-checkbox[data-kode="${kode}"]:checked`)).map(cb => ({
+                        rowIndex: parseInt(cb.dataset.rowIndex),
+                        nilai: parseInt(cb.dataset.nilai)
+                    }))
+                };
+            }
+        }
+    } else if (hewan === 'cakalang-beku') {
+        const table = document.getElementById('cakalangBekuTable');
+        if (table) {
+            data.penilaianCakalangBeku = {};
+            for (let kode = 1; kode <= 6; kode++) {
+                const totalCell = table.querySelector(`.total-cell[data-kode="${kode}"]`);
+                const avgCell = table.querySelector(`.avg-cell[data-kode="${kode}"]`);
+                data.penilaianCakalangBeku[`kodeContoh${kode}`] = {
+                    total: totalCell?.textContent || '0',
+                    rataRata: avgCell?.textContent || '0.00',
+                    nilai: Array.from(table.querySelectorAll(`.nilai-checkbox[data-kode="${kode}"]:checked`)).map(cb => ({
+                        rowIndex: parseInt(cb.dataset.rowIndex),
+                        nilai: parseInt(cb.dataset.nilai)
+                    }))
+                };
+            }
+        }
+    } else if (hewan === 'hiu-utuh-beku') {
+        const table = document.getElementById('hiuUtuhBekuTable');
+        if (table) {
+            data.penilaianHiuUtuhBeku = {};
+            for (let kode = 1; kode <= 6; kode++) {
+                const totalCell = table.querySelector(`.total-cell[data-kode="${kode}"]`);
+                const avgCell = table.querySelector(`.avg-cell[data-kode="${kode}"]`);
+                data.penilaianHiuUtuhBeku[`kodeContoh${kode}`] = {
+                    total: totalCell?.textContent || '0',
+                    rataRata: avgCell?.textContent || '0.00',
+                    nilai: Array.from(table.querySelectorAll(`.nilai-checkbox[data-kode="${kode}"]:checked`)).map(cb => ({
+                        rowIndex: parseInt(cb.dataset.rowIndex),
+                        nilai: parseInt(cb.dataset.nilai)
+                    }))
+                };
+            }
+        }
+    } else if (hewan === 'fillet-kakap-beku') {
+        const table = document.getElementById('filletKakapBekuTable');
+        if (table) {
+            data.penilaianFilletKakapBeku = {};
+            for (let kode = 1; kode <= 6; kode++) {
+                const totalCell = table.querySelector(`.total-cell[data-kode="${kode}"]`);
+                const avgCell = table.querySelector(`.avg-cell[data-kode="${kode}"]`);
+                data.penilaianFilletKakapBeku[`kodeContoh${kode}`] = {
+                    total: totalCell?.textContent || '0',
+                    rataRata: avgCell?.textContent || '0.00',
+                    nilai: Array.from(table.querySelectorAll(`.nilai-checkbox[data-kode="${kode}"]:checked`)).map(cb => ({
+                        rowIndex: parseInt(cb.dataset.rowIndex),
+                        nilai: parseInt(cb.dataset.nilai)
+                    }))
+                };
+            }
+        }
+    } else if (hewan === 'kepiting-rebus-beku') {
+        const table = document.getElementById('kepitingRebusBekuTable');
+        if (table) {
+            data.penilaianKepitingRebusBeku = {};
+            for (let kode = 1; kode <= 6; kode++) {
+                const totalCell = table.querySelector(`.total-cell[data-kode="${kode}"]`);
+                const avgCell = table.querySelector(`.avg-cell[data-kode="${kode}"]`);
+                data.penilaianKepitingRebusBeku[`kodeContoh${kode}`] = {
+                    total: totalCell?.textContent || '0',
+                    rataRata: avgCell?.textContent || '0.00',
+                    nilai: Array.from(table.querySelectorAll(`.nilai-checkbox[data-kode="${kode}"]:checked`)).map(cb => ({
+                        rowIndex: parseInt(cb.dataset.rowIndex),
+                        nilai: parseInt(cb.dataset.nilai)
+                    }))
+                };
+            }
+        }
+    } else if (hewan === 'udang-kupas-mentah-beku') {
+        const table = document.getElementById('udangKupasMentahBekuTable');
+        if (table) {
+            data.penilaianUdangKupasMentahBeku = {};
+            for (let kode = 1; kode <= 6; kode++) {
+                const totalCell = table.querySelector(`.total-cell[data-kode="${kode}"]`);
+                const avgCell = table.querySelector(`.avg-cell[data-kode="${kode}"]`);
+                data.penilaianUdangKupasMentahBeku[`kodeContoh${kode}`] = {
+                    total: totalCell?.textContent || '0',
+                    rataRata: avgCell?.textContent || '0.00',
+                    nilai: Array.from(table.querySelectorAll(`.nilai-checkbox[data-kode="${kode}"]:checked`)).map(cb => ({
+                        rowIndex: parseInt(cb.dataset.rowIndex),
+                        nilai: parseInt(cb.dataset.nilai)
+                    }))
+                };
+            }
+        }
+    } else if (hewan === 'bakso-ikan') {
+        const table = document.getElementById('baksoIkanTable');
+        if (table) {
+            data.penilaianBaksoIkan = {};
+            for (let kode = 1; kode <= 6; kode++) {
+                const totalCell = table.querySelector(`.total-cell[data-kode="${kode}"]`);
+                const avgCell = table.querySelector(`.avg-cell[data-kode="${kode}"]`);
+                data.penilaianBaksoIkan[`kodeContoh${kode}`] = {
+                    total: totalCell?.textContent || '0',
+                    rataRata: avgCell?.textContent || '0.00',
+                    nilai: Array.from(table.querySelectorAll(`.nilai-checkbox[data-kode="${kode}"]:checked`)).map(cb => ({
+                        rowIndex: parseInt(cb.dataset.rowIndex),
+                        nilai: parseInt(cb.dataset.nilai)
+                    }))
+                };
+            }
+        }
+    } else if (hewan === 'udang-masak-beku') {
+        const table = document.getElementById('udangMasakBekuTable');
+        if (table) {
+            data.penilaianUdangMasakBeku = {};
+            for (let kode = 1; kode <= 6; kode++) {
+                const totalCell = table.querySelector(`.total-cell[data-kode="${kode}"]`);
+                const avgCell = table.querySelector(`.avg-cell[data-kode="${kode}"]`);
+                data.penilaianUdangMasakBeku[`kodeContoh${kode}`] = {
+                    total: totalCell?.textContent || '0',
+                    rataRata: avgCell?.textContent || '0.00',
+                    nilai: Array.from(table.querySelectorAll(`.nilai-checkbox[data-kode="${kode}"]:checked`)).map(cb => ({
+                        rowIndex: parseInt(cb.dataset.rowIndex),
+                        nilai: parseInt(cb.dataset.nilai)
+                    }))
+                };
+            }
+        }
+    } else if (hewan === 'tuna-loin-beku') {
+        const table = document.getElementById('tunaLoinBekuTable');
+        if (table) {
+            data.penilaianTunaLoinBeku = {};
+            for (let kode = 1; kode <= 6; kode++) {
+                const totalCell = table.querySelector(`.total-cell[data-kode="${kode}"]`);
+                const avgCell = table.querySelector(`.avg-cell[data-kode="${kode}"]`);
+                data.penilaianTunaLoinBeku[`kodeContoh${kode}`] = {
+                    total: totalCell?.textContent || '0',
+                    rataRata: avgCell?.textContent || '0.00',
+                    nilai: Array.from(table.querySelectorAll(`.nilai-checkbox[data-kode="${kode}"]:checked`)).map(cb => ({
+                        rowIndex: parseInt(cb.dataset.rowIndex),
+                        nilai: parseInt(cb.dataset.nilai)
+                    }))
+                };
+            }
+        }
+    }
+
+    if (hewan === 'tuna-steak-beku') {
+        const table = document.getElementById('tunaSteakBekuTable');
+        if (table) {
+            data.penilaianTunaSteakBeku = {};
+            for (let kode = 1; kode <= 6; kode++) {
+                const totalCell = table.querySelector(`.total-cell[data-kode="${kode}"]`);
+                const avgCell = table.querySelector(`.avg-cell[data-kode="${kode}"]`);
+                data.penilaianTunaSteakBeku[`kodeContoh${kode}`] = {
+                    total: totalCell?.textContent || '0',
+                    rataRata: avgCell?.textContent || '0.00',
+                    nilai: Array.from(table.querySelectorAll(`.nilai-checkbox[data-kode="${kode}"]:checked`)).map(cb => ({
+                        rowIndex: parseInt(cb.dataset.rowIndex),
+                        nilai: parseInt(cb.dataset.nilai)
+                    }))
+                };
+            }
+        }
     }
     return data;
 }
@@ -3044,6 +3275,16 @@ function generateLHUHtml(data, hewan) {
     if (hewan === 'udang-beku') jenisContoh = 'Udang Beku';
     if (hewan === 'cumi-cumi-beku') jenisContoh = 'Cumi-cumi Beku';
     if (hewan === 'gurita-mentah-beku') jenisContoh = 'Gurita Mentah Beku';
+    if (hewan === 'lobster-beku') jenisContoh = 'Lobster Beku';
+    if (hewan === 'cakalang-beku') jenisContoh = 'Cakalang Beku';
+    if (hewan === 'hiu-utuh-beku') jenisContoh = 'Hiu Utuh Beku';
+    if (hewan === 'fillet-kakap-beku') jenisContoh = 'Fillet Kakap Beku';
+    if (hewan === 'kepiting-rebus-beku') jenisContoh = 'Daging Kepiting Rebus Beku';
+    if (hewan === 'udang-kupas-mentah-beku') jenisContoh = 'Udang Kupas Mentah Beku';
+    if (hewan === 'bakso-ikan') jenisContoh = 'Bakso Ikan';
+    if (hewan === 'udang-masak-beku') jenisContoh = 'Udang Masak Beku';
+    if (hewan === 'tuna-loin-beku') jenisContoh = 'Tuna Loin Beku';
+    if (hewan === 'tuna-steak-beku') jenisContoh = 'Tuna Steak Beku';
 
     const isIkanBeku = (hewan === 'ikan-beku');
     const isIkanTuna = (hewan === 'ikan-tuna-kaleng');
@@ -3064,6 +3305,14 @@ function generateLHUHtml(data, hewan) {
     const isUdangBeku = (hewan === 'udang-beku');
     const isCumiCumiBeku = (hewan === 'cumi-cumi-beku');
     const isGuritaMentahBeku = (hewan === 'gurita-mentah-beku');
+    const isLobsterBeku = (hewan === 'lobster-beku');
+    const isCakalangBeku = (hewan === 'cakalang-beku');
+    const isHiuUtuhBeku = (hewan === 'hiu-utuh-beku');
+    const isFilletKakapBeku = (hewan === 'fillet-kakap-beku');
+    const isKepitingRebusBeku = (hewan === 'kepiting-rebus-beku');
+    const isUdangKupasMentahBeku = (hewan === 'udang-kupas-mentah-beku');
+    const isBaksoIkan = (hewan === 'bakso-ikan');
+    const isUdangMasakBeku = (hewan === 'udang-masak-beku');
 
     const titles = {
         'ikan-beku': 'IKAN BEKU',
@@ -3084,7 +3333,17 @@ function generateLHUHtml(data, hewan) {
         'udang-segar': 'UDANG SEGAR',
         'udang-beku': 'UDANG BEKU',
         'cumi-cumi-beku': 'CUMI-CUMI BEKU',
-        'gurita-mentah-beku': 'GURITA MENTAH BEKU'
+        'gurita-mentah-beku': 'GURITA MENTAH BEKU',
+        'lobster-beku': 'LOBSTER BEKU',
+        'cakalang-beku': 'CAKALANG BEKU',
+        'hiu-utuh-beku': 'HIU UTUH BEKU',
+        'fillet-kakap-beku': 'FILLET KAKAP BEKU',
+        'kepiting-rebus-beku': 'DAGING KEPITING REBUS BEKU',
+        'udang-kupas-mentah-beku': 'UDANG KUPAS MENTAH BEKU',
+        'bakso-ikan': 'BAKSO IKAN',
+        'udang-masak-beku': 'UDANG MASAK BEKU',
+        'tuna-loin-beku': 'TUNA LOIN BEKU',
+        'tuna-steak-beku': 'TUNA STEAK BEKU'
     };
     const titleText = titles[hewan] || 'IKAN SEGAR';
 
@@ -3105,7 +3364,17 @@ function generateLHUHtml(data, hewan) {
         'udang-segar': 'SNI 2729-2021',
         'udang-beku': 'SNI 2705:2014',
         'cumi-cumi-beku': 'SNI 2731:2014',
-        'gurita-mentah-beku': 'SNI 6941-2017'
+        'gurita-mentah-beku': 'SNI 6941-2017',
+        'lobster-beku': 'SNI 2711.1:2009',
+        'cakalang-beku': 'SNI 01-2733.1-2006',
+        'hiu-utuh-beku': 'SNI 01-7145.1-2005',
+        'fillet-kakap-beku': 'SNI 01-2696.1-2006',
+        'kepiting-rebus-beku': 'SNI 3231.1-2010',
+        'udang-kupas-mentah-beku': 'SNI 3457-2014',
+        'bakso-ikan': 'SNI 7266-2017',
+        'udang-masak-beku': 'SNI 3458-2016',
+        'tuna-loin-beku': 'SNI 4104-2015',
+        'tuna-steak-beku': 'SNI 01-4485.1-2006'
     };
     const sniStandard = snis[hewan] || 'SNI 2729-2021';
 
@@ -3130,6 +3399,15 @@ function generateLHUHtml(data, hewan) {
     else if (isUdangBeku) penilaian = data.penilaianUdangBeku;
     else if (isCumiCumiBeku) penilaian = data.penilaianCumiCumiBeku;
     else if (isGuritaMentahBeku) penilaian = data.penilaianGuritaMentahBeku;
+    else if (isLobsterBeku) penilaian = data.penilaianLobsterBeku;
+    else if (isCakalangBeku) penilaian = data.penilaianCakalangBeku;
+    else if (isHiuUtuhBeku) penilaian = data.penilaianHiuUtuhBeku;
+    else if (isFilletKakapBeku) penilaian = data.penilaianFilletKakapBeku;
+    else if (isKepitingRebusBeku) penilaian = data.penilaianKepitingRebusBeku;
+    else if (isUdangKupasMentahBeku) penilaian = data.penilaianUdangKupasMentahBeku;
+    else if (isBaksoIkan) penilaian = data.penilaianBaksoIkan;
+    else if (isUdangMasakBeku) penilaian = data.penilaianUdangMasakBeku;
+    else if (isTunaLoinBeku) penilaian = data.penilaianTunaLoinBeku;
 
     if (penilaian) {
         let maxSamples = 6;
@@ -3365,6 +3643,175 @@ function generateLHUHtml(data, hewan) {
             },
             {
                 name: `B. Sesudah pelelehan\n   1. Kenampakan\n   2. Bau\n   3. Tekstur`,
+                rowIndices: [].concat(parameterList[3].rowIndices, parameterList[4].rowIndices, parameterList[5].rowIndices),
+                subGroups: [parameterList[3], parameterList[4], parameterList[5]]
+            }
+        ];
+    } else if (isLobsterBeku) {
+        parameterList = [
+            { name: 'A. Dalam keadaan beku\n   1. Lapisan es', rowIndices: [0, 1, 2, 3, 4, 5, 6] },
+            { name: '2. Pengeringan', rowIndices: [7, 8, 9, 10, 11, 12, 13] },
+            { name: '3. Perubahan warna', rowIndices: [14, 15, 16, 17, 18, 19, 20] },
+            { name: 'B. Sesudah pelelehan\n   1. Kenampakan', rowIndices: [21, 22, 23, 24, 25, 26, 27] },
+            { name: '2. Bau', rowIndices: [28, 29, 30, 31, 32, 33] },
+            { name: '3. Konsistensi', rowIndices: [34, 35, 36, 37, 38, 39] }
+        ];
+        renderGroups = [
+            {
+                name: `A. Dalam keadaan beku\n   1. Lapisan es\n   2. Pengeringan\n   3. Perubahan warna`,
+                rowIndices: [].concat(parameterList[0].rowIndices, parameterList[1].rowIndices, parameterList[2].rowIndices),
+                subGroups: [parameterList[0], parameterList[1], parameterList[2]]
+            },
+            {
+                name: `B. Sesudah pelelehan\n   1. Kenampakan\n   2. Bau\n   3. Konsistensi`,
+                rowIndices: [].concat(parameterList[3].rowIndices, parameterList[4].rowIndices, parameterList[5].rowIndices),
+                subGroups: [parameterList[3], parameterList[4], parameterList[5]]
+            }
+        ];
+    } else if (isCakalangBeku) {
+        parameterList = [
+            { name: 'A. Dalam keadaan beku\n   1. Lapisan es', rowIndices: [0, 1, 2, 3, 4, 5, 6] },
+            { name: '2. Pengeringan', rowIndices: [7, 8, 9, 10, 11, 12, 13] },
+            { name: '3. Perubahan warna', rowIndices: [14, 15, 16, 17, 18, 19] },
+            { name: 'B. Sesudah pelelehan\n   1. Kenampakan', rowIndices: [20, 21, 22, 23, 24, 25, 26] },
+            { name: '2. Bau', rowIndices: [27, 28, 29, 30, 31, 32] },
+            { name: '3. Tekstur', rowIndices: [33, 34, 35, 36, 37, 38] }
+        ];
+        renderGroups = [
+            {
+                name: `A. Dalam keadaan beku\n   1. Lapisan es\n   2. Pengeringan\n   3. Perubahan warna`,
+                rowIndices: [].concat(parameterList[0].rowIndices, parameterList[1].rowIndices, parameterList[2].rowIndices),
+                subGroups: [parameterList[0], parameterList[1], parameterList[2]]
+            },
+            {
+                name: `B. Sesudah pelelehan\n   1. Kenampakan\n   2. Bau\n   3. Tekstur`,
+                rowIndices: [].concat(parameterList[3].rowIndices, parameterList[4].rowIndices, parameterList[5].rowIndices),
+                subGroups: [parameterList[3], parameterList[4], parameterList[5]]
+            }
+        ];
+    } else if (isHiuUtuhBeku) {
+        parameterList = [
+            { name: 'A. Dalam keadaan beku\n   1. Pengeringan', rowIndices: [0, 1, 2, 3, 4] },
+            { name: '2. Perubahan warna', rowIndices: [5, 6, 7, 8, 9] },
+            { name: 'B. Sesudah pelelehan\n   1. Kenampakan', rowIndices: [10, 11, 12, 13, 14] },
+            { name: '2. Bau', rowIndices: [15, 16, 17, 18, 19] },
+            { name: '3. Daging', rowIndices: [20, 21, 22, 23, 24] },
+            { name: '4. Tekstur', rowIndices: [25, 26, 27, 28, 29] }
+        ];
+        renderGroups = [
+            {
+                name: `A. Dalam keadaan beku\n   1. Pengeringan\n   2. Perubahan warna`,
+                rowIndices: [].concat(parameterList[0].rowIndices, parameterList[1].rowIndices),
+                subGroups: [parameterList[0], parameterList[1]]
+            },
+            {
+                name: `B. Sesudah pelelehan\n   1. Kenampakan\n   2. Bau\n   3. Daging\n   4. Tekstur`,
+                rowIndices: [].concat(parameterList[2].rowIndices, parameterList[3].rowIndices, parameterList[4].rowIndices, parameterList[5].rowIndices),
+                subGroups: [parameterList[2], parameterList[3], parameterList[4], parameterList[5]]
+            }
+        ];
+    } else if (isFilletKakapBeku) {
+        parameterList = [
+            { name: 'A. Dalam Keadaan Beku\n   1. Lapisan es', rowIndices: [0, 1, 2, 3, 4, 5, 6] },
+            { name: '2. Pengeringan', rowIndices: [7, 8, 9, 10, 11, 12, 13] },
+            { name: '3. Perubahan warna', rowIndices: [14, 15, 16, 17, 18, 19, 20] },
+            { name: 'B. Sesudah pelelehan\n   1. Kenampakan', rowIndices: [21, 22, 23, 24, 25, 26] },
+            { name: '2. Bau', rowIndices: [27, 28, 29, 30, 31, 32] },
+            { name: '3. Tekstur', rowIndices: [33, 34, 35, 36, 37, 38] }
+        ];
+        renderGroups = [
+            {
+                name: `A. Dalam Keadaan Beku\n   1. Lapisan es\n   2. Pengeringan\n   3. Perubahan warna`,
+                rowIndices: [].concat(parameterList[0].rowIndices, parameterList[1].rowIndices, parameterList[2].rowIndices),
+                subGroups: [parameterList[0], parameterList[1], parameterList[2]]
+            },
+            {
+                name: `B. Sesudah pelelehan\n   1. Kenampakan\n   2. Bau\n   3. Tekstur`,
+                rowIndices: [].concat(parameterList[3].rowIndices, parameterList[4].rowIndices, parameterList[5].rowIndices),
+                subGroups: [parameterList[3], parameterList[4], parameterList[5]]
+            }
+        ];
+    } else if (isKepitingRebusBeku) {
+        parameterList = [
+            { name: '1. Kenampakan', rowIndices: [0, 1, 2, 3, 4, 5, 6] },
+            { name: '2. Bau', rowIndices: [7, 8, 9, 10, 11, 12, 13] },
+            { name: '3. Tekstur', rowIndices: [14, 15, 16, 17, 18, 19] }
+        ];
+        renderGroups = [
+            {
+                name: `Sesudah pelelehan (thawing)\n   1. Kenampakan\n   2. Bau\n   3. Tekstur`,
+                rowIndices: [].concat(parameterList[0].rowIndices, parameterList[1].rowIndices, parameterList[2].rowIndices),
+                subGroups: [parameterList[0], parameterList[1], parameterList[2]]
+            }
+        ];
+    } else if (isUdangKupasMentahBeku) {
+        parameterList = [
+            { name: 'A. Dalam keadaan beku\n   1. Lapisan Es', rowIndices: [0, 1, 2, 3, 4, 5, 6] },
+            { name: '2. Pengeringan', rowIndices: [7, 8, 9, 10, 11, 12, 13] },
+            { name: '3. Perubahan warna', rowIndices: [14, 15, 16, 17, 18, 19, 20] },
+            { name: 'B. Sesudah pelelehan\n   1. Kenampakan', rowIndices: [21, 22, 23, 24, 25, 26] },
+            { name: '2. Bau', rowIndices: [27, 28, 29, 30, 31, 32] },
+            { name: '3. Daging / Tekstur', rowIndices: [33, 34, 35, 36, 37] }
+        ];
+        renderGroups = [
+            {
+                name: `A. Dalam keadaan beku\n   1. Lapisan Es\n   2. Pengeringan\n   3. Perubahan warna`,
+                rowIndices: [].concat(parameterList[0].rowIndices, parameterList[1].rowIndices, parameterList[2].rowIndices),
+                subGroups: [parameterList[0], parameterList[1], parameterList[2]]
+            },
+            {
+                name: `B. Sesudah pelelehan\n   1. Kenampakan\n   2. Bau\n   3. Daging / Tekstur`,
+                rowIndices: [].concat(parameterList[3].rowIndices, parameterList[4].rowIndices, parameterList[5].rowIndices),
+                subGroups: [parameterList[3], parameterList[4], parameterList[5]]
+            }
+        ];
+    } else if (isBaksoIkan) {
+        parameterList = [
+            { name: '1. Kenampakan', rowIndices: [0, 1, 2] },
+            { name: '2. Bau', rowIndices: [3, 4, 5] },
+            { name: '3. Rasa', rowIndices: [6, 7, 8] },
+            { name: '4. Tekstur', rowIndices: [9, 10, 11] }
+        ];
+        renderGroups = [parameterList[0], parameterList[1], parameterList[2], parameterList[3]];
+    } else if (isUdangMasakBeku) {
+        parameterList = [
+            { name: 'A. Dalam keadaan beku\n   1. Lapisan es', rowIndices: [0, 1, 2] },
+            { name: '2. Pengeringan (dehidrasi)', rowIndices: [3, 4, 5] },
+            { name: '3. Perubahan warna (diskolorasi)', rowIndices: [6, 7, 8] },
+            { name: 'B. Sesudah dilelehkan (thawing)\n   1. Kenampakan', rowIndices: [9, 10, 11] },
+            { name: '2. Bau', rowIndices: [12, 13, 14] },
+            { name: '3. Rasa', rowIndices: [15, 16, 17] },
+            { name: '4. Tekstur', rowIndices: [18, 19, 20] }
+        ];
+        renderGroups = [
+            {
+                name: `A. Dalam keadaan beku\n   1. Lapisan es\n   2. Pengeringan (dehidrasi)\n   3. Perubahan warna (diskolorasi)`,
+                rowIndices: [].concat(parameterList[0].rowIndices, parameterList[1].rowIndices, parameterList[2].rowIndices),
+                subGroups: [parameterList[0], parameterList[1], parameterList[2]]
+            },
+            {
+                name: `B. Sesudah dilelehkan (thawing)\n   1. Kenampakan\n   2. Bau\n   3. Rasa\n   4. Tekstur`,
+                rowIndices: [].concat(parameterList[3].rowIndices, parameterList[4].rowIndices, parameterList[5].rowIndices, parameterList[6].rowIndices),
+                subGroups: [parameterList[3], parameterList[4], parameterList[5], parameterList[6]]
+            }
+        ];
+    } else if (isTunaLoinBeku) {
+        parameterList = [
+            { name: 'A. Dalam keadaan beku\n   1. Lapisan es', rowIndices: [0, 1, 2, 3, 4] },
+            { name: '2. Pengeringan (dehidrasi)', rowIndices: [5, 6, 7, 8, 9] },
+            { name: '3. Perubahan warna (diskolorasi)', rowIndices: [10, 11, 12, 13, 14] },
+            { name: 'B. Setelah pelelehan (thawing)\n   1. Kenampakan', rowIndices: [15, 16, 17, 18, 19] },
+            { name: '2. Tekstur', rowIndices: [20, 21, 22, 23, 24] },
+            { name: '3. Bau', rowIndices: [25, 26, 27, 28, 29] }
+        ];
+        renderGroups = [
+            {
+                name: `A. Dalam keadaan beku\n   1. Lapisan es\n   2. Pengeringan (dehidrasi)\n   3. Perubahan warna (diskolorasi)`,
+                rowIndices: [].concat(parameterList[0].rowIndices, parameterList[1].rowIndices, parameterList[2].rowIndices),
+                subGroups: [parameterList[0], parameterList[1], parameterList[2]]
+            },
+            {
+                name: `B. Setelah pelelehan (thawing)\n   1. Kenampakan\n   2. Tekstur\n   3. Bau`,
                 rowIndices: [].concat(parameterList[3].rowIndices, parameterList[4].rowIndices, parameterList[5].rowIndices),
                 subGroups: [parameterList[3], parameterList[4], parameterList[5]]
             }
@@ -3704,10 +4151,412 @@ function generateLHUHtml(data, hewan) {
             { kategori: 'B. Sesudah pelelehan (thawing)', subKategori: '2. Bau', items: [{ desc: 'Sangat segar, spesifik jenis.', nilai: 9 }, { desc: 'Bau segar spesifik jenis', nilai: 8 }, { desc: 'Netral', nilai: 7 }, { desc: 'Bau berubah dari netral', nilai: 6 }, { desc: 'Bau sedikit indol', nilai: 5 }, { desc: 'Bau indol', nilai: 3 }, { desc: 'Bau busuk, indol tajam', nilai: 1 }] },
             { kategori: 'B. Sesudah pelelehan (thawing)', subKategori: '3. Daging / tekstur', items: [{ desc: 'Elastis, bercahaya, spesifik jenis.', nilai: 9 }, { desc: 'Elastis, kurang bercahaya.', nilai: 8 }, { desc: 'Elastis, sedikit kurang bercahaya.', nilai: 7 }, { desc: 'Kurang elastis, warna sudah pudar.', nilai: 5 }, { desc: 'Lembek, warna agak sedikit merah.', nilai: 3 }, { desc: 'Sudah lembek sekali, warna merah cukup jelas.', nilai: 1 }] }
         ];
+    } else if (isLobsterBeku) {
+        scoreSheetItems = [
+            { kategori: 'A. Dalam keadaan beku', subKategori: '1. Lapisan es', items: [{ desc: 'Rata, Bening, cukup tebal pada seluruh permukaan dilapisi es.', nilai: 9 }, { desc: 'Rata, Bening, cukup tebal, ada bagian yang terbuka 10 %.', nilai: 8 }, { desc: 'Tidak rata, bagian yang terbuka, sebanyak 20 - 30 %.', nilai: 7 }, { desc: 'Tidak rata, bagian yang terbuka, sebanyak 40 - 50 %.', nilai: 6 }, { desc: 'Banyak bagian yang terbuka 60 - 70 %.', nilai: 5 }, { desc: 'Banyak bagian yang terbuka 80 - 90 %.', nilai: 3 }, { desc: 'Tidak terdapat lapisan es pada permukaan produk.', nilai: 1 }] },
+            { kategori: 'A. Dalam keadaan beku', subKategori: '2. Pengeringan (dehidrasi)', items: [{ desc: 'Tidak ada pengeringan pada permukaan produk.', nilai: 9 }, { desc: 'Sedikit mengalami pengeringan pada permukaan produk 10 %.', nilai: 8 }, { desc: 'Pengeringan mulai jelas pada permukaan produk 20 - 30 %.', nilai: 7 }, { desc: 'Pengeringan banyak pada permukaan produk 40 - 50 %.', nilai: 6 }, { desc: 'Banyak bagian produk yang tampak mengering 60 - 70 %.', nilai: 5 }, { desc: 'Banyak bagian produk yang tampak mengering 80 - 90 %.', nilai: 3 }, { desc: 'Seluruh bagian produk luar tampak mengering.', nilai: 1 }] },
+            { kategori: 'A. Dalam keadaan beku', subKategori: '3. Perubahan warna (diskolorasi)', items: [{ desc: 'Belum mengalami perubahan warna pada permukaan produk.', nilai: 9 }, { desc: 'Sedikit mengalami perubahan warna permukaan produk 10 %.', nilai: 8 }, { desc: 'Agak banyak perubahan warna permukaan produk 20 - 30 %.', nilai: 7 }, { desc: 'Banyak perubahan warna pada permukaan produk 40 - 50 %.', nilai: 6 }, { desc: 'Perubahan warna hampir menyeluruh permukaan produk 60 - 70 %.', nilai: 5 }, { desc: 'Perubahan warna hampir menyeluruh permukaan produk 80 - 90 %.', nilai: 3 }, { desc: 'Perubahan warna menyeluruh pada permukaan produk.', nilai: 1 }] },
+            { kategori: 'B. Sesudah pelelehan (thawing)', subKategori: '1. Kenampakan', items: [{ desc: 'Utuh, bening bercahaya asli menurut jenis, antar ruas kokoh.', nilai: 9 }, { desc: 'Utuh, kurang bening, cahaya mulai pudar, berwarna asli antar ruas kokoh.', nilai: 8 }, { desc: 'Utuh, tidak bening, warna pudar, antar ruas kokoh.', nilai: 7 }, { desc: 'Utuh, warna pudar, ada sedikit noda hitam, antar ruas agak renggang.', nilai: 6 }, { desc: 'Kurang utuh, noda hitam agak banyak, antar ruas mudah lepas.', nilai: 5 }, { desc: 'Tidak utuh, mulai merah, noda hitam banyak, antar ruas mudah lepas.', nilai: 3 }, { desc: 'Tidak utuh, warna merah jelas, penuh noda hitam.', nilai: 1 }] },
+            { kategori: 'B. Sesudah pelelehan (thawing)', subKategori: '2. Bau', items: [{ desc: 'Bau sangat segar spesifik jenis.', nilai: 9 }, { desc: 'Bau segar, spesifik jenis.', nilai: 7 }, { desc: 'Netral', nilai: 6 }, { desc: 'Mulai tibul bau amoniak.', nilai: 5 }, { desc: 'Bau amoniak kuat.', nilai: 3 }, { desc: 'Bau amoniak dan busuk.', nilai: 1 }] },
+            { kategori: 'B. Sesudah pelelehan (thawing)', subKategori: '3. Konsistensi', items: [{ desc: 'kulit ari kenyal, daging padat lekat erat pada kulit.', nilai: 9 }, { desc: 'kulit ari kurang kenyal, daging padat lekat pada kulit.', nilai: 7 }, { desc: 'Tidak kenyal, daging kurang padat, mulai lepas dari kulit.', nilai: 6 }, { desc: 'kulit ari tidak kenyal, daging lunak, mulai lepas dari kulit.', nilai: 5 }, { desc: 'Daging lunak dan lepas dari kulit.', nilai: 3 }, { desc: 'Daging sangat lunak dan lepas dari kulit.', nilai: 1 }] }
+        ];
+    } else if (isCakalangBeku) {
+        scoreSheetItems = [
+            { kategori: 'A. Dalam keadaan beku', subKategori: '1. Lapisan es', items: [{ desc: 'Rata, bening, cukup tebal pada seluruh permukaan dilapisi es.', nilai: 9 }, { desc: 'Rata, bening, cukup tebal, ada bagian yang terbuka 10%.', nilai: 8 }, { desc: 'Tidak rata, bagian yang terbuka, sebanyak 20%-30%.', nilai: 7 }, { desc: 'Tidak rata, bagian yang terbuka sebanyak 40%-50%.', nilai: 6 }, { desc: 'Banyak bagian yang terbuka 60%-70%.', nilai: 5 }, { desc: 'Banyak bagian yang terbuka 80%-90%.', nilai: 3 }, { desc: 'Tidak terdapat lapisan es pada permukaan produk.', nilai: 1 }] },
+            { kategori: 'A. Dalam keadaan beku', subKategori: '2. Pengeringan (dehidrasi)', items: [{ desc: 'Tidak ada pengeringan pada permukaan produk.', nilai: 9 }, { desc: 'Sedikit mengalami pengeringan pada permukaan produk 10%.', nilai: 8 }, { desc: 'Pengeringan mulai jelas pada permukaan produk 20%-30%.', nilai: 7 }, { desc: 'Pengeringan banyak pada permukaan produk 40%-50%.', nilai: 6 }, { desc: 'Banyak bagian produk yang tampak mengering 60%-70%.', nilai: 5 }, { desc: 'Banyak bagian produk yang tampak mengering 80%-90%.', nilai: 3 }, { desc: 'Seluruh bagian produk luar tampak mengering.', nilai: 1 }] },
+            { kategori: 'A. Dalam keadaan beku', subKategori: '3. Perubahan warna (diskolorasi)', items: [{ desc: 'Belum mengalami perubahan warna pada permukaan produk.', nilai: 9 }, { desc: 'Sedikit mengalami perubahan warna pada permukaan produk 10%.', nilai: 8 }, { desc: 'Agak banyak mengalami perubahan warna pada permukaan produk 20%-30%.', nilai: 7 }, { desc: 'Banyak mengalami perubahan warna pada permukaan produk 40%-50%.', nilai: 6 }, { desc: 'Perubahan warna hampir menyeluruh pada permukaan produk 60%-70%.', nilai: 5 }, { desc: 'Perubahan warna hampir menyeluruh pada permukaan produk 80%-90%.', nilai: 3 }, { desc: 'Perubahan warna menyeluruh pada permukaan produk.', nilai: 1 }] },
+            { kategori: 'B. Sesudah pelelehan (thawing)', subKategori: '1. Kenampakan', items: [{ desc: 'Utuh, tidak cacat, warna pelangi permukaan kulit mengkilat, cemerlang.', nilai: 9 }, { desc: 'Utuh, tidak cacat, warna pelangi permukaan kulit mengkilat, cemerlang.', nilai: 8 }, { desc: 'Utuh, tidak cacat, warna pelangi permukaan kulit kurang mengkilat, agak cemerlang.', nilai: 7 }, { desc: 'Utuh, tidak cacat, warna pelangi permukaan kulit hilang, kurang cemerlang.', nilai: 6 }, { desc: 'Utuh, tidak cacat, warna pelangi permukaan kulit hilang.', nilai: 5 }, { desc: 'Utuh, tidak cacat, warna permukaan kulit kusam.', nilai: 3 }, { desc: 'Utuh, tidak cacat, warna permukaan kulit sangat kusam.', nilai: 1 }] },
+            { kategori: 'B. Sesudah pelelehan (thawing)', subKategori: '2. Bau', items: [{ desc: 'Sangat segar.', nilai: 9 }, { desc: 'Segar.', nilai: 8 }, { desc: 'Segar mendekati netral.', nilai: 7 }, { desc: 'Netral.', nilai: 6 }, { desc: 'Sedikit tengik.', nilai: 5 }, { desc: 'Tengik sedikit asam.', nilai: 3 }, { desc: 'Asam dan busuk.', nilai: 1 }] },
+            { kategori: 'B. Sesudah pelelehan (thawing)', subKategori: '3. Daging/tekstur', items: [{ desc: 'Sayatan daging warna merah kecoklatan sangat cerah, antar jaringan sangat kuat, sangat elastis.', nilai: 9 }, { desc: 'Sayatan daging warna merah kecoklatan cerah, antar jaringan kuat, elastis.', nilai: 8 }, { desc: 'Sayatan daging warna merah kecoklatan kurang cerah, antar jaringan kuat, agak elastis.', nilai: 7 }, { desc: 'Sayatan daging warna kecoklatan kurang cerah, antar jaringan sedikit longgar, kurang elastis.', nilai: 6 }, { desc: 'Sayatan daging warna kecoklatan kusam, antar jaringan longgar, tidak elastis.', nilai: 5 }, { desc: 'Sayatan daging warna coklat kusam, antar jaringan longgar.', nilai: 3 }, { desc: 'Sayatan daging warna coklat kehitaman kusam, antar jaringan sangat longgar.', nilai: 1 }] }
+        ];
+    } else if (isHiuUtuhBeku) {
+        scoreSheetItems = [
+            { kategori: 'A. Dalam keadaan beku', subKategori: '1. Pengeringan (dehidrasi)', items: [{ desc: 'Tidak ada pengeringan pada permukaan produk.', nilai: 9 }, { desc: 'Sedikit mengalami pengeringan pada permukaan produk 10%.', nilai: 7 }, { desc: 'Pengeringan mulai jelas pada permukaan produk 20 - 30%.', nilai: 5 }, { desc: 'Pengeringan banyak pada permukaan produk 40 - 50%.', nilai: 3 }, { desc: 'Seluruh bagian produk luar tampak mengering.', nilai: 1 }] },
+            { kategori: 'A. Dalam keadaan beku', subKategori: '2. Perubahan warna (diskolorasi)', items: [{ desc: 'Belum mengalami perubahan warna pada permukaan produk', nilai: 9 }, { desc: 'Sedikit mengalami perubahan warna permukaan produk 10%', nilai: 7 }, { desc: 'Agak banyak perubahan warna permukaan produk 20 - 30%', nilai: 5 }, { desc: 'Banyak perubahan warna pada permukaan produk 40 - 50%', nilai: 3 }, { desc: 'Perubahan warna menyeluruh pada permukaan produk.', nilai: 1 }] },
+            { kategori: 'B. Sesudah pelelehan (thawing)', subKategori: '1. Kenampakan', items: [{ desc: 'Utuh, bersih, tidak cacat, warna sesuai jenis, cemerlang', nilai: 9 }, { desc: 'Utuh, bersih, tidak cacat, warna sesuai jenis, kurang cemerlang', nilai: 7 }, { desc: 'Utuh, bersih, tidak cacat, warna sesuai jenis, agak kusam', nilai: 5 }, { desc: 'Sedikit rusak, warna kusam', nilai: 3 }, { desc: 'Rusak, sangat kusam', nilai: 1 }] },
+            { kategori: 'B. Sesudah pelelehan (thawing)', subKategori: '2. Bau', items: [{ desc: 'Sangat segar., spesifik hiu segar', nilai: 9 }, { desc: 'Segar.', nilai: 7 }, { desc: 'Kurang segar., sedikit bau amoniak', nilai: 5 }, { desc: 'Sedikit busuk bau amoniak kuat', nilai: 3 }, { desc: 'Busuk', nilai: 1 }] },
+            { kategori: 'B. Sesudah pelelehan (thawing)', subKategori: '3. Daging', items: [{ desc: 'Sayatan daging berwarna putih susu, sangat cemerlang', nilai: 9 }, { desc: 'Sayatan daging berwarna putih sedikit kusam, agak cemerlang', nilai: 7 }, { desc: 'Sayatan daging berwarna krem , kurang cemerlang', nilai: 5 }, { desc: 'Sayatan daging krem kecoklatan, kusam', nilai: 3 }, { desc: 'Sayatan coklat, sangat kusam', nilai: 1 }] },
+            { kategori: 'B. Sesudah pelelehan (thawing)', subKategori: '4. Tekstur', items: [{ desc: 'Padat, sangat kompak, sangat elastis', nilai: 9 }, { desc: 'Padat, kompak, elastis', nilai: 7 }, { desc: 'Kurang Padat, kurang kompak', nilai: 5 }, { desc: 'lembek, tidak kompak', nilai: 3 }, { desc: 'Sayatan coklat, sangat kusam', nilai: 1 }] }
+        ];
+    } else if (isFilletKakapBeku) {
+        scoreSheetItems = [
+            {
+                kategori: 'A. Dalam Keadaan Beku', subKategori: '1. Lapisan es', items: [
+                    { desc: 'Rata, bening, cukup tebal pada seluruh permukaan dilapisi es.', nilai: 9 },
+                    { desc: 'Rata, bening, cukup tebal, ada bagian yang terbuka 10%.', nilai: 8 },
+                    { desc: 'Tidak rata, bagian yang terbuka, sebanyak 20-30%.', nilai: 7 },
+                    { desc: 'Tidak rata, bagian yang terbuka sebanyak 40-50%.', nilai: 6 },
+                    { desc: 'Banyak bagian yang terbuka 60-70%.', nilai: 5 },
+                    { desc: 'Banyak bagian yang terbuka 80-90%.', nilai: 3 },
+                    { desc: 'Tidak terdapat lapisan es pada permukaan produk.', nilai: 1 }
+                ]
+            },
+            {
+                kategori: 'A. Dalam Keadaan Beku', subKategori: '2. Pengeringan (dehidrasi)', items: [
+                    { desc: 'Tidak ada pengeringan pada permukaan produk', nilai: 9 },
+                    { desc: 'Sedikit mengalami pengeringan pada permukaan produk 10%.', nilai: 8 },
+                    { desc: 'Pengeringan mulai jelas pada permukaan produk 20-30%.', nilai: 7 },
+                    { desc: 'Pengeringan banyak pada permukaan produk 40-50%.', nilai: 6 },
+                    { desc: 'Banyak bagian produk yang tampak mengering 60-70%.', nilai: 5 },
+                    { desc: 'Banyak bagian produk yang tampak mengering 80-90%.', nilai: 3 },
+                    { desc: 'Seluruh bagian produk luar tampak mengering.', nilai: 1 }
+                ]
+            },
+            {
+                kategori: 'A. Dalam Keadaan Beku', subKategori: '3. Perubahan warna (diskolorasi)', items: [
+                    { desc: 'Belum mengalami perubahan warna pada permukaan produk.', nilai: 9 },
+                    { desc: 'Sedikit mengalami perubahan warna pada permukaan produk 10%.', nilai: 8 },
+                    { desc: 'Agak banyak mengalami perubahan warna pada permukaan produk 20-30%.', nilai: 7 },
+                    { desc: 'Banyak mengalami perubahan warna pada permukaan produk 40-50%.', nilai: 6 },
+                    { desc: 'Perubahan warna hampir menyeluruh pada permukaan produk 60-70%.', nilai: 5 },
+                    { desc: 'Perubahan warna hampir menyeluruh pada permukaan produk 80-90%.', nilai: 3 },
+                    { desc: 'Perubahan warna menyeluruh pada permukaan produk.', nilai: 1 }
+                ]
+            },
+            {
+                kategori: 'B. Sesudah pelelehan (thawing)', subKategori: '1. Kenampakan', items: [
+                    { desc: 'Rapi, bersih, warna daging putih krem kemerahan, sangat cemerlang, linea lateralis berwarna merah muda.', nilai: 9 },
+                    { desc: 'Rapi, bersih, warna daging putih krem agak kemerahan, cemerlang, linea lateralis berwarna merah muda.', nilai: 8 },
+                    { desc: 'Rapi, bersih, warna daging krem agak kemerahan, kurang cemerlang, garis yang membentuk tulang belakang dan linea lateralis berwarna merah.', nilai: 7 },
+                    { desc: 'Rapi, bersih, warna daging krem kecoklatan, kusam, linea lateralis berwarna merah agak kecoklatan.', nilai: 5 },
+                    { desc: 'Rapi, kurang bersih, warna daging agak kehijauan-hijauan, kusam, garis yang membentuk bagian tulang belakang berwarna coklat kusam.', nilai: 3 },
+                    { desc: 'Rapi, kurang bersih, warna daging kehijauan, sangat kusam, garis yang membentuk bagian tulang belakang berwarna kehijauan.', nilai: 1 }
+                ]
+            },
+            {
+                kategori: 'B. Sesudah pelelehan (thawing)', subKategori: '2. Bau', items: [
+                    { desc: 'Sangat segar, spesifik jenis.', nilai: 9 },
+                    { desc: 'Segar, spesifik jenis.', nilai: 8 },
+                    { desc: 'Kurang segar, mengarah ke netral.', nilai: 7 },
+                    { desc: 'Apek sedikit tengik.', nilai: 5 },
+                    { desc: 'Asam, sedikit bau amoniak dan tengik amoniak jelas.', nilai: 3 },
+                    { desc: 'Busuk, asam dan bau amoniak.', nilai: 1 }
+                ]
+            },
+            {
+                kategori: 'B. Sesudah pelelehan (thawing)', subKategori: '3. Tekstur', items: [
+                    { desc: 'Padat, kompak dan elastis.', nilai: 9 },
+                    { desc: 'Padat, kompak, agak elastis.', nilai: 8 },
+                    { desc: 'Padat, kompak, kurang elastis.', nilai: 7 },
+                    { desc: 'Kurang padat, kurang kompak.', nilai: 5 },
+                    { desc: 'Lembek, tidak kompak.', nilai: 3 },
+                    { desc: 'Lembek sekali.', nilai: 1 }
+                ]
+            }
+        ];
+    } else if (isKepitingRebusBeku) {
+        scoreSheetItems = [
+            {
+                kategori: 'Sesudah pelelehan (thawing)', subKategori: '1. Kenampakan', items: [
+                    { desc: 'Putih sesuai spesifikasi, cemerlang asli menurut jenis.', nilai: 9 },
+                    { desc: 'Putih sesuai spesifikasi, cemerlang asli menurut jenis sedikit berkurang.', nilai: 8 },
+                    { desc: 'Putih sesuai spesifikasi, cemerlang, menurut jenis mulai hilang.', nilai: 7 },
+                    { desc: 'Warna asli menurut jenis hilang.', nilai: 6 },
+                    { desc: 'Warna asli menurut jenis hilang, agak kusam, mulai berlendir.', nilai: 5 },
+                    { desc: 'Warna asli menurut jenis hilang, kusam, berlendir.', nilai: 3 },
+                    { desc: 'Warna asli menurut jenis hilang, sangat kusam, berlendir.', nilai: 1 }
+                ]
+            },
+            {
+                kategori: 'Sesudah pelelehan (thawing)', subKategori: '2. Bau', items: [
+                    { desc: 'Sangat segar spesifik.', nilai: 9 },
+                    { desc: 'Segar spesifik jenis.', nilai: 8 },
+                    { desc: 'Spesifik jenis netral.', nilai: 7 },
+                    { desc: 'Berubah dari netral.', nilai: 6 },
+                    { desc: 'Mulai timbul bau amonia.', nilai: 5 },
+                    { desc: 'Busuk lanjut dan bau asam sulfida (Hâ‚‚S).', nilai: 3 },
+                    { desc: 'Amonia dan bau busuk menyengat.', nilai: 1 }
+                ]
+            },
+            {
+                kategori: 'Sesudah pelelehan (thawing)', subKategori: '3. Tekstur', items: [
+                    { desc: 'Sangat kompak.', nilai: 9 },
+                    { desc: 'Kompak.', nilai: 8 },
+                    { desc: 'Sedikit kompak.', nilai: 7 },
+                    { desc: 'Kurang kompak.', nilai: 5 },
+                    { desc: 'Tidak kompak.', nilai: 3 },
+                    { desc: 'Tidak kompak, agak lembek.', nilai: 1 }
+                ]
+            }
+        ];
+    } else if (isUdangKupasMentahBeku) {
+        scoreSheetItems = [
+            {
+                kategori: 'A. Dalam keadaan beku', subKategori: '1. Lapisan Es', items: [
+                    { desc: 'Rata, Bening, cukup tebal pada seluruh permukaan dilapisi es.', nilai: 9 },
+                    { desc: 'Rata, Bening, cukup tebal, ada bagian yang terbuka 10 %.', nilai: 8 },
+                    { desc: 'Tidak rata, bagian yang terbuka, sebanyak 20 - 30 %.', nilai: 7 },
+                    { desc: 'Tidak rata, bagian yang terbuka, sebanyak 40 - 50 %.', nilai: 6 },
+                    { desc: 'Banyak bagian yang terbuka 60 - 70 %.', nilai: 5 },
+                    { desc: 'Banyak bagian yang terbuka 80 - 90 %.', nilai: 3 },
+                    { desc: 'Tidak terdapat lapisan es pada permukaan produk.', nilai: 1 }
+                ]
+            },
+            {
+                kategori: 'A. Dalam keadaan beku', subKategori: '2. Pengeringan (dehidrasi)', items: [
+                    { desc: 'Tidak ada pengeringan pada permukaan produk.', nilai: 9 },
+                    { desc: 'Sedikit mengalami pengeringan pada permukaan produk 10 %.', nilai: 8 },
+                    { desc: 'Pengeringan mulai jelas pada permukaan produk 20 - 30 %.', nilai: 7 },
+                    { desc: 'Pengeringan banyak pada permukaan produk 40 - 50 %.', nilai: 6 },
+                    { desc: 'Banyak bagian produk yang tampak mengering 60 - 70 %.', nilai: 5 },
+                    { desc: 'Banyak bagian produk yang tampak mengering 80 - 90 %.', nilai: 3 },
+                    { desc: 'Seluruh bagian produk luar tampak mengering.', nilai: 1 }
+                ]
+            },
+            {
+                kategori: 'A. Dalam keadaan beku', subKategori: '3. Perubahan warna (diskolorasi)', items: [
+                    { desc: 'Belum mengalami perubahan warna pada permukaan produk.', nilai: 9 },
+                    { desc: 'Sedikit mengalami perubahan warna permukaan produk 10 %.', nilai: 8 },
+                    { desc: 'Agak banyak perubahan warna permukaan produk 20 - 30 %.', nilai: 7 },
+                    { desc: 'Banyak perubahan warna pada permukaan produk 40 - 50 %.', nilai: 6 },
+                    { desc: 'Perubahan warna hampir menyeluruh permukaan produk 60 - 70 %.', nilai: 5 },
+                    { desc: 'Perubahan warna hampir menyeluruh permukaan produk 80 - 90 %.', nilai: 3 },
+                    { desc: 'Perubahan warna menyeluruh pada permukaan produk.', nilai: 1 }
+                ]
+            },
+            {
+                kategori: 'B. Sesudah pelelehan (thawing)', subKategori: '1. Kenampakan', items: [
+                    { desc: 'Utuh, rapi, bercahaya, warna daging asli jenis.', nilai: 9 },
+                    { desc: 'Utuh, rapi, kurang bercahaya, warna daging asli jenis.', nilai: 7 },
+                    { desc: 'Utuh, kurang rapi, kurang bercahaya, warna daging asli jenis.', nilai: 6 },
+                    { desc: 'Utuh, kurang rapi, agak kusam, warna daging asli jenis mulai berubah.', nilai: 5 },
+                    { desc: 'Utuh, kurang rapi, kusam, warna daging agak pink.', nilai: 3 },
+                    { desc: 'Utuh, kurang rapi, kusam sekali, warna daging pink.', nilai: 1 }
+                ]
+            },
+            {
+                kategori: 'B. Sesudah pelelehan (thawing)', subKategori: '2. Bau', items: [
+                    { desc: 'Sangat segar, spesifik jenis.', nilai: 9 },
+                    { desc: 'Bau netral.', nilai: 7 },
+                    { desc: 'Bau berubah dari netral.', nilai: 6 },
+                    { desc: 'Bau sedikit asam.', nilai: 5 },
+                    { desc: 'Bau asam dan amoniak.', nilai: 3 },
+                    { desc: 'Bau busuk dan amoniak cukup tajam.', nilai: 1 }
+                ]
+            },
+            {
+                kategori: 'B. Sesudah pelelehan (thawing)', subKategori: '3. Daging / Tekstur', items: [
+                    { desc: 'Elastis.', nilai: 9 },
+                    { desc: 'Sedikit elastis.', nilai: 7 },
+                    { desc: 'Kurang elastis, agak lembek.', nilai: 5 },
+                    { desc: 'Kurang elastis, lembek.', nilai: 3 },
+                    { desc: 'Kurang elastis, lembek & berair.', nilai: 1 }
+                ]
+            }
+        ];
+    } else if (isBaksoIkan) {
+        scoreSheetItems = [
+            {
+                kategori: '1. Kenampakan', items: [
+                    { desc: 'Permukaan halus, tidak berongga, cerah', nilai: 9 },
+                    { desc: 'Permukaan agak halus, sedikit berongga, agak cerah', nilai: 7 },
+                    { desc: 'Permukaan kasar, berongga, kusam', nilai: 5 }
+                ]
+            },
+            {
+                kategori: '2. Bau', items: [
+                    { desc: 'Spesifik produk', nilai: 9 },
+                    { desc: 'Agak spesifik produk', nilai: 7 },
+                    { desc: 'Netral', nilai: 5 }
+                ]
+            },
+            {
+                kategori: '3. Rasa', items: [
+                    { desc: 'Spesifik produk', nilai: 9 },
+                    { desc: 'Agak spesifik produk', nilai: 7 },
+                    { desc: 'Hambar', nilai: 5 }
+                ]
+            },
+            {
+                kategori: '4. Tekstur', items: [
+                    { desc: 'Padat, kompak, kenyal', nilai: 9 },
+                    { desc: 'Padat, kompak, agak kenyal', nilai: 7 },
+                    { desc: 'Tidak padat, tidak kompak, tidak kenyal', nilai: 5 }
+                ]
+            }
+        ];
+    } else if (isUdangMasakBeku) {
+        scoreSheetItems = [
+            {
+                kategori: 'A. Dalam keadaan beku', subKategori: '1. Lapisan es', items: [
+                    { desc: 'Rata, bening, seluruh permukaan dilapisi es', nilai: 9 },
+                    { desc: 'Tidak rata, bening, bagian permukaan produk yang tidak dilapisi es kurang lebih 30%', nilai: 7 },
+                    { desc: 'Tidak rata, bagian permukaan yang tidak dilapisi es kurang dari 50%', nilai: 5 }
+                ]
+            },
+            {
+                kategori: 'A. Dalam keadaan beku', subKategori: '2. Pengeringan (dehidrasi)', items: [
+                    { desc: 'Tidak ada pengeringan pada permukaan produk', nilai: 9 },
+                    { desc: 'Pengeringan pada permukaan produk kurang lebih 30%', nilai: 7 },
+                    { desc: 'Pengeringan pada permukaan produk kurang dari 50%', nilai: 5 }
+                ]
+            },
+            {
+                kategori: 'A. Dalam keadaan beku', subKategori: '3. Perubahan warna (diskolorasi)', items: [
+                    { desc: 'Belum mengalami perubahan warna pada permukaan produk', nilai: 9 },
+                    { desc: 'Perubahan warna pada permukaan produk kurang lebih 30%', nilai: 7 },
+                    { desc: 'Perubahan warna pada permukaan produk kurang dari 50%', nilai: 5 }
+                ]
+            },
+            {
+                kategori: 'B. Sesudah dilelehkan (thawing)', subKategori: '1. Kenampakan', items: [
+                    { desc: 'Utuh, daging berwarna merah muda cerah dan bersih', nilai: 9 },
+                    { desc: 'Utuh, daging berwarna merah muda, agak cerah dan bersih', nilai: 7 },
+                    { desc: 'Utuh, sedikit cacat, daging berwarna merah muda pucat, kusam, sedikit kotor', nilai: 5 }
+                ]
+            },
+            {
+                kategori: 'B. Sesudah dilelehkan (thawing)', subKategori: '2. Bau', items: [
+                    { desc: 'Bau sangat segar', nilai: 9 },
+                    { desc: 'Bau segar', nilai: 7 },
+                    { desc: 'Sedikit busuk', nilai: 5 }
+                ]
+            },
+            {
+                kategori: 'B. Sesudah dilelehkan (thawing)', subKategori: '3. Rasa', items: [
+                    { desc: 'Manis dan segar', nilai: 9 },
+                    { desc: 'Agak manis', nilai: 7 },
+                    { desc: 'Agak hambar', nilai: 5 }
+                ]
+            },
+            {
+                kategori: 'B. Sesudah dilelehkan (thawing)', subKategori: '4. Tekstur', items: [
+                    { desc: 'Elastis, kompak dan padat', nilai: 9 },
+                    { desc: 'Elastis, kompak dan kurang padat', nilai: 7 },
+                    { desc: 'Elastis dan agak hambar', nilai: 5 }
+                ]
+            }
+        ];
+    } else if (isTunaLoinBeku) {
+        scoreSheetItems = [
+            {
+                kategori: 'A. Dalam keadaan beku', subKategori: '1. Lapisan es', items: [
+                    { desc: 'Rata, bening, seluruh permukaan dilapisi es', nilai: 9 },
+                    { desc: 'Tidak rata, bening, bagian permukaan produk yang tidak dilapisi es kurang lebih 30%', nilai: 7 },
+                    { desc: 'Tidak rata, bagian permukaan yang tidak dilapisi es kurang dari 50%', nilai: 5 },
+                    { desc: 'Tidak rata, bagian permukaan yang tidak dilapisi es lebih dari 50%', nilai: 3 },
+                    { desc: 'Tidak terdapat lapisan es pada permukaan produk', nilai: 1 }
+                ]
+            },
+            {
+                kategori: 'A. Dalam keadaan beku', subKategori: '2. Pengeringan (dehidrasi)', items: [
+                    { desc: 'Tidak ada pengeringan pada permukaan produk', nilai: 9 },
+                    { desc: 'Pengeringan pada permukaan produk kurang lebih 30%', nilai: 7 },
+                    { desc: 'Pengeringan pada permukaan produk kurang dari 50%', nilai: 5 },
+                    { desc: 'Pengeringan banyak pada permukaan produk 40%-50%', nilai: 3 },
+                    { desc: 'Seluruh bagian produk luar tampak mengering', nilai: 1 }
+                ]
+            },
+            {
+                kategori: 'A. Dalam keadaan beku', subKategori: '3. Perubahan warna (diskolorasi)', items: [
+                    { desc: 'Belum mengalami perubahan warna pada permukaan produk', nilai: 9 },
+                    { desc: 'Perubahan warna pada permukaan produk kurang lebih 30%', nilai: 7 },
+                    { desc: 'Perubahan warna pada permukaan produk kurang dari 50%', nilai: 5 },
+                    { desc: 'Perubahan warna pada permukaan produk lebih dari 50%', nilai: 3 },
+                    { desc: 'Perubahan warna menyeluruh pada permukaan produk', nilai: 1 }
+                ]
+            },
+            {
+                kategori: 'B. Setelah pelelehan (thawing)', subKategori: '1. Kenampakan', items: [
+                    { desc: 'Cemerlang spesifik produk', nilai: 9 },
+                    { desc: 'Kurang cemerlang spesifik produk', nilai: 7 },
+                    { desc: 'Agak kusam', nilai: 5 },
+                    { desc: 'Mulai berubah warna', nilai: 3 },
+                    { desc: 'Warna agak kemerahan', nilai: 1 }
+                ]
+            },
+            {
+                kategori: 'B. Setelah pelelehan (thawing)', subKategori: '2. Tekstur', items: [
+                    { desc: 'Padat, kompak', nilai: 9 },
+                    { desc: 'Padat, kurang kompak', nilai: 7 },
+                    { desc: 'Agak lembek', nilai: 5 },
+                    { desc: 'Lembek', nilai: 3 },
+                    { desc: 'Sangat lembek', nilai: 1 }
+                ]
+            },
+            {
+                kategori: 'B. Setelah pelelehan (thawing)', subKategori: '3. Bau', items: [
+                    { desc: 'Spesifik produk', nilai: 9 },
+                    { desc: 'Netral', nilai: 7 },
+                    { desc: 'Sedikit tengik', nilai: 5 },
+                    { desc: 'Asam, sedikit bau amonia, tengik', nilai: 3 },
+                    { desc: 'Amonia dan busuk jelas sekali', nilai: 1 }
+                ]
+            }
+        ];
+    } else if (isTunaSteakBeku) {
+        scoreSheetItems = [
+            {
+                kategori: 'A. Dalam keadaan beku', subKategori: '1. Lapisan es', items: [
+                    { desc: 'Rata, bening, cukup tebal pada seluruh permukaan dilapisi es.', nilai: 9 },
+                    { desc: 'Rata, bening, cukup tebal, ada bagian yang terbuka 10%.', nilai: 8 },
+                    { desc: 'Tidak rata, bagian yang terbuka, sebanyak 20%-30%.', nilai: 7 },
+                    { desc: 'Tidak rata, bagian yang terbuka sebanyak 40%-50%.', nilai: 6 },
+                    { desc: 'Banyak bagian yang terbuka 60%-70%.', nilai: 5 },
+                    { desc: 'Banyak bagian yang terbuka 80%-90%.', nilai: 3 },
+                    { desc: 'Tidak terdapat lapisan es pada permukaan produk', nilai: 1 }
+                ]
+            },
+            {
+                kategori: 'A. Dalam keadaan beku', subKategori: '2. Pengeringan (dehidrasi)', items: [
+                    { desc: 'Tidak ada pengeringan pada permukaan produk', nilai: 9 },
+                    { desc: 'Sedikit mengalami pengeringan pada permukaan produk 10%.', nilai: 8 },
+                    { desc: 'Pengeringan mulai jelas pada permukaan produk 20%-30%.', nilai: 7 },
+                    { desc: 'Pengeringan banyak pada permukaan produk 40%-50%.', nilai: 6 },
+                    { desc: 'Banyak bagian produk yang tampak mengering 60%-70%.', nilai: 5 },
+                    { desc: 'Banyak bagian produk yang tampak mengering 80%-90%.', nilai: 3 },
+                    { desc: 'Seluruh bagian produk luar tampak mengering.', nilai: 1 }
+                ]
+            },
+            {
+                kategori: 'A. Dalam keadaan beku', subKategori: '3. Perubahan warna (diskolorasi)', items: [
+                    { desc: 'Belum mengalami perubahan warna pada permukaan produk.', nilai: 9 },
+                    { desc: 'Sedikit mengalami perubahan warna pada permukaan produk 10%.', nilai: 8 },
+                    { desc: 'Agak banyak mengalami perubahan warna pada permukaan produk 20%-30%.', nilai: 7 },
+                    { desc: 'Banyak mengalami perubahan warna pada permukaan produk 40%-50%.', nilai: 6 },
+                    { desc: 'Perubahan warna hampir menyeluruh pada permukaan produk 60%-70%.', nilai: 5 },
+                    { desc: 'Perubahan warna hampir menyeluruh pada permukaan produk 80%-90%.', nilai: 3 },
+                    { desc: 'Perubahan warna menyeluruh pada permukaan produk.', nilai: 1 }
+                ]
+            },
+            {
+                kategori: 'B. Sesudah dilelehkan (thawing)', subKategori: '1. Kenampakan', items: [
+                    { desc: 'Warna daging krem, sangat cerah dan sangat mengkilap', nilai: 9 },
+                    { desc: 'Warna daging krem, cerah dan mengkilap', nilai: 8 },
+                    { desc: 'Warna daging krem, cerah, kurang mengkilap', nilai: 7 },
+                    { desc: 'Warna dagingkrem kecoklatan, agak kusam', nilai: 6 },
+                    { desc: 'Warna daging kecoklatan, kusam', nilai: 5 },
+                    { desc: 'Warna daging coklat, kusam', nilai: 3 },
+                    { desc: 'Warna daging coklat tua, sangat kusam', nilai: 1 }
+                ]
+            },
+            {
+                kategori: 'B. Sesudah dilelehkan (thawing)', subKategori: '3. Bau', items: [
+                    { desc: 'Bau sangat segar.', nilai: 9 },
+                    { desc: 'Bau segar.', nilai: 8 },
+                    { desc: 'Bau segar mengarah ke netral.', nilai: 7 },
+                    { desc: 'Netral', nilai: 6 },
+                    { desc: 'Netral dengan sedikit bau tambahan yang mengganggu', nilai: 5 },
+                    { desc: 'Tercium bau busuk', nilai: 3 },
+                    { desc: 'Bau busuk sangat jelas', nilai: 1 }
+                ]
+            },
+            {
+                kategori: 'B. Sesudah dilelehkan (thawing)', subKategori: '4. Tekstur', items: [
+                    { desc: 'Kompak, padat dan sangat elastis', nilai: 9 },
+                    { desc: 'Kompak, padat dan elastis', nilai: 8 },
+                    { desc: 'Kurang padat, kurang elastis, jaringan daging masih melekat kuat', nilai: 7 },
+                    { desc: 'Kurang elastis, jaringan daging agak longgar', nilai: 6 },
+                    { desc: 'Tidak elastis, jaringan daging longgar dan daging agak mudah sobek', nilai: 5 },
+                    { desc: 'Lunak, daging mudah sobek', nilai: 3 },
+                    { desc: 'Sangat lunak, daging sangat mudah sobek', nilai: 1 }
+                ]
+            }
+        ];
     } else if (isUdangSegar) {
         scoreSheetItems = [
             { kategori: '1. Kenampakan', items: [{ desc: 'Utuh, bening bercahaya asli menurut jenis, antar ruas kokoh', nilai: 9 }, { desc: 'Utuh, kurang bening, cahaya mulai pudar, berwarna asli, antar ruas kokoh', nilai: 8 }, { desc: 'Utuh, kebeningan agak hilang, sedikit kusam, antar ruas kurang kokoh', nilai: 7 }, { desc: 'Utuh, kebeningan hilang, kusam, warna agak merah muda, sedikit noda hitam, antar ruas kurang kokoh', nilai: 5 }, { desc: 'Warna merah, noda hitam banyak, kulit mudah lepas dari daging', nilai: 3 }, { desc: 'Warna merah sangat kusam, banyak sekali noda hitam', nilai: 1 }] },
-            { kategori: '2. Bau', items: [{ desc: 'Bau sangat segar spesifik jenis', nilai: 9 }, { desc: 'Bau segar spesifik jenis', nilai: 8 }, { desc: 'Bau spesifik jenis netral', nilai: 7 }, { desc: 'Mulai timbul bau amoniak', nilai: 5 }, { desc: 'Bau asam sulfit (H₂S)', nilai: 3 }, { desc: 'Bau amoniak kuat dan bau busuk', nilai: 1 }] },
+            { kategori: '2. Bau', items: [{ desc: 'Bau sangat segar spesifik jenis', nilai: 9 }, { desc: 'Bau segar spesifik jenis', nilai: 8 }, { desc: 'Bau spesifik jenis netral', nilai: 7 }, { desc: 'Mulai timbul bau amoniak', nilai: 5 }, { desc: 'Bau asam sulfit (Hâ‚‚S)', nilai: 3 }, { desc: 'Bau amoniak kuat dan bau busuk', nilai: 1 }] },
             { kategori: '3. Tekstur', items: [{ desc: 'Sangat elastis, kompak dan padat', nilai: 9 }, { desc: 'Elastis, kompak dan padat', nilai: 8 }, { desc: 'Kurang elastis, kompak dan padat', nilai: 7 }, { desc: 'Tidak elastis, tidak kompak dan tidak padat', nilai: 5 }, { desc: 'Agak lunak', nilai: 3 }, { desc: 'Lunak', nilai: 1 }] }
         ];
     } else {
@@ -3747,12 +4596,12 @@ function generateLHUHtml(data, hewan) {
                     firstColContent += `<strong>${section.subKategori}</strong><br>`;
                 }
             }
-            specText = firstColContent + `<div style="padding-left:${firstColContent ? '10px' : '0'}">` + (item.desc.startsWith('•') ? item.desc : '• ' + item.desc) + `</div>`;
+            specText = firstColContent + `<div style="padding-left:${firstColContent ? '10px' : '0'}">` + (item.desc.startsWith('\u2022') ? item.desc : '&bull; ' + item.desc) + `</div>`;
             let checkboxesHtml = '';
             const samplesCount = isRumputLautKering ? 8 : 6;
             for (let k = 1; k <= samplesCount; k++) {
                 const isChecked = selectionMap[globalRowIndex] && selectionMap[globalRowIndex][k];
-                checkboxesHtml += `<td style="border: 1px solid #000; text-align: center; vertical-align: middle;">${isChecked ? '✔' : ''}</td>`;
+                checkboxesHtml += `<td style="border: 1px solid #000; text-align: center; vertical-align: middle;">${isChecked ? '&#10003;' : ''}</td>`;
             }
             scoreRowsHtml += `<tr><td style="border: 1px solid #000; padding: 2px; vertical-align: top; font-size: 9pt;">${specText}</td><td style="border: 1px solid #000; padding: 2px; text-align: center; vertical-align: middle; font-weight: bold;">${item.nilai}</td>${checkboxesHtml}</tr>`;
             globalRowIndex++;
@@ -3780,7 +4629,7 @@ function generateLHUHtml(data, hewan) {
             <thead><tr><th style="border: 1px solid #000; padding: 3px; text-align: center; width: 40px;">NO</th><th style="border: 1px solid #000; padding: 3px; text-align: center;">JENIS CONTOH UJI</th><th style="border: 1px solid #000; padding: 3px; text-align: center;">JUMLAH</th><th style="border: 1px solid #000; padding: 3px; text-align: center;">UKURAN</th><th style="border: 1px solid #000; padding: 3px; text-align: center;">Ket.</th></tr></thead>
             <tbody><tr><td style="border: 1px solid #000; padding: 3px; text-align: center;">1.</td><td style="border: 1px solid #000; padding: 3px;">${jenisContoh}</td><td style="border: 1px solid #000; padding: 3px; text-align: center;">${jumlah}</td><td style="border: 1px solid #000; padding: 3px; text-align: center;">${ukuran}</td><td style="border: 1px solid #000; padding: 3px; text-align: center;">${keterangan}</td></tr></tbody>
         </table>
-        <div style="margin-bottom: 2px; font-size: 8pt;">• Berilah tanda ✓ pada nilai yang dipilih sesuai kode contoh yang diuji.</div>
+        <div style="margin-bottom: 2px; font-size: 8pt;">â€¢ Berilah tanda âœ“ pada nilai yang dipilih sesuai kode contoh yang diuji.</div>
         <table style="width: 100%; border-collapse: collapse; font-size: 8pt;">
             <thead>
                 <tr><th style="border: 1px solid #000; padding: 3px; text-align: left; vertical-align: middle;" rowspan="2">Spesifikasi</th><th style="border: 1px solid #000; padding: 3px; text-align: center; vertical-align: middle;" rowspan="2">Nilai</th><th style="border: 1px solid #000; padding: 3px; text-align: center;" colspan="${isRumputLautKering ? 8 : 6}">Kode Contoh</th></tr>
@@ -4068,7 +4917,7 @@ async function showLHUPreview(savedData = null, savedHewan = null, savedFilename
         footerDiv.style.marginTop = isMobile ? '10px' : '15px';
 
         const printBtn = document.createElement('button');
-        printBtn.textContent = '🖨️ Print';
+        printBtn.innerHTML = '&#128424; Print';
         printBtn.style.padding = isMobile ? '8px 15px' : '10px 20px';
         printBtn.style.border = 'none';
         printBtn.style.background = '#1976D2';
@@ -4091,7 +4940,7 @@ async function showLHUPreview(savedData = null, savedHewan = null, savedFilename
         };
 
         const htmlBtn = document.createElement('button');
-        htmlBtn.textContent = '⬇️ HTML';
+        htmlBtn.innerHTML = '&#11015; HTML';
         htmlBtn.style.padding = isMobile ? '8px 15px' : '10px 20px';
         htmlBtn.style.border = 'none';
         htmlBtn.style.background = '#009688'; // Teal
@@ -4197,7 +5046,7 @@ function updateCheckmark(cell, checked) {
             mark.style.color = '#667eea';
             mark.style.display = 'block';
             mark.style.pointerEvents = 'none';
-            mark.textContent = '✓'; // Fixed checkmark symbol
+            mark.innerHTML = '&#10003;'; // Fixed checkmark symbol
             cell.appendChild(mark);
         }
         cell.style.backgroundColor = '#e8f0fe';
@@ -4830,6 +5679,102 @@ function handleFormSubmit(jenisUji, hewan) {
         }
     }
 
+    if (hewan === 'lobster-beku') {
+        const kodeContohUjiInput = document.getElementById('kodeContohUji');
+        const tglDiterimaInput = document.getElementById('tglDiterima');
+        if (kodeContohUjiInput) data.kodeContohUji = kodeContohUjiInput.value || '';
+        if (tglDiterimaInput) data.tglDiterima = tglDiterimaInput.value || '';
+
+        const table = document.getElementById('lobsterBekuTable');
+        if (table) {
+            data.penilaianLobsterBeku = {};
+            for (let kode = 1; kode <= 6; kode++) {
+                const kodeData = { nilai: [], total: 0, rataRata: 0 };
+                const checkboxes = table.querySelectorAll(`.nilai-checkbox[data-kode="${kode}"]:checked`);
+                checkboxes.forEach(checkbox => {
+                    kodeData.nilai.push({ rowIndex: checkbox.dataset.rowIndex, nilai: parseInt(checkbox.dataset.nilai) });
+                });
+                const totalCell = table.querySelector(`.total-cell[data-kode="${kode}"]`);
+                const avgCell = table.querySelector(`.avg-cell[data-kode="${kode}"]`);
+                if (totalCell) kodeData.total = parseInt(totalCell.textContent) || 0;
+                if (avgCell) kodeData.rataRata = parseFloat(avgCell.textContent) || 0;
+                data.penilaianLobsterBeku[`kodeContoh${kode}`] = kodeData;
+            }
+        }
+    }
+
+    if (hewan === 'cakalang-beku') {
+        const kodeContohUjiInput = document.getElementById('kodeContohUji');
+        const tglDiterimaInput = document.getElementById('tglDiterima');
+        if (kodeContohUjiInput) data.kodeContohUji = kodeContohUjiInput.value || '';
+        if (tglDiterimaInput) data.tglDiterima = tglDiterimaInput.value || '';
+
+        const table = document.getElementById('cakalangBekuTable');
+        if (table) {
+            data.penilaianCakalangBeku = {};
+            for (let kode = 1; kode <= 6; kode++) {
+                const kodeData = { nilai: [], total: 0, rataRata: 0 };
+                const checkboxes = table.querySelectorAll(`.nilai-checkbox[data-kode="${kode}"]:checked`);
+                checkboxes.forEach(checkbox => {
+                    kodeData.nilai.push({ rowIndex: checkbox.dataset.rowIndex, nilai: parseInt(checkbox.dataset.nilai) });
+                });
+                const totalCell = table.querySelector(`.total-cell[data-kode="${kode}"]`);
+                const avgCell = table.querySelector(`.avg-cell[data-kode="${kode}"]`);
+                if (totalCell) kodeData.total = parseInt(totalCell.textContent) || 0;
+                if (avgCell) kodeData.rataRata = parseFloat(avgCell.textContent) || 0;
+                data.penilaianCakalangBeku[`kodeContoh${kode}`] = kodeData;
+            }
+        }
+    }
+
+    if (hewan === 'hiu-utuh-beku') {
+        const kodeContohUjiInput = document.getElementById('kodeContohUji');
+        const tglDiterimaInput = document.getElementById('tglDiterima');
+        if (kodeContohUjiInput) data.kodeContohUji = kodeContohUjiInput.value || '';
+        if (tglDiterimaInput) data.tglDiterima = tglDiterimaInput.value || '';
+
+        const table = document.getElementById('hiuUtuhBekuTable');
+        if (table) {
+            data.penilaianHiuUtuhBeku = {};
+            for (let kode = 1; kode <= 6; kode++) {
+                const kodeData = { nilai: [], total: 0, rataRata: 0 };
+                const checkboxes = table.querySelectorAll(`.nilai-checkbox[data-kode="${kode}"]:checked`);
+                checkboxes.forEach(checkbox => {
+                    kodeData.nilai.push({ rowIndex: checkbox.dataset.rowIndex, nilai: parseInt(checkbox.dataset.nilai) });
+                });
+                const totalCell = table.querySelector(`.total-cell[data-kode="${kode}"]`);
+                const avgCell = table.querySelector(`.avg-cell[data-kode="${kode}"]`);
+                if (totalCell) kodeData.total = parseInt(totalCell.textContent) || 0;
+                if (avgCell) kodeData.rataRata = parseFloat(avgCell.textContent) || 0;
+                data.penilaianHiuUtuhBeku[`kodeContoh${kode}`] = kodeData;
+            }
+        }
+    }
+
+    if (hewan === 'fillet-kakap-beku') {
+        const kodeContohUjiInput = document.getElementById('kodeContohUji');
+        const tglDiterimaInput = document.getElementById('tglDiterima');
+        if (kodeContohUjiInput) data.kodeContohUji = kodeContohUjiInput.value || '';
+        if (tglDiterimaInput) data.tglDiterima = tglDiterimaInput.value || '';
+
+        const table = document.getElementById('filletKakapBekuTable');
+        if (table) {
+            data.penilaianFilletKakapBeku = {};
+            for (let kode = 1; kode <= 6; kode++) {
+                const kodeData = { nilai: [], total: 0, rataRata: 0 };
+                const checkboxes = table.querySelectorAll(`.nilai-checkbox[data-kode="${kode}"]:checked`);
+                checkboxes.forEach(checkbox => {
+                    kodeData.nilai.push({ rowIndex: checkbox.dataset.rowIndex, nilai: parseInt(checkbox.dataset.nilai) });
+                });
+                const totalCell = table.querySelector(`.total-cell[data-kode="${kode}"]`);
+                const avgCell = table.querySelector(`.avg-cell[data-kode="${kode}"]`);
+                if (totalCell) kodeData.total = parseInt(totalCell.textContent) || 0;
+                if (avgCell) kodeData.rataRata = parseFloat(avgCell.textContent) || 0;
+                data.penilaianFilletKakapBeku[`kodeContoh${kode}`] = kodeData;
+            }
+        }
+    }
+
     // Capture QR Code Source explicitly for saving
     let qrSrc = '';
     const qrImg = document.querySelector('#qrcode-container img');
@@ -4994,7 +5939,7 @@ function generateLobsterUdangKipasTable(container) {
                 </tr>
             </tbody>
         </table>
-        <p style="margin-bottom: 15px; font-style: italic;">Berilah tanda ✓ pada nilai yang dipilih sesuai kode contoh yang diuji.</p>
+        <p style="margin-bottom: 15px; font-style: italic;">Berilah tanda âœ“ pada nilai yang dipilih sesuai kode contoh yang diuji.</p>
     `;
     container.appendChild(headerDiv);
     // Hide catatan section for Lobster/Udang Kipas
@@ -5231,7 +6176,7 @@ function generateKepitingBakauTable(container) {
                 </tr>
             </tbody>
         </table>
-        <p style="margin-bottom: 15px; font-style: italic;">Berilah tanda ✓ pada nilai yang dipilih sesuai kode contoh yang diuji.</p>
+        <p style="margin-bottom: 15px; font-style: italic;">Berilah tanda âœ“ pada nilai yang dipilih sesuai kode contoh yang diuji.</p>
     `;
     container.appendChild(headerDiv);
     // Hide catatan section for Kepiting Bakau
@@ -5486,7 +6431,7 @@ function generateIkanAsapMurniTable(container) {
                 </tr>
             </tbody>
         </table>
-        <p style="margin-bottom: 15px; font-style: italic;">Berilah tanda ✓ pada nilai yang dipilih sesuai kode contoh yang diuji.</p>
+        <p style="margin-bottom: 15px; font-style: italic;">Berilah tanda âœ“ pada nilai yang dipilih sesuai kode contoh yang diuji.</p>
     `;
     container.appendChild(headerDiv);
     // Hide catatan section
@@ -5817,7 +6762,7 @@ function generateSiripHiuKeringTable(container) {
                 </tr>
             </tbody>
         </table>
-        <p style="margin-bottom: 15px; font-style: italic;">Berilah tanda ✓ pada nilai yang dipilih sesuai kode contoh yang diuji.</p>
+        <p style="margin-bottom: 15px; font-style: italic;">Berilah tanda âœ“ pada nilai yang dipilih sesuai kode contoh yang diuji.</p>
     `;
     container.appendChild(headerDiv);
 
@@ -5862,7 +6807,7 @@ function generateSiripHiuKeringTable(container) {
     thead.innerHTML = `
         <tr style="background-color: #f5f5f5;">
             <th style="border: 1px solid #ddd; padding: 10px; text-align: center; width: 50%;">Spesifikasi</th>
-            <th style="border: 1px solid #ddd; padding: 10px; text-align: center; width: 60px;">Nilai (✓)</th>
+            <th style="border: 1px solid #ddd; padding: 10px; text-align: center; width: 60px;">Nilai (âœ“)</th>
             <th colspan="6" style="border: 1px solid #ddd; padding: 10px; text-align: center;">Kode Contoh Uji :</th>
         </tr>
         <tr style="background-color: #f5f5f5;">
@@ -6067,7 +7012,7 @@ function generateUdangKeringUtuhTable(container) {
                 </tr>
             </tbody>
         </table>
-        <p style="margin-bottom: 15px; font-style: italic;">Berilah tanda ✓ pada nilai yang dipilih sesuai kode contoh yang diuji.</p>
+        <p style="margin-bottom: 15px; font-style: italic;">Berilah tanda âœ“ pada nilai yang dipilih sesuai kode contoh yang diuji.</p>
     `;
     container.appendChild(headerDiv);
 
@@ -6135,7 +7080,7 @@ function generateUdangKeringUtuhTable(container) {
     thead.innerHTML = `
         <tr style="background-color: #f5f5f5;">
             <th style="border: 1px solid #ddd; padding: 10px; text-align: center; width: 50%;">Spesifikasi</th>
-            <th style="border: 1px solid #ddd; padding: 10px; text-align: center; width: 60px;">Nilai (✓)</th>
+            <th style="border: 1px solid #ddd; padding: 10px; text-align: center; width: 60px;">Nilai (âœ“)</th>
             <th colspan="6" style="border: 1px solid #ddd; padding: 10px; text-align: center;">Kode Contoh Uji :</th>
         </tr>
         <tr style="background-color: #f5f5f5;">
@@ -6339,7 +7284,7 @@ function generateAbonIkanTable(container) {
                 </tr>
             </tbody>
         </table>
-        <p style="margin-bottom: 15px; font-style: italic;">Berilah tanda ✓ pada nilai yang dipilih sesuai kode contoh yang diuji.</p>
+        <p style="margin-bottom: 15px; font-style: italic;">Berilah tanda âœ“ pada nilai yang dipilih sesuai kode contoh yang diuji.</p>
     `;
     container.appendChild(headerDiv);
 
@@ -6399,7 +7344,7 @@ function generateAbonIkanTable(container) {
     thead.innerHTML = `
         <tr style="background-color: #f5f5f5;">
             <th style="border: 1px solid #ddd; padding: 10px; text-align: center; width: 50%;">Spesifikasi</th>
-            <th style="border: 1px solid #ddd; padding: 10px; text-align: center; width: 60px;">Nilai (✓)</th>
+            <th style="border: 1px solid #ddd; padding: 10px; text-align: center; width: 60px;">Nilai (âœ“)</th>
             <th colspan="6" style="border: 1px solid #ddd; padding: 10px; text-align: center;">Kode Contoh Uji :</th>
         </tr>
         <tr style="background-color: #f5f5f5;">
@@ -6603,7 +7548,7 @@ function generateSambalIkanTable(container) {
                 </tr>
             </tbody>
         </table>
-        <p style="margin-bottom: 15px; font-style: italic;">Berilah tanda ✓ pada nilai yang dipilih sesuai kode contoh yang diuji.</p>
+        <p style="margin-bottom: 15px; font-style: italic;">Berilah tanda âœ“ pada nilai yang dipilih sesuai kode contoh yang diuji.</p>
     `;
     container.appendChild(headerDiv);
 
@@ -6676,7 +7621,7 @@ function generateSambalIkanTable(container) {
             const specCell = document.createElement('td');
             specCell.style.border = '1px solid #ddd';
             specCell.style.padding = '8px';
-            specCell.textContent = '• ' + item.desc;
+            specCell.textContent = 'â€¢ ' + item.desc;
             tr.appendChild(specCell);
 
             const valorCell = document.createElement('td');
@@ -6860,7 +7805,7 @@ function generateTunaLoinBekuTable(container) {
                 </tr>
             </tbody>
         </table>
-        <p style="margin-bottom: 15px; font-style: italic;">Berilah tanda ✓ pada nilai yang dipilih sesuai kode contoh yang diuji.</p>
+        <p style="margin-bottom: 15px; font-style: italic;">Berilah tanda âœ“ pada nilai yang dipilih sesuai kode contoh yang diuji.</p>
     `;
     container.appendChild(headerDiv);
 
@@ -6975,7 +7920,7 @@ function generateTunaLoinBekuTable(container) {
             const specCell = document.createElement('td');
             specCell.style.border = '1px solid #ddd';
             specCell.style.padding = '8px';
-            specCell.textContent = '• ' + item.desc;
+            specCell.textContent = 'â€¢ ' + item.desc;
             tr.appendChild(specCell);
 
             const valorCell = document.createElement('td');
@@ -7160,7 +8105,7 @@ function generateTunaSteakBekuTable(container) {
                 </tr>
             </tbody>
         </table>
-        <p style="margin-bottom: 15px; font-style: italic;">Berilah tanda ✓ pada nilai yang dipilih sesuai kode contoh yang diuji.</p>
+        <p style="margin-bottom: 15px; font-style: italic;">Berilah tanda âœ“ pada nilai yang dipilih sesuai kode contoh yang diuji.</p>
     `;
     container.appendChild(headerDiv);
 
@@ -7287,7 +8232,7 @@ function generateTunaSteakBekuTable(container) {
             const specCell = document.createElement('td');
             specCell.style.border = '1px solid #ddd';
             specCell.style.padding = '8px';
-            specCell.textContent = '• ' + item.desc;
+            specCell.textContent = 'â€¢ ' + item.desc;
             tr.appendChild(specCell);
 
             const valorCell = document.createElement('td');
@@ -7472,7 +8417,7 @@ function generateUdangSegarTable(container) {
                 </tr>
             </tbody>
         </table>
-        <p style="margin-bottom: 15px; font-style: italic;">Berilah tanda ✓ pada nilai yang dipilih sesuai kode contoh yang diuji.</p>
+        <p style="margin-bottom: 15px; font-style: italic;">Berilah tanda âœ“ pada nilai yang dipilih sesuai kode contoh yang diuji.</p>
     `;
     container.appendChild(headerDiv);
 
@@ -7520,7 +8465,7 @@ function generateUdangSegarTable(container) {
                 { desc: 'Bau segar spesifik jenis', nilai: 8 },
                 { desc: 'Bau spesifik jenis netral', nilai: 7 },
                 { desc: 'Mulai timbul bau amoniak', nilai: 5 },
-                { desc: 'Bau asam sulfit (H₂S)', nilai: 3 },
+                { desc: 'Bau asam sulfit (Hâ‚‚S)', nilai: 3 },
                 { desc: 'Bau amoniak kuat dan bau busuk', nilai: 1 }
             ]
         },
@@ -7554,7 +8499,7 @@ function generateUdangSegarTable(container) {
             const specCell = document.createElement('td');
             specCell.style.border = '1px solid #ddd';
             specCell.style.padding = '8px';
-            specCell.textContent = '• ' + item.desc;
+            specCell.textContent = 'â€¢ ' + item.desc;
             tr.appendChild(specCell);
 
             const valorCell = document.createElement('td');
@@ -7739,7 +8684,7 @@ function generateUdangBekuTable(container) {
                 </tr>
             </tbody>
         </table>
-        <p style="margin-bottom: 15px; font-style: italic;">Berilah tanda ✓ pada nilai yang dipilih sesuai kode contoh yang diuji.</p>
+        <p style="margin-bottom: 15px; font-style: italic;">Berilah tanda âœ“ pada nilai yang dipilih sesuai kode contoh yang diuji.</p>
     `;
     container.appendChild(headerDiv);
 
@@ -8050,7 +8995,7 @@ function generateCumiCumiBekuTable(container) {
                 </tr>
             </tbody>
         </table>
-        <p style="margin-bottom: 15px; font-style: italic;">Berilah tanda ✓ pada nilai yang dipilih sesuai kode contoh yang diuji.</p>
+        <p style="margin-bottom: 15px; font-style: italic;">Berilah tanda âœ“ pada nilai yang dipilih sesuai kode contoh yang diuji.</p>
     `;
     container.appendChild(headerDiv);
 
@@ -8360,7 +9305,7 @@ function generateGuritaMentahBekuTable(container) {
                 </tr>
             </tbody>
         </table>
-        <p style="margin-bottom: 15px; font-style: italic;">Berilah tanda ✓ pada nilai yang dipilih sesuai kode contoh yang diuji.</p>
+        <p style="margin-bottom: 15px; font-style: italic;">Berilah tanda âœ“ pada nilai yang dipilih sesuai kode contoh yang diuji.</p>
     `;
     container.appendChild(headerDiv);
 
@@ -8463,7 +9408,7 @@ function generateGuritaMentahBekuTable(container) {
             const specCell = document.createElement('td');
             specCell.style.border = '1px solid #ddd';
             specCell.style.padding = '8px';
-            specCell.textContent = '• ' + item.desc;
+            specCell.textContent = 'â€¢ ' + item.desc;
             tr.appendChild(specCell);
 
             const valorCell = document.createElement('td');
@@ -8581,7 +9526,2417 @@ function generateGuritaMentahBekuTable(container) {
     setTimeout(updatePanelistQRCode, 300);
 }
 
-// Update hewanNames for Gurita Mentah Beku
+// Update hewanNames for Gurita Mentah Beku and Lobster Beku
 if (typeof hewanNames !== 'undefined') {
     hewanNames['gurita-mentah-beku'] = 'Gurita Mentah Beku';
+    hewanNames['lobster-beku'] = 'Lobster Beku';
+}
+
+function calculateTotalsLobsterBeku() {
+    const table = document.getElementById('lobsterBekuTable');
+    if (!table) return;
+
+    for (let kode = 1; kode <= 6; kode++) {
+        let total = 0;
+        const checkboxes = table.querySelectorAll(`.nilai-checkbox[data-kode="${kode}"]:checked`);
+        checkboxes.forEach(cb => {
+            total += parseInt(cb.dataset.nilai);
+        });
+
+        const totalCell = table.querySelector(`.total-cell[data-kode="${kode}"]`);
+        const avgCell = table.querySelector(`.avg-cell[data-kode="${kode}"]`);
+
+        if (totalCell) totalCell.textContent = total;
+        if (avgCell) {
+            // Count total unique parameters (6 in Lobster Beku)
+            const paramCount = 6;
+            avgCell.textContent = (total / paramCount).toFixed(2);
+        }
+    }
+}
+
+function generateLobsterBekuTable(container) {
+    // Header informasi
+    const headerDiv = document.createElement('div');
+    headerDiv.className = 'lobster-beku-header';
+    headerDiv.innerHTML = `
+        <h3 style="text-align: center; margin-bottom: 20px; font-size: 18px; font-weight: 600;">LEMBAR PENILAIAN UJI SKOR LOBSTER BEKU</h3>
+        <h4 style="text-align: center; margin-bottom: 20px; font-size: 14px; font-weight: normal;">SNI 2711.1:2009</h4>
+        <div style="margin-bottom: 15px;">
+            <label style="display: inline-block; width: 200px;">1. Kode Contoh Uji /No. Aju PTK :</label>
+            <input type="text" id="kodeContohUji" name="kodeContohUji" style="width: 300px; padding: 8px; border: 1px solid #ddd; border-radius: 5px;">
+        </div>
+        <div style="margin-bottom: 15px;">
+            <label style="display: inline-block; width: 200px;">2. Tgl. Diterima Contoh Uji :</label>
+            <input type="date" id="tglDiterima" name="tglDiterima" style="width: 300px; padding: 8px; border: 1px solid #ddd; border-radius: 5px;">
+        </div>
+        <table style="width: 100%; margin-bottom: 20px; border-collapse: collapse; border: 1px solid #ddd;">
+            <thead>
+                <tr style="background-color: #f5f5f5;">
+                    <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">NO</th>
+                    <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">JENIS CONTOH UJI</th>
+                    <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">JUMLAH</th>
+                    <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">UKURAN</th>
+                    <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">Ket.</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">1.</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;"><input type="text" id="jenisContoh" name="jenisContoh" placeholder="Lobster Beku" style="width: 100%; border: none; padding: 5px;"></td>
+                    <td style="border: 1px solid #ddd; padding: 8px;"><input type="text" name="jumlah" style="width: 100%; border: none; padding: 5px;"></td>
+                    <td style="border: 1px solid #ddd; padding: 8px;"><input type="text" name="ukuran" style="width: 100%; border: none; padding: 5px;"></td>
+                    <td style="border: 1px solid #ddd; padding: 8px;"><input type="text" name="keterangan" style="width: 100%; border: none; padding: 5px;"></td>
+                </tr>
+            </tbody>
+        </table>
+        <p style="margin-bottom: 15px; font-style: italic;">Berilah tanda âœ“ pada nilai yang dipilih sesuai kode contoh yang diuji.</p>
+    `;
+    container.appendChild(headerDiv);
+
+    const criteria = [
+        { kategori: 'A. Dalam keadaan beku', subKategori: '1. Lapisan es', items: [{ desc: 'Rata, Bening, cukup tebal pada seluruh permukaan dilapisi es.', nilai: 9 }, { desc: 'Rata, Bening, cukup tebal, ada bagian yang terbuka 10 %.', nilai: 8 }, { desc: 'Tidak rata, bagian yang terbuka, sebanyak 20 - 30 %.', nilai: 7 }, { desc: 'Tidak rata, bagian yang terbuka, sebanyak 40 - 50 %.', nilai: 6 }, { desc: 'Banyak bagian yang terbuka 60 - 70 %.', nilai: 5 }, { desc: 'Banyak bagian yang terbuka 80 - 90 %.', nilai: 3 }, { desc: 'Tidak terdapat lapisan es pada permukaan produk.', nilai: 1 }] },
+        { kategori: 'A. Dalam keadaan beku', subKategori: '2. Pengeringan (dehidrasi)', items: [{ desc: 'Tidak ada pengeringan pada permukaan produk.', nilai: 9 }, { desc: 'Sedikit mengalami pengeringan pada permukaan produk 10 %.', nilai: 8 }, { desc: 'Pengeringan mulai jelas pada permukaan produk 20 - 30 %.', nilai: 7 }, { desc: 'Pengeringan banyak pada permukaan produk 40 - 50 %.', nilai: 6 }, { desc: 'Banyak bagian produk yang tampak mengering 60 - 70 %.', nilai: 5 }, { desc: 'Banyak bagian produk yang tampak mengering 80 - 90 %.', nilai: 3 }, { desc: 'Seluruh bagian produk luar tampak mengering.', nilai: 1 }] },
+        { kategori: 'A. Dalam keadaan beku', subKategori: '3. Perubahan warna (diskolorasi)', items: [{ desc: 'Belum mengalami perubahan warna pada permukaan produk.', nilai: 9 }, { desc: 'Sedikit mengalami perubahan warna permukaan produk 10 %.', nilai: 8 }, { desc: 'Agak banyak perubahan warna permukaan produk 20 - 30 %.', nilai: 7 }, { desc: 'Banyak perubahan warna pada permukaan produk 40 - 50 %.', nilai: 6 }, { desc: 'Perubahan warna hampir menyeluruh permukaan produk 60 - 70 %.', nilai: 5 }, { desc: 'Perubahan warna hampir menyeluruh permukaan produk 80 - 90 %.', nilai: 3 }, { desc: 'Perubahan warna menyeluruh pada permukaan produk.', nilai: 1 }] },
+        { kategori: 'B. Sesudah pelelehan (thawing)', subKategori: '1. Kenampakan', items: [{ desc: 'Utuh, bening bercahaya asli menurut jenis, antar ruas kokoh.', nilai: 9 }, { desc: 'Utuh, kurang bening, cahaya mulai pudar, berwarna asli antar ruas kokoh.', nilai: 8 }, { desc: 'Utuh, tidak bening, warna pudar, antar ruas kokoh.', nilai: 7 }, { desc: 'Utuh, warna pudar, ada sedikit noda hitam, antar ruas agak renggang.', nilai: 6 }, { desc: 'Kurang utuh, noda hitam agak banyak, antar ruas mudah lepas.', nilai: 5 }, { desc: 'Tidak utuh, mulai merah, noda hitam banyak, antar ruas mudah lepas.', nilai: 3 }, { desc: 'Tidak utuh, warna merah jelas, penuh noda hitam.', nilai: 1 }] },
+        { kategori: 'B. Sesudah pelelehan (thawing)', subKategori: '2. Bau', items: [{ desc: 'Bau sangat segar spesifik jenis.', nilai: 9 }, { desc: 'Bau segar, spesifik jenis.', nilai: 7 }, { desc: 'Netral', nilai: 6 }, { desc: 'Mulai tibul bau amoniak.', nilai: 5 }, { desc: 'Bau amoniak kuat.', nilai: 3 }, { desc: 'Bau amoniak dan busuk.', nilai: 1 }] },
+        { kategori: 'B. Sesudah pelelehan (thawing)', subKategori: '3. Konsistensi', items: [{ desc: 'kulit ari kenyal, daging padat lekat erat pada kulit.', nilai: 9 }, { desc: 'kulit ari kurang kenyal, daging padat lekat pada kulit.', nilai: 7 }, { desc: 'Tidak kenyal, daging kurang padat, mulai lepas dari kulit.', nilai: 6 }, { desc: 'kulit ari tidak kenyal, daging lunak, mulai lepas dari kulit.', nilai: 5 }, { desc: 'Daging lunak and lepas dari kulit.', nilai: 3 }, { desc: 'Daging sangat lunak and lepas dari kulit.', nilai: 1 }] }
+    ];
+
+    const table = document.createElement('table');
+    table.id = 'lobsterBekuTable';
+    table.className = 'ikan-segar-table';
+    table.style.width = '100%';
+    table.style.borderCollapse = 'collapse';
+
+    const thead = document.createElement('thead');
+    thead.innerHTML = `
+        <tr style="background-color: #f2f2f2;">
+            <th rowspan="2" style="border: 1px solid #ddd; padding: 8px; text-align: center;">Spesifikasi</th>
+            <th rowspan="2" style="border: 1px solid #ddd; padding: 8px; text-align: center; width: 60px;">Nilai</th>
+            <th colspan="6" style="border: 1px solid #ddd; padding: 8px; text-align: center;">Kode Contoh</th>
+        </tr>
+        <tr style="background-color: #f2f2f2;">
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: center; width: 50px;">1</th>
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: center; width: 50px;">2</th>
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: center; width: 50px;">3</th>
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: center; width: 50px;">4</th>
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: center; width: 50px;">5</th>
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: center; width: 50px;">6</th>
+        </tr>
+    `;
+    table.appendChild(thead);
+
+    const tbody = document.createElement('tbody');
+    let rowIndex = 0;
+
+    criteria.forEach((section) => {
+        const catHeader = document.createElement('tr');
+        catHeader.style.backgroundColor = '#f1f1f1';
+        catHeader.innerHTML = `<td colspan="8" style="border: 1px solid #ddd; padding: 8px; font-weight: bold;">${section.kategori} - ${section.subKategori}</td>`;
+        tbody.appendChild(catHeader);
+
+        section.items.forEach(item => {
+            const tr = document.createElement('tr');
+            tr.dataset.nilai = item.nilai;
+            tr.dataset.rowIndex = rowIndex;
+
+            const specCell = document.createElement('td');
+            specCell.style.border = '1px solid #ddd';
+            specCell.style.padding = '8px';
+            specCell.textContent = 'â€¢ ' + item.desc;
+            tr.appendChild(specCell);
+
+            const valorCell = document.createElement('td');
+            valorCell.style.border = '1px solid #ddd';
+            valorCell.style.padding = '8px';
+            valorCell.style.textAlign = 'center';
+            valorCell.style.fontWeight = 'bold';
+            valorCell.textContent = item.nilai;
+            tr.appendChild(valorCell);
+
+            for (let kode = 1; kode <= 6; kode++) {
+                const td = document.createElement('td');
+                td.className = 'kode-contoh-cell';
+                td.dataset.kode = kode;
+                td.dataset.rowIndex = rowIndex;
+                td.dataset.nilai = item.nilai;
+                td.style.border = '1px solid #ddd';
+                td.style.padding = '10px';
+                td.style.textAlign = 'center';
+                td.style.cursor = 'pointer';
+
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.className = 'nilai-checkbox';
+                checkbox.dataset.kode = kode;
+                checkbox.dataset.rowIndex = rowIndex;
+                checkbox.dataset.nilai = item.nilai;
+                checkbox.style.display = 'none';
+                td.appendChild(checkbox);
+
+                td.addEventListener('click', function (e) {
+                    if (e.target.type === 'checkbox') return;
+                    const newChecked = !checkbox.checked;
+                    if (newChecked) {
+                        const catId = section.kategori + ' - ' + section.subKategori;
+                        tbody.querySelectorAll(`tr[data-cat-id="${catId}"] input.nilai-checkbox[data-kode="${kode}"]`).forEach(cb => {
+                            cb.checked = false;
+                            updateCheckmark(cb.parentElement, false);
+                        });
+                    }
+                    checkbox.checked = newChecked;
+                    updateCheckmark(td, newChecked);
+                    setTimeout(() => calculateTotalsLobsterBeku(), 10);
+                });
+
+                tr.appendChild(td);
+            }
+            tr.dataset.catId = section.kategori + ' - ' + section.subKategori;
+            tbody.appendChild(tr);
+            rowIndex++;
+        });
+    });
+
+    const totalTr = document.createElement('tr');
+    totalTr.style.backgroundColor = '#f9f9f9';
+    totalTr.innerHTML = `<td colspan="2" style="border: 1px solid #ddd; padding: 8px; font-weight: bold; text-align: center;">Total</td>`;
+    for (let i = 1; i <= 6; i++) {
+        totalTr.innerHTML += `<td class="total-cell" data-kode="${i}" style="border: 1px solid #ddd; padding: 10px; text-align: center; font-weight: bold;">0</td>`;
+    }
+    tbody.appendChild(totalTr);
+
+    const avgTr = document.createElement('tr');
+    avgTr.style.backgroundColor = '#f1f1f1';
+    avgTr.innerHTML = `<td colspan="2" style="border: 1px solid #ddd; padding: 8px; font-weight: bold; text-align: center;">Rata-rata</td>`;
+    for (let i = 1; i <= 6; i++) {
+        avgTr.innerHTML += `<td class="avg-cell" data-kode="${i}" style="border: 1px solid #ddd; padding: 10px; text-align: center; font-weight: bold;">0.00</td>`;
+    }
+    tbody.appendChild(avgTr);
+
+    table.appendChild(tbody);
+    container.appendChild(table);
+
+    const formActions = document.querySelector('.form-actions');
+    if (formActions) {
+        const oldBtn = formActions.querySelector('.btn-lhu');
+        if (oldBtn) oldBtn.remove();
+
+        const lhuButton = document.createElement('button');
+        lhuButton.type = 'button';
+        lhuButton.className = 'btn-lhu';
+        lhuButton.textContent = 'Lihat LHU (Laporan Hasil Uji)';
+        lhuButton.style.padding = '12px 24px';
+        lhuButton.style.background = 'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)';
+        lhuButton.style.color = 'white';
+        lhuButton.style.border = 'none';
+        lhuButton.style.borderRadius = '10px';
+        lhuButton.style.fontSize = '16px';
+        lhuButton.style.fontWeight = '600';
+        lhuButton.style.cursor = 'pointer';
+        lhuButton.style.transition = 'all 0.3s';
+        lhuButton.style.marginRight = '10px';
+
+        lhuButton.addEventListener('click', async function (e) {
+            try {
+                this.disabled = true;
+                await showLHUPreview();
+            } catch (err) {
+                console.error('showLHUPreview error', err);
+                alert('Gagal membuka preview: ' + (err && err.message ? err.message : err));
+            } finally {
+                this.disabled = false;
+            }
+        });
+
+        formActions.insertBefore(lhuButton, formActions.firstChild);
+    }
+
+    const qrWrapper = document.createElement('div');
+    qrWrapper.style.marginTop = '20px';
+    qrWrapper.style.display = 'flex';
+    qrWrapper.style.justifyContent = 'flex-end';
+    qrWrapper.innerHTML = `<div id="qrcode-container" style="padding: 10px; background: #fff; border-radius: 8px;"></div>`;
+    container.appendChild(qrWrapper);
+    setTimeout(updatePanelistQRCode, 300);
+}
+
+// Update hewanNames for Gurita Mentah Beku, Lobster Beku, Cakalang Beku, and Hiu Utuh Beku
+if (typeof hewanNames !== 'undefined') {
+    hewanNames['gurita-mentah-beku'] = 'Gurita Mentah Beku';
+    hewanNames['lobster-beku'] = 'Lobster Beku';
+    hewanNames['cakalang-beku'] = 'Cakalang Beku';
+    hewanNames['hiu-utuh-beku'] = 'Hiu Utuh Beku';
+}
+
+function calculateTotalsHiuUtuhBeku() {
+    const table = document.getElementById('hiuUtuhBekuTable');
+    if (!table) return;
+
+    for (let kode = 1; kode <= 6; kode++) {
+        let total = 0;
+        const checkboxes = table.querySelectorAll(`.nilai-checkbox[data-kode="${kode}"]:checked`);
+        checkboxes.forEach(cb => {
+            total += parseInt(cb.dataset.nilai);
+        });
+
+        const totalCell = table.querySelector(`.total-cell[data-kode="${kode}"]`);
+        const avgCell = table.querySelector(`.avg-cell[data-kode="${kode}"]`);
+
+        if (totalCell) totalCell.textContent = total;
+        if (avgCell) {
+            // Count total unique parameters (6 in Hiu Utuh Beku: 2 Frozen, 4 Thawed)
+            const paramCount = 6;
+            avgCell.textContent = (total / paramCount).toFixed(2);
+        }
+    }
+}
+
+function generateHiuUtuhBekuTable(container) {
+    // Header informasi
+    const headerDiv = document.createElement('div');
+    headerDiv.className = 'hiu-utuh-beku-header';
+    headerDiv.innerHTML = `
+        <h3 style="text-align: center; margin-bottom: 20px; font-size: 18px; font-weight: 600;">LEMBAR PENILAIAN UJI SKOR HIU UTUH BEKU</h3>
+        <h4 style="text-align: center; margin-bottom: 20px; font-size: 14px; font-weight: normal;">SNI 01-7145.1-2005</h4>
+        <div style="margin-bottom: 15px;">
+            <label style="display: inline-block; width: 200px;">1. Kode Contoh Uji /No. Aju PTK :</label>
+            <input type="text" id="kodeContohUji" name="kodeContohUji" style="width: 300px; padding: 8px; border: 1px solid #ddd; border-radius: 5px;">
+        </div>
+        <div style="margin-bottom: 15px;">
+            <label style="display: inline-block; width: 200px;">2. Tgl. Diterima Contoh Uji :</label>
+            <input type="date" id="tglDiterima" name="tglDiterima" style="width: 300px; padding: 8px; border: 1px solid #ddd; border-radius: 5px;">
+        </div>
+        <table style="width: 100%; margin-bottom: 20px; border-collapse: collapse; border: 1px solid #ddd;">
+            <thead>
+                <tr style="background-color: #f5f5f5;">
+                    <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">NO</th>
+                    <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">JENIS CONTOH UJI</th>
+                    <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">JUMLAH</th>
+                    <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">UKURAN</th>
+                    <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">Ket.</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">1.</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;"><input type="text" id="jenisContoh" name="jenisContoh" placeholder="Hiu Utuh Beku" style="width: 100%; border: none; padding: 5px;"></td>
+                    <td style="border: 1px solid #ddd; padding: 8px;"><input type="text" name="jumlah" style="width: 100%; border: none; padding: 5px;"></td>
+                    <td style="border: 1px solid #ddd; padding: 8px;"><input type="text" name="ukuran" style="width: 100%; border: none; padding: 5px;"></td>
+                    <td style="border: 1px solid #ddd; padding: 8px;"><input type="text" name="keterangan" style="width: 100%; border: none; padding: 5px;"></td>
+                </tr>
+            </tbody>
+        </table>
+        <p style="margin-bottom: 15px; font-style: italic;">Berilah tanda âœ“ pada nilai yang dipilih sesuai kode contoh yang diuji.</p>
+    `;
+    container.appendChild(headerDiv);
+
+    const criteria = [
+        { kategori: 'A. Dalam keadaan beku', subKategori: '1. Pengeringan (dehidrasi)', items: [{ desc: 'Tidak ada pengeringan pada permukaan produk.', nilai: 9 }, { desc: 'Sedikit mengalami pengeringan pada permukaan produk 10%.', nilai: 7 }, { desc: 'Pengeringan mulai jelas pada permukaan produk 20 - 30%.', nilai: 5 }, { desc: 'Pengeringan banyak pada permukaan produk 40 - 50%.', nilai: 3 }, { desc: 'Seluruh bagian produk luar tampak mengering.', nilai: 1 }] },
+        { kategori: 'A. Dalam keadaan beku', subKategori: '2. Perubahan warna (diskolorasi)', items: [{ desc: 'Belum mengalami perubahan warna pada permukaan produk', nilai: 9 }, { desc: 'Sedikit mengalami perubahan warna permukaan produk 10%', nilai: 7 }, { desc: 'Agak banyak perubahan warna permukaan produk 20 - 30%', nilai: 5 }, { desc: 'Banyak perubahan warna pada permukaan produk 40 - 50%', nilai: 3 }, { desc: 'Perubahan warna menyeluruh pada permukaan produk.', nilai: 1 }] },
+        { kategori: 'B. Sesudah pelelehan (thawing)', subKategori: '1. Kenampakan', items: [{ desc: 'Utuh, bersih, tidak cacat, warna sesuai jenis, cemerlang', nilai: 9 }, { desc: 'Utuh, bersih, tidak cacat, warna sesuai jenis, kurang cemerlang', nilai: 7 }, { desc: 'Utuh, bersih, tidak cacat, warna sesuai jenis, agak kusam', nilai: 5 }, { desc: 'Sedikit rusak, warna kusam', nilai: 3 }, { desc: 'Rusak, sangat kusam', nilai: 1 }] },
+        { kategori: 'B. Sesudah pelelehan (thawing)', subKategori: '2. Bau', items: [{ desc: 'Sangat segar., spesifik hiu segar', nilai: 9 }, { desc: 'Segar.', nilai: 7 }, { desc: 'Kurang segar., sedikit bau amoniak', nilai: 5 }, { desc: 'Sedikit busuk bau amoniak kuat', nilai: 3 }, { desc: 'Busuk', nilai: 1 }] },
+        { kategori: 'B. Sesudah pelelehan (thawing)', subKategori: '3. Daging', items: [{ desc: 'Sayatan daging berwarna putih susu, sangat cemerlang', nilai: 9 }, { desc: 'Sayatan daging berwarna putih sedikit kusam, agak cemerlang', nilai: 7 }, { desc: 'Sayatan daging berwarna krem , kurang cemerlang', nilai: 5 }, { desc: 'Sayatan daging krem kecoklatan, kusam', nilai: 3 }, { desc: 'Sayatan coklat, sangat kusam', nilai: 1 }] },
+        { kategori: 'B. Sesudah pelelehan (thawing)', subKategori: '4. Tekstur', items: [{ desc: 'Padat, sangat kompak, sangat elastis', nilai: 9 }, { desc: 'Padat, kompak, elastis', nilai: 7 }, { desc: 'Kurang Padat, kurang kompak', nilai: 5 }, { desc: 'lembek, tidak kompak', nilai: 3 }, { desc: 'Sayatan coklat, sangat kusam', nilai: 1 }] }
+    ];
+
+    const table = document.createElement('table');
+    table.id = 'hiuUtuhBekuTable';
+    table.className = 'ikan-segar-table';
+    table.style.width = '100%';
+    table.style.borderCollapse = 'collapse';
+
+    const thead = document.createElement('thead');
+    thead.innerHTML = `
+        <tr style="background-color: #f2f2f2;">
+            <th rowspan="2" style="border: 1px solid #ddd; padding: 8px; text-align: center;">Spesifikasi</th>
+            <th rowspan="2" style="border: 1px solid #ddd; padding: 8px; text-align: center; width: 60px;">Nilai</th>
+            <th colspan="6" style="border: 1px solid #ddd; padding: 8px; text-align: center;">Kode Contoh</th>
+        </tr>
+        <tr style="background-color: #f2f2f2;">
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: center; width: 50px;">1</th>
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: center; width: 50px;">2</th>
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: center; width: 50px;">3</th>
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: center; width: 50px;">4</th>
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: center; width: 50px;">5</th>
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: center; width: 50px;">6</th>
+        </tr>
+    `;
+    table.appendChild(thead);
+
+    const tbody = document.createElement('tbody');
+    let rowIndex = 0;
+
+    criteria.forEach((section) => {
+        const catHeader = document.createElement('tr');
+        catHeader.style.backgroundColor = '#f1f1f1';
+        catHeader.innerHTML = `<td colspan="8" style="border: 1px solid #ddd; padding: 8px; font-weight: bold;">${section.kategori} - ${section.subKategori}</td>`;
+        tbody.appendChild(catHeader);
+
+        section.items.forEach(item => {
+            const tr = document.createElement('tr');
+            tr.dataset.nilai = item.nilai;
+            tr.dataset.rowIndex = rowIndex;
+
+            const specCell = document.createElement('td');
+            specCell.style.border = '1px solid #ddd';
+            specCell.style.padding = '8px';
+            specCell.textContent = '- ' + item.desc;
+            tr.appendChild(specCell);
+
+            const valorCell = document.createElement('td');
+            valorCell.style.border = '1px solid #ddd';
+            valorCell.style.padding = '8px';
+            valorCell.style.textAlign = 'center';
+            valorCell.style.fontWeight = 'bold';
+            valorCell.textContent = item.nilai;
+            tr.appendChild(valorCell);
+
+            for (let kode = 1; kode <= 6; kode++) {
+                const td = document.createElement('td');
+                td.className = 'kode-contoh-cell';
+                td.dataset.kode = kode;
+                td.dataset.rowIndex = rowIndex;
+                td.dataset.nilai = item.nilai;
+                td.style.border = '1px solid #ddd';
+                td.style.padding = '10px';
+                td.style.textAlign = 'center';
+                td.style.cursor = 'pointer';
+
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.className = 'nilai-checkbox';
+                checkbox.dataset.kode = kode;
+                checkbox.dataset.rowIndex = rowIndex;
+                checkbox.dataset.nilai = item.nilai;
+                checkbox.style.display = 'none';
+                td.appendChild(checkbox);
+
+                td.addEventListener('click', function (e) {
+                    if (e.target.type === 'checkbox') return;
+                    const newChecked = !checkbox.checked;
+                    if (newChecked) {
+                        const catId = section.kategori + ' - ' + section.subKategori;
+                        tbody.querySelectorAll(`tr[data-cat-id="${catId}"] input.nilai-checkbox[data-kode="${kode}"]`).forEach(cb => {
+                            cb.checked = false;
+                            updateCheckmark(cb.parentElement, false);
+                        });
+                    }
+                    checkbox.checked = newChecked;
+                    updateCheckmark(td, newChecked);
+                    setTimeout(() => calculateTotalsHiuUtuhBeku(), 10);
+                });
+
+                tr.appendChild(td);
+            }
+            tr.dataset.catId = section.kategori + ' - ' + section.subKategori;
+            tbody.appendChild(tr);
+            rowIndex++;
+        });
+    });
+
+    const totalTr = document.createElement('tr');
+    totalTr.style.backgroundColor = '#f9f9f9';
+    totalTr.innerHTML = `<td colspan="2" style="border: 1px solid #ddd; padding: 8px; font-weight: bold; text-align: center;">Total</td>`;
+    for (let i = 1; i <= 6; i++) {
+        totalTr.innerHTML += `<td class="total-cell" data-kode="${i}" style="border: 1px solid #ddd; padding: 10px; text-align: center; font-weight: bold;">0</td>`;
+    }
+    tbody.appendChild(totalTr);
+
+    const avgTr = document.createElement('tr');
+    avgTr.style.backgroundColor = '#f1f1f1';
+    avgTr.innerHTML = `<td colspan="2" style="border: 1px solid #ddd; padding: 8px; font-weight: bold; text-align: center;">Rata-rata</td>`;
+    for (let i = 1; i <= 6; i++) {
+        avgTr.innerHTML += `<td class="avg-cell" data-kode="${i}" style="border: 1px solid #ddd; padding: 10px; text-align: center; font-weight: bold;">0.00</td>`;
+    }
+    tbody.appendChild(avgTr);
+
+    table.appendChild(tbody);
+    container.appendChild(table);
+
+    const formActions = document.querySelector('.form-actions');
+    if (formActions) {
+        const oldBtn = formActions.querySelector('.btn-lhu');
+        if (oldBtn) oldBtn.remove();
+
+        const lhuButton = document.createElement('button');
+        lhuButton.type = 'button';
+        lhuButton.className = 'btn-lhu';
+        lhuButton.textContent = 'Lihat LHU (Laporan Hasil Uji)';
+        lhuButton.style.padding = '12px 24px';
+        lhuButton.style.background = 'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)';
+        lhuButton.style.color = 'white';
+        lhuButton.style.border = 'none';
+        lhuButton.style.borderRadius = '10px';
+        lhuButton.style.fontSize = '16px';
+        lhuButton.style.fontWeight = '600';
+        lhuButton.style.cursor = 'pointer';
+        lhuButton.style.transition = 'all 0.3s';
+        lhuButton.style.marginRight = '10px';
+
+        lhuButton.addEventListener('click', async function (e) {
+            try {
+                this.disabled = true;
+                await showLHUPreview();
+            } catch (err) {
+                console.error('showLHUPreview error', err);
+                alert('Gagal membuka preview: ' + (err && err.message ? err.message : err));
+            } finally {
+                this.disabled = false;
+            }
+        });
+
+        formActions.insertBefore(lhuButton, formActions.firstChild);
+    }
+
+    const qrWrapper = document.createElement('div');
+    qrWrapper.style.marginTop = '20px';
+    qrWrapper.style.display = 'flex';
+    qrWrapper.style.justifyContent = 'flex-end';
+    qrWrapper.innerHTML = `<div id="qrcode-container" style="padding: 10px; background: #fff; border-radius: 8px;"></div>`;
+    container.appendChild(qrWrapper);
+    setTimeout(updatePanelistQRCode, 300);
+}
+
+function calculateTotalsCakalangBeku() {
+    const table = document.getElementById('cakalangBekuTable');
+    if (!table) return;
+
+    for (let kode = 1; kode <= 6; kode++) {
+        let total = 0;
+        const checkboxes = table.querySelectorAll(`.nilai-checkbox[data-kode="${kode}"]:checked`);
+        checkboxes.forEach(cb => {
+            total += parseInt(cb.dataset.nilai);
+        });
+
+        const totalCell = table.querySelector(`.total-cell[data-kode="${kode}"]`);
+        const avgCell = table.querySelector(`.avg-cell[data-kode="${kode}"]`);
+
+        if (totalCell) totalCell.textContent = total;
+        if (avgCell) {
+            const paramCount = 6;
+            avgCell.textContent = (total / paramCount).toFixed(2);
+        }
+    }
+}
+
+function generateCakalangBekuTable(container) {
+    const headerDiv = document.createElement('div');
+    headerDiv.className = 'cakalang-beku-header';
+    headerDiv.innerHTML = `
+        <h3 style="text-align: center; margin-bottom: 20px; font-size: 18px; font-weight: 600;">LEMBAR PENILAIAN UJI SKOR CAKALANG BEKU</h3>
+        <h4 style="text-align: center; margin-bottom: 20px; font-size: 14px; font-weight: normal;">SNI 01-2733.1-2006</h4>
+        <div style="margin-bottom: 15px;">
+            <label style="display: inline-block; width: 200px;">1. Kode Contoh Uji /No. Aju PTK :</label>
+            <input type="text" id="kodeContohUji" name="kodeContohUji" style="width: 300px; padding: 8px; border: 1px solid #ddd; border-radius: 5px;">
+        </div>
+        <div style="margin-bottom: 15px;">
+            <label style="display: inline-block; width: 200px;">2. Tgl. Diterima Contoh Uji :</label>
+            <input type="date" id="tglDiterima" name="tglDiterima" style="width: 300px; padding: 8px; border: 1px solid #ddd; border-radius: 5px;">
+        </div>
+        <table style="width: 100%; margin-bottom: 20px; border-collapse: collapse; border: 1px solid #ddd;">
+            <thead>
+                <tr style="background-color: #f5f5f5;">
+                    <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">NO</th>
+                    <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">JENIS CONTOH UJI</th>
+                    <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">JUMLAH</th>
+                    <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">UKURAN</th>
+                    <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">Ket.</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">1.</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;"><input type="text" id="jenisContoh" name="jenisContoh" placeholder="Cakalang Beku" style="width: 100%; border: none; padding: 5px;"></td>
+                    <td style="border: 1px solid #ddd; padding: 8px;"><input type="text" name="jumlah" style="width: 100%; border: none; padding: 5px;"></td>
+                    <td style="border: 1px solid #ddd; padding: 8px;"><input type="text" name="ukuran" style="width: 100%; border: none; padding: 5px;"></td>
+                    <td style="border: 1px solid #ddd; padding: 8px;"><input type="text" name="keterangan" style="width: 100%; border: none; padding: 5px;"></td>
+                </tr>
+            </tbody>
+        </table>
+        <p style="margin-bottom: 15px; font-style: italic;">Berilah tanda âœ“ pada nilai yang dipilih sesuai kode contoh yang diuji.</p>
+    `;
+    container.appendChild(headerDiv);
+
+    const criteria = [
+        { kategori: 'A. Dalam keadaan beku', subKategori: '1. Lapisan es', items: [{ desc: 'Rata, bening, cukup tebal pada seluruh permukaan dilapisi es.', nilai: 9 }, { desc: 'Rata, bening, cukup tebal, ada bagian yang terbuka 10%.', nilai: 8 }, { desc: 'Tidak rata, bagian yang terbuka, sebanyak 20%-30%.', nilai: 7 }, { desc: 'Tidak rata, bagian yang terbuka sebanyak 40%-50%.', nilai: 6 }, { desc: 'Banyak bagian yang terbuka 60%-70%.', nilai: 5 }, { desc: 'Banyak bagian yang terbuka 80%-90%.', nilai: 3 }, { desc: 'Tidak terdapat lapisan es pada permukaan produk.', nilai: 1 }] },
+        { kategori: 'A. Dalam keadaan beku', subKategori: '2. Pengeringan (dehidrasi)', items: [{ desc: 'Tidak ada pengeringan pada permukaan produk.', nilai: 9 }, { desc: 'Sedikit mengalami pengeringan pada permukaan produk 10%.', nilai: 8 }, { desc: 'Pengeringan mulai jelas pada permukaan produk 20%-30%.', nilai: 7 }, { desc: 'Pengeringan banyak pada permukaan produk 40%-50%.', nilai: 6 }, { desc: 'Banyak bagian produk yang tampak mengering 60%-70%.', nilai: 5 }, { desc: 'Banyak bagian produk yang tampak mengering 80%-90%.', nilai: 3 }, { desc: 'Seluruh bagian produk luar tampak mengering.', nilai: 1 }] },
+        { kategori: 'A. Dalam keadaan beku', subKategori: '3. Perubahan warna (diskolorasi)', items: [{ desc: 'Belum mengalami perubahan warna pada permukaan produk.', nilai: 9 }, { desc: 'Sedikit mengalami perubahan warna pada permukaan produk 10%.', nilai: 8 }, { desc: 'Agak banyak mengalami perubahan warna pada permukaan produk 20%-30%.', nilai: 7 }, { desc: 'Banyak mengalami perubahan warna pada permukaan produk 40%-50%.', nilai: 6 }, { desc: 'Perubahan warna hampir menyeluruh pada permukaan produk 60%-70%.', nilai: 5 }, { desc: 'Perubahan warna hampir menyeluruh pada permukaan produk 80%-90%.', nilai: 3 }, { desc: 'Perubahan warna menyeluruh pada permukaan produk.', nilai: 1 }] },
+        { kategori: 'B. Sesudah pelelehan (thawing)', subKategori: '1. Kenampakan', items: [{ desc: 'Utuh, tidak cacat, warna pelangi permukaan kulit mengkilat, cemerlang.', nilai: 9 }, { desc: 'Utuh, tidak cacat, warna pelangi permukaan kulit mengkilat, cemerlang.', nilai: 8 }, { desc: 'Utuh, tidak cacat, warna pelangi permukaan kulit kurang mengkilat, agak cemerlang.', nilai: 7 }, { desc: 'Utuh, tidak cacat, warna pelangi permukaan kulit hilang, kurang cemerlang.', nilai: 6 }, { desc: 'Utuh, tidak cacat, warna pelangi permukaan kulit hilang.', nilai: 5 }, { desc: 'Utuh, tidak cacat, warna permukaan kulit kusam.', nilai: 3 }, { desc: 'Utuh, tidak cacat, warna permukaan kulit sangat kusam.', nilai: 1 }] },
+        { kategori: 'B. Sesudah pelelehan (thawing)', subKategori: '2. Bau', items: [{ desc: 'Sangat segar.', nilai: 9 }, { desc: 'Segar.', nilai: 8 }, { desc: 'Segar mendekati netral.', nilai: 7 }, { desc: 'Netral.', nilai: 6 }, { desc: 'Sedikit tengik.', nilai: 5 }, { desc: 'Tengik sedikit asam.', nilai: 3 }, { desc: 'Asam dan busuk.', nilai: 1 }] },
+        { kategori: 'B. Sesudah pelelehan (thawing)', subKategori: '3. Daging/tekstur', items: [{ desc: 'Sayatan daging warna merah kecoklatan sangat cerah, antar jaringan sangat kuat, sangat elastis.', nilai: 9 }, { desc: 'Sayatan daging warna merah kecoklatan cerah, antar jaringan kuat, elastis.', nilai: 8 }, { desc: 'Sayatan daging warna merah kecoklatan kurang cerah, antar jaringan kuat, agak elastis.', nilai: 7 }, { desc: 'Sayatan daging warna kecoklatan kurang cerah, antar jaringan sedikit longgar, kurang elastis.', nilai: 6 }, { desc: 'Sayatan daging warna kecoklatan kusam, antar jaringan longgar, tidak elastis.', nilai: 5 }, { desc: 'Sayatan daging warna coklat kusam, antar jaringan longgar.', nilai: 3 }, { desc: 'Sayatan daging warna coklat kehitaman kusam, antar jaringan sangat longgar.', nilai: 1 }] }
+    ];
+
+    const table = document.createElement('table');
+    table.id = 'cakalangBekuTable';
+    table.className = 'ikan-segar-table';
+    table.style.width = '100%';
+    table.style.borderCollapse = 'collapse';
+
+    const thead = document.createElement('thead');
+    thead.innerHTML = `
+        <tr style="background-color: #f2f2f2;">
+            <th rowspan="2" style="border: 1px solid #ddd; padding: 8px; text-align: center;">Spesifikasi</th>
+            <th rowspan="2" style="border: 1px solid #ddd; padding: 8px; text-align: center; width: 60px;">Nilai</th>
+            <th colspan="6" style="border: 1px solid #ddd; padding: 8px; text-align: center;">Kode Contoh</th>
+        </tr>
+        <tr style="background-color: #f2f2f2;">
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: center; width: 50px;">1</th>
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: center; width: 50px;">2</th>
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: center; width: 50px;">3</th>
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: center; width: 50px;">4</th>
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: center; width: 50px;">5</th>
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: center; width: 50px;">6</th>
+        </tr>
+    `;
+    table.appendChild(thead);
+
+    const tbody = document.createElement('tbody');
+    let rowIndex = 0;
+
+    criteria.forEach((section) => {
+        const catHeader = document.createElement('tr');
+        catHeader.style.backgroundColor = '#f1f1f1';
+        catHeader.innerHTML = `<td colspan="8" style="border: 1px solid #ddd; padding: 8px; font-weight: bold;">${section.kategori} - ${section.subKategori}</td>`;
+        tbody.appendChild(catHeader);
+
+        section.items.forEach(item => {
+            const tr = document.createElement('tr');
+            tr.dataset.nilai = item.nilai;
+            tr.dataset.rowIndex = rowIndex;
+
+            const specCell = document.createElement('td');
+            specCell.style.border = '1px solid #ddd';
+            specCell.style.padding = '8px';
+            specCell.textContent = 'â€¢ ' + item.desc;
+            tr.appendChild(specCell);
+
+            const valorCell = document.createElement('td');
+            valorCell.style.border = '1px solid #ddd';
+            valorCell.style.padding = '8px';
+            valorCell.style.textAlign = 'center';
+            valorCell.style.fontWeight = 'bold';
+            valorCell.textContent = item.nilai;
+            tr.appendChild(valorCell);
+
+            for (let kode = 1; kode <= 6; kode++) {
+                const td = document.createElement('td');
+                td.className = 'kode-contoh-cell';
+                td.dataset.kode = kode;
+                td.dataset.rowIndex = rowIndex;
+                td.dataset.nilai = item.nilai;
+                td.style.border = '1px solid #ddd';
+                td.style.padding = '10px';
+                td.style.textAlign = 'center';
+                td.style.cursor = 'pointer';
+
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.className = 'nilai-checkbox';
+                checkbox.dataset.kode = kode;
+                checkbox.dataset.rowIndex = rowIndex;
+                checkbox.dataset.nilai = item.nilai;
+                checkbox.style.display = 'none';
+                td.appendChild(checkbox);
+
+                td.addEventListener('click', function (e) {
+                    if (e.target.type === 'checkbox') return;
+                    const newChecked = !checkbox.checked;
+                    if (newChecked) {
+                        const catId = section.kategori + ' - ' + section.subKategori;
+                        tbody.querySelectorAll(`tr[data-cat-id="${catId}"] input.nilai-checkbox[data-kode="${kode}"]`).forEach(cb => {
+                            cb.checked = false;
+                            updateCheckmark(cb.parentElement, false);
+                        });
+                    }
+                    checkbox.checked = newChecked;
+                    updateCheckmark(td, newChecked);
+                    setTimeout(() => calculateTotalsCakalangBeku(), 10);
+                });
+
+                tr.appendChild(td);
+            }
+            tr.dataset.catId = section.kategori + ' - ' + section.subKategori;
+            tbody.appendChild(tr);
+            rowIndex++;
+        });
+    });
+
+    const totalTr = document.createElement('tr');
+    totalTr.style.backgroundColor = '#f9f9f9';
+    totalTr.innerHTML = `<td colspan="2" style="border: 1px solid #ddd; padding: 8px; font-weight: bold; text-align: center;">Total</td>`;
+    for (let i = 1; i <= 6; i++) {
+        totalTr.innerHTML += `<td class="total-cell" data-kode="${i}" style="border: 1px solid #ddd; padding: 10px; text-align: center; font-weight: bold;">0</td>`;
+    }
+    tbody.appendChild(totalTr);
+
+    const avgTr = document.createElement('tr');
+    avgTr.style.backgroundColor = '#f1f1f1';
+    avgTr.innerHTML = `<td colspan="2" style="border: 1px solid #ddd; padding: 8px; font-weight: bold; text-align: center;">Rata-rata</td>`;
+    for (let i = 1; i <= 6; i++) {
+        avgTr.innerHTML += `<td class="avg-cell" data-kode="${i}" style="border: 1px solid #ddd; padding: 10px; text-align: center; font-weight: bold;">0.00</td>`;
+    }
+    tbody.appendChild(avgTr);
+
+    table.appendChild(tbody);
+    container.appendChild(table);
+
+    const formActions = document.querySelector('.form-actions');
+    if (formActions) {
+        const oldBtn = formActions.querySelector('.btn-lhu');
+        if (oldBtn) oldBtn.remove();
+
+        const lhuButton = document.createElement('button');
+        lhuButton.type = 'button';
+        lhuButton.className = 'btn-lhu';
+        lhuButton.textContent = 'Lihat LHU (Laporan Hasil Uji)';
+        lhuButton.style.padding = '12px 24px';
+        lhuButton.style.background = 'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)';
+        lhuButton.style.color = 'white';
+        lhuButton.style.border = 'none';
+        lhuButton.style.borderRadius = '10px';
+        lhuButton.style.fontSize = '16px';
+        lhuButton.style.fontWeight = '600';
+        lhuButton.style.cursor = 'pointer';
+        lhuButton.style.transition = 'all 0.3s';
+        lhuButton.style.marginRight = '10px';
+
+        lhuButton.addEventListener('click', async function (e) {
+            try {
+                this.disabled = true;
+                await showLHUPreview();
+            } catch (err) {
+                console.error('showLHUPreview error', err);
+                alert('Gagal membuka preview: ' + (err && err.message ? err.message : err));
+            } finally {
+                this.disabled = false;
+            }
+        });
+
+        formActions.insertBefore(lhuButton, formActions.firstChild);
+    }
+
+    const qrWrapper = document.createElement('div');
+    qrWrapper.style.marginTop = '20px';
+    qrWrapper.style.display = 'flex';
+    qrWrapper.style.justifyContent = 'flex-end';
+    qrWrapper.innerHTML = `<div id="qrcode-container" style="padding: 10px; background: #fff; border-radius: 8px;"></div>`;
+    container.appendChild(qrWrapper);
+    setTimeout(updatePanelistQRCode, 300);
+}
+
+function calculateTotalsFilletKakapBeku() {
+    const table = document.getElementById('filletKakapBekuTable');
+    if (!table) return;
+
+    for (let kode = 1; kode <= 6; kode++) {
+        let total = 0;
+        const checkboxes = table.querySelectorAll(`.nilai-checkbox[data-kode="${kode}"]:checked`);
+        checkboxes.forEach(cb => {
+            total += parseInt(cb.dataset.nilai);
+        });
+
+        const totalCell = table.querySelector(`.total-cell[data-kode="${kode}"]`);
+        const avgCell = table.querySelector(`.avg-cell[data-kode="${kode}"]`);
+
+        if (totalCell) totalCell.textContent = total;
+        if (avgCell) {
+            const paramCount = 6;
+            avgCell.textContent = (total / paramCount).toFixed(2);
+        }
+    }
+}
+
+function generateFilletKakapBekuTable(container) {
+    const headerDiv = document.createElement('div');
+    headerDiv.className = 'fillet-kakap-beku-header';
+    headerDiv.innerHTML = `
+        <h3 style="text-align: center; margin-bottom: 20px; font-size: 18px; font-weight: 600;">LEMBAR PENILAIAN UJI SKOR FILLET KAKAP BEKU</h3>
+        <h4 style="text-align: center; margin-bottom: 20px; font-size: 14px; font-weight: normal;">SNI 01-2696.1-2006</h4>
+        <div style="margin-bottom: 15px;">
+            <label style="display: inline-block; width: 200px;">1. Kode Contoh Uji /No. Aju PTK :</label>
+            <input type="text" id="kodeContohUji" name="kodeContohUji" style="width: 300px; padding: 8px; border: 1px solid #ddd; border-radius: 5px;">
+        </div>
+        <div style="margin-bottom: 15px;">
+            <label style="display: inline-block; width: 200px;">2. Tgl. Diterima Contoh Uji :</label>
+            <input type="date" id="tglDiterima" name="tglDiterima" style="width: 300px; padding: 8px; border: 1px solid #ddd; border-radius: 5px;">
+        </div>
+        <table style="width: 100%; margin-bottom: 20px; border-collapse: collapse; border: 1px solid #ddd;">
+            <thead>
+                <tr style="background-color: #f5f5f5;">
+                    <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">NO</th>
+                    <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">JENIS CONTOH UJI</th>
+                    <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">JUMLAH</th>
+                    <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">UKURAN</th>
+                    <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">Ket.</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">1.</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;"><input type="text" id="jenisContoh" name="jenisContoh" placeholder="Fillet Kakap Beku" style="width: 100%; border: none; padding: 5px;"></td>
+                    <td style="border: 1px solid #ddd; padding: 8px;"><input type="text" name="jumlah" style="width: 100%; border: none; padding: 5px;"></td>
+                    <td style="border: 1px solid #ddd; padding: 8px;"><input type="text" name="ukuran" style="width: 100%; border: none; padding: 5px;"></td>
+                    <td style="border: 1px solid #ddd; padding: 8px;"><input type="text" name="keterangan" style="width: 100%; border: none; padding: 5px;"></td>
+                </tr>
+            </tbody>
+        </table>
+        <p style="margin-bottom: 15px; font-style: italic;">Berilah tanda âœ“ pada nilai yang dipilih sesuai kode contoh yang diuji.</p>
+    `;
+    container.appendChild(headerDiv);
+
+    const criteria = [
+        { kategori: 'A. Dalam Keadaan Beku', subKategori: '1. Lapisan es', items: [{ desc: 'Rata, bening, cukup tebal pada seluruh permukaan dilapisi es.', nilai: 9 }, { desc: 'Rata, bening, cukup tebal, ada bagian yang terbuka 10%.', nilai: 8 }, { desc: 'Tidak rata, bagian yang terbuka, sebanyak 20-30%.', nilai: 7 }, { desc: 'Tidak rata, bagian yang terbuka sebanyak 40-50%.', nilai: 6 }, { desc: 'Banyak bagian yang terbuka 60-70%.', nilai: 5 }, { desc: 'Banyak bagian yang terbuka 80-90%.', nilai: 3 }, { desc: 'Tidak terdapat lapisan es pada permukaan produk.', nilai: 1 }] },
+        { kategori: 'A. Dalam Keadaan Beku', subKategori: '2. Pengeringan (dehidrasi)', items: [{ desc: 'Tidak ada pengeringan pada permukaan produk', nilai: 9 }, { desc: 'Sedikit mengalami pengeringan pada permukaan produk 10%.', nilai: 8 }, { desc: 'Pengeringan mulai jelas pada permukaan produk 20-30%.', nilai: 7 }, { desc: 'Pengeringan banyak pada permukaan produk 40-50%.', nilai: 6 }, { desc: 'Banyak bagian produk yang tampak mengering 60-70%.', nilai: 5 }, { desc: 'Banyak bagian produk yang tampak mengering 80-90%.', nilai: 3 }, { desc: 'Seluruh bagian produk luar tampak mengering.', nilai: 1 }] },
+        { kategori: 'A. Dalam Keadaan Beku', subKategori: '3. Perubahan warna (diskolorasi)', items: [{ desc: 'Belum mengalami perubahan warna pada permukaan produk.', nilai: 9 }, { desc: 'Sedikit mengalami perubahan warna pada permukaan produk 10%.', nilai: 8 }, { desc: 'Agak banyak mengalami perubahan warna pada permukaan produk 20-30%.', nilai: 7 }, { desc: 'Banyak mengalami perubahan warna pada permukaan produk 40-50%.', nilai: 6 }, { desc: 'Perubahan warna hampir menyeluruh pada permukaan produk 60-70%.', nilai: 5 }, { desc: 'Perubahan warna hampir menyeluruh pada permukaan produk 80-90%.', nilai: 3 }, { desc: 'Perubahan warna menyeluruh pada permukaan produk.', nilai: 1 }] },
+        { kategori: 'B. Sesudah pelelehan (thawing)', subKategori: '1. Kenampakan', items: [{ desc: 'Rapi, bersih, warna daging putih krem kemerahan, sangat cemerlang, linea lateralis berwarna merah muda.', nilai: 9 }, { desc: 'Rapi, bersih, warna daging putih krem agak kemerahan, cemerlang, linea lateralis berwarna merah muda.', nilai: 8 }, { desc: 'Rapi, bersih, warna daging krem agak kemerahan, kurang cemerlang, garis yang membentuk tulang belakang dan linea lateralis berwarna merah.', nilai: 7 }, { desc: 'Rapi, bersih, warna daging krem kecoklatan, kusam, linea lateralis berwarna merah agak kecoklatan.', nilai: 5 }, { desc: 'Rapi, kurang bersih, warna daging agak kehijauan-hijauan, kusam, garis yang membentuk bagian tulang belakang berwarna coklat kusam.', nilai: 3 }, { desc: 'Rapi, kurang bersih, warna daging kehijauan, sangat kusam, garis yang membentuk bagian tulang belakang berwarna kehijauan.', nilai: 1 }] },
+        { kategori: 'B. Sesudah pelelehan (thawing)', subKategori: '2. Bau', items: [{ desc: 'Sangat segar, spesifik jenis.', nilai: 9 }, { desc: 'Segar, spesifik jenis.', nilai: 8 }, { desc: 'Kurang segar, mengarah ke netral.', nilai: 7 }, { desc: 'Apek sedikit tengik.', nilai: 5 }, { desc: 'Asam, sedikit bau amoniak dan tengik amoniak jelas.', nilai: 3 }, { desc: 'Busuk, asam dan bau amoniak.', nilai: 1 }] },
+        { kategori: 'B. Sesudah pelelehan (thawing)', subKategori: '3. Tekstur', items: [{ desc: 'Padat, kompak dan elastis.', nilai: 9 }, { desc: 'Padat, kompak, agak elastis.', nilai: 8 }, { desc: 'Padat, kompak, kurang elastis.', nilai: 7 }, { desc: 'Kurang padat, kurang kompak.', nilai: 5 }, { desc: 'Lembek, tidak kompak.', nilai: 3 }, { desc: 'Lembek sekali.', nilai: 1 }] }
+    ];
+
+    const table = document.createElement('table');
+    table.id = 'filletKakapBekuTable';
+    table.className = 'ikan-segar-table';
+    table.style.width = '100%';
+    table.style.borderCollapse = 'collapse';
+
+    const thead = document.createElement('thead');
+    thead.innerHTML = `
+        <tr style="background-color: #f2f2f2;">
+            <th rowspan="2" style="border: 1px solid #ddd; padding: 8px; text-align: center;">Spesifikasi</th>
+            <th rowspan="2" style="border: 1px solid #ddd; padding: 8px; text-align: center; width: 60px;">Nilai</th>
+            <th colspan="6" style="border: 1px solid #ddd; padding: 8px; text-align: center;">Kode Contoh</th>
+        </tr>
+        <tr style="background-color: #f2f2f2;">
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: center; width: 50px;">1</th>
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: center; width: 50px;">2</th>
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: center; width: 50px;">3</th>
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: center; width: 50px;">4</th>
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: center; width: 50px;">5</th>
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: center; width: 50px;">6</th>
+        </tr>
+    `;
+    table.appendChild(thead);
+
+    const tbody = document.createElement('tbody');
+    let rowIndex = 0;
+
+    criteria.forEach((section) => {
+        const catHeader = document.createElement('tr');
+        catHeader.style.backgroundColor = '#f1f1f1';
+        catHeader.innerHTML = `<td colspan="8" style="border: 1px solid #ddd; padding: 8px; font-weight: bold;">${section.kategori} - ${section.subKategori}</td>`;
+        tbody.appendChild(catHeader);
+
+        section.items.forEach(item => {
+            const tr = document.createElement('tr');
+            tr.dataset.nilai = item.nilai;
+            tr.dataset.rowIndex = rowIndex;
+
+            const specCell = document.createElement('td');
+            specCell.style.border = '1px solid #ddd';
+            specCell.style.padding = '8px';
+            specCell.textContent = 'â€¢ ' + item.desc;
+            tr.appendChild(specCell);
+
+            const valorCell = document.createElement('td');
+            valorCell.style.border = '1px solid #ddd';
+            valorCell.style.padding = '8px';
+            valorCell.style.textAlign = 'center';
+            valorCell.style.fontWeight = 'bold';
+            valorCell.textContent = item.nilai;
+            tr.appendChild(valorCell);
+
+            for (let kode = 1; kode <= 6; kode++) {
+                const td = document.createElement('td');
+                td.className = 'kode-contoh-cell';
+                td.dataset.kode = kode;
+                td.dataset.rowIndex = rowIndex;
+                td.dataset.nilai = item.nilai;
+                td.style.border = '1px solid #ddd';
+                td.style.padding = '10px';
+                td.style.textAlign = 'center';
+                td.style.cursor = 'pointer';
+
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.className = 'nilai-checkbox';
+                checkbox.dataset.kode = kode;
+                checkbox.dataset.rowIndex = rowIndex;
+                checkbox.dataset.nilai = item.nilai;
+                checkbox.style.display = 'none';
+                td.appendChild(checkbox);
+
+                td.addEventListener('click', function (e) {
+                    if (e.target.type === 'checkbox') return;
+                    const newChecked = !checkbox.checked;
+                    if (newChecked) {
+                        const catId = section.kategori + ' - ' + section.subKategori;
+                        tbody.querySelectorAll(`tr[data-cat-id="${catId}"] input.nilai-checkbox[data-kode="${kode}"]`).forEach(cb => {
+                            cb.checked = false;
+                            updateCheckmark(cb.parentElement, false);
+                        });
+                    }
+                    checkbox.checked = newChecked;
+                    updateCheckmark(td, newChecked);
+                    setTimeout(() => calculateTotalsFilletKakapBeku(), 10);
+                });
+
+                tr.appendChild(td);
+            }
+            tr.dataset.catId = section.kategori + ' - ' + section.subKategori;
+            tbody.appendChild(tr);
+            rowIndex++;
+        });
+    });
+
+    const totalTr = document.createElement('tr');
+    totalTr.style.backgroundColor = '#f9f9f9';
+    totalTr.innerHTML = `<td colspan="2" style="border: 1px solid #ddd; padding: 8px; font-weight: bold; text-align: center;">Total</td>`;
+    for (let i = 1; i <= 6; i++) {
+        totalTr.innerHTML += `<td class="total-cell" data-kode="${i}" style="border: 1px solid #ddd; padding: 10px; text-align: center; font-weight: bold;">0</td>`;
+    }
+    tbody.appendChild(totalTr);
+
+    const avgTr = document.createElement('tr');
+    avgTr.style.backgroundColor = '#f1f1f1';
+    avgTr.innerHTML = `<td colspan="2" style="border: 1px solid #ddd; padding: 8px; font-weight: bold; text-align: center;">Rata-rata</td>`;
+    for (let i = 1; i <= 6; i++) {
+        avgTr.innerHTML += `<td class="avg-cell" data-kode="${i}" style="border: 1px solid #ddd; padding: 10px; text-align: center; font-weight: bold;">0.00</td>`;
+    }
+    tbody.appendChild(avgTr);
+
+    table.appendChild(tbody);
+    container.appendChild(table);
+
+    const formActions = document.querySelector('.form-actions');
+    if (formActions) {
+        const oldBtn = formActions.querySelector('.btn-lhu');
+        if (oldBtn) oldBtn.remove();
+
+        const lhuButton = document.createElement('button');
+        lhuButton.type = 'button';
+        lhuButton.className = 'btn-lhu';
+        lhuButton.textContent = 'Lihat LHU (Laporan Hasil Uji)';
+        lhuButton.style.padding = '12px 24px';
+        lhuButton.style.background = 'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)';
+        lhuButton.style.color = 'white';
+        lhuButton.style.border = 'none';
+        lhuButton.style.borderRadius = '10px';
+        lhuButton.style.fontSize = '16px';
+        lhuButton.style.fontWeight = '600';
+        lhuButton.style.cursor = 'pointer';
+        lhuButton.style.transition = 'all 0.3s';
+        lhuButton.style.marginRight = '10px';
+
+        lhuButton.addEventListener('click', async function (e) {
+            try {
+                this.disabled = true;
+                await showLHUPreview();
+            } catch (err) {
+                console.error('showLHUPreview error', err);
+                alert('Gagal membuka preview: ' + (err && err.message ? err.message : err));
+            } finally {
+                this.disabled = false;
+            }
+        });
+
+        formActions.insertBefore(lhuButton, formActions.firstChild);
+    }
+
+    const qrWrapper = document.createElement('div');
+    qrWrapper.style.marginTop = '20px';
+    qrWrapper.style.display = 'flex';
+    qrWrapper.style.justifyContent = 'flex-end';
+    qrWrapper.innerHTML = `<div id="qrcode-container" style="padding: 10px; background: #fff; border-radius: 8px;"></div>`;
+    container.appendChild(qrWrapper);
+    setTimeout(updatePanelistQRCode, 300);
+}
+
+function calculateTotalsKepitingRebusBeku() {
+    const table = document.getElementById('kepitingRebusBekuTable');
+    if (!table) return;
+
+    for (let kode = 1; kode <= 6; kode++) {
+        let total = 0;
+        const checkboxes = table.querySelectorAll(`.nilai-checkbox[data-kode="${kode}"]:checked`);
+        checkboxes.forEach(cb => {
+            total += parseInt(cb.dataset.nilai);
+        });
+
+        const totalCell = table.querySelector(`.total-cell[data-kode="${kode}"]`);
+        const avgCell = table.querySelector(`.avg-cell[data-kode="${kode}"]`);
+
+        if (totalCell) totalCell.textContent = total;
+        if (avgCell) {
+            const paramCount = 3;
+            avgCell.textContent = (total / paramCount).toFixed(2);
+        }
+    }
+}
+
+function generateKepitingRebusBekuTable(container) {
+    const headerDiv = document.createElement('div');
+    headerDiv.className = 'kepiting-rebus-beku-header';
+    headerDiv.innerHTML = `
+        <h3 style="text-align: center; margin-bottom: 20px; font-size: 18px; font-weight: 600;">LEMBAR PENILAIAN UJI SKOR KEPITING REBUS BEKU</h3>
+        <h4 style="text-align: center; margin-bottom: 20px; font-size: 14px; font-weight: normal;">SNI 3231.1-2010</h4>
+        <div style="margin-bottom: 15px;">
+            <label style="display: inline-block; width: 200px;">1. Kode Contoh Uji /No. Aju PTK :</label>
+            <input type="text" id="kodeContohUji" name="kodeContohUji" style="width: 300px; padding: 8px; border: 1px solid #ddd; border-radius: 5px;">
+        </div>
+        <div style="margin-bottom: 15px;">
+            <label style="display: inline-block; width: 200px;">2. Tgl. Diterima Contoh Uji :</label>
+            <input type="date" id="tglDiterima" name="tglDiterima" style="width: 300px; padding: 8px; border: 1px solid #ddd; border-radius: 5px;">
+        </div>
+        <table style="width: 100%; margin-bottom: 20px; border-collapse: collapse; border: 1px solid #ddd;">
+            <thead>
+                <tr style="background-color: #f5f5f5;">
+                    <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">NO</th>
+                    <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">JENIS CONTOH UJI</th>
+                    <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">JUMLAH</th>
+                    <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">UKURAN</th>
+                    <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">Ket.</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">1.</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;"><input type="text" id="jenisContoh" name="jenisContoh" placeholder="Kepiting Rebus Beku" style="width: 100%; border: none; padding: 5px;"></td>
+                    <td style="border: 1px solid #ddd; padding: 8px;"><input type="text" name="jumlah" style="width: 100%; border: none; padding: 5px;"></td>
+                    <td style="border: 1px solid #ddd; padding: 8px;"><input type="text" name="ukuran" style="width: 100%; border: none; padding: 5px;"></td>
+                    <td style="border: 1px solid #ddd; padding: 8px;"><input type="text" name="keterangan" style="width: 100%; border: none; padding: 5px;"></td>
+                </tr>
+            </tbody>
+        </table>
+        <p style="margin-bottom: 15px; font-style: italic;">Berilah tanda âœ“ pada nilai yang dipilih sesuai kode contoh yang diuji.</p>
+    `;
+    container.appendChild(headerDiv);
+
+    const criteria = [
+        { kategori: 'Sesudah pelelehan (thawing)', subKategori: '1. Kenampakan', items: [{ desc: 'Putih sesuai spesifikasi, cemerlang asli menurut jenis.', nilai: 9 }, { desc: 'Putih sesuai spesifikasi, cemerlang asli menurut jenis sedikit berkurang.', nilai: 8 }, { desc: 'Putih sesuai spesifikasi, cemerlang, menurut jenis mulai hilang.', nilai: 7 }, { desc: 'Warna asli menurut jenis hilang.', nilai: 6 }, { desc: 'Warna asli menurut jenis hilang, agak kusam, mulai berlendir.', nilai: 5 }, { desc: 'Warna asli menurut jenis hilang, kusam, berlendir.', nilai: 3 }, { desc: 'Warna asli menurut jenis hilang, sangat kusam, berlendir.', nilai: 1 }] },
+        { kategori: 'Sesudah pelelehan (thawing)', subKategori: '2. Bau', items: [{ desc: 'Sangat segar spesifik.', nilai: 9 }, { desc: 'Segar spesifik jenis.', nilai: 8 }, { desc: 'Spesifik jenis netral.', nilai: 7 }, { desc: 'Berubah dari netral.', nilai: 6 }, { desc: 'Mulai timbul bau amonia.', nilai: 5 }, { desc: 'Busuk lanjut dan bau asam sulfida (Hâ‚‚S).', nilai: 3 }, { desc: 'Amonia dan bau busuk menyengat.', nilai: 1 }] },
+        { kategori: 'Sesudah pelelehan (thawing)', subKategori: '3. Tekstur', items: [{ desc: 'Sangat kompak.', nilai: 9 }, { desc: 'Kompak.', nilai: 8 }, { desc: 'Sedikit kompak.', nilai: 7 }, { desc: 'Kurang kompak.', nilai: 5 }, { desc: 'Tidak kompak.', nilai: 3 }, { desc: 'Tidak kompak, agak lembek.', nilai: 1 }] }
+    ];
+
+    const table = document.createElement('table');
+    table.id = 'kepitingRebusBekuTable';
+    table.className = 'ikan-segar-table';
+    table.style.width = '100%';
+    table.style.borderCollapse = 'collapse';
+
+    const thead = document.createElement('thead');
+    thead.innerHTML = `
+        <tr style="background-color: #f2f2f2;">
+            <th rowspan="2" style="border: 1px solid #ddd; padding: 8px; text-align: center;">Spesifikasi</th>
+            <th rowspan="2" style="border: 1px solid #ddd; padding: 8px; text-align: center; width: 60px;">Nilai</th>
+            <th colspan="6" style="border: 1px solid #ddd; padding: 8px; text-align: center;">Kode Contoh</th>
+        </tr>
+        <tr style="background-color: #f2f2f2;">
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: center; width: 50px;">1</th>
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: center; width: 50px;">2</th>
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: center; width: 50px;">3</th>
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: center; width: 50px;">4</th>
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: center; width: 50px;">5</th>
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: center; width: 50px;">6</th>
+        </tr>
+    `;
+    table.appendChild(thead);
+
+    const tbody = document.createElement('tbody');
+    let rowIndex = 0;
+
+    criteria.forEach((section) => {
+        const catHeader = document.createElement('tr');
+        catHeader.style.backgroundColor = '#f1f1f1';
+        catHeader.innerHTML = `<td colspan="8" style="border: 1px solid #ddd; padding: 8px; font-weight: bold;">${section.kategori} - ${section.subKategori}</td>`;
+        tbody.appendChild(catHeader);
+
+        section.items.forEach(item => {
+            const tr = document.createElement('tr');
+            tr.dataset.nilai = item.nilai;
+            tr.dataset.rowIndex = rowIndex;
+
+            const specCell = document.createElement('td');
+            specCell.style.border = '1px solid #ddd';
+            specCell.style.padding = '8px';
+            specCell.textContent = 'â€¢ ' + item.desc;
+            tr.appendChild(specCell);
+
+            const valorCell = document.createElement('td');
+            valorCell.style.border = '1px solid #ddd';
+            valorCell.style.padding = '8px';
+            valorCell.style.textAlign = 'center';
+            valorCell.style.fontWeight = 'bold';
+            valorCell.textContent = item.nilai;
+            tr.appendChild(valorCell);
+
+            for (let kode = 1; kode <= 6; kode++) {
+                const td = document.createElement('td');
+                td.className = 'kode-contoh-cell';
+                td.dataset.kode = kode;
+                td.dataset.rowIndex = rowIndex;
+                td.dataset.nilai = item.nilai;
+                td.style.border = '1px solid #ddd';
+                td.style.padding = '10px';
+                td.style.textAlign = 'center';
+                td.style.cursor = 'pointer';
+
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.className = 'nilai-checkbox';
+                checkbox.dataset.kode = kode;
+                checkbox.dataset.rowIndex = rowIndex;
+                checkbox.dataset.nilai = item.nilai;
+                checkbox.style.display = 'none';
+                td.appendChild(checkbox);
+
+                td.addEventListener('click', function (e) {
+                    if (e.target.type === 'checkbox') return;
+                    const newChecked = !checkbox.checked;
+                    if (newChecked) {
+                        const catId = section.kategori + ' - ' + section.subKategori;
+                        tbody.querySelectorAll(`tr[data-cat-id="${catId}"] input.nilai-checkbox[data-kode="${kode}"]`).forEach(cb => {
+                            cb.checked = false;
+                            updateCheckmark(cb.parentElement, false);
+                        });
+                    }
+                    checkbox.checked = newChecked;
+                    updateCheckmark(td, newChecked);
+                    setTimeout(() => calculateTotalsKepitingRebusBeku(), 10);
+                });
+
+                tr.appendChild(td);
+            }
+            tr.dataset.catId = section.kategori + ' - ' + section.subKategori;
+            tbody.appendChild(tr);
+            rowIndex++;
+        });
+    });
+
+    const totalTr = document.createElement('tr');
+    totalTr.style.backgroundColor = '#f9f9f9';
+    totalTr.innerHTML = `<td colspan="2" style="border: 1px solid #ddd; padding: 8px; font-weight: bold; text-align: center;">Total</td>`;
+    for (let i = 1; i <= 6; i++) {
+        totalTr.innerHTML += `<td class="total-cell" data-kode="${i}" style="border: 1px solid #ddd; padding: 10px; text-align: center; font-weight: bold;">0</td>`;
+    }
+    tbody.appendChild(totalTr);
+
+    const avgTr = document.createElement('tr');
+    avgTr.style.backgroundColor = '#f1f1f1';
+    avgTr.innerHTML = `<td colspan="2" style="border: 1px solid #ddd; padding: 8px; font-weight: bold; text-align: center;">Rata-rata</td>`;
+    for (let i = 1; i <= 6; i++) {
+        avgTr.innerHTML += `<td class="avg-cell" data-kode="${i}" style="border: 1px solid #ddd; padding: 10px; text-align: center; font-weight: bold;">0.00</td>`;
+    }
+    tbody.appendChild(avgTr);
+
+    table.appendChild(tbody);
+    container.appendChild(table);
+
+    const formActions = document.querySelector('.form-actions');
+    if (formActions) {
+        const oldBtn = formActions.querySelector('.btn-lhu');
+        if (oldBtn) oldBtn.remove();
+
+        const lhuButton = document.createElement('button');
+        lhuButton.type = 'button';
+        lhuButton.className = 'btn-lhu';
+        lhuButton.textContent = 'Lihat LHU (Laporan Hasil Uji)';
+        lhuButton.style.padding = '12px 24px';
+        lhuButton.style.background = 'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)';
+        lhuButton.style.color = 'white';
+        lhuButton.style.border = 'none';
+        lhuButton.style.borderRadius = '10px';
+        lhuButton.style.fontSize = '16px';
+        lhuButton.style.fontWeight = '600';
+        lhuButton.style.cursor = 'pointer';
+        lhuButton.style.transition = 'all 0.3s';
+        lhuButton.style.marginRight = '10px';
+
+        lhuButton.addEventListener('click', async function (e) {
+            try {
+                this.disabled = true;
+                await showLHUPreview();
+            } catch (err) {
+                console.error('showLHUPreview error', err);
+                alert('Gagal membuka preview: ' + (err && err.message ? err.message : err));
+            } finally {
+                this.disabled = false;
+            }
+        });
+
+        formActions.insertBefore(lhuButton, formActions.firstChild);
+    }
+
+    const qrWrapper = document.createElement('div');
+    qrWrapper.style.marginTop = '20px';
+    qrWrapper.style.display = 'flex';
+    qrWrapper.style.justifyContent = 'flex-end';
+    qrWrapper.innerHTML = `<div id="qrcode-container" style="padding: 10px; background: #fff; border-radius: 8px;"></div>`;
+    container.appendChild(qrWrapper);
+    setTimeout(updatePanelistQRCode, 300);
+}
+
+function calculateTotalsUdangKupasMentahBeku() {
+    const table = document.getElementById('udangKupasMentahBekuTable');
+    if (!table) return;
+
+    for (let kode = 1; kode <= 6; kode++) {
+        const checked = table.querySelectorAll(`.nilai-checkbox[data-kode="${kode}"]:checked`);
+        let total = 0;
+        checked.forEach(cb => {
+            total += parseInt(cb.dataset.nilai);
+        });
+
+        const totalCell = table.querySelector(`.total-cell[data-kode="${kode}"]`);
+        const avgCell = table.querySelector(`.avg-cell[data-kode="${kode}"]`);
+
+        if (totalCell) totalCell.textContent = total;
+        if (avgCell) {
+            const paramCount = 6;
+            avgCell.textContent = (total / paramCount).toFixed(2);
+        }
+    }
+}
+
+function generateUdangKupasMentahBekuTable(container) {
+    const headerDiv = document.createElement('div');
+    headerDiv.className = 'udang-kupas-mentah-beku-header';
+    headerDiv.innerHTML = `
+        <h3 style="text-align: center; margin-bottom: 20px; font-size: 18px; font-weight: 600;">LEMBAR PENILAIAN UJI SKOR UDANG KUPAS MENTAH BEKU</h3>
+        <h4 style="text-align: center; margin-bottom: 20px; font-size: 14px; font-weight: normal;">SNI 3457-2014</h4>
+        <div style="margin-bottom: 15px;">
+            <label style="display: inline-block; width: 200px;">1. Kode Contoh Uji /No. Aju PTK :</label>
+            <input type="text" id="kodeContohUji" style="width: 300px; border: 1px solid #ccc; padding: 5px; border-radius: 4px;">
+        </div>
+        <div style="margin-bottom: 15px;">
+            <label style="display: inline-block; width: 200px;">2. Tanggal Diterima :</label>
+            <input type="date" id="tglDiterima" style="width: 300px; border: 1px solid #ccc; padding: 5px; border-radius: 4px;">
+        </div>
+        <div style="margin-bottom: 15px;">
+            <label style="display: inline-block; width: 200px;">3. Tanggal Uji :</label>
+            <input type="date" id="tanggalUji" style="width: 300px; border: 1px solid #ccc; padding: 5px; border-radius: 4px;">
+        </div>
+        <table style="width: 100%; margin-bottom: 20px; border-collapse: collapse; border: 1px solid #ddd;">
+            <thead>
+                <tr style="background-color: #f5f5f5;">
+                    <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">NO</th>
+                    <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">JENIS CONTOH UJI</th>
+                    <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">JUMLAH</th>
+                    <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">UKURAN</th>
+                    <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">Ket.</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">1.</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;"><input type="text" id="jenisContoh" name="jenisContoh" placeholder="Udang Kupas Mentah Beku" style="width: 100%; border: none; padding: 5px;"></td>
+                    <td style="border: 1px solid #ddd; padding: 8px;"><input type="text" name="jumlah" style="width: 100%; border: none; padding: 5px;"></td>
+                    <td style="border: 1px solid #ddd; padding: 8px;"><input type="text" name="ukuran" style="width: 100%; border: none; padding: 5px;"></td>
+                    <td style="border: 1px solid #ddd; padding: 8px;"><input type="text" name="keterangan" style="width: 100%; border: none; padding: 5px;"></td>
+                </tr>
+            </tbody>
+        </table>
+        <p style="margin-bottom: 15px; font-style: italic;">Berilah tanda âœ“ pada nilai yang dipilih sesuai kode contoh yang diuji.</p>
+    `;
+    container.appendChild(headerDiv);
+
+    const criteria = [
+        { kategori: 'A. Dalam keadaan beku', subKategori: '1. Lapisan Es', items: [{ desc: 'Rata, Bening, cukup tebal pada seluruh permukaan dilapisi es.', nilai: 9 }, { desc: 'Rata, Bening, cukup tebal, ada bagian yang terbuka 10 %.', nilai: 8 }, { desc: 'Tidak rata, bagian yang terbuka, sebanyak 20 - 30 %.', nilai: 7 }, { desc: 'Tidak rata, bagian yang terbuka, sebanyak 40 - 50 %.', nilai: 6 }, { desc: 'Banyak bagian yang terbuka 60 - 70 %.', nilai: 5 }, { desc: 'Banyak bagian yang terbuka 80 - 90 %.', nilai: 3 }, { desc: 'Tidak terdapat lapisan es pada permukaan produk.', nilai: 1 }] },
+        { kategori: 'A. Dalam keadaan beku', subKategori: '2. Pengeringan (dehidrasi)', items: [{ desc: 'Tidak ada pengeringan pada permukaan produk.', nilai: 9 }, { desc: 'Sedikit mengalami pengeringan pada permukaan produk 10 %.', nilai: 8 }, { desc: 'Pengeringan mulai jelas pada permukaan produk 20 - 30 %.', nilai: 7 }, { desc: 'Pengeringan banyak pada permukaan produk 40 - 50 %.', nilai: 6 }, { desc: 'Banyak bagian produk yang tampak mengering 60 - 70 %.', nilai: 5 }, { desc: 'Banyak bagian produk yang tampak mengering 80 - 90 %.', nilai: 3 }, { desc: 'Seluruh bagian produk luar tampak mengering.', nilai: 1 }] },
+        { kategori: 'A. Dalam keadaan beku', subKategori: '3. Perubahan warna (diskolorasi)', items: [{ desc: 'Belum mengalami perubahan warna pada permukaan produk.', nilai: 9 }, { desc: 'Sedikit mengalami perubahan warna permukaan produk 10 %.', nilai: 8 }, { desc: 'Agak banyak perubahan warna permukaan produk 20 - 30 %.', nilai: 7 }, { desc: 'Banyak perubahan warna pada permukaan produk 40 - 50 %.', nilai: 6 }, { desc: 'Perubahan warna hampir menyeluruh permukaan produk 60 - 70 %.', nilai: 5 }, { desc: 'Perubahan warna hampir menyeluruh permukaan produk 80 - 90 %.', nilai: 3 }, { desc: 'Perubahan warna menyeluruh pada permukaan produk.', nilai: 1 }] },
+        { kategori: 'B. Sesudah pelelehan (thawing)', subKategori: '1. Kenampakan', items: [{ desc: 'Utuh, rapi, bercahaya, warna daging asli jenis.', nilai: 9 }, { desc: 'Utuh, rapi, kurang bercahaya, warna daging asli jenis.', nilai: 7 }, { desc: 'Utuh, kurang rapi, kurang bercahaya, warna daging asli jenis.', nilai: 6 }, { desc: 'Utuh, kurang rapi, agak kusam, warna daging asli jenis mulai berubah.', nilai: 5 }, { desc: 'Utuh, kurang rapi, kusam, warna daging agak pink.', nilai: 3 }, { desc: 'Utuh, kurang rapi, kusam sekali, warna daging pink.', nilai: 1 }] },
+        { kategori: 'B. Sesudah pelelehan (thawing)', subKategori: '2. Bau', items: [{ desc: 'Sangat segar, spesifik jenis.', nilai: 9 }, { desc: 'Bau netral.', nilai: 7 }, { desc: 'Bau berubah dari netral.', nilai: 6 }, { desc: 'Bau sedikit asam.', nilai: 5 }, { desc: 'Bau asam dan amoniak.', nilai: 3 }, { desc: 'Bau busuk dan amoniak cukup tajam.', nilai: 1 }] },
+        { kategori: 'B. Sesudah pelelehan (thawing)', subKategori: '3. Daging / Tekstur', items: [{ desc: 'Elastis.', nilai: 9 }, { desc: 'Sedikit elastis.', nilai: 7 }, { desc: 'Kurang elastis, agak lembek.', nilai: 5 }, { desc: 'Kurang elastis, lembek.', nilai: 3 }, { desc: 'Kurang elastis, lembek & berair.', nilai: 1 }] }
+    ];
+
+    const table = document.createElement('table');
+    table.id = 'udangKupasMentahBekuTable';
+    table.className = 'ikan-segar-table';
+    table.style.width = '100%';
+    table.style.borderCollapse = 'collapse';
+
+    const thead = document.createElement('thead');
+    thead.innerHTML = `
+        <tr style="background-color: #f2f2f2;">
+            <th rowspan="2" style="border: 1px solid #ddd; padding: 8px; text-align: center;">Spesifikasi</th>
+            <th rowspan="2" style="border: 1px solid #ddd; padding: 8px; text-align: center; width: 60px;">Nilai</th>
+            <th colspan="6" style="border: 1px solid #ddd; padding: 8px; text-align: center;">Kode Contoh</th>
+        </tr>
+        <tr style="background-color: #f2f2f2;">
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: center; width: 50px;">1</th>
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: center; width: 50px;">2</th>
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: center; width: 50px;">3</th>
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: center; width: 50px;">4</th>
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: center; width: 50px;">5</th>
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: center; width: 50px;">6</th>
+        </tr>
+    `;
+    table.appendChild(thead);
+
+    const tbody = document.createElement('tbody');
+    let rowIndex = 0;
+
+    criteria.forEach((section) => {
+        const catHeader = document.createElement('tr');
+        catHeader.style.backgroundColor = '#f1f1f1';
+        catHeader.innerHTML = `<td colspan="8" style="border: 1px solid #ddd; padding: 8px; font-weight: bold;">${section.kategori} - ${section.subKategori}</td>`;
+        tbody.appendChild(catHeader);
+
+        section.items.forEach(item => {
+            const tr = document.createElement('tr');
+            tr.dataset.nilai = item.nilai;
+            tr.dataset.rowIndex = rowIndex;
+
+            const specCell = document.createElement('td');
+            specCell.style.border = '1px solid #ddd';
+            specCell.style.padding = '8px';
+            specCell.textContent = 'â€¢ ' + item.desc;
+            tr.appendChild(specCell);
+
+            const valorCell = document.createElement('td');
+            valorCell.style.border = '1px solid #ddd';
+            valorCell.style.padding = '8px';
+            valorCell.style.textAlign = 'center';
+            valorCell.style.fontWeight = 'bold';
+            valorCell.textContent = item.nilai;
+            tr.appendChild(valorCell);
+
+            for (let kode = 1; kode <= 6; kode++) {
+                const td = document.createElement('td');
+                td.className = 'kode-contoh-cell';
+                td.dataset.kode = kode;
+                td.dataset.rowIndex = rowIndex;
+                td.dataset.nilai = item.nilai;
+                td.style.border = '1px solid #ddd';
+                td.style.padding = '10px';
+                td.style.textAlign = 'center';
+                td.style.cursor = 'pointer';
+
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.className = 'nilai-checkbox';
+                checkbox.dataset.kode = kode;
+                checkbox.dataset.rowIndex = rowIndex;
+                checkbox.dataset.nilai = item.nilai;
+                checkbox.style.display = 'none';
+                td.appendChild(checkbox);
+
+                td.addEventListener('click', function (e) {
+                    if (e.target.type === 'checkbox') return;
+                    const newChecked = !checkbox.checked;
+                    if (newChecked) {
+                        const catId = section.kategori + ' - ' + section.subKategori;
+                        tbody.querySelectorAll(`tr[data-cat-id="${catId}"] input.nilai-checkbox[data-kode="${kode}"]`).forEach(cb => {
+                            cb.checked = false;
+                            updateCheckmark(cb.parentElement, false);
+                        });
+                    }
+                    checkbox.checked = newChecked;
+                    updateCheckmark(td, newChecked);
+                    setTimeout(() => calculateTotalsUdangKupasMentahBeku(), 10);
+                });
+
+                tr.appendChild(td);
+            }
+            tr.dataset.catId = section.kategori + ' - ' + section.subKategori;
+            tbody.appendChild(tr);
+            rowIndex++;
+        });
+    });
+
+    const totalTr = document.createElement('tr');
+    totalTr.style.backgroundColor = '#f9f9f9';
+    totalTr.innerHTML = `<td colspan="2" style="border: 1px solid #ddd; padding: 8px; font-weight: bold; text-align: center;">Total</td>`;
+    for (let i = 1; i <= 6; i++) {
+        totalTr.innerHTML += `<td class="total-cell" data-kode="${i}" style="border: 1px solid #ddd; padding: 10px; text-align: center; font-weight: bold;">0</td>`;
+    }
+    tbody.appendChild(totalTr);
+
+    const avgTr = document.createElement('tr');
+    avgTr.style.backgroundColor = '#f1f1f1';
+    avgTr.innerHTML = `<td colspan="2" style="border: 1px solid #ddd; padding: 8px; font-weight: bold; text-align: center;">Rata-rata</td>`;
+    for (let i = 1; i <= 6; i++) {
+        avgTr.innerHTML += `<td class="avg-cell" data-kode="${i}" style="border: 1px solid #ddd; padding: 10px; text-align: center; font-weight: bold;">0.00</td>`;
+    }
+    tbody.appendChild(avgTr);
+
+    table.appendChild(tbody);
+    container.appendChild(table);
+
+    const formActions = document.querySelector('.form-actions');
+    if (formActions) {
+        const oldBtn = formActions.querySelector('.btn-lhu');
+        if (oldBtn) oldBtn.remove();
+
+        const lhuButton = document.createElement('button');
+        lhuButton.type = 'button';
+        lhuButton.className = 'btn-lhu';
+        lhuButton.textContent = 'Lihat LHU (Laporan Hasil Uji)';
+        lhuButton.style.padding = '12px 24px';
+        lhuButton.style.background = 'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)';
+        lhuButton.style.color = 'white';
+        lhuButton.style.border = 'none';
+        lhuButton.style.borderRadius = '10px';
+        lhuButton.style.fontSize = '16px';
+        lhuButton.style.fontWeight = '600';
+        lhuButton.style.cursor = 'pointer';
+        lhuButton.style.transition = 'all 0.3s';
+        lhuButton.style.marginRight = '10px';
+
+        lhuButton.addEventListener('click', async function (e) {
+            try {
+                this.disabled = true;
+                await showLHUPreview();
+            } catch (err) {
+                console.error('showLHUPreview error', err);
+                alert('Gagal membuka preview: ' + (err && err.message ? err.message : err));
+            } finally {
+                this.disabled = false;
+            }
+        });
+
+        formActions.insertBefore(lhuButton, formActions.firstChild);
+    }
+
+    const qrWrapper = document.createElement('div');
+    qrWrapper.style.marginTop = '20px';
+    qrWrapper.style.display = 'flex';
+    qrWrapper.style.justifyContent = 'flex-end';
+    qrWrapper.innerHTML = `<div id="qrcode-container" style="padding: 10px; background: #fff; border-radius: 8px;"></div>`;
+    container.appendChild(qrWrapper);
+    setTimeout(updatePanelistQRCode, 300);
+}
+
+function calculateTotalsBaksoIkan() {
+    const table = document.getElementById('baksoIkanTable');
+    if (!table) return;
+
+    for (let kode = 1; kode <= 6; kode++) {
+        const checked = table.querySelectorAll(`.nilai-checkbox[data-kode="${kode}"]:checked`);
+        let total = 0;
+        checked.forEach(cb => {
+            total += parseInt(cb.dataset.nilai);
+        });
+
+        const totalCell = table.querySelector(`.total-cell[data-kode="${kode}"]`);
+        const avgCell = table.querySelector(`.avg-cell[data-kode="${kode}"]`);
+
+        if (totalCell) totalCell.textContent = total;
+        if (avgCell) {
+            const paramCount = 4;
+            avgCell.textContent = (total / paramCount).toFixed(2);
+        }
+    }
+}
+
+function generateBaksoIkanTable(container) {
+    const headerDiv = document.createElement('div');
+    headerDiv.className = 'bakso-ikan-header';
+    headerDiv.innerHTML = `
+        <h3 style="text-align: center; margin-bottom: 20px; font-size: 18px; font-weight: 600;">LEMBAR PENILAIAN UJI SKOR BAKSO IKAN</h3>
+        <h4 style="text-align: center; margin-bottom: 20px; font-size: 14px; font-weight: normal;">SNI 7266-2017</h4>
+        <div style="margin-bottom: 15px;">
+            <label style="display: inline-block; width: 200px;">1. Kode Contoh Uji /No. Aju PTK :</label>
+            <input type="text" id="kodeContohUji" style="width: 300px; border: 1px solid #ccc; padding: 5px; border-radius: 4px;">
+        </div>
+        <div style="margin-bottom: 15px;">
+            <label style="display: inline-block; width: 200px;">2. Tanggal Diterima :</label>
+            <input type="date" id="tglDiterima" style="width: 300px; border: 1px solid #ccc; padding: 5px; border-radius: 4px;">
+        </div>
+        <div style="margin-bottom: 15px;">
+            <label style="display: inline-block; width: 200px;">3. Tanggal Uji :</label>
+            <input type="date" id="tanggalUji" style="width: 300px; border: 1px solid #ccc; padding: 5px; border-radius: 4px;">
+        </div>
+        <table style="width: 100%; margin-bottom: 20px; border-collapse: collapse; border: 1px solid #ddd;">
+            <thead>
+                <tr style="background-color: #f5f5f5;">
+                    <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">NO</th>
+                    <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">JENIS CONTOH UJI</th>
+                    <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">JUMLAH</th>
+                    <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">UKURAN</th>
+                    <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">Ket.</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">1.</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;"><input type="text" id="jenisContoh" name="jenisContoh" placeholder="Bakso Ikan" style="width: 100%; border: none; padding: 5px;"></td>
+                    <td style="border: 1px solid #ddd; padding: 8px;"><input type="text" name="jumlah" style="width: 100%; border: none; padding: 5px;"></td>
+                    <td style="border: 1px solid #ddd; padding: 8px;"><input type="text" name="ukuran" style="width: 100%; border: none; padding: 5px;"></td>
+                    <td style="border: 1px solid #ddd; padding: 8px;"><input type="text" name="keterangan" style="width: 100%; border: none; padding: 5px;"></td>
+                </tr>
+            </tbody>
+        </table>
+        <p style="margin-bottom: 15px; font-style: italic;">Berilah tanda âœ“ pada nilai yang dipilih sesuai kode contoh yang diuji.</p>
+    `;
+    container.appendChild(headerDiv);
+
+    const criteria = [
+        { kategori: '1 Kenampakan', items: [{ desc: 'Permukaan halus, tidak berongga, cerah', nilai: 9 }, { desc: 'Permukaan agak halus, sedikit berongga, agak cerah', nilai: 7 }, { desc: 'Permukaan kasar, berongga, kusam', nilai: 5 }] },
+        { kategori: '2 Bau', items: [{ desc: 'Spesifik produk', nilai: 9 }, { desc: 'Agak spesifik produk', nilai: 7 }, { desc: 'Netral', nilai: 5 }] },
+        { kategori: '3 Rasa', items: [{ desc: 'Spesifik produk', nilai: 9 }, { desc: 'Agak spesifik produk', nilai: 7 }, { desc: 'Hambar', nilai: 5 }] },
+        { kategori: '4 Tekstur', items: [{ desc: 'Padat, kompak, kenyal', nilai: 9 }, { desc: 'Padat, kompak, agak kenyal', nilai: 7 }, { desc: 'Tidak padat, tidak kompak, tidak kenyal', nilai: 5 }] }
+    ];
+
+    const table = document.createElement('table');
+    table.id = 'baksoIkanTable';
+    table.className = 'ikan-segar-table';
+    table.style.width = '100%';
+    table.style.borderCollapse = 'collapse';
+
+    const thead = document.createElement('thead');
+    thead.innerHTML = `
+        <tr style="background-color: #f2f2f2;">
+            <th rowspan="2" style="border: 1px solid #ddd; padding: 8px; text-align: center;">Spesifikasi</th>
+            <th rowspan="2" style="border: 1px solid #ddd; padding: 8px; text-align: center; width: 60px;">Nilai</th>
+            <th colspan="6" style="border: 1px solid #ddd; padding: 8px; text-align: center;">Kode Contoh</th>
+        </tr>
+        <tr style="background-color: #f2f2f2;">
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: center; width: 50px;">1</th>
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: center; width: 50px;">2</th>
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: center; width: 50px;">3</th>
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: center; width: 50px;">4</th>
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: center; width: 50px;">5</th>
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: center; width: 50px;">6</th>
+        </tr>
+    `;
+    table.appendChild(thead);
+
+    const tbody = document.createElement('tbody');
+    let rowIndex = 0;
+
+    criteria.forEach((section) => {
+        const catHeader = document.createElement('tr');
+        catHeader.style.backgroundColor = '#f1f1f1';
+        catHeader.innerHTML = `<td colspan="8" style="border: 1px solid #ddd; padding: 8px; font-weight: bold;">${section.kategori}</td>`;
+        tbody.appendChild(catHeader);
+
+        section.items.forEach(item => {
+            const tr = document.createElement('tr');
+            tr.dataset.nilai = item.nilai;
+            tr.dataset.rowIndex = rowIndex;
+
+            const specCell = document.createElement('td');
+            specCell.style.border = '1px solid #ddd';
+            specCell.style.padding = '8px';
+            specCell.textContent = '- ' + item.desc;
+            tr.appendChild(specCell);
+
+            const valorCell = document.createElement('td');
+            valorCell.style.border = '1px solid #ddd';
+            valorCell.style.padding = '8px';
+            valorCell.style.textAlign = 'center';
+            valorCell.style.fontWeight = 'bold';
+            valorCell.textContent = item.nilai;
+            tr.appendChild(valorCell);
+
+            for (let kode = 1; kode <= 6; kode++) {
+                const td = document.createElement('td');
+                td.className = 'kode-contoh-cell';
+                td.dataset.kode = kode;
+                td.dataset.rowIndex = rowIndex;
+                td.dataset.nilai = item.nilai;
+                td.style.border = '1px solid #ddd';
+                td.style.padding = '10px';
+                td.style.textAlign = 'center';
+                td.style.cursor = 'pointer';
+
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.className = 'nilai-checkbox';
+                checkbox.dataset.kode = kode;
+                checkbox.dataset.rowIndex = rowIndex;
+                checkbox.dataset.nilai = item.nilai;
+                checkbox.style.display = 'none';
+                td.appendChild(checkbox);
+
+                td.addEventListener('click', function (e) {
+                    if (e.target.type === 'checkbox') return;
+                    const newChecked = !checkbox.checked;
+                    if (newChecked) {
+                        tbody.querySelectorAll(`tr[data-cat-id="${section.kategori}"] input.nilai-checkbox[data-kode="${kode}"]`).forEach(cb => {
+                            cb.checked = false;
+                            updateCheckmark(cb.parentElement, false);
+                        });
+                    }
+                    checkbox.checked = newChecked;
+                    updateCheckmark(td, newChecked);
+                    setTimeout(() => calculateTotalsBaksoIkan(), 10);
+                });
+
+                tr.appendChild(td);
+            }
+            tr.dataset.catId = section.kategori;
+            tbody.appendChild(tr);
+            rowIndex++;
+        });
+    });
+
+    const totalTr = document.createElement('tr');
+    totalTr.style.backgroundColor = '#f9f9f9';
+    totalTr.innerHTML = `<td colspan="2" style="border: 1px solid #ddd; padding: 8px; font-weight: bold; text-align: center;">Total</td>`;
+    for (let i = 1; i <= 6; i++) {
+        totalTr.innerHTML += `<td class="total-cell" data-kode="${i}" style="border: 1px solid #ddd; padding: 10px; text-align: center; font-weight: bold;">0</td>`;
+    }
+    tbody.appendChild(totalTr);
+
+    const avgTr = document.createElement('tr');
+    avgTr.style.backgroundColor = '#f1f1f1';
+    avgTr.innerHTML = `<td colspan="2" style="border: 1px solid #ddd; padding: 8px; font-weight: bold; text-align: center;">Rata-rata</td>`;
+    for (let i = 1; i <= 6; i++) {
+        avgTr.innerHTML += `<td class="avg-cell" data-kode="${i}" style="border: 1px solid #ddd; padding: 10px; text-align: center; font-weight: bold;">0.00</td>`;
+    }
+    tbody.appendChild(avgTr);
+
+    table.appendChild(tbody);
+    container.appendChild(table);
+
+    const formActions = document.querySelector('.form-actions');
+    if (formActions) {
+        const oldBtn = formActions.querySelector('.btn-lhu');
+        if (oldBtn) oldBtn.remove();
+
+        const lhuButton = document.createElement('button');
+        lhuButton.type = 'button';
+        lhuButton.className = 'btn-lhu';
+        lhuButton.textContent = 'Lihat LHU (Laporan Hasil Uji)';
+        lhuButton.style.padding = '12px 24px';
+        lhuButton.style.background = 'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)';
+        lhuButton.style.color = 'white';
+        lhuButton.style.border = 'none';
+        lhuButton.style.borderRadius = '10px';
+        lhuButton.style.fontSize = '16px';
+        lhuButton.style.fontWeight = '600';
+        lhuButton.style.cursor = 'pointer';
+        lhuButton.style.transition = 'all 0.3s';
+        lhuButton.style.marginRight = '10px';
+
+        lhuButton.addEventListener('click', async function (e) {
+            try {
+                this.disabled = true;
+                await showLHUPreview();
+            } catch (err) {
+                console.error('showLHUPreview error', err);
+                alert('Gagal membuka preview: ' + (err && err.message ? err.message : err));
+            } finally {
+                this.disabled = false;
+            }
+        });
+
+        formActions.insertBefore(lhuButton, formActions.firstChild);
+    }
+
+    const qrWrapper = document.createElement('div');
+    qrWrapper.style.marginTop = '20px';
+    qrWrapper.style.display = 'flex';
+    qrWrapper.style.justifyContent = 'flex-end';
+    qrWrapper.innerHTML = `<div id="qrcode-container" style="padding: 10px; background: #fff; border-radius: 8px;"></div>`;
+    container.appendChild(qrWrapper);
+    setTimeout(updatePanelistQRCode, 300);
+}
+
+function calculateTotalsUdangMasakBeku() {
+    const table = document.getElementById('udangMasakBekuTable');
+    if (!table) return;
+
+    for (let kode = 1; kode <= 6; kode++) {
+        const checked = table.querySelectorAll(`.nilai-checkbox[data-kode="${kode}"]:checked`);
+        let total = 0;
+        checked.forEach(cb => {
+            total += parseInt(cb.dataset.nilai);
+        });
+
+        const totalCell = table.querySelector(`.total-cell[data-kode="${kode}"]`);
+        const avgCell = table.querySelector(`.avg-cell[data-kode="${kode}"]`);
+
+        if (totalCell) totalCell.textContent = total;
+        if (avgCell) {
+            const paramCount = 7;
+            avgCell.textContent = (total / paramCount).toFixed(2);
+        }
+    }
+}
+
+function generateUdangMasakBekuTable(container) {
+    const headerDiv = document.createElement('div');
+    headerDiv.className = 'udang-masak-beku-header';
+    headerDiv.innerHTML = `
+        <h3 style="text-align: center; margin-bottom: 20px; font-size: 18px; font-weight: 600;">LEMBAR PENILAIAN UJI SKOR UDANG MASAK BEKU</h3>
+        <h4 style="text-align: center; margin-bottom: 20px; font-size: 14px; font-weight: normal;">SNI 3458-2016</h4>
+        <div style="margin-bottom: 15px;">
+            <label style="display: inline-block; width: 200px;">1. Kode Contoh Uji /No. Aju PTK :</label>
+            <input type="text" id="kodeContohUji" style="width: 300px; border: 1px solid #ccc; padding: 5px; border-radius: 4px;">
+        </div>
+        <div style="margin-bottom: 15px;">
+            <label style="display: inline-block; width: 200px;">2. Tanggal Diterima :</label>
+            <input type="date" id="tglDiterima" style="width: 300px; border: 1px solid #ccc; padding: 5px; border-radius: 4px;">
+        </div>
+        <div style="margin-bottom: 15px;">
+            <label style="display: inline-block; width: 200px;">3. Tanggal Uji :</label>
+            <input type="date" id="tanggalUji" style="width: 300px; border: 1px solid #ccc; padding: 5px; border-radius: 4px;">
+        </div>
+        <table style="width: 100%; margin-bottom: 20px; border-collapse: collapse; border: 1px solid #ddd;">
+            <thead>
+                <tr style="background-color: #f5f5f5;">
+                    <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">NO</th>
+                    <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">JENIS CONTOH UJI</th>
+                    <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">JUMLAH</th>
+                    <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">UKURAN</th>
+                    <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">Ket.</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">1.</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;"><input type="text" id="jenisContoh" name="jenisContoh" placeholder="Udang Masak Beku" style="width: 100%; border: none; padding: 5px;"></td>
+                    <td style="border: 1px solid #ddd; padding: 8px;"><input type="text" name="jumlah" style="width: 100%; border: none; padding: 5px;"></td>
+                    <td style="border: 1px solid #ddd; padding: 8px;"><input type="text" name="ukuran" style="width: 100%; border: none; padding: 5px;"></td>
+                    <td style="border: 1px solid #ddd; padding: 8px;"><input type="text" name="keterangan" style="width: 100%; border: none; padding: 5px;"></td>
+                </tr>
+            </tbody>
+        </table>
+        <p style="margin-bottom: 15px; font-style: italic;">Berilah tanda âœ“ pada nilai yang dipilih sesuai kode contoh yang diuji.</p>
+    `;
+    container.appendChild(headerDiv);
+
+    const criteria = [
+        { kategori: 'A. Dalam keadaan beku', subKategori: '1. Lapisan es', items: [{ desc: 'Rata, bening, seluruh permukaan dilapisi es', nilai: 9 }, { desc: 'Tidak rata, bening, bagian permukaan produk yang tidak dilapisi es kurang lebih 30%', nilai: 7 }, { desc: 'Tidak rata, bagian permukaan yang tidak dilapisi es kurang dari 50%', nilai: 5 }] },
+        { kategori: 'A. Dalam keadaan beku', subKategori: '2. Pengeringan (dehidrasi)', items: [{ desc: 'Tidak ada pengeringan pada permukaan produk', nilai: 9 }, { desc: 'Pengeringan pada permukaan produk kurang lebih 30%', nilai: 7 }, { desc: 'Pengeringan pada permukaan produk kurang dari 50%', nilai: 5 }] },
+        { kategori: 'A. Dalam keadaan beku', subKategori: '3. Perubahan warna (diskolorasi)', items: [{ desc: 'Belum mengalami perubahan warna pada permukaan produk', nilai: 9 }, { desc: 'Perubahan warna pada permukaan produk kurang lebih 30%', nilai: 7 }, { desc: 'Perubahan warna pada permukaan produk kurang dari 50%', nilai: 5 }] },
+        { kategori: 'B. Sesudah dilelehkan (thawing)', subKategori: '1. Kenampakan', items: [{ desc: 'Utuh, daging berwarna merah muda cerah dan bersih', nilai: 9 }, { desc: 'Utuh, daging berwarna merah muda, agak cerah dan bersih', nilai: 7 }, { desc: 'Utuh, sedikit cacat, daging berwarna merah muda pucat, kusam, sedikit kotor', nilai: 5 }] },
+        { kategori: 'B. Sesudah dilelehkan (thawing)', subKategori: '2. Bau', items: [{ desc: 'Bau sangat segar', nilai: 9 }, { desc: 'Bau segar', nilai: 7 }, { desc: 'Sedikit busuk', nilai: 5 }] },
+        { kategori: 'B. Sesudah dilelehkan (thawing)', subKategori: '3. Rasa', items: [{ desc: 'Manis dan segar', nilai: 9 }, { desc: 'Agak manis', nilai: 7 }, { desc: 'Agak hambar', nilai: 5 }] },
+        { kategori: 'B. Sesudah dilelehkan (thawing)', subKategori: '4. Tekstur', items: [{ desc: 'Elastis, kompak dan padat', nilai: 9 }, { desc: 'Elastis, kompak dan kurang padat', nilai: 7 }, { desc: 'Elastis dan agak hambar', nilai: 5 }] }
+    ];
+
+    const table = document.createElement('table');
+    table.id = 'udangMasakBekuTable';
+    table.className = 'ikan-segar-table';
+    table.style.width = '100%';
+    table.style.borderCollapse = 'collapse';
+
+    const thead = document.createElement('thead');
+    thead.innerHTML = `
+        <tr style="background-color: #f2f2f2;">
+            <th rowspan="2" style="border: 1px solid #ddd; padding: 8px; text-align: center;">Spesifikasi</th>
+            <th rowspan="2" style="border: 1px solid #ddd; padding: 8px; text-align: center; width: 60px;">Nilai</th>
+            <th colspan="6" style="border: 1px solid #ddd; padding: 8px; text-align: center;">Kode Contoh</th>
+        </tr>
+        <tr style="background-color: #f2f2f2;">
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: center; width: 50px;">1</th>
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: center; width: 50px;">2</th>
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: center; width: 50px;">3</th>
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: center; width: 50px;">4</th>
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: center; width: 50px;">5</th>
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: center; width: 50px;">6</th>
+        </tr>
+    `;
+    table.appendChild(thead);
+
+    const tbody = document.createElement('tbody');
+    let rowIndex = 0;
+
+    criteria.forEach((section) => {
+        const catHeader = document.createElement('tr');
+        catHeader.style.backgroundColor = '#f1f1f1';
+        const title = (section.kategori && section.subKategori) ? `${section.kategori} - ${section.subKategori}` : (section.subKategori || section.kategori);
+        catHeader.innerHTML = `<td colspan="8" style="border: 1px solid #ddd; padding: 8px; font-weight: bold;">${title}</td>`;
+        tbody.appendChild(catHeader);
+
+        section.items.forEach(item => {
+            const tr = document.createElement('tr');
+            tr.dataset.nilai = item.nilai;
+            tr.dataset.rowIndex = rowIndex;
+
+            const specCell = document.createElement('td');
+            specCell.style.border = '1px solid #ddd';
+            specCell.style.padding = '8px';
+            specCell.textContent = '- ' + item.desc;
+            tr.appendChild(specCell);
+
+            const valorCell = document.createElement('td');
+            valorCell.style.border = '1px solid #ddd';
+            valorCell.style.padding = '8px';
+            valorCell.style.textAlign = 'center';
+            valorCell.style.fontWeight = 'bold';
+            valorCell.textContent = item.nilai;
+            tr.appendChild(valorCell);
+
+            for (let kode = 1; kode <= 6; kode++) {
+                const td = document.createElement('td');
+                td.className = 'kode-contoh-cell';
+                td.dataset.kode = kode;
+                td.dataset.rowIndex = rowIndex;
+                td.dataset.nilai = item.nilai;
+                td.style.border = '1px solid #ddd';
+                td.style.padding = '10px';
+                td.style.textAlign = 'center';
+                td.style.cursor = 'pointer';
+
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.className = 'nilai-checkbox';
+                checkbox.dataset.kode = kode;
+                checkbox.dataset.rowIndex = rowIndex;
+                checkbox.dataset.nilai = item.nilai;
+                checkbox.style.display = 'none';
+                td.appendChild(checkbox);
+
+                td.addEventListener('click', function (e) {
+                    if (e.target.type === 'checkbox') return;
+                    const newChecked = !checkbox.checked;
+                    if (newChecked) {
+                        const catId = section.kategori + (section.subKategori ? ' - ' + section.subKategori : '');
+                        tbody.querySelectorAll(`tr[data-cat-id="${catId}"] input.nilai-checkbox[data-kode="${kode}"]`).forEach(cb => {
+                            cb.checked = false;
+                            updateCheckmark(cb.parentElement, false);
+                        });
+                    }
+                    checkbox.checked = newChecked;
+                    updateCheckmark(td, newChecked);
+                    setTimeout(() => calculateTotalsUdangMasakBeku(), 10);
+                });
+
+                tr.appendChild(td);
+            }
+            tr.dataset.catId = section.kategori + (section.subKategori ? ' - ' + section.subKategori : '');
+            tbody.appendChild(tr);
+            rowIndex++;
+        });
+    });
+
+    const totalTr = document.createElement('tr');
+    totalTr.style.backgroundColor = '#f9f9f9';
+    totalTr.innerHTML = `<td colspan="2" style="border: 1px solid #ddd; padding: 8px; font-weight: bold; text-align: center;">Total</td>`;
+    for (let i = 1; i <= 6; i++) {
+        totalTr.innerHTML += `<td class="total-cell" data-kode="${i}" style="border: 1px solid #ddd; padding: 10px; text-align: center; font-weight: bold;">0</td>`;
+    }
+    tbody.appendChild(totalTr);
+
+    const avgTr = document.createElement('tr');
+    avgTr.style.backgroundColor = '#f1f1f1';
+    avgTr.innerHTML = `<td colspan="2" style="border: 1px solid #ddd; padding: 8px; font-weight: bold; text-align: center;">Rata-rata</td>`;
+    for (let i = 1; i <= 6; i++) {
+        avgTr.innerHTML += `<td class="avg-cell" data-kode="${i}" style="border: 1px solid #ddd; padding: 10px; text-align: center; font-weight: bold;">0.00</td>`;
+    }
+    tbody.appendChild(avgTr);
+
+    table.appendChild(tbody);
+    container.appendChild(table);
+
+    const formActions = document.querySelector('.form-actions');
+    if (formActions) {
+        const oldBtn = formActions.querySelector('.btn-lhu');
+        if (oldBtn) oldBtn.remove();
+
+        const lhuButton = document.createElement('button');
+        lhuButton.type = 'button';
+        lhuButton.className = 'btn-lhu';
+        lhuButton.textContent = 'Lihat LHU (Laporan Hasil Uji)';
+        lhuButton.style.padding = '12px 24px';
+        lhuButton.style.background = 'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)';
+        lhuButton.style.color = 'white';
+        lhuButton.style.border = 'none';
+        lhuButton.style.borderRadius = '10px';
+        lhuButton.style.fontSize = '16px';
+        lhuButton.style.fontWeight = '600';
+        lhuButton.style.cursor = 'pointer';
+        lhuButton.style.transition = 'all 0.3s';
+        lhuButton.style.marginRight = '10px';
+
+        lhuButton.addEventListener('click', async function (e) {
+            try {
+                this.disabled = true;
+                await showLHUPreview();
+            } catch (err) {
+                console.error('showLHUPreview error', err);
+                alert('Gagal membuka preview: ' + (err && err.message ? err.message : err));
+            } finally {
+                this.disabled = false;
+            }
+        });
+
+        formActions.insertBefore(lhuButton, formActions.firstChild);
+    }
+
+    const qrWrapper = document.createElement('div');
+    qrWrapper.style.marginTop = '20px';
+    qrWrapper.style.display = 'flex';
+    qrWrapper.style.justifyContent = 'flex-end';
+    qrWrapper.innerHTML = `<div id="qrcode-container" style="padding: 10px; background: #fff; border-radius: 8px;"></div>`;
+    container.appendChild(qrWrapper);
+    setTimeout(updatePanelistQRCode, 300);
+}
+
+
+function calculateTotalsTunaLoinBeku() {
+    const table = document.getElementById('tunaLoinBekuTable');
+    if (!table) return;
+
+    for (let kode = 1; kode <= 6; kode++) {
+        const checked = table.querySelectorAll(`.nilai-checkbox[data-kode="${kode}"]:checked`);
+        let total = 0;
+        checked.forEach(cb => {
+            total += parseInt(cb.dataset.nilai);
+        });
+
+        const totalCell = table.querySelector(`.total-cell[data-kode="${kode}"]`);
+        const avgCell = table.querySelector(`.avg-cell[data-kode="${kode}"]`);
+
+        if (totalCell) totalCell.textContent = total;
+        if (avgCell) {
+            const paramCount = 6;
+            avgCell.textContent = (total / paramCount).toFixed(2);
+        }
+    }
+}
+
+function generateTunaLoinBekuTable(container) {
+    const headerDiv = document.createElement('div');
+    headerDiv.className = 'tuna-loin-beku-header';
+    headerDiv.innerHTML = `
+        <h3 style="text-align: center; margin-bottom: 20px; font-size: 18px; font-weight: 600;">LEMBAR PENILAIAN UJI SKOR TUNA LOIN BEKU</h3>
+        <h4 style="text-align: center; margin-bottom: 20px; font-size: 14px; font-weight: normal;">SNI 4104-2015</h4>
+        <div style="margin-bottom: 15px;">
+            <label style="display: inline-block; width: 200px;">1. Kode Contoh Uji /No. Aju PTK :</label>
+            <input type="text" id="kodeContohUji" style="width: 300px; border: 1px solid #ccc; padding: 5px; border-radius: 4px;">
+        </div>
+        <div style="margin-bottom: 15px;">
+            <label style="display: inline-block; width: 200px;">2. Tanggal Diterima :</label>
+            <input type="date" id="tglDiterima" style="width: 300px; border: 1px solid #ccc; padding: 5px; border-radius: 4px;">
+        </div>
+        <div style="margin-bottom: 15px;">
+            <label style="display: inline-block; width: 200px;">3. Tanggal Uji :</label>
+            <input type="date" id="tanggalUji" style="width: 300px; border: 1px solid #ccc; padding: 5px; border-radius: 4px;">
+        </div>
+        <table style="width: 100%; margin-bottom: 20px; border-collapse: collapse; border: 1px solid #ddd;">
+            <thead>
+                <tr style="background-color: #f5f5f5;">
+                    <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">NO</th>
+                    <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">JENIS CONTOH UJI</th>
+                    <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">JUMLAH</th>
+                    <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">UKURAN</th>
+                    <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">Ket.</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">1.</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;"><input type="text" id="jenisContoh" name="jenisContoh" placeholder="Tuna Loin Beku" style="width: 100%; border: none; padding: 5px;"></td>
+                    <td style="border: 1px solid #ddd; padding: 8px;"><input type="text" name="jumlah" style="width: 100%; border: none; padding: 5px;"></td>
+                    <td style="border: 1px solid #ddd; padding: 8px;"><input type="text" name="ukuran" style="width: 100%; border: none; padding: 5px;"></td>
+                    <td style="border: 1px solid #ddd; padding: 8px;"><input type="text" name="keterangan" style="width: 100%; border: none; padding: 5px;"></td>
+                </tr>
+            </tbody>
+        </table>
+        <p style="margin-bottom: 15px; font-style: italic;">Berilah tanda âœ“ pada nilai yang dipilih sesuai kode contoh yang diuji.</p>
+    `;
+    container.appendChild(headerDiv);
+
+    const criteria = [
+        {
+            kategori: 'A. Dalam keadaan beku', subKategori: '1. Lapisan es', items: [
+                { desc: 'Rata, bening, seluruh permukaan dilapisi es', nilai: 9 },
+                { desc: 'Tidak rata, bening, bagian permukaan produk yang tidak dilapisi es kurang lebih 30%', nilai: 7 },
+                { desc: 'Tidak rata, bagian permukaan yang tidak dilapisi es kurang dari 50%', nilai: 5 },
+                { desc: 'Tidak rata, bagian permukaan yang tidak dilapisi es lebih dari 50%', nilai: 3 },
+                { desc: 'Tidak terdapat lapisan es pada permukaan produk', nilai: 1 }
+            ]
+        },
+        {
+            kategori: 'A. Dalam keadaan beku', subKategori: '2. Pengeringan (dehidrasi)', items: [
+                { desc: 'Tidak ada pengeringan pada permukaan produk', nilai: 9 },
+                { desc: 'Pengeringan pada permukaan produk kurang lebih 30%', nilai: 7 },
+                { desc: 'Pengeringan pada permukaan produk kurang dari 50%', nilai: 5 },
+                { desc: 'Pengeringan banyak pada permukaan produk 40%-50%', nilai: 3 },
+                { desc: 'Seluruh bagian produk luar tampak mengering', nilai: 1 }
+            ]
+        },
+        {
+            kategori: 'A. Dalam keadaan beku', subKategori: '3. Perubahan warna (diskolorasi)', items: [
+                { desc: 'Belum mengalami perubahan warna pada permukaan produk', nilai: 9 },
+                { desc: 'Perubahan warna pada permukaan produk kurang lebih 30%', nilai: 7 },
+                { desc: 'Perubahan warna pada permukaan produk kurang dari 50%', nilai: 5 },
+                { desc: 'Perubahan warna pada permukaan produk lebih dari 50%', nilai: 3 },
+                { desc: 'Perubahan warna menyeluruh pada permukaan produk', nilai: 1 }
+            ]
+        },
+        {
+            kategori: 'B. Setelah pelelehan (thawing)', subKategori: '1. Kenampakan', items: [
+                { desc: 'Cemerlang spesifik produk', nilai: 9 },
+                { desc: 'Kurang cemerlang spesifik produk', nilai: 7 },
+                { desc: 'Agak kusam', nilai: 5 },
+                { desc: 'Mulai berubah warna', nilai: 3 },
+                { desc: 'Warna agak kemerahan', nilai: 1 }
+            ]
+        },
+        {
+            kategori: 'B. Setelah pelelehan (thawing)', subKategori: '2. Tekstur', items: [
+                { desc: 'Padat, kompak', nilai: 9 },
+                { desc: 'Padat, kurang kompak', nilai: 7 },
+                { desc: 'Agak lembek', nilai: 5 },
+                { desc: 'Lembek', nilai: 3 },
+                { desc: 'Sangat lembek', nilai: 1 }
+            ]
+        },
+        {
+            kategori: 'B. Setelah pelelehan (thawing)', subKategori: '3. Bau', items: [
+                { desc: 'Spesifik produk', nilai: 9 },
+                { desc: 'Netral', nilai: 7 },
+                { desc: 'Sedikit tengik', nilai: 5 },
+                { desc: 'Asam, sedikit bau amonia, tengik', nilai: 3 },
+                { desc: 'Amonia dan busuk jelas sekali', nilai: 1 }
+            ]
+        }
+    ];
+
+    const table = document.createElement('table');
+    table.id = 'tunaLoinBekuTable';
+    table.className = 'ikan-segar-table';
+    table.style.width = '100%';
+    table.style.borderCollapse = 'collapse';
+
+    const thead = document.createElement('thead');
+    thead.innerHTML = `
+        <tr style="background-color: #f2f2f2;">
+            <th rowspan="2" style="border: 1px solid #ddd; padding: 8px; text-align: center;">Spesifikasi</th>
+            <th rowspan="2" style="border: 1px solid #ddd; padding: 8px; text-align: center; width: 60px;">Nilai</th>
+            <th colspan="6" style="border: 1px solid #ddd; padding: 8px; text-align: center;">Kode Contoh</th>
+        </tr>
+        <tr style="background-color: #f2f2f2;">
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: center; width: 50px;">1</th>
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: center; width: 50px;">2</th>
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: center; width: 50px;">3</th>
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: center; width: 50px;">4</th>
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: center; width: 50px;">5</th>
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: center; width: 50px;">6</th>
+        </tr>
+    `;
+    table.appendChild(thead);
+
+    const tbody = document.createElement('tbody');
+    let rowIndex = 0;
+
+    criteria.forEach((section) => {
+        const catHeader = document.createElement('tr');
+        catHeader.style.backgroundColor = '#f1f1f1';
+        const title = (section.kategori && section.subKategori) ? `${section.kategori} - ${section.subKategori}` : (section.subKategori || section.kategori);
+        catHeader.innerHTML = `<td colspan="8" style="border: 1px solid #ddd; padding: 8px; font-weight: bold;">${title}</td>`;
+        tbody.appendChild(catHeader);
+
+        section.items.forEach(item => {
+            const tr = document.createElement('tr');
+            tr.dataset.nilai = item.nilai;
+            tr.dataset.rowIndex = rowIndex;
+
+            const specCell = document.createElement('td');
+            specCell.style.border = '1px solid #ddd';
+            specCell.style.padding = '8px';
+            specCell.textContent = '- ' + item.desc;
+            tr.appendChild(specCell);
+
+            const valorCell = document.createElement('td');
+            valorCell.style.border = '1px solid #ddd';
+            valorCell.style.padding = '8px';
+            valorCell.style.textAlign = 'center';
+            valorCell.style.fontWeight = 'bold';
+            valorCell.textContent = item.nilai;
+            tr.appendChild(valorCell);
+
+            for (let kode = 1; kode <= 6; kode++) {
+                const td = document.createElement('td');
+                td.className = 'kode-contoh-cell';
+                td.dataset.kode = kode;
+                td.dataset.rowIndex = rowIndex;
+                td.dataset.nilai = item.nilai;
+                td.style.border = '1px solid #ddd';
+                td.style.padding = '10px';
+                td.style.textAlign = 'center';
+                td.style.cursor = 'pointer';
+
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.className = 'nilai-checkbox';
+                checkbox.dataset.kode = kode;
+                checkbox.dataset.rowIndex = rowIndex;
+                checkbox.dataset.nilai = item.nilai;
+                checkbox.style.display = 'none';
+                td.appendChild(checkbox);
+
+                td.addEventListener('click', function (e) {
+                    if (e.target.type === 'checkbox') return;
+                    const newChecked = !checkbox.checked;
+                    if (newChecked) {
+                        const catId = section.kategori + (section.subKategori ? ' - ' + section.subKategori : '');
+                        tbody.querySelectorAll(`tr[data-cat-id="${catId}"] input.nilai-checkbox[data-kode="${kode}"]`).forEach(cb => {
+                            cb.checked = false;
+                            updateCheckmark(cb.parentElement, false);
+                        });
+                    }
+                    checkbox.checked = newChecked;
+                    updateCheckmark(td, newChecked);
+                    setTimeout(() => calculateTotalsTunaLoinBeku(), 10);
+                });
+
+                tr.appendChild(td);
+            }
+            tr.dataset.catId = section.kategori + (section.subKategori ? ' - ' + section.subKategori : '');
+            tbody.appendChild(tr);
+            rowIndex++;
+        });
+    });
+
+    const totalTr = document.createElement('tr');
+    totalTr.style.backgroundColor = '#f9f9f9';
+    totalTr.innerHTML = `<td colspan="2" style="border: 1px solid #ddd; padding: 8px; font-weight: bold; text-align: center;">Total</td>`;
+    for (let i = 1; i <= 6; i++) {
+        totalTr.innerHTML += `<td class="total-cell" data-kode="${i}" style="border: 1px solid #ddd; padding: 10px; text-align: center; font-weight: bold;">0</td>`;
+    }
+    tbody.appendChild(totalTr);
+
+    const avgTr = document.createElement('tr');
+    avgTr.style.backgroundColor = '#f1f1f1';
+    avgTr.innerHTML = `<td colspan="2" style="border: 1px solid #ddd; padding: 8px; font-weight: bold; text-align: center;">Rata-rata</td>`;
+    for (let i = 1; i <= 6; i++) {
+        avgTr.innerHTML += `<td class="avg-cell" data-kode="${i}" style="border: 1px solid #ddd; padding: 10px; text-align: center; font-weight: bold;">0.00</td>`;
+    }
+    tbody.appendChild(avgTr);
+
+    table.appendChild(tbody);
+    container.appendChild(table);
+
+    const formActions = document.querySelector('.form-actions');
+    if (formActions) {
+        const oldBtn = formActions.querySelector('.btn-lhu');
+        if (oldBtn) oldBtn.remove();
+
+        const lhuButton = document.createElement('button');
+        lhuButton.type = 'button';
+        lhuButton.className = 'btn-lhu';
+        lhuButton.textContent = 'Lihat LHU (Laporan Hasil Uji)';
+        lhuButton.style.padding = '12px 24px';
+        lhuButton.style.background = 'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)';
+        lhuButton.style.color = 'white';
+        lhuButton.style.border = 'none';
+        lhuButton.style.borderRadius = '10px';
+        lhuButton.style.fontSize = '16px';
+        lhuButton.style.fontWeight = '600';
+        lhuButton.style.cursor = 'pointer';
+        lhuButton.style.transition = 'all 0.3s';
+        lhuButton.style.marginRight = '10px';
+
+        lhuButton.addEventListener('click', async function (e) {
+            try {
+                this.disabled = true;
+                await showLHUPreview();
+            } catch (err) {
+                console.error('showLHUPreview error', err);
+                alert('Gagal membuka preview: ' + (err && err.message ? err.message : err));
+            } finally {
+                this.disabled = false;
+            }
+        });
+
+        formActions.insertBefore(lhuButton, formActions.firstChild);
+    }
+
+    const qrWrapper = document.createElement('div');
+    qrWrapper.style.marginTop = '20px';
+    qrWrapper.style.display = 'flex';
+    qrWrapper.style.justifyContent = 'flex-end';
+    qrWrapper.innerHTML = `<div id="qrcode-container" style="padding: 10px; background: #fff; border-radius: 8px;"></div>`;
+    container.appendChild(qrWrapper);
+    setTimeout(updatePanelistQRCode, 300);
+}
+
+function calculateTotalsTunaSteakBeku() {
+    const table = document.getElementById('tunaSteakBekuTable');
+    if (!table) return;
+
+    for (let kode = 1; kode <= 6; kode++) {
+        const checked = table.querySelectorAll(`.nilai-checkbox[data-kode="${kode}"]:checked`);
+        let total = 0;
+        checked.forEach(cb => {
+            total += parseInt(cb.dataset.nilai);
+        });
+
+        const totalCell = table.querySelector(`.total-cell[data-kode="${kode}"]`);
+        const avgCell = table.querySelector(`.avg-cell[data-kode="${kode}"]`);
+
+        if (totalCell) totalCell.textContent = total;
+        if (avgCell) {
+            const paramCount = 3;
+            avgCell.textContent = (total / paramCount).toFixed(2);
+        }
+    }
+}
+
+function generateTunaSteakBekuTable(container) {
+    const headerDiv = document.createElement('div');
+    headerDiv.className = 'tuna-steak-beku-header';
+    headerDiv.innerHTML = `
+        <h3 style="text-align: center; margin-bottom: 20px; font-size: 18px; font-weight: 600;">LEMBAR PENILAIAN UJI SKOR TUNA STEAK BEKU</h3>
+        <h4 style="text-align: center; margin-bottom: 20px; font-size: 14px; font-weight: normal;">SNI 01-4485.1-2006</h4>
+        <div style="margin-bottom: 15px;">
+            <label style="display: inline-block; width: 200px;">1. Kode Contoh Uji /No. Aju PTK :</label>
+            <input type="text" id="kodeContohUji" style="width: 300px; border: 1px solid #ccc; padding: 5px; border-radius: 4px;">
+        </div>
+        <div style="margin-bottom: 15px;">
+            <label style="display: inline-block; width: 200px;">2. Tanggal Diterima :</label>
+            <input type="date" id="tglDiterima" style="width: 300px; border: 1px solid #ccc; padding: 5px; border-radius: 4px;">
+        </div>
+        <div style="margin-bottom: 15px;">
+            <label style="display: inline-block; width: 200px;">3. Tanggal Uji :</label>
+            <input type="date" id="tanggalUji" style="width: 300px; border: 1px solid #ccc; padding: 5px; border-radius: 4px;">
+        </div>
+        <table style="width: 100%; margin-bottom: 20px; border-collapse: collapse; border: 1px solid #ddd;">
+            <thead>
+                <tr style="background-color: #f5f5f5;">
+                    <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">NO</th>
+                    <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">JENIS CONTOH UJI</th>
+                    <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">JUMLAH</th>
+                    <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">UKURAN</th>
+                    <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">Ket.</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">1.</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;"><input type="text" id="jenisContoh" name="jenisContoh" placeholder="Tuna Steak Beku" style="width: 100%; border: none; padding: 5px;"></td>
+                    <td style="border: 1px solid #ddd; padding: 8px;"><input type="text" name="jumlah" style="width: 100%; border: none; padding: 5px;"></td>
+                    <td style="border: 1px solid #ddd; padding: 8px;"><input type="text" name="ukuran" style="width: 100%; border: none; padding: 5px;"></td>
+                    <td style="border: 1px solid #ddd; padding: 8px;"><input type="text" name="keterangan" style="width: 100%; border: none; padding: 5px;"></td>
+                </tr>
+            </tbody>
+        </table>
+        <p style="margin-bottom: 15px; font-style: italic;">Berilah tanda ✓ pada nilai yang dipilih sesuai kode contoh yang diuji.</p>
+    `;
+    container.appendChild(headerDiv);
+
+    const criteria = [
+        {
+            kategori: 'A. Dalam keadaan beku', subKategori: '1. Lapisan es', items: [
+                { desc: 'Rata, bening, cukup tebal pada seluruh permukaan dilapisi es.', nilai: 9 },
+                { desc: 'Rata, bening, cukup tebal, ada bagian yang terbuka 10%.', nilai: 8 },
+                { desc: 'Tidak rata, bagian yang terbuka, sebanyak 20%-30%.', nilai: 7 },
+                { desc: 'Tidak rata, bagian yang terbuka sebanyak 40%-50%.', nilai: 6 },
+                { desc: 'Banyak bagian yang terbuka 60%-70%.', nilai: 5 },
+                { desc: 'Banyak bagian yang terbuka 80%-90%.', nilai: 3 },
+                { desc: 'Tidak terdapat lapisan es pada permukaan produk', nilai: 1 }
+            ]
+        },
+        {
+            kategori: 'A. Dalam keadaan beku', subKategori: '2. Pengeringan (dehidrasi)', items: [
+                { desc: 'Tidak ada pengeringan pada permukaan produk', nilai: 9 },
+                { desc: 'Sedikit mengalami pengeringan pada permukaan produk 10%.', nilai: 8 },
+                { desc: 'Pengeringan mulai jelas pada permukaan produk 20%-30%.', nilai: 7 },
+                { desc: 'Pengeringan banyak pada permukaan produk 40%-50%.', nilai: 6 },
+                { desc: 'Banyak bagian produk yang tampak mengering 60%-70%.', nilai: 5 },
+                { desc: 'Banyak bagian produk yang tampak mengering 80%-90%.', nilai: 3 },
+                { desc: 'Seluruh bagian produk luar tampak mengering.', nilai: 1 }
+            ]
+        },
+        {
+            kategori: 'A. Dalam keadaan beku', subKategori: '3. Perubahan warna (diskolorasi)', items: [
+                { desc: 'Belum mengalami perubahan warna pada permukaan produk.', nilai: 9 },
+                { desc: 'Sedikit mengalami perubahan warna pada permukaan produk 10%.', nilai: 8 },
+                { desc: 'Agak banyak mengalami perubahan warna pada permukaan produk 20%-30%.', nilai: 7 },
+                { desc: 'Banyak mengalami perubahan warna pada permukaan produk 40%-50%.', nilai: 6 },
+                { desc: 'Perubahan warna hampir menyeluruh pada permukaan produk 60%-70%.', nilai: 5 },
+                { desc: 'Perubahan warna hampir menyeluruh pada permukaan produk 80%-90%.', nilai: 3 },
+                { desc: 'Perubahan warna menyeluruh pada permukaan produk.', nilai: 1 }
+            ]
+        },
+        {
+            kategori: 'B. Sesudah dilelehkan (thawing)', subKategori: '1. Kenampakan', items: [
+                { desc: 'Warna daging krem, sangat cerah dan sangat mengkilap', nilai: 9 },
+                { desc: 'Warna daging krem, cerah dan mengkilap', nilai: 8 },
+                { desc: 'Warna daging krem, cerah, kurang mengkilap', nilai: 7 },
+                { desc: 'Warna dagingkrem kecoklatan, agak kusam', nilai: 6 },
+                { desc: 'Warna daging kecoklatan, kusam', nilai: 5 },
+                { desc: 'Warna daging coklat, kusam', nilai: 3 },
+                { desc: 'Warna daging coklat tua, sangat kusam', nilai: 1 }
+            ]
+        },
+        {
+            kategori: 'B. Sesudah dilelehkan (thawing)', subKategori: '3. Bau', items: [
+                { desc: 'Bau sangat segar.', nilai: 9 },
+                { desc: 'Bau segar.', nilai: 8 },
+                { desc: 'Bau segar mengarah ke netral.', nilai: 7 },
+                { desc: 'Netral', nilai: 6 },
+                { desc: 'Netral dengan sedikit bau tambahan yang mengganggu', nilai: 5 },
+                { desc: 'Tercium bau busuk', nilai: 3 },
+                { desc: 'Bau busuk sangat jelas', nilai: 1 }
+            ]
+        },
+        {
+            kategori: 'B. Sesudah dilelehkan (thawing)', subKategori: '4. Tekstur', items: [
+                { desc: 'Kompak, padat dan sangat elastis', nilai: 9 },
+                { desc: 'Kompak, padat dan elastis', nilai: 8 },
+                { desc: 'Kurang padat, kurang elastis, jaringan daging masih melekat kuat', nilai: 7 },
+                { desc: 'Kurang elastis, jaringan daging agak longgar', nilai: 6 },
+                { desc: 'Tidak elastis, jaringan daging longgar dan daging agak mudah sobek', nilai: 5 },
+                { desc: 'Lunak, daging mudah sobek', nilai: 3 },
+                { desc: 'Sangat lunak, daging sangat mudah sobek', nilai: 1 }
+            ]
+        }
+    ];
+
+    const table = document.createElement('table');
+    table.id = 'tunaSteakBekuTable';
+    table.className = 'ikan-segar-table';
+    table.style.width = '100%';
+    table.style.borderCollapse = 'collapse';
+
+    const thead = document.createElement('thead');
+    thead.innerHTML = `
+        <tr style="background-color: #f2f2f2;">
+            <th rowspan="2" style="border: 1px solid #ddd; padding: 8px; text-align: center;">Spesifikasi</th>
+            <th rowspan="2" style="border: 1px solid #ddd; padding: 8px; text-align: center; width: 60px;">Nilai</th>
+            <th colspan="6" style="border: 1px solid #ddd; padding: 8px; text-align: center;">Kode Contoh</th>
+        </tr>
+        <tr style="background-color: #f2f2f2;">
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: center; width: 50px;">1</th>
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: center; width: 50px;">2</th>
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: center; width: 50px;">3</th>
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: center; width: 50px;">4</th>
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: center; width: 50px;">5</th>
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: center; width: 50px;">6</th>
+        </tr>
+    `;
+    table.appendChild(thead);
+
+    const tbody = document.createElement('tbody');
+    let rowIndex = 0;
+
+    criteria.forEach((section) => {
+        const catHeader = document.createElement('tr');
+        catHeader.style.backgroundColor = '#f1f1f1';
+        const title = (section.kategori && section.subKategori) ? `${section.kategori} - ${section.subKategori}` : (section.subKategori || section.kategori);
+        catHeader.innerHTML = `<td colspan="8" style="border: 1px solid #ddd; padding: 8px; font-weight: bold;">${title}</td>`;
+        tbody.appendChild(catHeader);
+
+        section.items.forEach(item => {
+            const tr = document.createElement('tr');
+            tr.dataset.nilai = item.nilai;
+            tr.dataset.rowIndex = rowIndex;
+
+            const specCell = document.createElement('td');
+            specCell.style.border = '1px solid #ddd';
+            specCell.style.padding = '8px';
+            specCell.textContent = '- ' + item.desc;
+            tr.appendChild(specCell);
+
+            const valorCell = document.createElement('td');
+            valorCell.style.border = '1px solid #ddd';
+            valorCell.style.padding = '8px';
+            valorCell.style.textAlign = 'center';
+            valorCell.style.fontWeight = 'bold';
+            valorCell.textContent = item.nilai;
+            tr.appendChild(valorCell);
+
+            for (let kode = 1; kode <= 6; kode++) {
+                const td = document.createElement('td');
+                td.className = 'kode-contoh-cell';
+                td.dataset.kode = kode;
+                td.dataset.rowIndex = rowIndex;
+                td.dataset.nilai = item.nilai;
+                td.style.border = '1px solid #ddd';
+                td.style.padding = '10px';
+                td.style.textAlign = 'center';
+                td.style.cursor = 'pointer';
+
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.className = 'nilai-checkbox';
+                checkbox.dataset.kode = kode;
+                checkbox.dataset.rowIndex = rowIndex;
+                checkbox.dataset.nilai = item.nilai;
+                checkbox.style.display = 'none';
+                td.appendChild(checkbox);
+
+                td.addEventListener('click', function (e) {
+                    if (e.target.type === 'checkbox') return;
+                    const newChecked = !checkbox.checked;
+                    if (newChecked) {
+                        const catId = section.kategori + (section.subKategori ? ' - ' + section.subKategori : '');
+                        tbody.querySelectorAll(`tr[data-cat-id="${catId}"] input.nilai-checkbox[data-kode="${kode}"]`).forEach(cb => {
+                            cb.checked = false;
+                            updateCheckmark(cb.parentElement, false);
+                        });
+                    }
+                    checkbox.checked = newChecked;
+                    updateCheckmark(td, newChecked);
+                    setTimeout(() => calculateTotalsTunaSteakBeku(), 10);
+                });
+
+                tr.appendChild(td);
+            }
+            tr.dataset.catId = section.kategori + (section.subKategori ? ' - ' + section.subKategori : '');
+            tbody.appendChild(tr);
+            rowIndex++;
+        });
+    });
+
+    const totalTr = document.createElement('tr');
+    totalTr.style.backgroundColor = '#f9f9f9';
+    totalTr.innerHTML = `<td colspan="2" style="border: 1px solid #ddd; padding: 8px; font-weight: bold; text-align: center;">Total</td>`;
+    for (let i = 1; i <= 6; i++) {
+        totalTr.innerHTML += `<td class="total-cell" data-kode="${i}" style="border: 1px solid #ddd; padding: 10px; text-align: center; font-weight: bold;">0</td>`;
+    }
+    tbody.appendChild(totalTr);
+
+    const avgTr = document.createElement('tr');
+    avgTr.style.backgroundColor = '#f1f1f1';
+    avgTr.innerHTML = `<td colspan="2" style="border: 1px solid #ddd; padding: 8px; font-weight: bold; text-align: center;">Rata-rata</td>`;
+    for (let i = 1; i <= 6; i++) {
+        avgTr.innerHTML += `<td class="avg-cell" data-kode="${i}" style="border: 1px solid #ddd; padding: 10px; text-align: center; font-weight: bold;">0.00</td>`;
+    }
+    tbody.appendChild(avgTr);
+
+    table.appendChild(tbody);
+    container.appendChild(table);
+
+    const formActions = document.querySelector('.form-actions');
+    if (formActions) {
+        const oldBtn = formActions.querySelector('.btn-lhu');
+        if (oldBtn) oldBtn.remove();
+
+        const lhuButton = document.createElement('button');
+        lhuButton.type = 'button';
+        lhuButton.className = 'btn-lhu';
+        lhuButton.textContent = 'Lihat LHU (Laporan Hasil Uji)';
+        lhuButton.style.padding = '12px 24px';
+        lhuButton.style.background = 'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)';
+        lhuButton.style.color = 'white';
+        lhuButton.style.border = 'none';
+        lhuButton.style.borderRadius = '10px';
+        lhuButton.style.fontSize = '16px';
+        lhuButton.style.fontWeight = '600';
+        lhuButton.style.cursor = 'pointer';
+        lhuButton.style.transition = 'all 0.3s';
+        lhuButton.style.marginRight = '10px';
+
+        lhuButton.addEventListener('click', async function (e) {
+            try {
+                this.disabled = true;
+                await showLHUPreview();
+            } catch (err) {
+                console.error('showLHUPreview error', err);
+                alert('Gagal membuka preview: ' + (err && err.message ? err.message : err));
+            } finally {
+                this.disabled = false;
+            }
+        });
+
+        formActions.insertBefore(lhuButton, formActions.firstChild);
+    }
+
+    const qrWrapper = document.createElement('div');
+    qrWrapper.style.marginTop = '20px';
+    qrWrapper.style.display = 'flex';
+    qrWrapper.style.justifyContent = 'flex-end';
+    qrWrapper.innerHTML = `<div id="qrcode-container" style="padding: 10px; background: #fff; border-radius: 8px;"></div>`;
+    container.appendChild(qrWrapper);
+    setTimeout(updatePanelistQRCode, 300);
 }
