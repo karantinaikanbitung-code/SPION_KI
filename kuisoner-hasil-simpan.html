@@ -220,69 +220,31 @@
             const body = document.getElementById('historyBody');
             const container = document.getElementById('historyTableContainer');
             const empty = document.getElementById('emptyState');
-            const syncBtn = document.querySelector('.btn-sync');
 
             // Tampilkan loading state
-            const originalBtnText = syncBtn.innerHTML;
-            syncBtn.disabled = true;
-            syncBtn.innerHTML = '<span>⏳</span> Sinkronisasi...';
-
-            body.innerHTML = '<tr><td colspan="5" style="text-align: center; padding: 40px;">Memuat data dari cloud... <div class="loading-spinner"></div></td></tr>';
+            body.innerHTML = '<tr><td colspan="4" style="text-align: center; padding: 40px;">Memuat data dari cloud... <div class="loading-spinner"></div></td></tr>';
             container.style.display = 'block';
             empty.style.display = 'none';
 
-            let localHistory = JSON.parse(localStorage.getItem('spion_history') || '[]');
-            let cloudHistory = [];
-            let combinedHistory = [];
+            let history = [];
 
             try {
-                // 1. Ambil dari Cloud (Google Sheets)
-                console.log('Fetching history from cloud...');
+                // Ambil dari Cloud (Google Sheets)
                 const cloudRes = await getHistoryFromSheets();
-
                 if (cloudRes && cloudRes.success && cloudRes.history) {
-                    cloudHistory = cloudRes.history;
-                    console.log('Cloud history fetched:', cloudHistory.length, 'records');
-
-                    // 2. Gabungkan dengan data lokal yang mungkin belum ter-sync
-                    // Gunakan ID atau timestamp + filename sebagai unik key
-                    const cloudKeys = new Set(cloudHistory.map(item => item.id || `${item.timestamp}_${item.filename}`));
-
-                    const unsyncedLocal = localHistory.filter(item => {
-                        const key = item.id || `${item.timestamp}_${item.filename}`;
-                        return !cloudKeys.has(key);
-                    });
-
-                    if (unsyncedLocal.length > 0) {
-                        console.log('Found', unsyncedLocal.length, 'unsynced local items. Syncing to cloud...');
-                        // Push unsynced items to cloud (one by one for safety or we could bulk if GAS supports it)
-                        for (const item of unsyncedLocal) {
-                            await saveHistoryToSheets(item);
-                        }
-                        // Refresh cloud history after syncing
-                        const refreshedRes = await getHistoryFromSheets();
-                        if (refreshedRes && refreshedRes.success) {
-                            cloudHistory = refreshedRes.history;
-                        }
-                    }
-
-                    combinedHistory = cloudHistory;
-                    // Update Local Storage sebagai cache terbaru
-                    localStorage.setItem('spion_history', JSON.stringify(combinedHistory));
+                    history = cloudRes.history;
+                    // Update Local Storage sebagai cache
+                    localStorage.setItem('spion_history', JSON.stringify(history));
                 } else {
-                    console.warn('Gagal ambil history dari cloud:', cloudRes ? cloudRes.message : 'Unknown error');
-                    combinedHistory = localHistory;
+                    console.warn('Gagal ambil history dari cloud, menggunakan local storage.');
+                    history = JSON.parse(localStorage.getItem('spion_history') || '[]');
                 }
             } catch (err) {
-                console.error('Error during synchronization:', err);
-                combinedHistory = localHistory;
-                alert('Gagal sinkronisasi cloud: ' + err.message + '. Menampilkan data lokal.');
-            } finally {
-                syncBtn.disabled = false;
-                syncBtn.innerHTML = originalBtnText;
+                console.error('Error fetching cloud history:', err);
+                history = JSON.parse(localStorage.getItem('spion_history') || '[]');
             }
 
-            if (combinedHistory.length === 0) {
+            if (history.length === 0) {
                 container.style.display = 'none';
                 empty.style.display = 'block';
                 return;
@@ -292,11 +254,8 @@
             empty.style.display = 'none';
             body.innerHTML = '';
 
-            combinedHistory.forEach((item, index) => {
+            history.forEach((item, index) => {
                 const tr = document.createElement('tr');
-                const userRole = sessionStorage.getItem('userRole') || 'user';
-                const canDelete = (userRole === 'admin');
-
                 tr.innerHTML = `
                     <td>${index + 1}</td>
                     <td style="font-family: monospace; font-size: 13px;">${item.filename}</td>
@@ -304,22 +263,13 @@
                     <td style="color: #666; font-size: 13px;">${item.timestamp ? new Date(item.timestamp).toLocaleString('id-ID') : '-'}</td>
                     <td style="text-align: center;">
                         <button class="btn-view" onclick="viewResult('${item.id || index}')">Lihat PDF</button>
-                        ${canDelete ?
-                        `<button class="btn-delete" style="opacity: 0.5; cursor: not-allowed;" title="Hapus hanya tersedia di Google Sheets" onclick="alert('Penghapusan data terpusat harus dilakukan langsung di Google Sheets Master History.')">Hapus</button>` :
-                        `<button class="btn-delete" style="display:none;" disabled>Hapus</button>`
-                    }
+                        <button class="btn-delete" style="opacity: 0.5; cursor: not-allowed;" title="Hapus hanya tersedia di Google Sheets" onclick="alert('Penghapusan data terpusat harus dilakukan langsung di Google Sheets Master History.')">Hapus</button>
                     </td>
                 `;
                 // Simpan data di element untuk viewResult
                 tr.dataset.item = JSON.stringify(item);
                 body.appendChild(tr);
             });
-
-            // Sembunyikan tombol "Hapus Lokal" jika bukan admin
-            const clearLocalBtn = document.querySelector('button[onclick="clearHistory()"]');
-            if (clearLocalBtn && sessionStorage.getItem('userRole') !== 'admin') {
-                clearLocalBtn.style.display = 'none';
-            }
         }
 
         function viewResult(id) {

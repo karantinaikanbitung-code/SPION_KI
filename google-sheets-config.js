@@ -15,34 +15,12 @@ const SHEET_NAMES = {
 // Daftar panelis terpusat (bisa diperluas atau dimuat dari sheet)
 // Gunakan window.PANELIS_LIST untuk akses global di script lain
 window.PANELIS_LIST = window.PANELIS_LIST || [
-    "Adytia Eko Maulana, S.Pi",
-    "Angga Afrianto",
-    "Ansar Ahmad",
-    "Arie Bramono, S.Pi",
-    "Asternia S, A.Md",
-    "Fabio Rembet",
-    "Fernando Wenur",
-    "Grace L. Tantu, S.Pi",
-    "Hendro Saputro, A.Md",
-    "Herdiawan Asnur",
-    "Ikhsan Alpar, A.Md.Pi",
-    "Jeane T. S, S.Pi, M.Si",
-    "Kamaruddin, S.Pi",
-    "Lidiawati, S.Pi",
-    "M. Arwin, S.Pi, M.Si",
-    "Marwono Sutias, S.Pi",
-    "Meidyawati Y L L, S.Pi",
-    "Miftahuddin, A.Md",
-    "Muhammad, A.Md",
-    "Noch M. J. Telew, S.Pi",
-    "Nur H Mokobombang, S.KH",
-    "Nursanti Ishak, A.Md",
-    "Raymond W C, S.Tr.Pi",
-    "Renold Rahajaan, S.Pi",
-    "Rindiyani Y K, A.Md.T",
-    "Santi Nika A, S.Tr. Pi",
-    "Yance W. T, A.Md",
-    "Yessie Yulianda, S.KH"
+    "ARIE BRAMONO",
+    "MUHAMMAD",
+    "MIFTAHUDDIN",
+    "NOCH MUSA JEFTA TELEW",
+    "GRACE LANNY TANTU",
+    "YANCE"
 ];
 
 /**
