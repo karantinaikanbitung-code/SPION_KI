@@ -1,44 +1,35 @@
-<!DOCTYPE html>
-<html lang="id">
+<h2>Daftar Hasil Uji (LHU)</h2>
+<div id="list-hasil">Memuat data...</div>
 
-<head>
-    <meta charset="UTF-8">
-    <title>Hasil Simpan</title>
-</head>
+<script>
+fetch("https://file-api.karantinaikanbitung.workers.dev/list")
+  .then(res => {
+    if (!res.ok) throw new Error("API error");
+    return res.json();
+  })
+  .then(files => {
+    const list = document.getElementById("list-hasil");
+    list.innerHTML = "";
 
-<body>
+    if (!files.length) {
+      list.textContent = "Belum ada hasil uji";
+      return;
+    }
 
-    <h2>Daftar Hasil Uji (LHU)</h2>
-    <div id="list-hasil">Memuat data...</div>
+    files.forEach(file => {
+      const a = document.createElement("a");
+      a.href =
+        "https://file-api.karantinaikanbitung.workers.dev/file/" + file.key;
+      a.textContent = file.key;
+      a.target = "_blank";
 
-    <script>
-        fetch("https://file-api.karantinaikanbitung.workers.dev/list")
-            .then(res => res.json())
-            .then(files => {
-                const list = document.getElementById("list-hasil");
-                list.innerHTML = "";
-
-                if (files.length === 0) {
-                    list.textContent = "Belum ada hasil uji";
-                    return;
-                }
-
-                files.forEach(file => {
-                    const a = document.createElement("a");
-                    a.href = "https://file-api.karantinaikanbitung.workers.dev/file/" + file.name;
-                    a.textContent = file.name;
-                    a.target = "_blank";
-
-                    list.appendChild(a);
-                    list.appendChild(document.createElement("br"));
-                });
-            })
-            .catch(() => {
-                document.getElementById("list-hasil").textContent =
-                    "Gagal memuat data hasil uji";
-            });
-    </script>
-
-</body>
-
-</html>
+      list.appendChild(a);
+      list.appendChild(document.createElement("br"));
+    });
+  })
+  .catch(err => {
+    console.error(err);
+    document.getElementById("list-hasil").textContent =
+      "Gagal memuat data hasil uji";
+  });
+</script>
