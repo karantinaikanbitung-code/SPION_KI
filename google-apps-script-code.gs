@@ -55,6 +55,8 @@ function doPost(e) {
        return saveHistoryToSheet(data.historyItem);
     } else if (action === 'getHistory') {
        return getHistoryFromSheet();
+    } else if (action === 'deleteHistory') {
+       return deleteHistoryItem(data.id);
     } else {
       return createJSONResponse({
         success: false,
@@ -390,6 +392,45 @@ function getHistoryFromSheet() {
     return createJSONResponse({ success: true, history: history });
   } catch (error) {
     return createJSONResponse({ success: false, message: 'Gagal ambil history: ' + error.toString() });
+  }
+}
+
+/**
+ * Menghapus baris dari sheet 'History' berdasarkan ID
+ */
+function deleteHistoryItem(id) {
+  try {
+    const spreadsheet = SpreadsheetApp.openById(SPREADSHEET_ID);
+    const sheet = spreadsheet.getSheetByName('History');
+    
+    if (!sheet) {
+      return createJSONResponse({ success: false, message: 'Sheet History tidak ditemukan' });
+    }
+    
+    const rows = sheet.getDataRange().getValues();
+    const headers = rows[0];
+    const idIndex = headers.indexOf('ID');
+    
+    if (idIndex === -1) {
+      return createJSONResponse({ success: false, message: 'Kolom ID tidak ditemukan di sheet History' });
+    }
+    
+    let deleted = false;
+    // Cari dari bawah untuk menghindari masalah index saat menghapus
+    for (let i = rows.length - 1; i >= 1; i--) {
+      if (rows[i][idIndex] == id) {
+        sheet.deleteRow(i + 1);
+        deleted = true;
+      }
+    }
+    
+    if (deleted) {
+      return createJSONResponse({ success: true, message: 'Data berhasil dihapus dari cloud' });
+    } else {
+      return createJSONResponse({ success: false, message: 'Data dengan ID tersebut tidak ditemukan' });
+    }
+  } catch (error) {
+    return createJSONResponse({ success: false, message: 'Gagal hapus history: ' + error.toString() });
   }
 }
 

@@ -15,12 +15,35 @@ const SHEET_NAMES = {
 // Daftar panelis terpusat (bisa diperluas atau dimuat dari sheet)
 // Gunakan window.PANELIS_LIST untuk akses global di script lain
 window.PANELIS_LIST = window.PANELIS_LIST || [
-    "ARIE BRAMONO",
-    "MUHAMMAD",
-    "MIFTAHUDDIN",
-    "NOCH MUSA JEFTA TELEW",
-    "GRACE LANNY TANTU",
-    "YANCE"
+    "Aditya Eko Maulana, S.Pi",
+    "Angga Afrianto",
+    "Ansar Ahmad",
+    "Arie Bramono, S.Pi",
+    "Asterina S, A.Md",
+    "Fabio Rembe",
+    "Fernando Wenur",
+    "Hendro Saputro, A.Md",
+    "Herdiawan Asnur",
+    "Ikhsan Alpar, A.Md.Pi",
+    "Jeane T. S, S.Pi, M.Si",
+    "Kamaruddin, S.Pi",
+    "Lidiawati, S.Pi",
+    "M. Arwin, S.Pi. M.Si",
+    "Marwono Sutias, S.Pi",
+    "Meidyawati Y L L, S.Pi",
+    "Miftahuddin, A.Md",
+    "Muhammad, A.Md",
+    "Noch M. J. Telew, S.Pi",
+    "Nur Herlinda M, S.KH",
+    "Nursanti. T. Ishak, A.Md",
+    "Raymond W C, S.Tr.Pi",
+    "Renold Rahajaan, S.Pi",
+    "Rindiyani Y.K, A.Md.T",
+    "Santi Nika A, S.Tr. Pi",
+    "Steven Manoppo, S.Pi",
+    "Stevy Matahelumual, S.Pi",
+    "Yance W.T, A.Md",
+    "Yessie Yulianda, S.KH"
 ];
 
 /**
@@ -327,6 +350,35 @@ async function getHistoryFromSheets() {
         throw new Error('HTTP Error: ' + response.status);
     } catch (error) {
         console.error('Error fetching history from Sheets:', error);
+        return { success: false, message: error.message };
+    }
+}
+
+/**
+ * Menghapus item history dari Google Sheets
+ */
+async function deleteHistoryFromSheets(id) {
+    if (!GOOGLE_APPS_SCRIPT_URL || GOOGLE_APPS_SCRIPT_URL === 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE') {
+        return { success: false, message: 'Apps Script URL belum dikonfigurasi' };
+    }
+
+    try {
+        const response = await fetch(GOOGLE_APPS_SCRIPT_URL, {
+            method: 'POST',
+            mode: 'cors',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                action: 'deleteHistory',
+                id: id
+            })
+        });
+
+        if (response.ok) {
+            return await response.json();
+        }
+        throw new Error('HTTP Error: ' + response.status);
+    } catch (error) {
+        console.error('Error deleting history from Sheets:', error);
         return { success: false, message: error.message };
     }
 }

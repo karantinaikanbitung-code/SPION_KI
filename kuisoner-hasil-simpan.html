@@ -179,6 +179,7 @@
                         <tr>
                             <th style="width: 50px;">#</th>
                             <th>Nama File</th>
+                            <th>Jenis Produk</th>
                             <th>Lokasi Pelayanan</th>
                             <th>Tanggal Simpan</th>
                             <th style="width: 200px; text-align: center;">Aksi</th>
@@ -222,29 +223,43 @@
             const empty = document.getElementById('emptyState');
 
             // Tampilkan loading state
-            body.innerHTML = '<tr><td colspan="4" style="text-align: center; padding: 40px;">Memuat data dari cloud... <div class="loading-spinner"></div></td></tr>';
+            body.innerHTML = '<tr><td colspan="6" style="text-align: center; padding: 40px;">Memuat dan sinkronisasi data... <div class="loading-spinner"></div></td></tr>';
             container.style.display = 'block';
             empty.style.display = 'none';
 
-            let history = [];
+            let cloudHistory = [];
+            let localHistory = JSON.parse(localStorage.getItem('spion_history') || '[]');
+            let finalHistory = [];
 
             try {
                 // Ambil dari Cloud (Google Sheets)
                 const cloudRes = await getHistoryFromSheets();
                 if (cloudRes && cloudRes.success && cloudRes.history) {
-                    history = cloudRes.history;
-                    // Update Local Storage sebagai cache
-                    localStorage.setItem('spion_history', JSON.stringify(history));
-                } else {
-                    console.warn('Gagal ambil history dari cloud, menggunakan local storage.');
-                    history = JSON.parse(localStorage.getItem('spion_history') || '[]');
+                    cloudHistory = cloudRes.history;
                 }
             } catch (err) {
                 console.error('Error fetching cloud history:', err);
-                history = JSON.parse(localStorage.getItem('spion_history') || '[]');
             }
 
-            if (history.length === 0) {
+            // Gabungkan data (ID unik sebagai key)
+            const map = new Map();
+            // Masukkan data lokal dulu
+            localHistory.forEach(item => {
+                if (item.id) map.set(item.id.toString(), item);
+            });
+            // Masukkan data cloud (indeks cloud diutamakan jika ID bentrok)
+            cloudHistory.forEach(item => {
+                if (item.id) map.set(item.id.toString(), item);
+            });
+
+            finalHistory = Array.from(map.values());
+            // Urutkan berdasarkan waktu terbaru
+            finalHistory.sort((a, b) => new Date(b.timestamp || 0) - new Date(a.timestamp || 0));
+
+            // Update Local Storage sebagai cache hasil gabungan
+            localStorage.setItem('spion_history', JSON.stringify(finalHistory));
+
+            if (finalHistory.length === 0) {
                 container.style.display = 'none';
                 empty.style.display = 'block';
                 return;
@@ -254,34 +269,30 @@
             empty.style.display = 'none';
             body.innerHTML = '';
 
-            history.forEach((item, index) => {
+            finalHistory.forEach((item, index) => {
                 const tr = document.createElement('tr');
+                const tgl = item.timestamp ? new Date(item.timestamp).toLocaleString('id-ID') : '-';
+                const lokasi = item['lokasi pelayanan'] || item.lokasiPelayanan || item.lokasipelayanan || (item.data ? item.data.noSampel : '-');
+                const jenisProduk = item.hewan ? item.hewan.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()) : '-';
+
                 tr.innerHTML = `
                     <td>${index + 1}</td>
                     <td style="font-family: monospace; font-size: 13px;">${item.filename}</td>
-                    <td style="font-size: 13px;">${item['lokasi pelayanan'] || item.lokasiPelayanan || item.lokasipelayanan || (item.data ? item.data.noSampel : '-')}</td>
-                    <td style="color: #666; font-size: 13px;">${item.timestamp ? new Date(item.timestamp).toLocaleString('id-ID') : '-'}</td>
+                    <td style="font-size: 13px; font-weight: 500;">${jenisProduk}</td>
+                    <td style="font-size: 13px;">${lokasi}</td>
+                    <td style="color: #666; font-size: 13px;">${tgl}</td>
                     <td style="text-align: center;">
                         <button class="btn-view" onclick="viewResult('${item.id || index}')">Lihat PDF</button>
-                        <button class="btn-delete" style="opacity: 0.5; cursor: not-allowed;" title="Hapus hanya tersedia di Google Sheets" onclick="alert('Penghapusan data terpusat harus dilakukan langsung di Google Sheets Master History.')">Hapus</button>
+                        <button class="btn-delete" title="Hapus data ini" onclick="deleteResult('${item.id}')">Hapus</button>
                     </td>
                 `;
-                // Simpan data di element untuk viewResult
-                tr.dataset.item = JSON.stringify(item);
                 body.appendChild(tr);
             });
         }
 
         function viewResult(id) {
-            // Temukan item dari history yang sedang ditampilkan
-            const rows = document.querySelectorAll('#historyBody tr');
-            let itemData = null;
-            rows.forEach(row => {
-                const item = JSON.parse(row.dataset.item || '{}');
-                if (item.id == id || (item.id === undefined && rows.indexOf(row) == id)) {
-                    itemData = item;
-                }
-            });
+            const history = JSON.parse(localStorage.getItem('spion_history') || '[]');
+            const itemData = history.find(item => (item.id && item.id.toString() === id.toString()));
 
             if (itemData && itemData.data) {
                 // Gunakan showLHUPreview yang sudah ada di kuisoner-form-script.js
@@ -291,8 +302,36 @@
             }
         }
 
-        function deleteResult(id) {
-            alert('Fitur hapus dinonaktifkan untuk sinkronisasi cloud. Silakan hapus baris di Google Sheets jika ingin menghapus permanen.');
+        async function deleteResult(id) {
+            if (!id || id === 'undefined') {
+                alert('ID tidak ditemukan. Silakan segarkan halaman.');
+                return;
+            }
+
+            if (confirm('Apakah Anda yakin ingin menghapus data ini secara PERMANEN dari cloud?')) {
+                // Hapus dari Cloud
+                const btn = event.target;
+                const originalText = btn.textContent;
+                btn.disabled = true;
+                btn.textContent = 'Menghapus...';
+
+                try {
+                    const res = await deleteHistoryFromSheets(id);
+                    if (res && res.success) {
+                        // Refresh history
+                        alert('Data berhasil dihapus.');
+                        loadHistory();
+                    } else {
+                        alert('Gagal menghapus: ' + (res.message || 'Error tidak diketahui'));
+                    }
+                } catch (err) {
+                    console.error('Delete error:', err);
+                    alert('Terjadi kesalahan saat menghapus data.');
+                } finally {
+                    btn.disabled = false;
+                    btn.textContent = originalText;
+                }
+            }
         }
 
         function clearHistory() {

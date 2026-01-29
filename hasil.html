@@ -1,297 +1,70 @@
-<!DOCTYPE html>
-<html lang="id">
+<h2>Daftar Hasil Uji (LHU)</h2>
+<div id="list-hasil">Memuat data...</div>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daftar Hasil Uji Tersimpan - SPION</title>
-    <link rel="stylesheet" href="spion-ui.css">
-    <link rel="stylesheet" href="kuisoner-style.css">
-    <script src="theme-manager.js"></script>
-    <style>
-        .history-container {
-            max-width: 1000px;
-            margin: 40px auto;
-            padding: 20px;
-        }
+<script>
+    fetch("https://file-api.karantinaikanbitung.workers.dev/list")
+        .then(res => {
+            if (!res.ok) throw new Error("API error");
+            return res.json();
+        })
+        .then(files => {
+            const list = document.getElementById("list-hasil");
+            list.innerHTML = "";
 
-        .history-card {
-            background: var(--card-bg);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 10px 30px var(--shadow-color);
-            border: 1px solid var(--glass-border);
-        }
-
-        .history-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-
-        .history-table th,
-        .history-table td {
-            padding: 15px;
-            text-align: left;
-            border-bottom: 1px solid #eee;
-        }
-
-        .history-table th {
-            background-color: #f8f9fa;
-            font-weight: 600;
-            color: #333;
-        }
-
-        .btn-view {
-            background-color: var(--accent-blue, #667eea);
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 13px;
-            transition: all 0.2s;
-        }
-
-        .btn-view:hover {
-            opacity: 0.9;
-            transform: translateY(-1px);
-        }
-
-        .btn-delete {
-            background-color: #f44336;
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 13px;
-            margin-left: 8px;
-        }
-
-        .empty-state {
-            text-align: center;
-            padding: 40px;
-            color: var(--text-secondary);
-        }
-
-        @media (max-width: 600px) {
-
-            .history-table th:nth-child(1),
-            .history-table td:nth-child(1) {
-                display: none;
+            if (!files.length) {
+                list.textContent = "Belum ada hasil uji";
+                return;
             }
 
-            .history-table th,
-            .history-table td {
-                padding: 10px 5px;
-                font-size: 12px;
-            }
+            files.forEach(file => {
+                const a = document.createElement("a");
+                a.href =
+                    "https://file-api.karantinaikanbitung.workers.dev/file/" + file.key;
+                a.textContent = file.key;
+                a.target = "_blank";
 
-            .btn-delete {
-                margin-left: 0;
-                margin-top: 5px;
-            }
-        }
-
-        .loading-spinner {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(0, 0, 0, .1);
-            border-radius: 50%;
-            border-top-color: var(--accent-blue, #667eea);
-            animation: spin 1s ease-in-out infinite;
-            margin-left: 10px;
-            vertical-align: middle;
-        }
-
-        @keyframes spin {
-            to {
-                transform: rotate(360deg);
-            }
-        }
-
-        .btn-sync {
-            background-color: #4caf50;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 14px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: all 0.2s;
-        }
-
-        .btn-sync:hover {
-            background-color: #43a047;
-            transform: scale(1.02);
-        }
-    </style>
-</head>
-
-<body>
-    <div class="bg-blobs">
-        <div class="blob blob-1"></div>
-        <div class="blob blob-2"></div>
-    </div>
-
-    <div class="history-container">
-        <nav class="top-bar animate-fade-in" style="margin-bottom: 30px;">
-            <div class="brand-mini">
-                <div class="logo-icon">
-                    <img src="images/logo.png" alt="SPION Logo">
-                </div>
-                <div style="display: flex; flex-direction: column;">
-                    <h2>SPION</h2>
-                    <p style="font-size: 0.65rem; color: rgba(255,255,255,0.7); margin: 0; line-height: 1.2;">Sistem
-                        Pemeriksaan sensorI Organoleptik lapagaN</p>
-                </div>
-                <span style="margin: 0 10px; color: rgba(255,255,255,0.2);">|</span>
-                <h2>Daftar Hasil Uji</h2>
-            </div>
-            <div class="user-profile">
-                <button id="themeToggle" class="btn-logout-modern" style="margin-right: 15px;">🌓 Mode</button>
-                <a href="kuisoner-jenis-uji.html" class="btn-logout-modern"
-                    style="text-decoration:none; display:inline-flex; align-items:center;">Kembali Beranda</a>
-            </div>
-        </nav>
-
-        <div class="history-card animate-fade-in" style="animation-delay: 0.1s;">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-                <h1 style="font-size: 24px; color: #333; margin: 0;">Hasil Uji Tersimpan</h1>
-                <div style="display: flex; gap: 10px;">
-                    <button class="btn-sync" onclick="loadHistory()">
-                        <span>🔄</span> Segarkan (Cloud Sync)
-                    </button>
-                    <button class="btn-logout-modern" style="background:#607d8b;" onclick="clearHistory()">Hapus
-                        Lokal</button>
-                </div>
-            </div>
-
-            <div id="historyTableContainer">
-                <table class="history-table">
-                    <thead>
-                        <tr>
-                            <th style="width: 50px;">#</th>
-                            <th>Nama File</th>
-                            <th>Lokasi Pelayanan</th>
-                            <th>Tanggal Simpan</th>
-                            <th style="width: 200px; text-align: center;">Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody id="historyBody">
-                        <!-- Content loaded via JS -->
-                    </tbody>
-                </table>
-            </div>
-            <div id="emptyState" class="empty-state" style="display: none;">
-                <div style="font-size: 48px; margin-bottom: 10px;">📂</div>
-                <p>Belum ada hasil uji yang disimpan.</p>
-                <button class="btn-view" onclick="window.location.href='kuisoner-jenis-uji.html'"
-                    style="margin-top: 15px;">Mulai Uji Baru</button>
-            </div>
-        </div>
-    </div>
-
-
-    <!-- PDF Preview Modal -->
-    <div id="pdfModal"
-        style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:9999; align-items:center; justify-content:center;">
-        <div
-            style="background:white; width:90%; height:90%; border-radius:10px; overflow:hidden; display:flex; flex-direction:column;">
-            <div
-                style="padding:15px; background:#667eea; color:white; display:flex; justify-content:space-between; align-items:center;">
-                <h3 id="modalTitle" style="margin:0;">Preview PDF</h3>
-                <button onclick="closePDF()"
-                    style="background:transparent; border:none; color:white; font-size:24px; cursor:pointer;">&times;</button>
-            </div>
-            <iframe id="pdfFrame" style="flex:1; border:none; width:100%;"></iframe>
-        </div>
-    </div>
-
-    <script>
-        const API = "https://file-api.karantinaikanbitung.workers.dev";
-
-        document.addEventListener("DOMContentLoaded", () => {
-            loadHistoryFromWorker();
+                list.appendChild(a);
+                list.appendChild(document.createElement("br"));
+            });
+        })
+        .catch(err => {
+            console.error(err);
+            document.getElementById("list-hasil").textContent =
+                "Gagal memuat data hasil uji";
         });
+</script>
 
-        async function loadHistoryFromWorker() {
-            const body = document.getElementById("historyBody");
-            const container = document.getElementById("historyTableContainer");
-            const empty = document.getElementById("emptyState");
+<script>
+    const API_LIST = "https://file-api.karantinaikanbitung.workers.dev/list";
+    const API_FILE = "https://file-api.karantinaikanbitung.workers.dev/file/";
 
-            body.innerHTML = `
-                <tr>
-                    <td colspan="5" style="text-align:center;padding:40px">
-                        Memuat data dari cloud...
-                        <span class="loading-spinner"></span>
-                    </td>
-                </tr>
-            `;
+    async function loadFiles() {
+        const container = document.getElementById("fileList");
 
-            try {
-                const res = await fetch(API + "/list");
-                const files = await res.json();
+        try {
+            const res = await fetch(API_LIST);
+            const files = await res.json();
 
-                if (!files.length) {
-                    container.style.display = "none";
-                    empty.style.display = "block";
-                    return;
-                }
-
-                body.innerHTML = "";
-                container.style.display = "block";
-                empty.style.display = "none";
-
-                files.forEach((f, i) => {
-                    const fileUrl = `${API}/file/${f.key}`;
-                    const fileName = f.key.split("/").pop();
-                    const tanggal = new Date(f.uploaded).toLocaleString("id-ID");
-
-                    const tr = document.createElement("tr");
-                    tr.innerHTML = `
-                        <td>${i + 1}</td>
-                        <td style="font-family: monospace">${fileName}</td>
-                        <td>-</td>
-                        <td>${tanggal}</td>
-                        <td style="text-align:center">
-                            <button class="btn-view" onclick="previewPDF('${fileUrl}', '${fileName}')">
-                                Lihat
-                            </button>
-                        </td>
-                    `;
-                    body.appendChild(tr);
-                });
-
-            } catch (err) {
-                console.error(err);
-                body.innerHTML = `
-                    <tr>
-                        <td colspan="5" style="text-align:center;color:red">
-                            Gagal memuat data dari cloud
-                        </td>
-                    </tr>
-                `;
+            if (!files.length) {
+                container.innerHTML = "<p>Belum ada file</p>";
+                return;
             }
-        }
 
-        function previewPDF(url, title) {
-            document.getElementById("pdfFrame").src = url;
-            document.getElementById("modalTitle").innerText = title;
-            document.getElementById("pdfModal").style.display = "flex";
-        }
+            container.innerHTML = "";
+            files.forEach(f => {
+                const link = document.createElement("a");
+                link.href = API_FILE + f.key;
+                link.textContent = f.key;
+                link.target = "_blank";
 
-        function closePDF() {
-            document.getElementById("pdfFrame").src = "";
-            document.getElementById("pdfModal").style.display = "none";
+                const div = document.createElement("div");
+                div.appendChild(link);
+                container.appendChild(div);
+            });
+        } catch (e) {
+            container.innerHTML = "<p>Gagal memuat data</p>";
         }
-    </script>
-</body>
+    }
 
-</html>
+    loadFiles();
+</script>
