@@ -400,7 +400,7 @@ function generateFilletIkanBekuTable(container) {
     headerDiv.innerHTML = `
         <h3 style="text-align: center; margin-bottom: 20px; font-size: 18px; font-weight: 600;">LEMBAR PENILAIAN UJI SKOR FILLET IKAN BEKU</h3>
         <div style="margin-bottom: 15px;">
-            <label style="display: inline-block; width: 200px;">1. Kode Contoh Uji /No. Aju PTK :</label>
+            <label style="display: inline-block; width: 200px;">1. Nomor Sertifikat :</label>
             <input type="text" id="kodeContohUji" name="kodeContohUji" style="width: 300px; padding: 8px; border: 1px solid #ddd; border-radius: 5px;">
         </div>
         <div style="margin-bottom: 15px;">
@@ -745,7 +745,7 @@ function generateDagingKepitingRebusBekuTable(container) {
     headerDiv.innerHTML = `
         <h3 style="text-align: center; margin-bottom: 20px; font-size: 18px; font-weight: 600;">LEMBAR PENILAIAN UJI SKOR DAGING KEPITING REBUS BEKU</h3>
         <div style="margin-bottom: 15px;">
-            <label style="display: inline-block; width: 200px;">1. Kode Contoh Uji /No. Aju PTK :</label>
+            <label style="display: inline-block; width: 200px;">1. Nomor Sertifikat :</label>
             <input type="text" id="kodeContohUji" name="kodeContohUji" style="width: 300px; padding: 8px; border: 1px solid #ddd; border-radius: 5px;">
         </div>
         <div style="margin-bottom: 15px;">
@@ -1071,7 +1071,7 @@ function generateSosisIkanTable(container) {
     headerDiv.innerHTML = `
         <h3 style="text-align: center; margin-bottom: 20px; font-size: 18px; font-weight: 600;">LEMBAR PENILAIAN UJI SKOR SOSIS IKAN</h3>
         <div style="margin-bottom: 15px;">
-            <label style="display: inline-block; width: 200px;">1. Kode Contoh Uji /No. Aju PTK :</label>
+            <label style="display: inline-block; width: 200px;">1. Nomor Sertifikat :</label>
             <input type="text" id="kodeContohUji" name="kodeContohUji" style="width: 300px; padding: 8px; border: 1px solid #ddd; border-radius: 5px;">
         </div>
         <div style="margin-bottom: 15px;">
@@ -1391,7 +1391,7 @@ function generateBaksoIkanTable(container) {
     headerDiv.innerHTML = `
         <h3 style="text-align: center; margin-bottom: 20px; font-size: 18px; font-weight: 600;">LEMBAR PENILAIAN UJI SKOR BAKSO IKAN</h3>
         <div style="margin-bottom: 15px;">
-            <label style="display: inline-block; width: 200px;">1. Kode Contoh Uji /No. Aju PTK :</label>
+            <label style="display: inline-block; width: 200px;">1. Nomor Sertifikat :</label>
             <input type="text" id="kodeContohUji" name="kodeContohUji" style="width: 300px; padding: 8px; border: 1px solid #ddd; border-radius: 5px;">
         </div>
         <div style="margin-bottom: 15px;">
@@ -1710,7 +1710,7 @@ function generateIkanSegarTable(container) {
     headerDiv.innerHTML = `
         <h3 style="text-align: center; margin-bottom: 20px; font-size: 18px; font-weight: 600;">LEMBAR PENILAIAN UJI SKOR IKAN SEGAR</h3>
         <div style="margin-bottom: 15px;">
-            <label style="display: inline-block; width: 200px;">1. Kode Contoh Uji /No. Aju PTK :</label>
+            <label style="display: inline-block; width: 200px;">1. Nomor Sertifikat :</label>
             <input type="text" id="kodeContohUji" name="kodeContohUji" style="width: 300px; padding: 8px; border: 1px solid #ddd; border-radius: 5px;">
         </div>
         <div style="margin-bottom: 15px;">
@@ -2084,7 +2084,7 @@ function generateIkanBekuTable(container) {
     headerDiv.innerHTML = `
         <h3 style="text-align: center; margin-bottom: 20px; font-size: 18px; font-weight: 600;">LEMBAR PENILAIAN UJI SKOR IKAN BEKU</h3>
         <div style="margin-bottom: 15px;">
-            <label style="display: inline-block; width: 200px;">1. Kode Contoh Uji /No. Aju PTK :</label>
+            <label style="display: inline-block; width: 200px;">1. Nomor Sertifikat :</label>
             <input type="text" id="kodeContohUji" name="kodeContohUji" style="width: 300px; padding: 8px; border: 1px solid #ddd; border-radius: 5px;">
         </div>
         <div style="margin-bottom: 15px;">
@@ -2559,7 +2559,7 @@ function generateIkanTunaKalengTable(container) {
     headerDiv.innerHTML = `
         <h3 style="text-align: center; margin-bottom: 20px; font-size: 18px; font-weight: 600;">LEMBAR PENILAIAN UJI SKOR IKAN TUNA KALENG</h3>
         <div style="margin-bottom: 15px;">
-            <label style="display: inline-block; width: 200px;">1. Kode Contoh Uji /No. Aju PTK :</label>
+            <label style="display: inline-block; width: 200px;">1. Nomor Sertifikat :</label>
             <input type="text" id="kodeContohUji" name="kodeContohUji" style="width: 300px; padding: 8px; border: 1px solid #ddd; border-radius: 5px;">
         </div>
         <div style="margin-bottom: 15px;">
@@ -2911,7 +2911,7 @@ function generateSardenMakarelKalengTable(container) {
     headerDiv.innerHTML = `
         <h3 style="text-align: center; margin-bottom: 20px; font-size: 18px; font-weight: 600;">LEMBAR PENILAIAN UJI SKOR SARDEN/MAKAREL KALENG</h3>
         <div style="margin-bottom: 15px;">
-            <label style="display: inline-block; width: 200px;">1. Kode Contoh Uji /No. Aju PTK :</label>
+            <label style="display: inline-block; width: 200px;">1. Nomor Sertifikat :</label>
             <input type="text" id="kodeContohUji" name="kodeContohUji" style="width: 300px; padding: 8px; border: 1px solid #ddd; border-radius: 5px;">
         </div>
         <div style="margin-bottom: 15px;">
@@ -3160,7 +3160,7 @@ function generateDriedSmokingFishTable(container) {
     headerDiv.innerHTML = `
         <h3 style="text-align: center; margin-bottom: 20px; font-size: 18px; font-weight: 600;">LEMBAR PENILAIAN UJI SKOR DRIED SMOKING FISH (IKAN KAYU)</h3>
         <div style="margin-bottom: 15px;">
-            <label style="display: inline-block; width: 200px;">1. Kode Contoh Uji /No. Aju PTK :</label>
+            <label style="display: inline-block; width: 200px;">1. Nomor Sertifikat :</label>
             <input type="text" id="kodeContohUji" name="kodeContohUji" style="width: 300px; padding: 8px; border: 1px solid #ddd; border-radius: 5px;">
         </div>
         <div style="margin-bottom: 15px;">
@@ -3432,7 +3432,7 @@ function generateIkanAsinKeringTable(container) {
     headerDiv.innerHTML = `
         <h3 style="text-align: center; margin-bottom: 20px; font-size: 18px; font-weight: 600;">LEMBAR PENILAIAN UJI SKOR IKAN ASIN KERING</h3>
         <div style="margin-bottom: 15px;">
-            <label style="display: inline-block; width: 200px;">1. Kode Contoh Uji /No. Aju PTK :</label>
+            <label style="display: inline-block; width: 200px;">1. Nomor Sertifikat :</label>
             <input type="text" id="kodeContohUji" name="kodeContohUji" style="width: 300px; padding: 8px; border: 1px solid #ddd; border-radius: 5px;">
         </div>
         <div style="margin-bottom: 15px;">
@@ -3688,7 +3688,7 @@ function generateRumputLautKeringTable(container) {
     headerDiv.innerHTML = `
         <h3 style="text-align: center; margin-bottom: 20px; font-size: 18px; font-weight: 600;">LEMBAR PENILAIAN UJI SKOR RUMPUT LAUT KERING</h3>
         <div style="margin-bottom: 15px;">
-            <label style="display: inline-block; width: 200px;">1. Kode Contoh Uji /No. Aju PTK :</label>
+            <label style="display: inline-block; width: 200px;">1. Nomor Sertifikat :</label>
             <input type="text" id="kodeContohUji" name="kodeContohUji" style="width: 300px; padding: 8px; border: 1px solid #ddd; border-radius: 5px;">
         </div>
         <div style="margin-bottom: 15px;">
@@ -5750,7 +5750,7 @@ function generateLHUHtml(data, hewan) {
     const scoreSheetPageHTML = `
     <div class="sheet" style="position: relative;">
         <div style="text-align: center; margin-top: 2mm; margin-bottom: 10px;"><h3 style="margin: 0; font-size: 10pt; font-weight: bold; text-decoration: underline;">LEMBAR PENILAIAN UJI SKOR ${titleText}</h3></div>
-        <div style="margin-bottom: 5px; font-size: 8pt;"><table style="width: 100%; border: none;"><tr><td style="width: 200px;">1. Kode Contoh Uji /No. Aju PTK</td><td style="width: 10px;">:</td><td>${kodeContohUji}</td></tr><tr><td>2. Tgl. Diterima Contoh Uji</td><td>:</td><td>${tglDiterima ? formatIndoDate(tglDiterima) : ''}</td></tr></table></div>
+        <div style="margin-bottom: 5px; font-size: 8pt;"><table style="width: 100%; border: none;"><tr><td style="width: 200px;">1. Nomor Sertifikat</td><td style="width: 10px;">:</td><td>${kodeContohUji}</td></tr><tr><td>2. Tgl. Diterima Contoh Uji</td><td>:</td><td>${tglDiterima ? formatIndoDate(tglDiterima) : ''}</td></tr></table></div>
         <table style="width: 100%; border-collapse: collapse; margin-bottom: 5px; font-size: 8pt;">
             <thead><tr><th style="border: 1px solid #000; padding: 3px; text-align: center; width: 40px;">NO</th><th style="border: 1px solid #000; padding: 3px; text-align: center;">JENIS CONTOH UJI</th><th style="border: 1px solid #000; padding: 3px; text-align: center;">JUMLAH</th><th style="border: 1px solid #000; padding: 3px; text-align: center;">UKURAN</th><th style="border: 1px solid #000; padding: 3px; text-align: center;">Ket.</th></tr></thead>
             <tbody><tr><td style="border: 1px solid #000; padding: 3px; text-align: center;">1.</td><td style="border: 1px solid #000; padding: 3px;">${jenisContoh}</td><td style="border: 1px solid #000; padding: 3px; text-align: center;">${jumlah}</td><td style="border: 1px solid #000; padding: 3px; text-align: center;">${ukuran}</td><td style="border: 1px solid #000; padding: 3px; text-align: center;">${keterangan}</td></tr></tbody>
@@ -6839,29 +6839,38 @@ function handleFormSubmit(jenisUji, hewan) {
     // Simpan ke Local Storage
     saveResultLocally(data, filename, lhuHtml, hewan);
 
-    // Backup ke GDrive (File HTML)
-    backupToGDrive(data, filename, lhuHtml);
+    // Kirim data ke Production API
+    const productionAPIData = {
+        nomor_sertifikat: data.kodeContohUji || '-',
+        nama_perusahaan: data.namaPerusahaan || '-',
+        jenis_produk: data.jenisHewan || '-',
+        negara_tujuan: data.negaraTujuan || '-',
+        tanggal_terbit: data.tanggalUji || '-'
+    };
 
-    // Simpan ke Google Sheets History (Agar bisa dilihat semua orang/perangkat)
-    saveHistoryToSheets(historyItem)
-        .then(res => console.log('History synced to cloud:', res))
-        .catch(err => console.error('History sync failed:', err));
+    console.log('Sending data to Production API:', productionAPIData);
 
-    // Simpan ke Google Sheets (Data Terformat)
-    saveToGoogleSheets(data, jenisUjiNames[jenisUji], hewanNames[hewan])
-        .then(result => {
-            if (result.success) {
-                console.log('Data berhasil disimpan ke Google Sheets');
+    fetch(GOOGLE_APPS_SCRIPT_URL, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(productionAPIData)
+    })
+        .then(async response => {
+            if (response.ok) {
+                const result = await response.json();
+                console.log('Successfully sent to Production API:', result);
             } else {
-                console.warn('Peringatan: ' + result.message);
+                console.error('Failed to send to Production API', response.status);
             }
         })
         .catch(error => {
-            console.error('Error saving to Google Sheets:', error);
+            console.error('Error sending to Production API:', error);
         });
 
     // Tampilkan pesan sukses
-    alert('Terima kasih! Data penilaian uji telah berhasil disimpan dan disinkronkan ke semua perangkat.');
+    alert('Terima kasih! Data penilaian uji telah berhasil disimpan dan dikirim ke sistem produksi.');
 }
 
 function exportToExcel(data, jenisUji, hewan) {
@@ -6944,7 +6953,7 @@ function generateLobsterUdangKipasTable(container) {
     headerDiv.innerHTML = `
         <h3 style="text-align: center; margin-bottom: 20px; font-size: 18px; font-weight: 600;">LEMBAR PENILAIAN UJI SKOR LOBSTER, UDANG KIPAS HIDUP</h3>
         <div style="margin-bottom: 15px;">
-            <label style="display: inline-block; width: 200px;">1. Kode Contoh Uji /No. Aju PTK :</label>
+            <label style="display: inline-block; width: 200px;">1. Nomor Sertifikat :</label>
             <input type="text" id="kodeContohUji" name="kodeContohUji" style="width: 300px; padding: 8px; border: 1px solid #ddd; border-radius: 5px;">
         </div>
         <div style="margin-bottom: 15px;">
@@ -7181,7 +7190,7 @@ function generateKepitingBakauTable(container) {
     headerDiv.innerHTML = `
         <h3 style="text-align: center; margin-bottom: 20px; font-size: 18px; font-weight: 600;">LEMBAR PENILAIAN UJI SKOR KEPITING BAKAU HIDUP</h3>
         <div style="margin-bottom: 15px;">
-            <label style="display: inline-block; width: 200px;">1. Kode Contoh Uji /No. Aju PTK :</label>
+            <label style="display: inline-block; width: 200px;">1. Nomor Sertifikat :</label>
             <input type="text" id="kodeContohUji" name="kodeContohUji" style="width: 300px; padding: 8px; border: 1px solid #ddd; border-radius: 5px;">
         </div>
         <div style="margin-bottom: 15px;">
@@ -7436,7 +7445,7 @@ function generateIkanAsapMurniTable(container) {
     headerDiv.innerHTML = `
         <h3 style="text-align: center; margin-bottom: 20px; font-size: 18px; font-weight: 600;">LEMBAR PENILAIAN UJI SKOR IKAN ASAP</h3>
         <div style="margin-bottom: 15px;">
-            <label style="display: inline-block; width: 200px;">1. Kode Contoh Uji /No. Aju PTK :</label>
+            <label style="display: inline-block; width: 200px;">1. Nomor Sertifikat :</label>
             <input type="text" id="kodeContohUji" name="kodeContohUji" style="width: 300px; padding: 8px; border: 1px solid #ddd; border-radius: 5px;">
         </div>
         <div style="margin-bottom: 15px;">
@@ -7767,7 +7776,7 @@ function generateSiripHiuKeringTable(container) {
     headerDiv.innerHTML = `
         <h3 style="text-align: center; margin-bottom: 20px; font-size: 18px; font-weight: 600;">LEMBAR PENILAIAN UJI SKOR SIRIP HIU KERING DENGAN KULIT</h3>
         <div style="margin-bottom: 15px;">
-            <label style="display: inline-block; width: 200px;">1. Kode Contoh Uji /No. Aju PTK :</label>
+            <label style="display: inline-block; width: 200px;">1. Nomor Sertifikat :</label>
             <input type="text" id="kodeContohUji" name="kodeContohUji" style="width: 300px; padding: 8px; border: 1px solid #ddd; border-radius: 5px;">
         </div>
         <div style="margin-bottom: 15px;">
@@ -7840,7 +7849,7 @@ function generateSiripHiuKeringTable(container) {
         <tr style="background-color: #f5f5f5;">
             <th style="border: 1px solid #ddd; padding: 10px; text-align: center; width: 50%;">Spesifikasi</th>
             <th style="border: 1px solid #ddd; padding: 10px; text-align: center; width: 60px;">Nilai (?)</th>
-            <th colspan="6" style="border: 1px solid #ddd; padding: 10px; text-align: center;">Kode Contoh Uji /No. Aju PTK :</th>
+            <th colspan="6" style="border: 1px solid #ddd; padding: 10px; text-align: center;">Nomor Sertifikat :</th>
         </tr>
         <tr style="background-color: #f5f5f5;">
             <th colspan="2"></th>
@@ -8017,7 +8026,7 @@ function generateUdangKeringUtuhTable(container) {
     headerDiv.innerHTML = `
         <h3 style="text-align: center; margin-bottom: 20px; font-size: 18px; font-weight: 600;">LEMBAR PENILAIAN UJI SKOR UDANG KERING UTUH</h3>
         <div style="margin-bottom: 15px;">
-            <label style="display: inline-block; width: 200px;">1. Kode Contoh Uji /No. Aju PTK :</label>
+            <label style="display: inline-block; width: 200px;">1. Nomor Sertifikat :</label>
             <input type="text" id="kodeContohUji" name="kodeContohUji" style="width: 300px; padding: 8px; border: 1px solid #ddd; border-radius: 5px;">
         </div>
         <div style="margin-bottom: 15px;">
@@ -8113,7 +8122,7 @@ function generateUdangKeringUtuhTable(container) {
         <tr style="background-color: #f5f5f5;">
             <th style="border: 1px solid #ddd; padding: 10px; text-align: center; width: 50%;">Spesifikasi</th>
             <th style="border: 1px solid #ddd; padding: 10px; text-align: center; width: 60px;">Nilai (?)</th>
-            <th colspan="6" style="border: 1px solid #ddd; padding: 10px; text-align: center;">Kode Contoh Uji /No. Aju PTK :</th>
+            <th colspan="6" style="border: 1px solid #ddd; padding: 10px; text-align: center;">Nomor Sertifikat :</th>
         </tr>
         <tr style="background-color: #f5f5f5;">
             <th colspan="2"></th>
@@ -8289,7 +8298,7 @@ function generateAbonIkanTable(container) {
     headerDiv.innerHTML = `
         <h3 style="text-align: center; margin-bottom: 20px; font-size: 18px; font-weight: 600;">LEMBAR PENILAIAN UJI SKOR ABON IKAN, KRUSTASEA, DAN MOLUSKA</h3>
         <div style="margin-bottom: 15px;">
-            <label style="display: inline-block; width: 200px;">1. Kode Contoh Uji /No. Aju PTK :</label>
+            <label style="display: inline-block; width: 200px;">1. Nomor Sertifikat :</label>
             <input type="text" id="kodeContohUji" name="kodeContohUji" style="width: 300px; padding: 8px; border: 1px solid #ddd; border-radius: 5px;">
         </div>
         <div style="margin-bottom: 15px;">
@@ -8377,7 +8386,7 @@ function generateAbonIkanTable(container) {
         <tr style="background-color: #f5f5f5;">
             <th style="border: 1px solid #ddd; padding: 10px; text-align: center; width: 50%;">Spesifikasi</th>
             <th style="border: 1px solid #ddd; padding: 10px; text-align: center; width: 60px;">Nilai (?)</th>
-            <th colspan="6" style="border: 1px solid #ddd; padding: 10px; text-align: center;">Kode Contoh Uji /No. Aju PTK :</th>
+            <th colspan="6" style="border: 1px solid #ddd; padding: 10px; text-align: center;">Nomor Sertifikat :</th>
         </tr>
         <tr style="background-color: #f5f5f5;">
             <th colspan="2"></th>
@@ -8553,7 +8562,7 @@ function generateSambalIkanTable(container) {
     headerDiv.innerHTML = `
         <h3 style="text-align: center; margin-bottom: 20px; font-size: 18px; font-weight: 600;">LEMBAR PENILAIAN UJI SKOR SAMBAL IKAN</h3>
         <div style="margin-bottom: 15px;">
-            <label style="display: inline-block; width: 200px;">1. Kode Contoh Uji /No. Aju PTK :</label>
+            <label style="display: inline-block; width: 200px;">1. Nomor Sertifikat :</label>
             <input type="text" id="kodeContohUji" name="kodeContohUji" style="width: 300px; padding: 8px; border: 1px solid #ddd; border-radius: 5px;">
         </div>
         <div style="margin-bottom: 15px;">
@@ -8625,7 +8634,7 @@ function generateSambalIkanTable(container) {
         <tr style="background-color: #f5f5f5;">
             <th style="border: 1px solid #ddd; padding: 10px; text-align: center; width: 40%;">Spesifikasi</th>
             <th style="border: 1px solid #ddd; padding: 10px; text-align: center; width: 50px;">Nilai</th>
-            <th colspan="6" style="border: 1px solid #ddd; padding: 10px; text-align: center;">Kode Contoh Uji /No. Aju PTK :</th>
+            <th colspan="6" style="border: 1px solid #ddd; padding: 10px; text-align: center;">Nomor Sertifikat :</th>
         </tr>
         <tr style="background-color: #f5f5f5;">
             <th colspan="2"></th>`;
@@ -8810,7 +8819,7 @@ function generateTunaLoinBekuTable(container) {
     headerDiv.innerHTML = `
         <h3 style="text-align: center; margin-bottom: 20px; font-size: 18px; font-weight: 600;">LEMBAR PENILAIAN UJI SKOR TUNA LOIN BEKU</h3>
         <div style="margin-bottom: 15px;">
-            <label style="display: inline-block; width: 200px;">1. Kode Contoh Uji /No. Aju PTK :</label>
+            <label style="display: inline-block; width: 200px;">1. Nomor Sertifikat :</label>
             <input type="text" id="kodeContohUji" name="kodeContohUji" style="width: 300px; padding: 8px; border: 1px solid #ddd; border-radius: 5px;">
         </div>
         <div style="margin-bottom: 15px;">
@@ -9110,7 +9119,7 @@ function generateTunaSteakBekuTable(container) {
     headerDiv.innerHTML = `
         <h3 style="text-align: center; margin-bottom: 20px; font-size: 18px; font-weight: 600;">LEMBAR PENILAIAN UJI SKOR TUNA STEAK BEKU</h3>
         <div style="margin-bottom: 15px;">
-            <label style="display: inline-block; width: 200px;">1. Kode Contoh Uji /No. Aju PTK :</label>
+            <label style="display: inline-block; width: 200px;">1. Nomor Sertifikat :</label>
             <input type="text" id="kodeContohUji" name="kodeContohUji" style="width: 300px; padding: 8px; border: 1px solid #ddd; border-radius: 5px;">
         </div>
         <div style="margin-bottom: 15px;">
@@ -9422,7 +9431,7 @@ function generateUdangSegarTable(container) {
     headerDiv.innerHTML = `
         <h3 style="text-align: center; margin-bottom: 20px; font-size: 18px; font-weight: 600;">LEMBAR PENILAIAN UJI SKOR UDANG SEGAR</h3>
         <div style="margin-bottom: 15px;">
-            <label style="display: inline-block; width: 200px;">1. Kode Contoh Uji /No. Aju PTK :</label>
+            <label style="display: inline-block; width: 200px;">1. Nomor Sertifikat :</label>
             <input type="text" id="kodeContohUji" name="kodeContohUji" style="width: 300px; padding: 8px; border: 1px solid #ddd; border-radius: 5px;">
         </div>
         <div style="margin-bottom: 15px;">
@@ -9686,7 +9695,7 @@ function generateUdangBekuTable(container) {
     headerDiv.innerHTML = `
         <h3 style="text-align: center; margin-bottom: 20px; font-size: 18px; font-weight: 600;">LEMBAR PENILAIAN UJI SKOR UDANG BEKU</h3>
         <div style="margin-bottom: 15px;">
-            <label style="display: inline-block; width: 200px;">1. Kode Contoh Uji /No. Aju PTK :</label>
+            <label style="display: inline-block; width: 200px;">1. Nomor Sertifikat :</label>
             <input type="text" id="kodeContohUji" name="kodeContohUji" style="width: 300px; padding: 8px; border: 1px solid #ddd; border-radius: 5px;">
         </div>
         <div style="margin-bottom: 15px;">
@@ -10070,7 +10079,7 @@ function generateUdangMasakBekuTable(container) {
     headerDiv.innerHTML = `
         <h3 style="text-align: center; margin-bottom: 20px; font-size: 18px; font-weight: 600;">LEMBAR PENILAIAN UJI SKOR UDANG MASAK BEKU</h3>
         <div style="margin-bottom: 15px;">
-            <label style="display: inline-block; width: 200px;">1. Kode Contoh Uji /No. Aju PTK :</label>
+            <label style="display: inline-block; width: 200px;">1. Nomor Sertifikat :</label>
             <input type="text" id="kodeContohUji" name="kodeContohUji" style="width: 300px; padding: 8px; border: 1px solid #ddd; border-radius: 5px;">
         </div>
         <div style="margin-bottom: 15px;">
@@ -10367,7 +10376,7 @@ function generateCumiCumiBekuTable(container) {
     headerDiv.innerHTML = `
         <h3 style="text-align: center; margin-bottom: 20px; font-size: 18px; font-weight: 600;">LEMBAR PENILAIAN UJI SKOR CUMI-CUMI BEKU</h3>
         <div style="margin-bottom: 15px;">
-            <label style="display: inline-block; width: 200px;">1. Kode Contoh Uji /No. Aju PTK :</label>
+            <label style="display: inline-block; width: 200px;">1. Nomor Sertifikat :</label>
             <input type="text" id="kodeContohUji" name="kodeContohUji" style="width: 300px; padding: 8px; border: 1px solid #ddd; border-radius: 5px;">
         </div>
         <div style="margin-bottom: 15px;">
@@ -10677,7 +10686,7 @@ function generateGuritaMentahBekuTable(container) {
     headerDiv.innerHTML = `
         <h3 style="text-align: center; margin-bottom: 20px; font-size: 18px; font-weight: 600;">LEMBAR PENILAIAN UJI SKOR GURITA MENTAH BEKU</h3>
         <div style="margin-bottom: 15px;">
-            <label style="display: inline-block; width: 200px;">1. Kode Contoh Uji /No. Aju PTK :</label>
+            <label style="display: inline-block; width: 200px;">1. Nomor Sertifikat :</label>
             <input type="text" id="kodeContohUji" name="kodeContohUji" style="width: 300px; padding: 8px; border: 1px solid #ddd; border-radius: 5px;">
         </div>
         <div style="margin-bottom: 15px;">
@@ -10966,7 +10975,7 @@ function generateLobsterBekuTable(container) {
     headerDiv.innerHTML = `
         <h3 style="text-align: center; margin-bottom: 20px; font-size: 18px; font-weight: 600;">LEMBAR PENILAIAN UJI SKOR LOBSTER BEKU</h3>
         <div style="margin-bottom: 15px;">
-            <label style="display: inline-block; width: 200px;">1. Kode Contoh Uji /No. Aju PTK :</label>
+            <label style="display: inline-block; width: 200px;">1. Nomor Sertifikat :</label>
             <input type="text" id="kodeContohUji" name="kodeContohUji" style="width: 300px; padding: 8px; border: 1px solid #ddd; border-radius: 5px;">
         </div>
         <div style="margin-bottom: 15px;">
@@ -11269,7 +11278,7 @@ function generateCakalangBekuTable(container) {
     headerDiv.innerHTML = `
         <h3 style="text-align: center; margin-bottom: 20px; font-size: 18px; font-weight: 600;">LEMBAR PENILAIAN UJI SKOR CAKALANG BEKU</h3>
         <div style="margin-bottom: 15px;">
-            <label style="display: inline-block; width: 200px;">1. Kode Contoh Uji /No. Aju PTK :</label>
+            <label style="display: inline-block; width: 200px;">1. Nomor Sertifikat :</label>
             <input type="text" id="kodeContohUji" name="kodeContohUji" style="width: 300px; padding: 8px; border: 1px solid #ddd; border-radius: 5px;">
         </div>
         <div style="margin-bottom: 15px;">
@@ -11577,7 +11586,7 @@ function generateFilletKakapBekuTable(container) {
     headerDiv.innerHTML = `
         <h3 style="text-align: center; margin-bottom: 20px; font-size: 18px; font-weight: 600;">LEMBAR PENILAIAN UJI SKOR FILLET KAKAP BEKU</h3>
         <div style="margin-bottom: 15px;">
-            <label style="display: inline-block; width: 200px;">1. Kode Contoh Uji /No. Aju PTK :</label>
+            <label style="display: inline-block; width: 200px;">1. Nomor Sertifikat :</label>
             <input type="text" id="kodeContohUji" name="kodeContohUji" style="width: 300px; padding: 8px; border: 1px solid #ddd; border-radius: 5px;">
         </div>
         <div style="margin-bottom: 15px;">
@@ -11875,7 +11884,7 @@ function generateHiuUtuhBekuTable(container) {
     headerDiv.innerHTML = `
         <h3 style="text-align: center; margin-bottom: 20px; font-size: 18px; font-weight: 600;">LEMBAR PENILAIAN UJI SKOR HIU UTUH BEKU</h3>
         <div style="margin-bottom: 15px;">
-            <label style="display: inline-block; width: 200px;">1. Kode Contoh Uji /No. Aju PTK :</label>
+            <label style="display: inline-block; width: 200px;">1. Nomor Sertifikat :</label>
             <input type="text" id="kodeContohUji" name="kodeContohUji" style="width: 300px; padding: 8px; border: 1px solid #ddd; border-radius: 5px;">
         </div>
         <div style="margin-bottom: 15px;">
@@ -12166,7 +12175,7 @@ function generateFilletNilaBekuTable(container) {
     headerDiv.innerHTML = `
         <h3 style="text-align: center; margin-bottom: 20px; font-size: 18px; font-weight: 600;">LEMBAR PENILAIAN UJI SKOR FILLET NILA (TILAPIA SP.) BEKU</h3>
         <div style="margin-bottom: 15px;">
-            <label style="display: inline-block; width: 200px;">1. Kode Contoh Uji /No. Aju PTK :</label>
+            <label style="display: inline-block; width: 200px;">1. Nomor Sertifikat :</label>
             <input type="text" id="kodeContohUji" name="kodeContohUji" style="width: 300px; padding: 8px; border: 1px solid #ddd; border-radius: 5px;">
         </div>
         <div style="margin-bottom: 15px;">
@@ -12448,7 +12457,7 @@ function generateIkanPindangTable(container) {
     headerDiv.innerHTML = `
         <h3 style="text-align: center; margin-bottom: 20px; font-size: 18px; font-weight: 600;">LEMBAR PENILAIAN UJI SKOR IKAN PINDANG</h3>
         <div style="margin-bottom: 15px;">
-            <label style="display: inline-block; width: 200px;">1. Kode Contoh Uji /No. Aju PTK :</label>
+            <label style="display: inline-block; width: 200px;">1. Nomor Sertifikat :</label>
             <input type="text" id="kodeContohUji" name="kodeContohUji" style="width: 300px; padding: 8px; border: 1px solid #ddd; border-radius: 5px;">
         </div>
         <div style="margin-bottom: 15px;">
@@ -12693,7 +12702,7 @@ function generateTunaSegarSashimiTable(container) {
     headerDiv.innerHTML = `
         <h3 style="text-align: center; margin-bottom: 20px; font-size: 18px; font-weight: 600;">LEMBAR PENILAIAN UJI SKOR TUNA SEGAR UNTUK SASHIMI</h3>
         <div style="margin-bottom: 15px;">
-            <label style="display: inline-block; width: 200px;">1. Kode Contoh Uji /No. Aju PTK :</label>
+            <label style="display: inline-block; width: 200px;">1. Nomor Sertifikat :</label>
             <input type="text" id="kodeContohUji" name="kodeContohUji" style="width: 300px; padding: 8px; border: 1px solid #ddd; border-radius: 5px;">
         </div>
         <div style="margin-bottom: 15px;">
@@ -13012,7 +13021,7 @@ function generateTunaLoinSegarTable(container) {
     headerDiv.innerHTML = `
         <h3 style="text-align: center; margin-bottom: 20px; font-size: 18px; font-weight: 600;">LEMBAR PENILAIAN UJI SKOR TUNA LOIN SEGAR</h3>
         <div style="margin-bottom: 15px;">
-            <label style="display: inline-block; width: 200px;">1. Kode Contoh Uji /No. Aju PTK :</label>
+            <label style="display: inline-block; width: 200px;">1. Nomor Sertifikat :</label>
             <input type="text" id="kodeContohUji" name="kodeContohUji" style="width: 300px; padding: 8px; border: 1px solid #ddd; border-radius: 5px;">
         </div>
         <div style="margin-bottom: 15px;">

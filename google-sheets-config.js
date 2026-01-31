@@ -1,6 +1,6 @@
 // Konfigurasi Google Sheets
 // Ganti URL ini dengan URL Google Apps Script Web App Anda
-const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwMquEGFezdJZqG9ci814UsF01BVc4oYn5DS1mCWHTL6YBX1kVjA2hCNCJBr2UYyrC4yg/exec';
+const GOOGLE_APPS_SCRIPT_URL = 'https://spion-api.karantinaikanbitung.workers.dev';
 
 // Mapping jenis hewan ke nama sheet
 const SHEET_NAMES = {
