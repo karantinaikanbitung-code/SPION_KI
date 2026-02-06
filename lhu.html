@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Data LHU</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    th, td {
+      border: 1px solid #333;
+      padding: 8px;
+      text-align: left;
+    }
+
+    th {
+      background: #eee;
+    }
+
+    input, button {
+      margin: 5px 0;
+      padding: 6px;
+    }
+  </style>
+</head>
+<body>
+
+<h2>Form Input LHU</h2>
+
+<input id="nomor_sertifikat" placeholder="Nomor Sertifikat"><br>
+<input id="nama_perusahaan" placeholder="Nama Perusahaan"><br>
+<input id="jenis_produk" placeholder="Jenis Produk"><br>
+<input id="negara_tujuan" placeholder="Negara Tujuan"><br>
+<input id="tanggal_terbit" type="date"><br>
+
+<button onclick="simpanLHU()">💾 Simpan LHU</button>
+
+<hr>
+
+<h2>Daftar LHU</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nomor Sertifikat</th>
+      <th>Perusahaan</th>
+      <th>Produk</th>
+      <th>Negara</th>
+      <th>Tanggal Terbit</th>
+    </tr>
+  </thead>
+  <tbody id="tabelLHU"></tbody>
+</table>
+
+<script>
+const API = "https://spion-api.karantinaikanbitung.workers.dev";
+
+async function loadLHU() {
+  const res = await fetch(API + "/lhu");
+  const json = await res.json();
+
+  const tbody = document.getElementById("tabelLHU");
+  tbody.innerHTML = "";
+
+  json.results.forEach(row => {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td>${row.id}</td>
+      <td>${row.nomor_sertifikat}</td>
+      <td>${row.nama_perusahaan}</td>
+      <td>${row.jenis_produk}</td>
+      <td>${row.negara_tujuan}</td>
+      <td>${row.tanggal_terbit}</td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+async function simpanLHU() {
+  const data = {
+    nomor_sertifikat: document.getElementById("nomor_sertifikat").value,
+    nama_perusahaan: document.getElementById("nama_perusahaan").value,
+    jenis_produk: document.getElementById("jenis_produk").value,
+    negara_tujuan: document.getElementById("negara_tujuan").value,
+    tanggal_terbit: document.getElementById("tanggal_terbit").value
+  };
+
+  const res = await fetch(API + "/lhu", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data)
+  });
+
+  const hasil = await res.json();
+  alert("Berhasil simpan LHU");
+
+  loadLHU();
+}
+
+loadLHU();
+</script>
+
+</body>
+</html>
