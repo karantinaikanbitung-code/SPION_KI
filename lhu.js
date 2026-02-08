@@ -1,82 +1,48 @@
-const API_URL = "https://spion-api.karantinaikanbitung.workers.dev";
+const API_URL = "https://spion-api.karantinaikanbitung.workers.dev/lhu";
 
-// ==============================
-// SIMPAN LHU
-// ==============================
-document.getElementById("lhuForm").addEventListener("submit", async (e) => {
-  e.preventDefault();
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("penilaianForm");
+  if (!form) return;
 
-  const no_ptk = document.getElementById("no_ptk").value;
-  const nama_panelis = document.getElementById("nama_panelis").value;
-  const lokasi_pelayanan = document.getElementById("lokasi_pelayanan").value;
-  const jenis_ikan = document.getElementById("jenis_ikan").value;
-
-  // 👉 isi HTML LHU (INI FILE YANG AKAN DIPREVIEW)
-  const htmlLHU = `
-    <html>
-    <head><title>LHU ${no_ptk}</title></head>
-    <body>
-      <h2>Lembar Hasil Uji</h2>
-      <p>No PTK: ${no_ptk}</p>
-      <p>Nama Panelis: ${nama_panelis}</p>
-      <p>Lokasi Pelayanan: ${lokasi_pelayanan}</p>
-      <p>Jenis Ikan: ${jenis_ikan}</p>
-    </body>
-    </html>
-  `;
-
-  // SIMPAN HTML KE GITHUB / SERVER (sementara pakai Blob)
-  const blob = new Blob([htmlLHU], { type: "text/html" });
-  const fileURL = URL.createObjectURL(blob);
-
-  // KIRIM DATA KE API
-  const res = await fetch(API_URL + "/lhu", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      no_ptk,
-      nama_panelis,
-      lokasi_pelayanan,
-      jenis_ikan,
-      file_url: fileURL
-    })
-  });
-
-  const result = await res.json();
-  console.log("HASIL API:", result);
-
-  if (result.success) {
-    alert("LHU berhasil disimpan");
-    loadTable();
-    document.getElementById("lhuForm").reset();
-  } else {
-    alert("Gagal menyimpan");
-  }
+  form.addEventListener("submit", handleFormSubmit);
 });
 
-// ==============================
-// LOAD TABEL
-// ==============================
-async function loadTable() {
-  const res = await fetch(API_URL + "/lhu");
-  const data = await res.json();
+async function handleFormSubmit(e) {
+  e.preventDefault();
 
-  const tbody = document.getElementById("tabelLHU");
-  tbody.innerHTML = "";
+  try {
+    const form = e.target;
+    const formData = new FormData(form);
 
-  data.results.forEach(row => {
-    const tr = document.createElement("tr");
+    // ambil HTML preview LHU
+    const preview = document.getElementById("previewLHU");
+    if (!preview) {
+      alert("Preview LHU tidak ditemukan");
+      return;
+    }
 
-    tr.innerHTML = `
-      <td>${row.no_ptk}</td>
-      <td>${row.nama_panelis || "-"}</td>
-      <td>${row.lokasi_pelayanan || "-"}</td>
-      <td>${row.jenis_ikan || "-"}</td>
-      <td><a href="${row.file_url}" target="_blank">👁️ Lihat LHU</a></td>
-    `;
+    formData.append(
+      "html_content",
+      "<html><body>" + preview.innerHTML + "</body></html>"
+    );
 
-    tbody.appendChild(tr);
-  });
+    const response = await fetch(API_URL, {
+      method: "POST",
+      body: formData
+    });
+
+    const result = await response.json();
+    console.log("HASIL API:", result);
+
+    if (!response.ok || !result.success) {
+      throw new Error(result.error || "Gagal simpan");
+    }
+
+    alert("✅ LHU berhasil disimpan");
+    form.reset();
+
+  } catch (err) {
+    console.error("ERROR:", err);
+    alert("❌ Gagal menyimpan LHU");
+  }
 }
-
-loadTable();
