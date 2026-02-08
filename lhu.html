@@ -1,47 +1,14 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-  <meta charset="UTF-8">
-  <title>Form LHU</title>
-</head>
-<body>
-
-<h2>Form Score Sheet / LHU</h2>
-
-<form id="lhuForm">
-  <label>No. PTK</label><br>
-  <input type="text" id="no_ptk" required><br><br>
-
-  <label>Nama Panelis</label><br>
-  <input type="text" id="nama_panelis"><br><br>
-
-  <label>Lokasi Pelayanan</label><br>
-  <input type="text" id="lokasi_pelayanan"><br><br>
-
-  <label>Jenis Ikan</label><br>
-  <input type="text" id="jenis_ikan"><br><br>
-
+<form id="penilaianForm" enctype="multipart/form-data">
+  <input name="no_ptk" placeholder="No PTK" required>
+  <input name="nama_panelis" placeholder="Nama Panelis" required>
+  <input name="lokasi_pelayanan" placeholder="Lokasi Pelayanan" required>
+  <input name="jenis_ikan" placeholder="Jenis Ikan" required>
   <button type="submit">💾 Simpan LHU</button>
 </form>
 
-<hr>
-
-<h3>Daftar LHU</h3>
-
-<table border="1" width="100%">
-  <thead>
-    <tr>
-      <th>No. PTK</th>
-      <th>Nama Panelis</th>
-      <th>Lokasi Pelayanan</th>
-      <th>Jenis Ikan</th>
-      <th>Preview LHU</th>
-    </tr>
-  </thead>
-  <tbody id="tabelLHU"></tbody>
-</table>
+<div id="previewLHU">
+  <h2>Lembar Hasil Uji</h2>
+  <p>No PTK: <span id="p_no_ptk"></span></p>
+</div>
 
 <script src="lhu.js"></script>
-
-</body>
-</html>
