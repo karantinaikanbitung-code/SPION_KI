@@ -1,95 +1,30 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-  <meta charset="UTF-8" />
-  <title>Daftar Hasil Uji (LHU)</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      padding: 20px;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 15px;
-    }
-    th, td {
-      border: 1px solid #444;
-      padding: 8px;
-      text-align: center;
-    }
-    th {
-      background: #f0f0f0;
-    }
-    a {
-      color: blue;
-      text-decoration: underline;
-    }
-  </style>
-</head>
-<body>
-
-<h2>Daftar Hasil Uji (LHU)</h2>
-
-<table>
+<table border="1">
   <thead>
     <tr>
-      <th>No. PTK</th>
+      <th>No PTK</th>
       <th>Nama Panelis</th>
       <th>Lokasi Pelayanan</th>
       <th>Jenis Ikan</th>
       <th>Preview LHU</th>
     </tr>
   </thead>
-  <tbody id="tabelLHU">
-    <tr>
-      <td colspan="5">Memuat data...</td>
-    </tr>
-  </tbody>
+  <tbody id="data"></tbody>
 </table>
 
 <script>
-const API_BASE = "https://spion-api.karantinaikanbitung.workers.dev";
-
-async function loadLHU() {
-  const tbody = document.getElementById("tabelLHU");
-  tbody.innerHTML = "";
-
-  try {
-    const res = await fetch(API_BASE + "/lhu");
-    const json = await res.json();
-
-    if (!json.success || json.results.length === 0) {
-      tbody.innerHTML = "<tr><td colspan='5'>Belum ada data</td></tr>";
-      return;
-    }
-
-    json.results.forEach(row => {
-      const tr = document.createElement("tr");
-
-      tr.innerHTML = `
-        <td>${row.no_ptk || '-'}</td>
-        <td>${row.nama_panelis || '-'}</td>
-        <td>${row.lokasi_pelayanan || '-'}</td>
-        <td>${row.jenis_ikan || '-'}</td>
-        <td>
-          ${row.file_url
-            ? `<a href="${row.file_url}" target="_blank">Lihat LHU</a>`
-            : '-'}
-        </td>
-      `;
-
-      tbody.appendChild(tr);
+fetch("https://spion-api.karantinaikanbitung.workers.dev/lhu")
+  .then(r => r.json())
+  .then(res => {
+    const tbody = document.getElementById("data");
+    res.results.forEach(r => {
+      tbody.innerHTML += `
+        <tr>
+          <td>${r.no_ptk}</td>
+          <td>${r.nama_panelis}</td>
+          <td>${r.lokasi_pelayanan}</td>
+          <td>${r.jenis_ikan}</td>
+          <td><a href="${r.file_url}" target="_blank">Lihat</a></td>
+        </tr>`;
     });
-
-  } catch (err) {
-    tbody.innerHTML = "<tr><td colspan='5'>Gagal memuat data</td></tr>";
-    console.error(err);
-  }
-}
-
-loadLHU();
+  });
 </script>
-
-</body>
-</html>
