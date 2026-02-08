@@ -5841,24 +5841,32 @@ async function backupToGDrive(data, filename, htmlContent) {
         return;
     }
 
-    try {
-        const response = await fetch(GOOGLE_APPS_SCRIPT_URL, {
-            method: 'POST',
-            mode: 'cors',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                action: 'saveFileToDrive',
-                filename: filename + '.html',
-                htmlContent: htmlContent
-            })
-        });
+   try {
+    const response = await fetch("https://spion-api.karantinaikanbitung.workers.dev/lhu", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            no_ptk: data.kodeContohUji || "-",
+            nama_panelis: data.namaPanelis || "-",
+            lokasi_pelayanan: data.noSampel || "-",
+            jenis_ikan: data.jenisHewan || "-",
+            html: htmlContent
+        })
+    });
 
-        if (response.ok) {
-            const result = await response.json();
-            console.log('GDrive Backup Result:', result.message);
-        } else {
-            console.error('GDrive Backup Error: HTTP ' + response.status);
-        }
+    const result = await response.json();
+    console.log("HASIL API:", result);
+
+    if (!result.success) {
+        alert("Gagal menyimpan LHU ke server");
+    }
+
+} catch (error) {
+    console.error("ERROR KIRIM LHU:", error);
+}
+
     } catch (error) {
         console.error('GDrive Backup Exception:', error);
     }
@@ -13313,5 +13321,6 @@ function calculateTotalsTunaLoinSegar() {
         }
     }
 }
+
 
 
