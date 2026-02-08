@@ -6850,13 +6850,49 @@ function handleFormSubmit(jenisUji, hewan) {
 
     console.log('Sending data to Production API:', productionAPIData);
 
-    fetch(GOOGLE_APPS_SCRIPT_URL, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(productionAPIData)
-    })
+    fetch("https://spion-api.karantinaikanbitung.workers.dev/lhu", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({
+    no_ptk: data.kodeContohUji || "-",
+    nama_panelis: data.namaPanelis || "-",
+    lokasi_pelayanan: data.noSampel || "-",
+    jenis_ikan: data.jenisHewan || "-",
+    html: lhuHtml
+  })
+})
+.then(res => res.json())
+.then(result => {
+  console.log("HASIL API:", result);
+  if (!result.success) {
+    alert("Gagal menyimpan ke server");
+  }
+})
+.catch(err => {
+  console.error("ERROR API:", err);
+});
+
+  body: JSON.stringify({
+    no_ptk: data.kodeContohUji || "-",
+    nama_panelis: data.namaPanelis || "-",
+    lokasi_pelayanan: data.noSampel || "-",
+    jenis_ikan: data.jenisHewan || "-",
+    html: lhuHtml
+  })
+})
+.then(res => res.json())
+.then(result => {
+  console.log("HASIL API:", result);
+  if (!result.success) {
+    alert("Gagal menyimpan ke server");
+  }
+})
+.catch(err => {
+  console.error("ERROR API:", err);
+});
+
         .then(async response => {
             if (response.ok) {
                 const result = await response.json();
@@ -13277,4 +13313,5 @@ function calculateTotalsTunaLoinSegar() {
         }
     }
 }
+
 
