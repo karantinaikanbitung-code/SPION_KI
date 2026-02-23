@@ -1,0 +1,862 @@
+:root {
+    --bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --body-bg: #f5f7fa;
+    --container-bg: #ffffff;
+    --text-primary: #333333;
+    --text-secondary: #666666;
+    --section-border: #f0f0f0;
+    --input-border: #e0e0e0;
+    --input-bg: #ffffff;
+    --card-bg: #ffffff;
+    --header-text: #ffffff;
+    --table-header-bg: #f5f5f5;
+    --table-stripe: #fafafa;
+    --btn-reset-bg: #f0f0f0;
+    --btn-reset-text: #333;
+    --shadow-color: rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] {
+    --bg-gradient: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    --body-bg: #0f3460;
+    --container-bg: #1a1a2e;
+    --text-primary: #e0e0e0;
+    --text-secondary: #aaaaaa;
+    --section-border: #2e2e4e;
+    --input-border: #3e3e5e;
+    --input-bg: #16213e;
+    --card-bg: #16213e;
+    --header-text: #ffffff;
+    --table-header-bg: #16213e;
+    --table-stripe: #1a1a2e;
+    --btn-reset-bg: #2e2e4e;
+    --btn-reset-text: #e0e0e0;
+    --shadow-color: rgba(0, 0, 0, 0.6);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background: var(--bg-gradient);
+    min-height: 100vh;
+    padding: 20px;
+    color: var(--text-primary);
+    transition: background 0.3s, color 0.3s;
+}
+
+/* Login Page Styles */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.login-box {
+    background: var(--container-bg);
+    border-radius: 20px;
+    padding: 40px 30px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 20px 60px var(--shadow-color);
+    animation: slideUp 0.5s ease-out;
+    transition: background 0.3s, box-shadow 0.3s;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.login-box h1 {
+    text-align: center;
+    color: #667eea;
+    margin-bottom: 10px;
+    font-size: 28px;
+}
+
+.subtitle {
+    text-align: center;
+    color: var(--text-secondary);
+    margin-bottom: 30px;
+    font-size: 14px;
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--text-primary);
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid var(--input-border);
+    background: var(--input-bg);
+    color: var(--text-primary);
+    border-radius: 10px;
+    font-size: 16px;
+    transition: all 0.3s;
+}
+
+.input-group input:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.error-message {
+    display: block;
+    color: #e74c3c;
+    font-size: 12px;
+    margin-top: 5px;
+    min-height: 18px;
+}
+
+.btn-primary {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+}
+
+/* Questionnaire Page Styles */
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    background: var(--container-bg);
+    border-radius: 20px;
+    box-shadow: 0 20px 60px var(--shadow-color);
+    overflow: hidden;
+    transition: background 0.3s, box-shadow 0.3s;
+}
+
+header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 20px 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+header .header-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+header h1 {
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.btn-logout {
+    padding: 10px 20px;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 2px solid white;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-logout:hover {
+    background: white;
+    color: #667eea;
+}
+
+.form-container {
+    padding: 30px 25px;
+}
+
+.form-section {
+    margin-bottom: 35px;
+}
+
+.form-section h2 {
+    color: #667eea;
+    font-size: 20px;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--section-border);
+}
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 10px;
+    color: var(--text-primary);
+    font-weight: 500;
+    font-size: 15px;
+}
+
+.required {
+    color: #e74c3c;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="number"],
+.form-group input[type="date"],
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid var(--input-border);
+    background: var(--input-bg);
+    color: var(--text-primary);
+    border-radius: 10px;
+    font-size: 15px;
+    font-family: inherit;
+    transition: all 0.3s;
+}
+
+.form-group input:focus,
+.form-group input[type="date"]:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.radio-group,
+.checkbox-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.radio-label,
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    border: 2px solid var(--input-border);
+    background: var(--input-bg);
+    color: var(--text-primary);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.radio-label:hover,
+.checkbox-label:hover {
+    border-color: #667eea;
+    background: rgba(102, 126, 234, 0.05);
+}
+
+.radio-label input[type="radio"],
+.checkbox-label input[type="checkbox"] {
+    margin-right: 10px;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    accent-color: #667eea;
+}
+
+.radio-label input[type="radio"]:checked+span,
+.checkbox-label input[type="checkbox"]:checked+span {
+    font-weight: 600;
+    color: #667eea;
+}
+
+.radio-label:has(input[type="radio"]:checked),
+.checkbox-label:has(input[type="checkbox"]:checked) {
+    border-color: #667eea;
+    background: rgba(102, 126, 234, 0.1);
+}
+
+.form-group input[type="range"] {
+    width: 100%;
+    height: 8px;
+    border-radius: 5px;
+    background: #e0e0e0;
+    outline: none;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.form-group input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #667eea;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.form-group input[type="range"]::-moz-range-thumb {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #667eea;
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.rating-display {
+    margin-top: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #667eea;
+}
+
+#ratingValue {
+    font-size: 20px;
+}
+
+.form-actions {
+    display: flex;
+    gap: 15px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+}
+
+.btn-submit,
+.btn-reset {
+    flex: 1;
+    min-width: 150px;
+    padding: 15px;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-submit {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.btn-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+}
+
+.btn-reset {
+    background: var(--btn-reset-bg);
+    color: var(--btn-reset-text);
+    border: 2px solid var(--input-border);
+}
+
+.btn-reset:hover {
+    background: #e0e0e0;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+
+    .login-box {
+        padding: 30px 20px;
+    }
+
+    .login-box h1 {
+        font-size: 24px;
+    }
+
+    header {
+        padding: 15px 20px;
+    }
+
+    header h1 {
+        font-size: 20px;
+    }
+
+    .form-container {
+        padding: 20px 15px;
+    }
+
+    .form-section h2 {
+        font-size: 18px;
+    }
+
+    .form-actions {
+        flex-direction: column;
+    }
+
+    .btn-submit,
+    .btn-reset {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .login-box h1 {
+        font-size: 22px;
+    }
+
+    header h1 {
+        font-size: 18px;
+    }
+
+    .form-group label {
+        font-size: 14px;
+    }
+
+    .form-group input,
+    .form-group input[type="date"],
+    .form-group select,
+    .form-group textarea {
+        font-size: 14px;
+        padding: 10px 12px;
+    }
+}
+
+/* LHU styles removed */
+/* (LHU modal and print styles have been removed when LHU feature was deleted) */
+
+
+/* Ikan Segar Table Styles */
+.ikan-segar-header {
+    margin-bottom: 30px;
+    -webkit-appearance: none;
+    appearance: none;
+    padding: 20px;
+    background: var(--card-bg);
+    border-radius: 10px;
+    border: 1px solid var(--input-border);
+}
+
+.table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.ikan-segar-header label {
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.ikan-segar-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    font-size: 14px;
+    background: var(--container-bg);
+    box-shadow: 0 2px 8px var(--shadow-color);
+}
+
+.ikan-segar-table th {
+    font-weight: 600;
+    color: var(--text-primary);
+    background: var(--table-header-bg);
+}
+
+.ikan-segar-table td {
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.ikan-segar-table .kode-contoh-cell {
+    transition: background-color 0.2s;
+}
+
+.ikan-segar-table .kode-contoh-cell:hover {
+    background-color: #f5f5f5 !important;
+}
+
+.ikan-segar-table .kode-contoh-cell:has(.nilai-checkbox:checked) {
+    background-color: #e8f0fe;
+}
+
+.ikan-segar-table .total-cell,
+.ikan-segar-table .avg-cell {
+    color: #667eea;
+}
+
+/* Responsive untuk tabel ikan segar */
+@media (max-width: 768px) {
+    .ikan-segar-table {
+        font-size: 12px;
+    }
+
+    .ikan-segar-table th,
+    .ikan-segar-table td {
+        padding: 8px 5px;
+        font-size: 11px;
+    }
+
+    .ikan-segar-header {
+        padding: 15px;
+    }
+
+    .ikan-segar-header label {
+        display: block;
+        width: 100%;
+        margin-bottom: 5px;
+    }
+
+    .ikan-segar-header input {
+        width: 100% !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .ikan-segar-table {
+        font-size: 10px;
+    }
+
+    .ikan-segar-table th,
+    .ikan-segar-table td {
+        padding: 6px 3px;
+        font-size: 10px;
+    }
+
+    .container {
+        overflow-x: auto;
+    }
+}
+
+/* Home Page Styles */
+.home-container {
+    min-height: 100vh;
+    padding-bottom: 40px;
+}
+
+.home-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 30px 25px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.home-header h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.welcome-text {
+    font-size: 16px;
+    margin-bottom: 15px;
+    opacity: 0.95;
+}
+
+.welcome-text span {
+    font-weight: 600;
+}
+
+.home-header .btn-logout {
+    margin-top: 10px;
+    padding: 8px 20px;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 2px solid white;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.home-header .btn-logout:hover {
+    background: white;
+    color: #667eea;
+}
+
+.header-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 15px;
+    flex-wrap: wrap;
+}
+
+.btn-back {
+    padding: 10px 20px;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 2px solid white;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-back:hover {
+    background: white;
+    color: #667eea;
+}
+
+.main-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 30px 20px;
+}
+
+.section-title {
+    text-align: center;
+    color: white;
+    font-size: 28px;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.section-subtitle {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 16px;
+    margin-bottom: 40px;
+}
+
+.icon-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.icon-card {
+    background: var(--card-bg);
+    border-radius: 20px;
+    padding: 40px 30px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 10px 30px var(--shadow-color);
+    animation: slideUp 0.5s ease-out;
+}
+
+.icon-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.icon-card:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.icon-card:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.icon-card:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+.icon-card:nth-child(4) {
+    animation-delay: 0.4s;
+}
+
+.icon-wrapper {
+    margin-bottom: 25px;
+}
+
+.icon-circle {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    transition: all 0.3s;
+    font-size: 80px;
+}
+
+.icon-organoleptik {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    color: white;
+}
+
+.icon-virologi {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    color: white;
+}
+
+.icon-mikrobiologi {
+    background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+    color: white;
+}
+
+.icon-hewan {
+    font-size: 80px;
+}
+
+.icon-card:hover .icon-circle {
+    transform: scale(1.1) rotate(5deg);
+}
+
+.icon-card h3 {
+    color: var(--text-primary);
+    font-size: 22px;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.icon-card p {
+    color: var(--text-secondary);
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+    .home-header h1 {
+        font-size: 20px;
+    }
+
+    .section-title {
+        font-size: 24px;
+    }
+
+    .section-subtitle {
+        font-size: 14px;
+    }
+
+    .icon-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .icon-card {
+        padding: 30px 20px;
+    }
+
+    .icon-circle {
+        width: 120px;
+        height: 120px;
+        font-size: 60px;
+    }
+
+    .icon-card h3 {
+        font-size: 20px;
+    }
+}
+
+/* Dynamic Form Tables Dark Mode Overrides */
+[data-theme="dark"] .ikan-segar-header,
+[data-theme="dark"] .ikan-beku-header,
+[data-theme="dark"] .ikan-tuna-kaleng-header,
+[data-theme="dark"] .sarden-makarel-kaleng-header,
+[data-theme="dark"] .ikan-asap-header,
+[data-theme="dark"] .ikan-asin-kering-header,
+[data-theme="dark"] .rumput-laut-kering-header,
+[data-theme="dark"] .lobster-udang-kipas-header,
+[data-theme="dark"] .kepiting-bakau-header {
+    background-color: var(--card-bg) !important;
+    border-color: var(--input-border) !important;
+    color: var(--text-primary) !important;
+}
+
+[data-theme="dark"] .ikan-segar-header input,
+[data-theme="dark"] .ikan-beku-header input,
+[data-theme="dark"] table input {
+    background-color: var(--input-bg) !important;
+    border-color: var(--input-border) !important;
+    color: var(--text-primary) !important;
+}
+
+/* Override inline backgrounds on tables */
+/* Target headers and rows with inline background styles */
+[data-theme="dark"] table tr[style*="background-color"],
+[data-theme="dark"] table th[style*="background-color"],
+[data-theme="dark"] table td[style*="background-color"] {
+    background-color: var(--table-header-bg) !important;
+    color: var(--text-primary) !important;
+    border-color: var(--input-border) !important;
+}
+
+/* Specific handling for striped or different colored rows if needed */
+[data-theme="dark"] .total-cell[style*="background"],
+[data-theme="dark"] .avg-cell[style*="background"] {
+    background-color: var(--table-stripe) !important;
+    color: var(--text-primary) !important;
+}
+
+/* General Table Cell Overrides */
+[data-theme="dark"] table th,
+[data-theme="dark"] table td {
+    border-color: var(--input-border) !important;
+    color: var(--text-primary) !important;
+}
+
+/* Ensure inputs inside tables are transparent or match input bg and have correct text color */
+[data-theme="dark"] table input,
+[data-theme="dark"] table input[type="text"] {
+    background-color: var(--input-bg) !important;
+    color: var(--text-primary) !important;
+    border: 1px solid var(--input-border) !important;
+}
+
+/* Hover effects for table cells in dark mode */
+[data-theme="dark"] .ikan-segar-table .kode-contoh-cell:hover {
+    background-color: var(--table-stripe) !important;
+}
+
+[data-theme="dark"] .ikan-segar-table .kode-contoh-cell:has(.nilai-checkbox:checked) {
+    background-color: rgba(102, 126, 234, 0.2) !important;
+}
+
+/* Fix for instruction boxes with inline background #f0f0f0 */
+[data-theme="dark"] .ikan-segar-header div[style*="background-color"],
+[data-theme="dark"] .ikan-beku-header div[style*="background-color"],
+[data-theme="dark"] .ikan-tuna-kaleng-header div[style*="background-color"],
+[data-theme="dark"] .sarden-makarel-kaleng-header div[style*="background-color"],
+[data-theme="dark"] .ikan-asap-header div[style*="background-color"],
+[data-theme="dark"] .ikan-asin-kering-header div[style*="background-color"],
+[data-theme="dark"] .rumput-laut-kering-header div[style*="background-color"],
+[data-theme="dark"] .lobster-udang-kipas-header div[style*="background-color"],
+[data-theme="dark"] .kepiting-bakau-header div[style*="background-color"] {
+    background-color: var(--glass-bg) !important;
+    border: 1px solid var(--glass-border) !important;
+    color: var(--text-secondary) !important;
+}

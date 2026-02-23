@@ -1,0 +1,70 @@
+<h2>Daftar Hasil Uji (LHU)</h2>
+<div id="list-hasil">Memuat data...</div>
+
+<script>
+    fetch("https://file-api.karantinaikanbitung.workers.dev/list")
+        .then(res => {
+            if (!res.ok) throw new Error("API error");
+            return res.json();
+        })
+        .then(files => {
+            const list = document.getElementById("list-hasil");
+            list.innerHTML = "";
+
+            if (!files.length) {
+                list.textContent = "Belum ada hasil uji";
+                return;
+            }
+
+            files.forEach(file => {
+                const a = document.createElement("a");
+                a.href =
+                    "https://file-api.karantinaikanbitung.workers.dev/file/" + file.key;
+                a.textContent = file.key;
+                a.target = "_blank";
+
+                list.appendChild(a);
+                list.appendChild(document.createElement("br"));
+            });
+        })
+        .catch(err => {
+            console.error(err);
+            document.getElementById("list-hasil").textContent =
+                "Gagal memuat data hasil uji";
+        });
+</script>
+
+<script>
+    const API_LIST = "https://file-api.karantinaikanbitung.workers.dev/list";
+    const API_FILE = "https://file-api.karantinaikanbitung.workers.dev/file/";
+
+    async function loadFiles() {
+        const container = document.getElementById("fileList");
+
+        try {
+            const res = await fetch(API_LIST);
+            const files = await res.json();
+
+            if (!files.length) {
+                container.innerHTML = "<p>Belum ada file</p>";
+                return;
+            }
+
+            container.innerHTML = "";
+            files.forEach(f => {
+                const link = document.createElement("a");
+                link.href = API_FILE + f.key;
+                link.textContent = f.key;
+                link.target = "_blank";
+
+                const div = document.createElement("div");
+                div.appendChild(link);
+                container.appendChild(div);
+            });
+        } catch (e) {
+            container.innerHTML = "<p>Gagal memuat data</p>";
+        }
+    }
+
+    loadFiles();
+</script>

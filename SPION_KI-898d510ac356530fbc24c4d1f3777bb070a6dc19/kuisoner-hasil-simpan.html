@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daftar Hasil Uji Tersimpan - SPION</title>
+    <link rel="stylesheet" href="spion-ui.css">
+    <link rel="stylesheet" href="kuisoner-style.css">
+    <script src="theme-manager.js"></script>
+    <style>
+        .history-container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .history-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px var(--shadow-color);
+            border: 1px solid var(--glass-border);
+        }
+
+        .history-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .history-table th,
+        .history-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        .history-table th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .btn-view {
+            background-color: var(--accent-blue, #667eea);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            transition: all 0.2s;
+        }
+
+        .btn-view:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
+
+        .btn-delete {
+            background-color: #f44336;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            margin-left: 8px;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-secondary);
+        }
+
+        @media (max-width: 600px) {
+
+            .history-table th:nth-child(1),
+            .history-table td:nth-child(1) {
+                display: none;
+            }
+
+            .history-table th,
+            .history-table td {
+                padding: 10px 5px;
+                font-size: 12px;
+            }
+
+            .btn-delete {
+                margin-left: 0;
+                margin-top: 5px;
+            }
+        }
+
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(0, 0, 0, .1);
+            border-radius: 50%;
+            border-top-color: var(--accent-blue, #667eea);
+            animation: spin 1s ease-in-out infinite;
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .btn-sync {
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s;
+        }
+
+        .btn-sync:hover {
+            background-color: #43a047;
+            transform: scale(1.02);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div>
+
+    <div class="history-container">
+        <nav class="top-bar animate-fade-in" style="margin-bottom: 30px;">
+            <div class="brand-mini">
+                <div class="logo-icon">
+                    <img src="images/logo.png" alt="SPION Logo">
+                </div>
+                <div style="display: flex; flex-direction: column;">
+                    <h2>SPION</h2>
+                    <p style="font-size: 0.65rem; color: rgba(255,255,255,0.7); margin: 0; line-height: 1.2;">Sistem
+                        Pemeriksaan sensorI Organoleptik lapagaN</p>
+                </div>
+                <span style="margin: 0 10px; color: rgba(255,255,255,0.2);">|</span>
+                <h2>Daftar Hasil Uji</h2>
+            </div>
+            <div class="user-profile">
+                <button id="themeToggle" class="btn-logout-modern" style="margin-right: 15px;">🌓 Mode</button>
+                <a href="kuisoner-jenis-uji.html" class="btn-logout-modern"
+                    style="text-decoration:none; display:inline-flex; align-items:center;">Kembali Beranda</a>
+            </div>
+        </nav>
+
+        <div class="history-card animate-fade-in" style="animation-delay: 0.1s;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h1 style="font-size: 24px; color: #333; margin: 0;">Hasil Uji Tersimpan</h1>
+                <div style="display: flex; gap: 10px;">
+                    <button class="btn-sync" onclick="loadHistory()">
+                        <span>🔄</span> Segarkan (Cloud Sync)
+                    </button>
+                    <button class="btn-logout-modern" style="background:#607d8b;" onclick="clearHistory()">Hapus
+                        Lokal</button>
+                </div>
+            </div>
+
+            <div id="historyTableContainer">
+                <table class="history-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 50px;">#</th>
+                            <th>Nama File</th>
+                            <th>Jenis Produk</th>
+                            <th>Lokasi Pelayanan</th>
+                            <th>Tanggal Simpan</th>
+                            <th style="width: 200px; text-align: center;">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody id="historyBody">
+                        <!-- Content loaded via JS -->
+                    </tbody>
+                </table>
+            </div>
+            <div id="emptyState" class="empty-state" style="display: none;">
+                <div style="font-size: 48px; margin-bottom: 10px;">📂</div>
+                <p>Belum ada hasil uji yang disimpan.</p>
+                <button class="btn-view" onclick="window.location.href='kuisoner-jenis-uji.html'"
+                    style="margin-top: 15px;">Mulai Uji Baru</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hidden containers for dependencies of showLHUPreview -->
+    <div id="qrcode-container" style="display:none;"></div>
+    <div id="ikanSegarTable" style="display:none;"></div>
+    <div id="ikanBekuTable" style="display:none;"></div>
+    <div id="ikanTunaKalengTable" style="display:none;"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="google-sheets-config.js"></script>
+    <script src="kuisoner-form-script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if (sessionStorage.getItem('isAuthenticated') !== 'true') {
+                window.location.href = 'kuisoner-login.html';
+                return;
+            }
+            loadHistory();
+        });
+
+        async function loadHistory() {
+            const body = document.getElementById('historyBody');
+            const container = document.getElementById('historyTableContainer');
+            const empty = document.getElementById('emptyState');
+
+            // Tampilkan loading state
+            body.innerHTML = '<tr><td colspan="6" style="text-align: center; padding: 40px;">Memuat dan sinkronisasi data... <div class="loading-spinner"></div></td></tr>';
+            container.style.display = 'block';
+            empty.style.display = 'none';
+
+            let cloudHistory = [];
+            let localHistory = JSON.parse(localStorage.getItem('spion_history') || '[]');
+            let finalHistory = [];
+
+            try {
+                // Ambil dari Cloud (Google Sheets)
+                const cloudRes = await getHistoryFromSheets();
+                if (cloudRes && cloudRes.success && cloudRes.history) {
+                    cloudHistory = cloudRes.history;
+                }
+            } catch (err) {
+                console.error('Error fetching cloud history:', err);
+            }
+
+            // Gabungkan data (ID unik sebagai key)
+            const map = new Map();
+            // Masukkan data lokal dulu
+            localHistory.forEach(item => {
+                if (item.id) map.set(item.id.toString(), item);
+            });
+            // Masukkan data cloud (indeks cloud diutamakan jika ID bentrok)
+            cloudHistory.forEach(item => {
+                if (item.id) map.set(item.id.toString(), item);
+            });
+
+            finalHistory = Array.from(map.values());
+            // Urutkan berdasarkan waktu terbaru
+            finalHistory.sort((a, b) => new Date(b.timestamp || 0) - new Date(a.timestamp || 0));
+
+            // Update Local Storage sebagai cache hasil gabungan
+            localStorage.setItem('spion_history', JSON.stringify(finalHistory));
+
+            if (finalHistory.length === 0) {
+                container.style.display = 'none';
+                empty.style.display = 'block';
+                return;
+            }
+
+            container.style.display = 'block';
+            empty.style.display = 'none';
+            body.innerHTML = '';
+
+            finalHistory.forEach((item, index) => {
+                const tr = document.createElement('tr');
+                const tgl = item.timestamp ? new Date(item.timestamp).toLocaleString('id-ID') : '-';
+                const lokasi = item['lokasi pelayanan'] || item.lokasiPelayanan || item.lokasipelayanan || (item.data ? item.data.noSampel : '-');
+                const jenisProduk = item.hewan ? item.hewan.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()) : '-';
+
+                tr.innerHTML = `
+                    <td>${index + 1}</td>
+                    <td style="font-family: monospace; font-size: 13px;">${item.filename}</td>
+                    <td style="font-size: 13px; font-weight: 500;">${jenisProduk}</td>
+                    <td style="font-size: 13px;">${lokasi}</td>
+                    <td style="color: #666; font-size: 13px;">${tgl}</td>
+                    <td style="text-align: center;">
+                        <button class="btn-view" onclick="viewResult('${item.id || index}')">Lihat PDF</button>
+                        <button class="btn-delete" title="Hapus data ini" onclick="deleteResult('${item.id}')">Hapus</button>
+                    </td>
+                `;
+                body.appendChild(tr);
+            });
+        }
+
+        function viewResult(id) {
+            const history = JSON.parse(localStorage.getItem('spion_history') || '[]');
+            const itemData = history.find(item => (item.id && item.id.toString() === id.toString()));
+
+            if (itemData && itemData.data) {
+                // Gunakan showLHUPreview yang sudah ada di kuisoner-form-script.js
+                showLHUPreview(itemData.data, itemData.hewan, itemData.filename);
+            } else {
+                alert('Data tidak ditemukan atau format tidak valid.');
+            }
+        }
+
+        async function deleteResult(id) {
+            if (!id || id === 'undefined') {
+                alert('ID tidak ditemukan. Silakan segarkan halaman.');
+                return;
+            }
+
+            if (confirm('Apakah Anda yakin ingin menghapus data ini secara PERMANEN dari cloud?')) {
+                // Hapus dari Cloud
+                const btn = event.target;
+                const originalText = btn.textContent;
+                btn.disabled = true;
+                btn.textContent = 'Menghapus...';
+
+                try {
+                    const res = await deleteHistoryFromSheets(id);
+                    if (res && res.success) {
+                        // Refresh history
+                        alert('Data berhasil dihapus.');
+                        loadHistory();
+                    } else {
+                        alert('Gagal menghapus: ' + (res.message || 'Error tidak diketahui'));
+                    }
+                } catch (err) {
+                    console.error('Delete error:', err);
+                    alert('Terjadi kesalahan saat menghapus data.');
+                } finally {
+                    btn.disabled = false;
+                    btn.textContent = originalText;
+                }
+            }
+        }
+
+        function clearHistory() {
+            if (confirm('Apakah Anda yakin ingin menghapus SEMUA riwayat lokal? Ini tidak akan menghapus data di cloud.')) {
+                localStorage.removeItem('spion_history');
+                loadHistory();
+            }
+        }
+    </script>
+</body>
+
+</html>
